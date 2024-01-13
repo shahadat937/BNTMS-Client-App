@@ -1,0 +1,64 @@
+<section class="content">
+    <div class="container-fluid">
+      <div class="block-header">
+        <div class="row">
+          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <ul class="breadcrumb breadcrumb-style ">
+              <li class="breadcrumb-item">
+                <h4 class="page-title">School History</h4>
+              </li>
+              <li class="breadcrumb-item bcrumb-1">
+                <a routerLink="/admin/dashboard/main"><i class="fas fa-home"></i></a>
+              </li>
+              <li class="breadcrumb-item bcrumb-2">
+                <a href="#" onClick="return false;">School History</a>
+              </li>
+              <li class="breadcrumb-item active">*</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="row clearfix school-history">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+          <div class="card">
+            <div class="header">
+            </div>
+            <div class="body">
+              <form *ngIf="isUpdateable" class="form-border-design" [formGroup]="BaseSchoolNameForm" (ngSubmit)="onSubmit()">
+                <div class="row">
+
+                  <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                      <mat-label>School History</mat-label>                                                
+
+                      <textarea formControlName="schoolHistory" matInput placeholder="Within 3000 Words Maximum!"></textarea>
+                    </mat-form-field>
+                  </div>
+ 
+                 
+                  <div class="col-xl-2 col-lg-2 col-md-2 col-sm-12 mb-2  m-t-10">
+                    <button class="btn-space" [class.auth-spinner]="loading" [disabled]="loading" [disabled]="!BaseSchoolNameForm.valid " mat-raised-button
+                        color="primary">Update</button>
+                    <!-- <button type="button" mat-button routerLink="/routine-management/classroutine-list">Cancel</button> -->
+                  </div>
+                </div> 
+              </form>
+              <div *ngIf="!isUpdateable" class="row">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+                  
+                  <p>{{showSchoolHistory}}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  
+  
+  
+   
+

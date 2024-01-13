@@ -1,0 +1,146 @@
+<section class="content">
+    <div class="container-fluid">
+      <div class="block-header">
+        <div class="row">
+          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <ul class="breadcrumb breadcrumb-style ">
+              <li class="breadcrumb-item">
+                <h4 class="page-title">{{pageTitle}}</h4>
+              </li>
+              <li class="breadcrumb-item bcrumb-1">
+                <a routerLink="/admin/dashboard/main"><i class="fas fa-home"></i></a>
+              </li>
+              <li class="breadcrumb-item bcrumb-2">
+                <a href="#" onClick="return false;">Relevent Work Status List</a>
+              </li>
+              <li class="breadcrumb-item active">{{destination}}</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="row clearfix">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+          <div class="card">
+            <div class="header">
+            </div>
+            <div class="body">
+                <div class="row">
+                  
+                  <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+                    <div class="row right-row">
+                      <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+                        <div class="row">
+                          <div  class="container col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2 mt-2 sticky-table ex-mrk-li">
+                            <div class="materialTableHeader"> 
+                              <div class="row">
+                                <div class="col-8">
+                                  <ul class="header-buttons-left ml-0">
+                                    <li class="dropdown">
+                                    </li>
+                                    <!-- <li class="dropdown">
+                                      <input placeholder="Search" type="text" [(ngModel)]="searchText"  #filter class="browser-default search-field"
+                                      aria-label="Search box">
+                                    </li>
+                                    <li> 
+                                      <div class="icon-button-demo m-l-10">
+                                        <button mat-mini-fab color="accent" (click)="applyFilter(searchText)">
+                                          <mat-icon class="col-white">search</mat-icon>
+                                        </button>
+                                      </div>
+                                      
+                                      
+                                    </li> -->
+                                  </ul>
+                                </div>
+                                <div class="col-4">
+                                  <ul class="header-buttons">
+                                    <li>
+                                      <div class="icon-button-demo">                            
+                                        <button *ngIf="role === 'Foreign Training'" class="btn-space"  mat-raised-button
+                                          color="warn" [routerLink]="['/admin/dashboard/foreigntraining-dashboard']"> 
+                                          <mat-icon class="col-white">keyboard_backspace</mat-icon> Back
+                                        </button>
+                                        
+                                        
+                                      </div>
+                                    </li>
+                                   
+                                  </ul>
+                                </div>
+                              </div>
+                            </div>
+                            <table class="table ex-mrk-entry trainee-doc-info">
+                              <thead>
+                                <tr>                              
+                                  <th class="cl-mrk-foreign"><h5>Trainee</h5></th>
+                                  <th class="cl-mrk-foreign"><h5>Ticket</h5></th>
+                                  <th class="cl-mrk-rmrk-foreign"><h5>Visa</h5></th>
+                                  <th class="cl-mrk-rmrk-foreign"><h5>Passport</h5></th>
+                                  <th class="cl-mrk-rmrk-foreign"><h5>Covid19</h5></th>
+                                  <th class="cl-mrk-rmrk-foreign"><h5>DGFI Breafing</h5></th>
+                                  <th class="cl-mrk-rmrk-foreign"><h5>DNI Breafing</h5></th>
+                                  <th class="cl-mrk-rmrk-foreign"><h5>Embassi Breafing</h5></th>
+                                  <th class="cl-mrk-rmrk-foreign"><h5>Sanction</h5></th>
+                                  <th class="cl-mrk-rmrk-foreign"><h5>Ex.BD Leave</h5></th>
+                                  <!-- <th class="cl-mrk-rmrk-foreign"><h5>Family Go</h5></th>
+                                  <th class="cl-mrk-rmrk-foreign"><h5>Medical Doc</h5></th> -->
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <tr class="trainee-other-doc-row" *ngFor="let data of StudentOtherDocInfoList;">
+                                  <td>
+                                     <b>({{data.traineeName}})</b>
+                                  </td>
+                                  <td>
+                                    <span style="color: green; font-weight: bold;" class="doc-yes" *ngIf="data.ticket == true"> Yes </span>
+                                    <span style="color: red; font-weight: bold;" class="doc-no" *ngIf="data.ticket != true"> No </span>
+                                  </td>
+                                  <td>
+                                    <span style="color: green; font-weight: bold;" class="doc-yes" *ngIf="data.visa == true"> Yes </span>
+                                    <span style="color: red; font-weight: bold;" class="doc-no"  *ngIf="data.visa != true"> No </span>
+                                  </td>
+                                  <td>
+                                    <span style="color: green; font-weight: bold;" class="doc-yes" *ngIf="data.passport == true"> Yes </span>
+                                    <span style="color: red; font-weight: bold;" class="doc-no" *ngIf="data.passport != true"> No </span>
+                                  </td>
+                                  <td>
+                                    <span style="color: green; font-weight: bold;" class="doc-yes" *ngIf="data.covidTest == true"> Yes </span>
+                                    <span style="color: red; font-weight: bold;" class="doc-no" *ngIf="data.covidTest != true"> No </span>
+                                  </td>
+                                  <td>
+                                    <span style="color: green; font-weight: bold;" class="doc-yes" *ngIf="data.dgfiBreafing == true"> Yes </span>
+                                    <span style="color: red; font-weight: bold;" class="doc-no" *ngIf="data.dgfiBreafing != true"> No </span>
+                                  </td>
+                                  <td>
+                                    <span style="color: green; font-weight: bold;" class="doc-yes" *ngIf="data.dniBreafing == true"> Yes </span>
+                                    <span style="color: red; font-weight: bold;" class="doc-no" *ngIf="data.dniBreafing != true"> No </span>
+                                  </td>
+                                  <td>
+                                    <span style="color: green; font-weight: bold;" class="doc-yes" *ngIf="data.embassiBreafing == true"> Yes </span>
+                                    <span style="color: red; font-weight: bold;" class="doc-no" *ngIf="data.embassiBreafing != true"> No </span>
+                                  </td>
+                                  <td>
+                                    <span style="color: green; font-weight: bold;" class="doc-yes" *ngIf="data.financialSanction == true"> Yes </span>
+                                    <span style="color: red; font-weight: bold;" class="doc-no" *ngIf="data.financialSanction != true"> No </span>
+                                  </td>
+                                  <td>
+                                    <span style="color: green; font-weight: bold;" class="doc-yes" *ngIf="data.exBdLeave == true"> Yes </span>
+                                    <span style="color: red; font-weight: bold;" class="doc-no" *ngIf="data.exBdLeave != true"> No </span>
+                                  </td>
+                                </tr>                        
+                              </tbody>
+                            </table>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>            
+                </div> 
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+

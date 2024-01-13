@@ -1,0 +1,98 @@
+<section class="content">
+    <div class="container-fluid">
+      <div class="block-header">
+        <div class="row">
+          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <ul class="breadcrumb breadcrumb-style ">
+              <li class="breadcrumb-item">
+                <h4 class="page-title">Trainee Nomination</h4>
+              </li>
+              <li class="breadcrumb-item bcrumb-1">
+                <a routerLink="/admin/dashboard/main"><i class="fas fa-home"></i></a>
+              </li>
+              <li class="breadcrumb-item bcrumb-2">
+                <a href="#" onClick="return false;">Trainee Nomination</a>
+              </li>
+              <li class="breadcrumb-item active">All</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+          <div class="card">
+            <div class="body">
+              <div class="responsive_table">
+                <div class="materialTableHeader"> 
+                  <div class="row">
+                    <div class="col-8">
+                      <ul class="header-buttons-left ml-0">
+                        <div class="align-center course-name">
+                          <p>Course:- {{getCourse}}</p>
+                        </div>
+                        <!-- <li class="dropdown">
+                          <input placeholder="Search" type="text" [(ngModel)]="searchText"  #filter class="browser-default search-field"
+                          aria-label="Search box">
+                        </li>
+                        <li> 
+                          <div class="icon-button-demo m-l-10">
+                            <button mat-mini-fab color="accent" (click)="applyFilter(searchText)">
+                              <mat-icon class="col-white">search</mat-icon>
+                            </button>
+                          </div>
+                          
+                          
+                        </li> -->
+                      </ul>
+                    </div>
+                    <div class="col-4">
+                      <ul class="header-buttons">
+                        <li>
+                          <div class="icon-button-demo">
+
+                            <button class="btn-space"  mat-raised-button
+                              color="warn" [routerLink]="['/admin/dashboard/Jcoexamlistindashboard-list']"> 
+                              <mat-icon class="col-white">keyboard_backspace</mat-icon> Back
+                            </button>
+                           
+                          </div>
+                        </li>
+                       
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+
+                <table class="table  tbl-by-group">
+                  <thead>
+                    <tr>
+                      <!-- <th class="cl-srl"><h5>Ser</h5></th> -->
+                      <th class="cl-srl"><h5>Rank</h5></th>
+                      <th class="course-name-col"><h5>Name </h5></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <ng-container *ngFor="let data of groupArrays;let i= index;">
+                      <tr>
+                        <td class="cl-srl" [attr.rowspan]="data.courses.length + 1">{{data.sailorRank}}</td>
+                      </tr>
+                      <tr *ngFor="let number of data.courses;">
+                        <td class="course-name-col">{{number.name}}  <span class="t-n-pno-d">(P No {{number.pno}})</span> </td>
+                        
+                      </tr>
+                    </ng-container>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  
+  
+  
+   
+

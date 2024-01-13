@@ -1,0 +1,121 @@
+<section class="content">
+    <div class="container-fluid">
+      <div class="block-header">
+        <div class="row">
+          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <ul class="breadcrumb breadcrumb-style ">
+              <li class="breadcrumb-item">
+                <h4 class="page-title">Local Course List</h4>
+              </li>
+              <li class="breadcrumb-item bcrumb-1">
+                <a routerLink="/admin/dashboard/main"><i class="fas fa-home"></i></a>
+              </li>
+              <li class="breadcrumb-item bcrumb-2">
+                <a href="#" onClick="return false;">Local Course</a>
+              </li>
+              <li class="breadcrumb-item active">All</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+          <div class="card">
+            <div class="body">
+              <div class="responsive_table">
+                <div class="materialTableHeader"> 
+                  <div class="row">
+                    <div class="col-8">
+                      <ul class="header-buttons-left ml-0">
+                        <li class="dropdown">
+                        </li>
+                        <!-- <li class="dropdown">
+                          <input placeholder="Search" type="text" [(ngModel)]="searchText"  #filter class="browser-default search-field"
+                          aria-label="Search box">
+                        </li>
+                        <li> 
+                          <div class="icon-button-demo m-l-10">
+                            <button mat-mini-fab color="accent" (click)="applyFilter(searchText)">
+                              <mat-icon class="col-white">search</mat-icon>
+                            </button>
+                          </div>
+                          
+                          
+                        </li> -->
+                      </ul>
+                    </div>
+                    <div class="col-4">
+                      <ul class="header-buttons">
+                        <!-- <li>
+                          <div class="icon-button-demo">
+                            <button class="btn-space"  mat-raised-button 
+                             color="primary" [routerLink]="['/course-management/add-localcourse',this.courseTypeId]"> Add
+                              <mat-icon class="col-white">add</mat-icon>
+                            </button>
+                          </div>
+                        </li> -->
+                       
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+
+                <table class="table  tbl-by-group">
+                  <thead>
+                    <tr>
+                      <th class="cl-serl"><h5>Ser</h5></th>
+                      <!-- <th class="cl-srl"><h5>Name of Establishment / School</h5></th> -->
+                      <th class="course-name-col"><h5>Course</h5></th>
+                      <th class="cl-mrk"><h5>Duration</h5></th>
+                      
+                      <th class="cl-mrk-rmrk"><h5>Actions</h5></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <ng-container>
+                      <!-- <tr>
+                        <td class="cl-srl" [attr.rowspan]="data.courses.length + 1">{{data.baseSchoolName}}</td>
+                      </tr> -->
+                      <tr *ngFor="let number of CourseListBySchool;let i= index;">
+                        <td class="cl-serl">{{i+1}}</td>
+                       
+                        <td class="course-name-col"> 
+                          {{getDateComparision(number)}} 
+                          {{number.courseName}} - {{number.courseTitle}}
+                          <span class="passingout-course" *ngIf="passOutStatus === 1" style="color:red;font-weight:bold;"> (Passing Out)</span>
+                        </td>
+                       
+                        <td class="section-duration">
+                          {{number.durationFrom | date:'mediumDate'}} - {{number.durationTo | date:'mediumDate'}} 
+                          
+                        </td>
+                         
+                        <td class="section-action">
+                          <button mat-icon-button color="accent" title="Assign Section" class="btn-tbl-view" 
+                            [routerLink]="['/course-management/coursenominee-list', number.courseDurationId]">
+                            <mat-icon mat-icon aria-label="Edit" class="col-white">toc</mat-icon>
+                          </button>
+                          
+                        </td>
+                      </tr>
+                    </ng-container>
+                  </tbody>
+                </table>
+            
+                 <!-- <mat-paginator [length]="paging.length" [showFirstLastButtons]="masterData.paging.showFirstLastButtons"
+                [pageSize]="paging.pageSize" [pageSizeOptions]="masterData.paging.pageSizeOptions"
+                (page)="pageChanged($event)">
+                </mat-paginator> -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  
+  
+  
+   
+

@@ -1,0 +1,191 @@
+<section class="content">
+  <div class="container-fluid">
+    <div class="block-header">
+      <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <ul class="breadcrumb breadcrumb-style ">
+            <li class="breadcrumb-item">
+              <h4 class="page-title">{{pageTitle}}</h4>
+            </li>
+            <li class="breadcrumb-item bcrumb-1">
+              <a routerLink="/admin/dashboard/main"><i class="fas fa-home"></i></a>
+            </li>
+            <li class="breadcrumb-item bcrumb-2">
+              <a href="#" onClick="return false;">Feature</a>
+            </li>
+            <li class="breadcrumb-item active">{{destination}}</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="row clearfix">
+      <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+        <div class="card">
+          <div class="header">
+            <!--
+            <h2>{{destination}} Feature</h2>
+            -->
+
+          </div>
+          <div class="body">
+            <form class="m-4" [formGroup]="FeatureForm" (ngSubmit)="onSubmit()">
+              <div class="row">
+                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2"> 
+                  <mat-form-field class="example-full-width mb-3" appearance="outline">
+                    <mat-label>Feature name</mat-label>
+                    <input matInput formControlName="featureName" required>
+                    <mat-error *ngIf="FeatureForm.get('featureName').hasError('required')">
+                      Feature name is required
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+
+                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2"> 
+                  <mat-form-field class="example-full-width mb-3" appearance="outline">
+                    <mat-label>Path</mat-label>
+                    <input matInput formControlName="path" required>
+                    <mat-error *ngIf="FeatureForm.get('path').hasError('required')">
+                      Feature name is required
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+
+                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2"> 
+                  <mat-form-field class="example-full-width mb-3" appearance="outline">
+                    <mat-label>Icon Name</mat-label>
+                    <input matInput formControlName="iconName">
+                    <!--
+    <mat-error *ngIf="FeatureForm.get('iconName').hasError('required')">
+                      Icon Name is required
+                    </mat-error>
+                    -->
+                
+                  </mat-form-field>
+                </div>
+
+                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2"> 
+                  <mat-form-field class="example-full-width mb-3" appearance="outline">
+                    <mat-label>Icon</mat-label>
+                    <input matInput formControlName="icon">
+                    <!--
+ <mat-error *ngIf="FeatureForm.get('icon').hasError('required')">
+                      Icon is required
+                    </mat-error>
+                    -->
+                   
+                  </mat-form-field>
+                </div>
+ 
+                <!-- <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2"> 
+                  <mat-form-field class="example-full-width mb-3" appearance="outline">
+                    <mat-label>Class</mat-label>
+                    <input matInput formControlName="class">
+                  </mat-form-field>
+                </div> -->
+
+                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2"> 
+                  <mat-form-field class="example-full-width mb-3" appearance="outline">
+                    <mat-label>Group Title</mat-label>
+                    <input matInput formControlName="groupTitle">
+                    <!--
+    <mat-error *ngIf="FeatureForm.get('groupTitle').hasError('required')">
+                      Group Title is required
+                    </mat-error>
+                    -->
+                  </mat-form-field>
+                </div>
+
+                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 mb-2">
+                  <mat-form-field class="example-full-width mb-3" appearance="outline">
+                      <mat-label>Module</mat-label>
+                      
+                      <mat-select formControlName="moduleId" required>
+                          <mat-option *ngFor="let module of selectedModel" [value]="module.value">
+                              {{module.text}}
+                            </mat-option>                          
+                      </mat-select>
+                      <mat-error *ngIf="FeatureForm.get('moduleId').hasError('required')">
+                          Select Any Module
+                      </mat-error>
+                  </mat-form-field>
+                </div>
+
+                <!--
+  <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2"> 
+                  <mat-form-field class="example-full-width mb-3" appearance="outline">
+                    <mat-label>Module</mat-label>
+                    <input matInput formControlName="moduleId" required>
+                    <mat-error *ngIf="FeatureForm.get('moduleId').hasError('required')">
+                      Module is required
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                -->
+              
+
+                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2"> 
+                  <mat-form-field class="example-full-width mb-3" appearance="outline">
+                    <mat-label>Feature Code</mat-label>
+                    <input matInput formControlName="featureCode" required> 
+                    <mat-error *ngIf="FeatureForm.get('featureCode').hasError('required')">
+                      Feature Code is required
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+
+                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2"> 
+                  <mat-form-field class="example-full-width mb-3" appearance="outline">
+                    <mat-label>Order No</mat-label>
+                    <input matInput formControlName="orderNo" required> 
+                    <mat-error *ngIf="FeatureForm.get('orderNo').hasError('required')">
+                      Order No is required
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+<!--
+   <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2"> 
+                  <mat-form-field class="example-full-width mb-3" appearance="outline">
+                    <mat-label>Is Report</mat-label>
+                    <input matInput formControlName="isReport" required> 
+                    <mat-error *ngIf="FeatureForm.get('isReport').hasError('required')">
+                      IS report required
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+-->
+             
+
+
+                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2"> 
+                  <mat-form-field class="example-full-width mb-3" appearance="outline">
+                    <mat-label>Feature Type Id</mat-label>
+                    <input matInput formControlName="featureTypeId" required> 
+                    <mat-error *ngIf="FeatureForm.get('featureTypeId').hasError('required')">
+                      Feature Type Id
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                <!--<div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                  <mat-form-field class="example-full-width mb-3" appearance="outline">
+                    <mat-label>Menu position</mat-label>
+                    <input matInput formControlName="menuPosition">
+                  </mat-form-field>
+                </div>-->
+              </div>
+          
+          
+             
+              <div class="row">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+                  <button class="btn-space" [class.auth-spinner]="loading" [disabled]="loading" [disabled]="!FeatureForm.valid " mat-raised-button
+                    color="primary">{{buttonText}}</button>
+                  <button type="button" mat-button routerLink="/security/feature-list">Cancel</button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

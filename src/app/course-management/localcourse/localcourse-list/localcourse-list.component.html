@@ -1,0 +1,171 @@
+<section class="content">
+    <div class="container-fluid">
+      <div class="block-header">
+        <div class="row">
+          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <ul class="breadcrumb breadcrumb-style ">
+              <li class="breadcrumb-item">
+                <h4 class="page-title">Local Course List</h4>
+              </li>
+              <li class="breadcrumb-item bcrumb-1">
+                <a routerLink="/admin/dashboard/main"><i class="fas fa-home"></i></a>
+              </li>
+              <li class="breadcrumb-item bcrumb-2">
+                <a href="#" onClick="return false;">Local Course</a>
+              </li>
+              <li class="breadcrumb-item active">All</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+          <div class="card">
+            <div class="body">
+              <div class="responsive_table">
+                <div class="materialTableHeader"> 
+                  <div class="row">
+                    <div class="col-8">
+                      <ul class="header-buttons-left ml-0">
+                        <li class="dropdown">
+                        </li>
+                        <li class="dropdown">
+                          <input placeholder="Search" type="text" [(ngModel)]="searchText"  #filter class="browser-default search-field"
+                          aria-label="Search box">
+                        </li>
+                        <li> 
+                          <div class="icon-button-demo m-l-10">
+                            <button mat-mini-fab color="accent" (click)="applyFilter(searchText)">
+                              <mat-icon class="col-white">search</mat-icon>
+                            </button>
+                          </div>
+                          
+                          
+                        </li>
+                      </ul>
+                    </div>
+                    <div class="col-4">
+                      <ul class="header-buttons">
+                        <li>
+                          <div class="icon-button-demo">
+                            <!---->
+                            <button class="btn-space"  mat-raised-button 
+                             color="primary" [routerLink]="['/course-management/add-localcourse',this.courseTypeId]"> Add
+                              <mat-icon class="col-white">add</mat-icon>
+                            </button>
+                          </div>
+                        </li>
+                       
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+             <br>
+                <div class="row dash-cd-m-0">
+                  <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 div-class div-left course-filter">
+                    <button class="running-course" (click)="getCoursesByViewType(1)">Running</button>
+                    <button class="passing-course" (click)="getCoursesByViewType(2)">Passing Out</button>
+                    <button class="upcoming-course" (click)="getCoursesByViewType(3)">Upcoming</button>
+                  </div>
+
+                  <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 div-class div-right">
+                    <h4 class="rnc"> Courses</h4>
+                  </div>
+                  
+                </div> 
+                
+                <table class="table  tbl-by-group">
+                  <thead>
+                    <tr>
+                      <!-- <th class="cl-srl"><h5>Ser</h5></th> -->
+                      <th class="cl-srl"><h5>Name of Establishment / School</h5></th>
+                      <th class="course-name-col"><h5>Name of Course</h5></th>
+                      <!-- <th class="cl-mrk"><h5>No of Candidates</h5></th> -->
+                      <th class="cl-mrk"><h5>Date of Commencement</h5></th>
+                      <th class="cl-mrk"><h5>Date of Completion</h5></th>
+                      <th class="cl-mrk-rmrk"><h5>Actions</h5></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <ng-container *ngFor="let data of groupArrays;let i= index;">
+                      <tr>
+                        <td class="cl-srl" [attr.rowspan]="data.courses.length + 1">{{data.schoolName}}</td>
+                      </tr>
+                      <tr *ngFor="let number of data.courses;">
+                        <td class="course-name-col">
+                          {{getDateComparision(number)}}
+                          {{number.course}} - {{number.courseTitle}}
+                          <span *ngIf="passOutStatus === 1" style="color:red;font-weight:bold;"> (Passing Out)</span>
+                        </td>
+                        <!-- <td>
+                          {{number.noOfCandidates}}
+                          <a [routerLink]="['/admin/dashboard/traineenomination-list', number.courseDurationId]" style="color: green;text-decoration: underline; font-weight: bold;">{{getTraineeNominationsByCourseDurationId(number.courseDurationId)}}</a>
+                        </td> -->
+                        <!-- <td>{{number.professional}}</td>
+                        <td>{{number.nbcd}}</td> -->
+                        <td>{{number.durationFrom | date:'mediumDate'}}</td>
+                        <td>{{number.durationTo | date:'mediumDate'}}</td>
+                         
+                        <td>
+                          <button *ngIf="number.courseSyllabus" mat-icon-button class="btn-tbl-view" title="View Course Syllabus">
+                            <a [href]='this.fileUrl+number.courseSyllabus' target='_blank'><mat-icon aria-label="Edit" class="col-white">picture_as_pdf</mat-icon></a>
+                          </button>
+                          <button mat-icon-button class="btn-tbl-view" title="View Course Details" [routerLink]="['/admin/dashboard/runningcourse-details',number.courseDurationId,100]"> <!--100 for master admin-->
+                            <mat-icon aria-label="Edit" class="col-white">visibility</mat-icon>
+                          </button>
+                          <button mat-icon-button color="accent" title="Trainee Mark List" class="btn-tbl-view" 
+                            [routerLink]="['/course-management/marklistbycourse-list', number.courseDurationId]">
+                            <mat-icon mat-icon aria-label="Edit" class="col-white">toc</mat-icon>
+                          </button>
+                          <button mat-icon-button color="accent" title="Course Routine List" class="btn-tbl-view" 
+                            [routerLink]="['/course-management/routinebycourse-list', number.baseSchoolNameId, number.courseNameId, number.courseDurationId]">
+                            <!-- <mat-icon aria-label="Edit" class="col-white">book</mat-icon> -->
+                            <img src="../../../assets/images/app-icon/routine.png" class="routine-icon"/>
+                          </button>
+                          <button mat-icon-button class="btn-tbl-nomination" title="List of Trainee" [routerLink]="['/course-management/add-traineenomination', number.courseDurationId]">
+                            <!-- <mat-icon aria-label="Edit" class="col-white">supervisor_account</mat-icon> -->
+                            <img src="../../../assets/images/app-icon/biodata.png" class="biodata-icon"/>
+                          </button>
+                          <button mat-icon-button color="accent" title="Course Subject List" class="btn-tbl-view" 
+                            [routerLink]="['/course-management/view-subjectbyschoolandcourse', number.baseSchoolNameId, number.courseNameId, number.courseDurationId]">
+                            <mat-icon aria-label="Edit" class="col-white">book</mat-icon>
+                          </button>
+                          
+                          <button mat-icon-button class="btn-tbl-nomination" title="Exam Status" [routerLink]="['/admin/dashboard/view-examstatusbysubjectlist', number.baseSchoolNameId, number.courseNameId, number.courseDurationId]">
+                            <!-- <mat-icon aria-label="Edit" class="col-white">assessment</mat-icon> -->
+                            <img src="../../../assets/images/app-icon/exam.png" class="exam-icon"/>
+                          </button>
+
+                            
+                          <button mat-icon-button color="accent" title="Edit" class="btn-tbl-edit" 
+                            [routerLink]="['/course-management/update-localcourse', number.courseDurationId, number.courseTypeId]">
+                            <mat-icon aria-label="Edit" class="col-white">edit</mat-icon>
+                          </button>
+
+                          <button mat-icon-button color="accent" title="Delete" class="btn-tbl-delete btn-custom" (click)="$event.stopPropagation()"
+                            (click)="deleteItem(number)">
+                            <mat-icon aria-label="Delete" class="col-white">delete</mat-icon> 
+                          </button>
+                        </td>
+                      </tr>
+                    </ng-container>
+                  </tbody>
+                </table>
+            
+                 <!-- <mat-paginator [length]="paging.length" [showFirstLastButtons]="masterData.paging.showFirstLastButtons"
+                [pageSize]="paging.pageSize" [pageSizeOptions]="masterData.paging.pageSizeOptions"
+                (page)="pageChanged($event)">
+                </mat-paginator> -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  
+  
+  
+   
+

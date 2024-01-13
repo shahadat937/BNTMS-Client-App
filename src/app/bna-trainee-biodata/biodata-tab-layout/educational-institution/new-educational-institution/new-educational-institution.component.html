@@ -1,0 +1,156 @@
+      <div class="block-header">
+        <div class="row">
+          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <ul class="breadcrumb breadcrumb-style ">
+              <li class="breadcrumb-item">
+                <h4 class="page-title">{{pageTitle}}</h4>
+              </li>
+              <li class="breadcrumb-item bcrumb-1">
+                <a routerLink="/admin/dashboard/main"><i class="fas fa-home"></i></a>
+              </li>
+              <li class="breadcrumb-item bcrumb-2">
+                <a href="#" onClick="return false;">Educational Institution</a>
+              </li>
+              <li class="breadcrumb-item active">{{destination}}</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="row clearfix">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+          <div class="card">
+            <div class="header">
+            </div>
+            <div class="body">
+              <form class="m-4" [formGroup]="EducationalInstitutionForm" (ngSubmit)="onSubmit()">
+                <div class="row">
+                  <div hidden class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                      <mat-label>Trainee Id</mat-label>
+                      <input matInput formControlName="traineeId" required>
+                      <mat-error *ngIf="EducationalInstitutionForm.get('traineeId').hasError('required')">
+                        Trainee name is required
+                      </mat-error>
+                    </mat-form-field>
+                  </div>
+                  <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                      <mat-label>Institute Name</mat-label>
+                      <input matInput formControlName="instituteName" required>
+                      <mat-error *ngIf="EducationalInstitutionForm.get('instituteName').hasError('required')">
+                        institute Name is required
+                      </mat-error>
+                    </mat-form-field>
+                  </div>
+                  <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                      <mat-label>Address</mat-label>
+                      <input matInput formControlName="address" required>
+                      <mat-error *ngIf="EducationalInstitutionForm.get('address').hasError('required')">
+                        address is required
+                      </mat-error>
+                    </mat-form-field>
+                  </div>
+                  <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                      <mat-form-field class="example-full-width mb-3" appearance="outline">
+                        <mat-label>District</mat-label>                
+                        <mat-select formControlName="districtId" required (selectionChange)="onDistrictSelectionChangeGetThana($event.value)">
+                          <mat-option  value="0">--Select--</mat-option >
+                          <mat-option *ngFor="let district of districtValues" [value]="district.value">
+                            {{district.text}}  
+                          </mat-option>                          
+                        </mat-select>
+                        <mat-error *ngIf="EducationalInstitutionForm.get('districtId').hasError('required')">
+                          District is required
+                        </mat-error>
+                      </mat-form-field>
+                  </div>
+                  <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                      <mat-label>Thana</mat-label>                        
+                      <mat-select formControlName="thanaId" required>
+                        <mat-option  value="0">--Select--</mat-option >
+                        <mat-option *ngFor="let thana of selectedThana" [value]="thana.value">
+                          {{thana.text}}  
+                        </mat-option>                          
+                      </mat-select>
+                      <mat-error *ngIf="EducationalInstitutionForm.get('thanaId').hasError('required')">
+                        thana is Required!
+                      </mat-error>
+                    </mat-form-field>
+                  </div>
+                  <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                      <mat-label>Class Studied From</mat-label>
+                      <input matInput formControlName="classStudiedFrom" required>
+                      <mat-error *ngIf="EducationalInstitutionForm.get('classStudiedFrom').hasError('required')">
+                        Class Studied From is required
+                      </mat-error>
+                    </mat-form-field>
+                  </div>
+                  <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                      <mat-label>Class Studied To</mat-label>
+                      <input matInput formControlName="classStudiedTo" required>
+                      <mat-error *ngIf="EducationalInstitutionForm.get('classStudiedTo').hasError('required')">
+                        Class Studied To is required
+                      </mat-error>
+                    </mat-form-field>
+                  </div>
+                  
+                  <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                      <mat-label>Year From</mat-label>
+                        <input matInput [matDatepicker]="yearFrompicker" formControlName="yearFrom" >
+                        <mat-datepicker-toggle matSuffix [for]="yearFrompicker"></mat-datepicker-toggle>
+                        <mat-datepicker #yearFrompicker></mat-datepicker>  
+                        <mat-error *ngIf="EducationalInstitutionForm.get('yearFrom').hasError('required')">
+                          Year From is required
+                        </mat-error>                                          
+                    </mat-form-field>
+                  </div>
+                  
+                  <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                      <mat-label>Year To</mat-label>
+                        <input matInput [matDatepicker]="yearTopicker" formControlName="yearTo" >
+                        <mat-datepicker-toggle matSuffix [for]="yearTopicker"></mat-datepicker-toggle>
+                        <mat-datepicker #yearTopicker></mat-datepicker>                                            
+                        <mat-error *ngIf="EducationalInstitutionForm.get('yearFrom').hasError('required')">
+                          Year To is required
+                        </mat-error>
+                    </mat-form-field>
+                  </div>
+                  <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                      <mat-label>AdditionaI nformation</mat-label>
+                      <input matInput formControlName="additionaInformation" >                      
+                    </mat-form-field>
+                  </div>
+                  
+                  <!-- <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                      <mat-label>status</mat-label>
+                      <input matInput formControlName="status" >                      
+                    </mat-form-field>
+                  </div> -->
+                  
+                 
+                </div>
+               
+                <div class="row">
+                  <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+                    <button class="btn-space" [class.auth-spinner]="loading" [disabled]="loading" [disabled]="!EducationalInstitutionForm.valid " mat-raised-button
+                      color="primary">{{buttonText}}</button>
+                    <button type="button" mat-button [routerLink]="['/trainee-biodata/trainee-biodata-tab/main-tab-layout/main-tab/educational-institution-details', this.traineeId]">Cancel</button>
+                    
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+  
+
+

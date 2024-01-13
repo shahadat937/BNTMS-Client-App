@@ -1,0 +1,117 @@
+      <div class="block-header">
+        <div class="row">
+          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <ul class="breadcrumb breadcrumb-style ">
+              <li class="breadcrumb-item">
+                <h4 class="page-title">{{pageTitle}}</h4>
+              </li>
+              <li class="breadcrumb-item bcrumb-1">
+                <a routerLink="/admin/dashboard/main"><i class="fas fa-home"></i></a>
+              </li>
+              <li class="breadcrumb-item bcrumb-2">
+                <a href="#" onClick="return false;">Family Information</a>
+              </li>
+              <li class="breadcrumb-item active">{{destination}}</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="row clearfix">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+          <div class="card">
+            <div class="header">
+            </div>
+            <div class="body">
+              <form class="m-4" [formGroup]="ParentRelativeForm" (ngSubmit)="onSubmit()">
+                <div class="row">
+                  <div class="col-xl-12 col-lg-12 col-md-6 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3 important-type" appearance="outline">
+                        <mat-label>Relation Type</mat-label>
+                        
+                        <mat-select formControlName="relationTypeId" required>
+                            <mat-option *ngFor="let code of relationTypeValues" [value]="code.value">
+                                {{code.text}}
+                              </mat-option>                          
+                        </mat-select>
+                        <mat-error *ngIf="ParentRelativeForm.get('relationTypeId').hasError('required')">
+                          Relation Type is required
+                        </mat-error>
+                    </mat-form-field> 
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2" hidden>
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                      <mat-label>Trainee Id</mat-label>
+                      <input matInput formControlName="traineeId" required>
+                      <mat-error *ngIf="ParentRelativeForm.get('traineeId').hasError('required')">
+                        Trainee name is required
+                      </mat-error>
+                    </mat-form-field>
+                  </div>
+                  
+                  <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                      <mat-label>Name In Full</mat-label>
+                      <input matInput formControlName="nameInFull" required>
+                      <mat-error *ngIf="ParentRelativeForm.get('nameInFull').hasError('required')">
+                        Name In Full is required
+                      </mat-error>
+                    </mat-form-field>
+                  </div>
+                  
+                  <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                        <mat-label>Dead Status</mat-label>                       
+                        <mat-select formControlName="deadStatus" required> 
+                            <mat-option *ngFor="let deadStatus of selectedDeadStatus" [value]="deadStatus.value">
+                                {{deadStatus.text}}   
+                              </mat-option>                          
+                        </mat-select>
+                        <mat-error *ngIf="ParentRelativeForm.get('deadStatus').hasError('required')">
+                          Dead Status is required
+                        </mat-error>
+                    </mat-form-field>
+                  </div>
+                  
+                  <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                        <mat-label>Occupation</mat-label>
+                        
+                        <mat-select formControlName="occupationId" required>
+                            <mat-option *ngFor="let code of occupationValues" [value]="code.value">
+                                {{code.text}}
+                            </mat-option>                          
+                        </mat-select>
+                        <mat-error *ngIf="ParentRelativeForm.get('occupationId').hasError('required')">
+                          Occupation is required
+                        </mat-error>
+                    </mat-form-field> 
+                  </div>
+                  
+                  <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                      <mat-label>Mobile</mat-label>
+                      <input matInput formControlName="mobile">                      
+                    </mat-form-field>
+                  </div>
+                  
+                  
+               
+                  <div class="row">
+                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+                      <button class="btn-space" [class.auth-spinner]="loading" [disabled]="loading" [disabled]="!ParentRelativeForm.valid " mat-raised-button
+                        color="primary">{{buttonText}}</button>
+                      <button type="button" mat-button [routerLink]="['/trainee-biodata/sailor-biodata-tab/main-tab-layout/main-tab/family-info-details', this.traineeId]">Cancel</button>
+                      
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+  
+
+

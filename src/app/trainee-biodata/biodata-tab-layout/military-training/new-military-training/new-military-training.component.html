@@ -1,0 +1,101 @@
+<div class="block-header">
+    <div class="row">
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <ul class="breadcrumb breadcrumb-style ">
+          <li class="breadcrumb-item">
+            <h4 class="page-title">{{pageTitle}}</h4>
+          </li>
+          <li class="breadcrumb-item bcrumb-1">
+            <a routerLink="/admin/dashboard/main"><i class="fas fa-home"></i> </a>
+          </li>
+          <li class="breadcrumb-item bcrumb-2">
+            <a href="#" onClick="return false;">Record of Service</a>
+          </li>
+          <li class="breadcrumb-item active">{{destination}}</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="row clearfix">
+    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+      <div class="card">
+        <div class="header">
+        </div>
+        <div class="body">
+          <form class="m-4" [formGroup]="MilitaryTrainingForm" (ngSubmit)="onSubmit()">
+            <div class="row">
+
+              <div hidden class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                <mat-form-field class="example-full-width mb-3" appearance="outline">
+                  <mat-label>Trainee Id</mat-label>
+                  <input matInput formControlName="traineeId" required>
+                  <mat-error *ngIf="MilitaryTrainingForm.get('traineeId').hasError('required')">
+                    Trainee name is required
+                  </mat-error>
+                </mat-form-field>
+              </div>
+
+              <!-- <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                <mat-form-field class="example-full-width mb-3" appearance="outline">
+                  <mat-label>Social Media Type</mat-label>
+                  <mat-select formControlName="MilitaryTrainingTypeId" required>
+                    <mat-option *ngFor="let social of selectedMilitaryTraining" [value]="social.value">
+                        {{social.text}}
+                    </mat-option>                          
+                  </mat-select>
+                  <mat-error *ngIf="MilitaryTrainingForm.get('MilitaryTrainingTypeId').hasError('required')">
+                    Social Media Type is required
+                  </mat-error>
+                </mat-form-field>
+              </div> -->
+              <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mb-2">
+                <mat-form-field class="example-full-width mb-3" appearance="outline">
+                  <mat-label>Date Attended</mat-label>
+                    <input matInput [matDatepicker]="frompicker" formControlName="dateAttended" required>
+                    <mat-datepicker-toggle matSuffix [for]="frompicker"></mat-datepicker-toggle>
+                   <mat-datepicker #frompicker></mat-datepicker>   
+                   <mat-error *ngIf="MilitaryTrainingForm.get('dateAttended').hasError('required')">
+                    Date From is required
+                  </mat-error>                                         
+                </mat-form-field>
+              </div>
+
+            
+              <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
+                <mat-form-field class="example-full-width mb-3" appearance="outline">
+                  <mat-label>Name And Location of Trg Establishment</mat-label>
+                  <input matInput formControlName="locationOfTrg" required>
+                  <mat-error *ngIf="MilitaryTrainingForm.get('locationOfTrg').hasError('required')">
+                    locationOfTrg is required
+                  </mat-error>
+                </mat-form-field>
+              </div>
+             
+              <div class="col-xl-4 col-lg-4col-md-4 col-sm-12 mb-2">
+                <mat-form-field class="example-full-width mb-3" appearance="outline">
+                  <mat-label>Details Of Course</mat-label>
+                  <input matInput formControlName="detailsOfCourse">
+                </mat-form-field>
+              </div>
+              <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mb-2">
+                <mat-form-field class="example-full-width mb-3" appearance="outline">
+                  <mat-label>Remarks</mat-label>
+                  <input matInput formControlName="remarks">
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+                <button class="btn-space" [class.auth-spinner]="loading" [disabled]="loading" [disabled]="!MilitaryTrainingForm.valid " mat-raised-button
+                  color="primary">{{buttonText}}</button>
+                <button type="button" mat-button [routerLink]="['/trainee-biodata/trainee-biodata-tab/main-tab-layout/main-tab/militarytraining-details/',this.traineeId]">Cancel</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+

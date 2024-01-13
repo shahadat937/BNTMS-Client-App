@@ -1,0 +1,112 @@
+<section class="content">
+    <div class="container-fluid">
+      <div class="block-header">
+        <div class="row">
+          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <ul class="breadcrumb breadcrumb-style ">
+              <li class="breadcrumb-item">
+                <h4 class="page-title">Trainee Assessment Mark</h4>
+              </li>
+              <li class="breadcrumb-item bcrumb-1">
+                <a routerLink="/admin/dashboard/main"><i class="fas fa-home"></i></a>
+              </li>
+              <li class="breadcrumb-item bcrumb-2">
+                <a href="#" onClick="return false;">Trainee Assessment Mark List</a>
+              </li>
+              <li class="breadcrumb-item active">All</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+          <div class="card">
+            <div class="body">
+              <div class="responsive_table reading-materials">
+                <div class="materialTableHeader"> 
+                  <div class="row">
+                    <div class="col-8">
+                      <ul class="header-buttons-left ml-0">
+                        <li class="dropdown">
+                        </li>
+                        <!-- <li class="dropdown">
+                          <input placeholder="Search" type="text" [(ngModel)]="searchText"  #filter class="browser-default search-field"
+                          aria-label="Search box">
+                        </li>
+                        <li> 
+                          <div class="icon-button-demo m-l-10">
+                            <button mat-mini-fab color="accent" (click)="applyFilter(searchText)">
+                              <mat-icon class="col-white">search</mat-icon>
+                            </button>
+                          </div>
+                          
+                        </li> -->
+                      </ul>
+                    </div>
+                    <div class="col-4">
+                      <ul class="header-buttons">
+                        <li>
+                          <div class="icon-button-demo">
+                            <!-- <button class="btn-space"  mat-raised-button
+                            color="primary" routerLink="/trainee-assessment/add-traineeassessmentcreate"> Add
+                              <mat-icon class="col-white">add</mat-icon>
+                            </button> -->
+                            <button  class="btn-space"  mat-raised-button color="warn" (click)="backClicked()"> 
+                              <mat-icon class="col-white">keyboard_backspace</mat-icon> Back
+                            </button> 
+                          </div>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+                 
+                <table class="table tbl-by-group db-li-s-in">
+                  <thead>
+                    <tr>
+                      <th class="cl-mrk-rmrk-act-library"><h5>Trainee</h5></th>
+                      <th class="book-category"><h5>Position</h5></th>
+                      <th class="cl-action"><h5>Knowledge</h5></th>  
+                      <th class="cl-action"><h5>Staff Duty</h5></th>  
+                      <th class="cl-action"><h5>Leadeship</h5></th>  
+                    </tr>
+                  </thead>
+                  <tbody>
+                      <tr *ngFor="let number of this.traineeAssessmentMarkList">
+                        <td>
+                          {{number.rnkPosition}} {{number.name}} (P No {{number.pno}})
+                        </td>
+                        <td>
+                          {{number.markPosition}}                          
+                        </td>
+                        <td>
+                          {{number.knowledge}}                          
+                        </td>
+                        <td>
+                          {{number.staffDuty}}                          
+                        </td>
+                        <td>
+                          {{number.leadeship}}                          
+                        </td>
+                      </tr>
+                    <!-- </ng-container> -->
+                  </tbody>
+                </table>
+            
+                 <!-- <mat-paginator [length]="paging.length" [showFirstLastButtons]="masterData.paging.showFirstLastButtons"
+                [pageSize]="paging.pageSize" [pageSizeOptions]="masterData.paging.pageSizeOptions"
+                (page)="pageChanged($event)">
+                </mat-paginator> -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  
+  
+  
+   
+

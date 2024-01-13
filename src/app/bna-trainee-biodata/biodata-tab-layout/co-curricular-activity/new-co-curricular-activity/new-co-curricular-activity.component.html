@@ -1,0 +1,90 @@
+      <div class="block-header">
+        <div class="row">
+          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <ul class="breadcrumb breadcrumb-style ">
+              <li class="breadcrumb-item">
+                <h4 class="page-title">{{pageTitle}}</h4>
+              </li>
+              <li class="breadcrumb-item bcrumb-1">
+                <a routerLink="/admin/dashboard/main"><i class="fas fa-home"></i> </a>
+              </li>
+              <li class="breadcrumb-item bcrumb-2">
+                <a href="#" onClick="return false;">Co-Curricular Activities</a>
+              </li>
+              <li class="breadcrumb-item active">{{destination}}</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="row clearfix">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+          <div class="card">
+            <div class="header">
+            </div>
+            <div class="body">
+              <form class="m-4" [formGroup]="CoCurricularActivityForm" (ngSubmit)="onSubmit()">
+                <div class="row">
+                  <div hidden class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                      <mat-label>Trainee Id</mat-label>
+                      <input matInput formControlName="traineeId" required>
+                      <mat-error *ngIf="CoCurricularActivityForm.get('traineeId').hasError('required')">
+                        Trainee name is required
+                      </mat-error>
+                    </mat-form-field>
+                  </div>
+                  <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                      <mat-label>Activity Type</mat-label>
+                      <mat-select formControlName="coCurricularActivityTypeId" required>
+                        <mat-option *ngFor="let code of CoCurricularActivityTypeValues" [value]="code.value">
+                            {{code.text}}
+                        </mat-option>                          
+                      </mat-select>
+                      <mat-error *ngIf="CoCurricularActivityForm.get('coCurricularActivityTypeId').hasError('required')">
+                        Activity Type is required
+                      </mat-error>
+                    </mat-form-field>
+                  </div>
+                  <!-- <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                      <mat-label>coCurricularActivityTypeId</mat-label>
+                      <input matInput formControlName="coCurricularActivityTypeId" required>
+                      <mat-error *ngIf="CoCurricularActivityForm.get('coCurricularActivityTypeId').hasError('required')">
+                        coCurricularActivityTypeId is required
+                      </mat-error>
+                    </mat-form-field>
+                  </div> -->
+                  <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                      <mat-label>Participation</mat-label>
+                      <input matInput formControlName="participation" >
+                      
+                    </mat-form-field>
+                  </div>
+                  <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                      <mat-label>Achievement</mat-label>
+                      <input matInput formControlName="achievement" >
+                      
+                    </mat-form-field>
+                  </div>
+                  
+                 
+                </div>
+               
+                <div class="row">
+                  <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+                    <button class="btn-space" [class.auth-spinner]="loading" [disabled]="loading" [disabled]="!CoCurricularActivityForm.valid " mat-raised-button
+                      color="primary">{{buttonText}}</button>
+                    <button type="button" mat-button [routerLink]="['/trainee-biodata/trainee-biodata-tab/main-tab-layout/main-tab/co-curricular-activity-details', this.traineeId]">Cancel</button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+  
+
+

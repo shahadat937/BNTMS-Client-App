@@ -1,0 +1,92 @@
+<section class="content">
+    <div class="container-fluid">
+      <div class="block-header">
+        <div class="row">
+          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <ul class="breadcrumb breadcrumb-style ">
+              <li class="breadcrumb-item">
+                <h4 class="page-title">Daily Course List</h4>
+              </li>
+              <li class="breadcrumb-item bcrumb-1">
+                <a routerLink="/admin/dashboard/main"><i class="fas fa-home"></i></a>
+              </li>
+              <li class="breadcrumb-item bcrumb-2">
+                <a href="#" onClick="return false;">Daily Course List</a>
+              </li>
+              <li class="breadcrumb-item active">All</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+          <div class="card">
+            <div class="body">
+              <div class="responsive_table">
+                <div class="materialTableHeader"> 
+                  <div class="row">
+                    <div class="col-8">
+                      <ul class="header-buttons-left ml-0">
+                        <li class="dropdown">
+                        </li>
+                      </ul>
+                    </div>
+                    <!-- [routerLink]="['/admin/dashboard/school-dashboard',schoolId]" -->
+                    <div class="col-4">
+                      <ul class="header-buttons">
+                        <li>
+                          <div class="icon-button-demo">
+                            <button class="btn-space"  mat-raised-button
+                            color="warn" [routerLink]="['/admin/dashboard/instructorcourselistforroutine', traineeId]"> 
+                            <mat-icon class="col-white">keyboard_backspace</mat-icon> Back
+                            </button>
+                          </div>
+                        </li>
+                       
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+                <div id="print-routine">
+                <table class="table  tbl-by-group">
+                  <thead>
+                    <tr>
+                      <!-- <th class="cl-srl"><h5>Ser</h5></th> -->
+                      <th class="cl-srl"><h5>Course</h5></th>
+                      <th class="cl-mrk"><h5>Duration</h5></th>
+                      <th class="cl-mrk-rmrk"><h5>Subject</h5></th>
+                      <th class="cl-mrk-rmrk"><h5>Section</h5></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <ng-container *ngFor="let data of groupArrays;let i= index;">
+                      <tr>
+                        <td [attr.rowspan]="data.courses.length + 1">{{data.course | date:'mediumDate'}}</td>
+                      </tr>
+                      <tr *ngFor="let number of data.courses;">                 
+                        <td class="cl-mrk"> {{number.periodName}}  ({{number.durationForm}}-{{number.durationTo}}) </td>
+                        <td class="cl-mrk-rmrk">{{number.subjectShortName}} - {{number.classCountPeriod}}/{{number.subjectCountPeriod}} - ( {{number.shortName}} ) - ( {{number.classTypeName}} )</td>
+                        <td class="cl-mrk-rmrk">{{number.sectionName}}</td>                        
+                      </tr>
+                    </ng-container>
+                  </tbody>
+                </table>
+              </div>
+              <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 div-class div-left m-t-20">
+                <button class="btn-space"  mat-raised-button color="primary" (click)="printSingle()"> Print
+                  <mat-icon class="col-white">print</mat-icon>
+                </button>
+              </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  
+  
+  
+   
+

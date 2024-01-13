@@ -1,0 +1,586 @@
+<section class="content">
+  <div class="container-fluid">
+    <div class="block-header">
+      <div class="row">
+        <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
+          <ul class="breadcrumb breadcrumb-style ">
+            <li class="breadcrumb-item">
+              <h4 class="page-title">{{pageTitle}}</h4>
+            </li>
+            <li class="breadcrumb-item bcrumb-1">
+              <a routerLink="/school/dashboard">
+                <i class="fas fa-home"></i> </a>
+            </li>
+            <li class="breadcrumb-item bcrumb-2">{{pageTitle}}</li>
+            <li class="breadcrumb-item active">{{schoolName}}</li>
+          </ul>
+        </div>
+        <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+          <h4 class="user-manual manual-btn">
+            <a [href]='this.fileUrl+userManual' target='_blank'>User Manual (Download)</a>
+          </h4>            
+        </div>
+      </div>
+    </div>
+
+      <!-- *ngIf="isShown" -->
+
+      <div class="row">
+       <!-- Useful links -->
+     <div *ngIf="isShown"  class="col-xs-8 col-sm-8 col-md-8 col-lg-8 scl-top-row">     
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+      <div class="card usefullink">
+        <div class="header">
+        </div>
+        <div class="body">
+          <div class="row dash-cd-m-0">
+            <!-- <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 div-class div-left align-center">
+              <h3>Useful Links</h3>
+            </div> -->
+          </div>
+          <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12">
+
+            
+              <button [routerLink]="['/admin/dashboard/weeklyprogramdashboard',schoolId]" class="col-lg-4 col-md-4 col-sm-4 btnDetails" mat-flat-button color="primary">Weekly Program</button>
+              <button [routerLink]="['/admin/dashboard/view-schoolnotice',schoolId]" class="col-lg-4 col-md-4 col-sm-4 btnDetails" mat-flat-button color="primary">Notice Board</button>
+              <button [routerLink]="['/admin/dashboard/absentlistdashboard',schoolId]" class="col-lg-4 col-md-4 col-sm-4 btnDetails" mat-flat-button color="primary">Attendance</button>
+              <button [routerLink]="['/admin/dashboard/courseinstructorlist',schoolId]" class="col-lg-4 col-md-4 col-sm-4 btnDetails" mat-flat-button color="primary">Course Instructor</button>
+              <button [routerLink]="['/admin/dashboard/pendingexamevaluation-list',schoolId]" class="col-lg-4 col-md-4 col-sm-4 btnDetails" mat-flat-button color="primary"> Exam Evaluation</button>
+              <button [routerLink]="['/admin/dashboard/readingmateriallist-dashboard',schoolId]" class="col-lg-4 col-md-4 col-sm-4 btnDetails" mat-flat-button color="primary">Precourse Material</button>
+              <button [routerLink]="['/admin/dashboard/view-readingmaterial']" class="col-lg-4 col-md-4 col-sm-4 btnDetails" mat-flat-button color="primary">Reading Materials</button>
+              <button [routerLink]="['/admin/dashboard/view-courselistbyschool',schoolId]" class="col-lg-4 col-md-4 col-sm-4 btnDetails" mat-flat-button color="primary">Course Names </button>
+              <!-- <button class="btnDetails" mat-flat-button color="primary">Teacher Evaluation</button>
+              <button class="btnDetails" mat-flat-button color="primary">Syllabus</button> -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+
+        <div *ngIf="isShown"  class="col-xl-4 col-lg-4 col-md-12 col-sm-12 scl-top-row">     
+          <div class="card">
+            <div class="body">
+              <table class="full-width col-12 count-tbl db-main">
+                <tr>
+                  <th>Total Trainee</th>
+                  <td>
+                    <a [routerLink]="['/admin/dashboard/view-totaltraineelistbyschool', schoolId]">{{nomineeCount}}</a>
+                  </td>
+                </tr>
+                <tr>
+                  <th>Foreign Trainee</th>
+                  <td>
+                    <a [routerLink]="['/admin/dashboard/view-totalforeigntraineelistbyschool', schoolId, masterData.OfficerType.Foreign]">{{foreignNomineeCount}}</a>
+                  </td> 
+                </tr>
+                <tr>
+                  <th>Officers</th>
+                  <td>
+                    <a [routerLink]="['/admin/dashboard/view-officerlistbyschool', schoolId, masterData.TraineeStatus.officer]">{{runningOfficerCount}}</a>
+                  </td>
+                </tr>
+                <tr>
+                  <th>Sailors</th>
+                  <td>
+                    <a [routerLink]="['/admin/dashboard/view-officerlistbyschool', schoolId, masterData.TraineeStatus.sailor]">{{runningSailorCount}}</a>
+                  </td>
+                </tr>
+                <tr>
+                  <th>Civil</th>
+                  <td>
+                    <a [routerLink]="['/admin/dashboard/view-officerlistbyschool', schoolId, masterData.TraineeStatus.civil]">{{runningCivilCount}}</a>
+                  </td>
+                </tr>
+                <!-- <tr>
+                  <th>Total Local Courses (Running)</th>
+                  <td><span class="no-link"><a [routerLink]="['/admin/dashboard/runningcourses-list', schoolId]">{{localCourseCount}}</a></span></td>
+                </tr> -->
+                <tr>
+                  <th class="calendar-color">Online Interaction <span class="notify-design float-none">{{notificationCount}}</span> <span *ngIf="notificationCount" class="blink_me float-none">New Massage</span></th>
+                  <td>
+                    <span class="no-link">
+                      <a [routerLink]="['/admin/dashboard/online-interaction']">>>></a>
+                      <!-- <a *ngIf="this.schoolId == this.masterData.schoolName.NBCDSchool" [routerLink]="['/admin/dashboard/upcomingcoursesnbcd-list', schoolId]">{{UpcomingCourseCount}}</a> -->
+                    </span>
+                  </td>
+                </tr>
+                <!-- <tr>
+                  <th class="calendar-color">Upcoming Events</th>
+                  <td><span class="no-link"><a [routerLink]="['/admin/dashboard/view-schoolevent', schoolId]">></a></span></td>
+                </tr> -->
+              </table>
+            </div>
+          </div>
+        </div>    
+      </div>
+
+      <div  *ngIf="isShown" class="container-fluid  m-b-10 bulletin">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 bulletin-section">
+          <div class="row">
+            <div class="col-lg-1 col-md-1 ">
+              <div class="title">
+                <h4>Bulletin:</h4>
+              </div>
+              
+            </div>
+            <div class="col-lg-11 col-md-11">
+              <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 scrollbar">
+                <ng-marquee [stopOnHover]="true" duration="75s" >
+                  <mark class="bulletin-item" *ngFor="let data of bulletinList;">{{data.buletinDetails}}</mark>                
+                </ng-marquee>
+              </div>
+              
+              
+            </div>
+          </div>
+          
+        </div>
+      </div>
+
+   
+    <div *ngIf="isShown" class="row clearfix">
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <div class="card">
+          <div class="header">
+          </div>
+          <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+              <div class="card">
+                <div class="body">                  
+                  <div class="row dash-cd-m-0">
+                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 div-class div-left course-filter">
+                      <button class="running-course" (click)="getCoursesByViewType(1)">Running</button>
+                      <button class="passing-course" (click)="getCoursesByViewType(2)">Passing Out</button>
+                      <button class="upcoming-course" (click)="getCoursesByViewType(3)">Upcoming</button>
+                      <button *ngIf="schoolId == masterData.schoolName.BNA" class="combined-routine" routerLink="/admin/dashboard/view-combinedbnaroutine">Combined Routine</button>
+                    </div>
+
+                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 div-class div-right">
+                      <h4 class="rnc">{{viewCourseTitle}} Courses</h4>
+                    </div>
+                    
+                  </div> 
+                  <!-- Running CourseList -->
+                  <mat-table *ngIf="(role == userRole.SuperAdmin || role === userRole.BNASchool || role === userRole.JSTISchool || role == userRole.SchoolOIC || role == userRole.OICNBCDSchool || role == userRole.OICNETSchool) && viewStatus != 3" #table [dataSource]="runningCourses" matSort class="mat-cell notice-list db-tbl scl-db">               
+
+                      <ng-container matColumnDef="ser">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header> Ser: </mat-header-cell>
+                        <mat-cell *matCellDef="let element; let i = index;"> {{ ((paging.pageIndex-1) *  paging.pageSize) + i+1}} </mat-cell>
+                      </ng-container>    
+    
+                      <ng-container matColumnDef="course">
+                        <mat-header-cell class="course-col" *matHeaderCellDef mat-sort-header>Name of Course </mat-header-cell>
+                        <mat-cell class="course-col" *matCellDef="let element">
+                          {{getDateComparision(element)}} {{element.course}} - {{element.courseTitle}} 
+                          <span *ngIf="passOutStatus === 1" style="color:red;font-weight:bold;width: 45%;"> (Passing Out)</span>
+                        </mat-cell>
+                      </ng-container>
+    
+    
+    
+                      <ng-container matColumnDef="durationFrom">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header> Date of Commencement</mat-header-cell>
+                        <mat-cell *matCellDef="let element"> {{element.durationFrom | date:'mediumDate'}} </mat-cell>
+                      </ng-container>
+    
+                      <ng-container matColumnDef="durationTo">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header>Date of Completion</mat-header-cell>
+                        <mat-cell *matCellDef="let element"> {{element.durationTo | date:'mediumDate'}} </mat-cell>
+                      </ng-container>
+                      
+                      <ng-container matColumnDef="countWeek">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header> Duration</mat-header-cell>
+                        <mat-cell *matCellDef="let element"><a [routerLink]="['/admin/dashboard/view-courseweekbyduration',element.courseDurationId]"> {{element.completeWeek}} / {{element.countWeek}} (Week)</a></mat-cell>
+                      </ng-container>
+
+                      <ng-container matColumnDef="courseSyllabus">
+                        <mat-header-cell class="sub-col" *matHeaderCellDef mat-sort-header> Syllabus </mat-header-cell>
+                        <mat-cell class="sub-col" *matCellDef="let row"> 
+                          <button *ngIf="row.courseSyllabus" mat-icon-button class="btn-tbl-view" title="View Course Syllabus">
+                            <a [href]='this.fileUrl+row.courseSyllabus' target='_blank'><mat-icon aria-label="Edit" class="col-white">picture_as_pdf</mat-icon></a>
+                          </button>  
+                        </mat-cell>
+                      </ng-container>
+                      
+                      <ng-container matColumnDef="actions">
+                        <mat-header-cell ngClass="custom-action local" *matHeaderCellDef class="pr-0"></mat-header-cell>
+                        <mat-cell ngClass="custom-action local" *matCellDef="let row; let i=index;" class="pr-0">
+                          <!-- <button *ngIf="row.courseSyllabus" mat-icon-button class="btn-tbl-view" title="View Course Syllabus">
+                            <a [href]='this.fileUrl+row.courseSyllabus' target='_blank'><mat-icon aria-label="Edit" class="col-white">picture_as_pdf</mat-icon></a>
+                          </button> *ngIf="row.countWeek == 0" -->
+                   
+                          <button *ngIf="row.countWeek == 0" mat-icon-button color="accent" title="Course Week Generate" class="btn-tbl-nomination" (click)="$event.stopPropagation()"
+                            (click)="courseWeekGenerate(row)">
+                            <mat-icon aria-label="Delete" class="col-white">alarm</mat-icon>
+                          </button>
+                          <button *ngIf="role == userRole.SchoolOIC && row.nbcd>0 && row.nbcdStatus !=1"  mat-icon-button class="btn-tbl-view" title="Course Details" [routerLink]="['/admin/dashboard/update-nbcdcourseduration',row.courseDurationId]">
+                            <mat-icon aria-label="Edit" class="col-white">school</mat-icon>
+                          </button>
+                          <button mat-icon-button class="btn-tbl-view" title="Course Details" [routerLink]="['/admin/dashboard/course-details',row.courseDurationId,schoolDb]">
+                            <mat-icon aria-label="Edit" class="col-white">visibility</mat-icon>
+                          </button>
+                          <button *ngIf="role != dataEnty" mat-icon-button color="accent" title="Trainee Mark List" class="btn-tbl-view" 
+                            [routerLink]="['/course-management/marklistbycourse-list', row.courseDurationId, dbType]">
+                            <mat-icon mat-icon aria-label="Edit" class="col-white">toc</mat-icon>
+                          </button>
+                          <!-- <button mat-icon-button class="btn-tbl-view" title="Exam Instructor List" [routerLink]="['/admin/dashboard/view-examinstructor',row.baseSchoolNameId, row.courseNameId]">
+                            <mat-icon aria-label="Edit" class="col-white">person</mat-icon>
+                          </button> -->
+                          <button mat-icon-button class="btn-tbl-nomination" title="Subject Instructor List" [routerLink]="['/admin/dashboard/view-subjectinstructors',row.baseSchoolNameId ,row.courseDurationId, row.courseNameId]">
+                            <!-- <mat-icon aria-label="Edit" class="col-white">wc</mat-icon> -->
+                            <img src="assets/images/main.jpg" class="instructor-icon"/>
+                          </button>
+                          <button mat-icon-button color="accent" title="Weekly Training Program" class="btn-tbl-view" 
+                            [routerLink]="['/admin/dashboard/view-routinebycourse', row.baseSchoolNameId, row.courseNameId, row.courseDurationId]">
+                            <!-- <mat-icon aria-label="Edit" class="col-white">hourglass_empty</mat-icon> -->
+                            <img src="../../../assets/images/app-icon/routine.png" class="routine-icon"/>
+                          </button>
+                          <button mat-icon-button class="btn-tbl-nomination" title="List of Trainee" [routerLink]="['/admin/dashboard/traineenomination-list', row.courseDurationId,1,2,3,4]">
+                            <!-- <mat-icon aria-label="Edit" class="col-white">supervisor_account</mat-icon> -->
+                            <!-- <img src="../../../assets/images/app-icon/biodata.png" class="biodata-icon"/> -->
+                            <mat-icon aria-label="Edit" class="col-white">wc</mat-icon>
+                          </button>
+                          <button mat-icon-button color="accent" title="Syllabus" class="btn-tbl-view" 
+                          [routerLink]="['/admin/dashboard/view-syllabusfromschool', row.baseSchoolNameId, row.courseNameId, row.courseDurationId,schoolDb]">
+                            <!-- <mat-icon aria-label="Edit" class="col-white">book</mat-icon> -->
+                            <img src="../../../assets/images/app-icon/material.png" class="syllabus-icon"/>
+                          </button>
+                          <button mat-icon-button class="btn-tbl-nomination" title="Exam Status" [routerLink]="['/admin/dashboard/view-examstatusbysubjectlist', row.baseSchoolNameId, row.courseNameId, row.courseDurationId]">
+                            <!-- <mat-icon aria-label="Edit" class="col-white">assessment</mat-icon> -->
+                            <img src="../../../assets/images/app-icon/exam.png" class="exam-icon"/>
+                          </button>
+                        </mat-cell>
+                      </ng-container>              
+                      
+    
+                      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+                  </mat-table>
+                  <mat-table *ngIf="(role == userRole.SuperAdmin || role === userRole.BNASchool || role === userRole.JSTISchool || role == userRole.SchoolOIC || role == userRole.OICNBCDSchool || role == userRole.OICNETSchool)&& viewStatus == 3 && this.schoolId != this.masterData.schoolName.NBCDSchool" #table [dataSource]="upcomingCourses" matSort class="mat-cell db-tbl upcoming-course-tbl">               
+                    <ng-container matColumnDef="ser">
+                      <mat-header-cell *matHeaderCellDef mat-sort-header> Ser: </mat-header-cell>
+                      <mat-cell *matCellDef="let element; let i = index;"> {{ ((paging.pageIndex-1) *  paging.pageSize) + i+1}} </mat-cell>
+                    </ng-container>    
+    
+                    <ng-container matColumnDef="course">
+                      <mat-header-cell *matHeaderCellDef mat-sort-header class="course-name-col">Name of Course </mat-header-cell>
+                      <mat-cell *matCellDef="let element" class="course-name-col">                       
+                        <span>{{element.course}} - {{element.courseTitle}} - <span style="color:red;font-weight:bold;">(Left {{getRemainingDays(element.durationFrom | date:'mediumDate')}} Days)</span></span>
+                      </mat-cell>
+                    </ng-container>
+    
+                    <ng-container  matColumnDef="schoolName">
+                      <mat-header-cell *matHeaderCellDef mat-sort-header>Name of Establishment / School</mat-header-cell>
+                      <mat-cell *matCellDef="let element"> {{element.schoolName}} </mat-cell>
+                    </ng-container>
+    
+                    <ng-container matColumnDef="noOfCandidates">
+                      <mat-header-cell *matHeaderCellDef mat-sort-header>No of Candidates</mat-header-cell>
+                      <mat-cell *matCellDef="let element"> {{element.noOfCandidates}} </mat-cell>
+                    </ng-container>
+    
+                    <ng-container matColumnDef="professional">
+                      <mat-header-cell class="tbl-custom-s-pro" *matHeaderCellDef mat-sort-header>Professional  </mat-header-cell>
+                      <mat-cell class="tbl-custom-s-pro" *matCellDef="let element"> {{element.professional}} </mat-cell>
+                    </ng-container>
+    
+                    <ng-container matColumnDef="nbcd">
+                      <mat-header-cell class="tbl-custom-s-nbc" *matHeaderCellDef mat-sort-header>NBCD  </mat-header-cell>
+                      <mat-cell class="tbl-custom-s-nbc" *matCellDef="let element"> {{element.nbcd}} </mat-cell>
+                    </ng-container>
+    
+    
+                    <ng-container matColumnDef="durationFrom">
+                      <mat-header-cell *matHeaderCellDef mat-sort-header> Date of Commencement</mat-header-cell>
+                      <mat-cell *matCellDef="let element"> {{element.durationFrom | date:'mediumDate'}} </mat-cell>
+                    </ng-container>
+    
+                    <ng-container matColumnDef="durationTo">
+                      <mat-header-cell *matHeaderCellDef mat-sort-header>Date of Completion</mat-header-cell>
+                      <mat-cell *matCellDef="let element"> {{element.durationTo | date:'mediumDate'}} </mat-cell>
+                    </ng-container>
+    
+                    <ng-container matColumnDef="remark">
+                      <mat-header-cell *matHeaderCellDef mat-sort-header>Remarks  </mat-header-cell>
+                      <mat-cell *matCellDef="let element"> {{element.remark}} </mat-cell>
+                    </ng-container>
+    
+                    <ng-container matColumnDef="daysCalculate">
+                      <mat-header-cell *matHeaderCellDef mat-sort-header>Week  </mat-header-cell>
+                      <mat-cell *matCellDef="let element"> {{getDaysfromDate(element.durationFrom | date:'mediumDate',element.durationTo | date:'mediumDate', 0)}} Week(s) </mat-cell>
+                    </ng-container>
+                    
+                    <ng-container matColumnDef="actions">
+                      <mat-header-cell ngClass="custom-action local" *matHeaderCellDef class="pr-0">Actions</mat-header-cell>
+                      <mat-cell ngClass="custom-action local" *matCellDef="let row; let i=index;" class="pr-0">
+                        <!-- <button mat-icon-button class="btn-tbl-nomination" title="Subject Instructor List" [routerLink]="['/admin/dashboard/view-subjectinstructors',row.baseSchoolNameId ,row.courseDurationId, row.courseNameId]">
+                          <mat-icon aria-label="Edit" class="col-white">wc</mat-icon>
+                        </button>
+                        <button mat-icon-button color="accent" title="Course Routine List" class="btn-tbl-view" 
+                          [routerLink]="['/admin/dashboard/routinebycourse-list', row.baseSchoolNameId, row.courseNameId, row.courseDurationId]">
+                          <mat-icon aria-label="Edit" class="col-white">book</mat-icon>
+                        </button> *ngIf="row.countWeek == 0" -->
+                       
+                        <!-- <span> {{checkCourseWeeks(row.courseDurationId) }}</span> -->
+                        <button *ngIf="row.countWeek == 0"  mat-icon-button color="accent" title="Course Week Generate" class="btn-tbl-nomination" (click)="$event.stopPropagation()"
+                        (click)="courseWeekGenerate(row)">
+                          <mat-icon aria-label="Delete" class="col-white">alarm</mat-icon>
+                        </button>
+                        <button *ngIf="this.school != this.masterData.schoolName.NBCDSchool || role != this.userRole.OICNBCDSchool" mat-icon-button class="btn-tbl-view" title="Course Details" [routerLink]="['/admin/dashboard/course-details',row.courseDurationId,row.baseSchoolNameId]">
+                          <mat-icon aria-label="Edit" class="col-white">visibility</mat-icon>
+                        </button>
+                        <button *ngIf="this.school== this.masterData.schoolName.NBCDSchool" mat-icon-button class="btn-tbl-view" title="Course Details" [routerLink]="['/admin/dashboard/view-course-details',row.courseDurationId,row.baseSchoolNameId]">
+                          <mat-icon aria-label="Edit" class="col-white">visibility</mat-icon>
+                        </button>
+                        
+                        <button mat-icon-button class="btn-tbl-nomination" title="Nomination" [routerLink]="['/admin/dashboard/traineenomination-list', row.courseDurationId,5]">
+                          <mat-icon aria-label="Edit" class="col-white">supervisor_account</mat-icon>
+                        </button>
+                        <button *ngIf="this.school != this.masterData.schoolName.NBCDSchool" mat-icon-button color="accent" title="Syllabus" class="btn-tbl-view" 
+                            [routerLink]="['/admin/dashboard/view-syllabusfromschool', row.baseSchoolNameId, row.courseNameId, row.courseDurationId,5]">
+                              <mat-icon aria-label="Edit" class="col-white">book</mat-icon>
+                            </button>
+                      </mat-cell>
+                    </ng-container>  
+                    <mat-header-row *matHeaderRowDef="displayedUpcomingColumns"></mat-header-row>
+                    <mat-row *matRowDef="let row; columns: displayedUpcomingColumns;"></mat-row>
+                  </mat-table>
+
+
+                  <!-- NBCD School -->
+                  <mat-table *ngIf="(role == userRole.SuperAdmin || role === userRole.BNASchool || role === userRole.JSTISchool || role == userRole.SchoolOIC || role == userRole.OICNBCDSchool || role == userRole.OICNETSchool)&& viewStatus == 3 && this.schoolId == this.masterData.schoolName.NBCDSchool" #table [dataSource]="upcomingCourses" matSort class="mat-cell db-tbl upcoming-course-tbl">
+                    <ng-container matColumnDef="ser">
+                      <mat-header-cell *matHeaderCellDef mat-sort-header> Ser: </mat-header-cell>
+                      <mat-cell *matCellDef="let element; let i = index;"> {{ ((paging.pageIndex-1) *  paging.pageSize) + i+1}} </mat-cell>
+                    </ng-container>    
+    
+                    <ng-container matColumnDef="course">
+                      <mat-header-cell *matHeaderCellDef mat-sort-header class="course-name-col">Name of Course </mat-header-cell>
+                      <mat-cell *matCellDef="let element" class="course-name-col">                       
+                        <span>{{element.course}} - {{element.courseTitle}} - <span style="color:red;font-weight:bold;">(Left {{getRemainingDays(element.durationFrom | date:'mediumDate')}} Days)</span></span>
+                      </mat-cell>
+                    </ng-container>
+    
+                    <ng-container  matColumnDef="schoolName">
+                      <mat-header-cell *matHeaderCellDef mat-sort-header>Name of Establishment / School</mat-header-cell>
+                      <mat-cell *matCellDef="let element"> {{element.schoolName}} </mat-cell>
+                    </ng-container>
+    
+                    <ng-container matColumnDef="noOfCandidates">
+                      <mat-header-cell *matHeaderCellDef mat-sort-header>No of Candidates</mat-header-cell>
+                      <mat-cell *matCellDef="let element"> {{element.noOfCandidates}} </mat-cell>
+                    </ng-container>
+    
+                    <ng-container matColumnDef="professional">
+                      <mat-header-cell class="tbl-custom-s-pro" *matHeaderCellDef mat-sort-header>Professional  </mat-header-cell>
+                      <mat-cell class="tbl-custom-s-pro" *matCellDef="let element"> {{element.professional}} </mat-cell>
+                    </ng-container>
+    
+                    <ng-container matColumnDef="nbcd">
+                      <mat-header-cell class="tbl-custom-s-nbc" *matHeaderCellDef mat-sort-header>NBCD  </mat-header-cell>
+                      <mat-cell class="tbl-custom-s-nbc" *matCellDef="let element"> {{element.nbcd}} </mat-cell>
+                    </ng-container>
+    
+    
+                    <ng-container matColumnDef="durationFrom">
+                      <mat-header-cell *matHeaderCellDef mat-sort-header> Date of Commencement</mat-header-cell>
+                      <mat-cell *matCellDef="let element"> {{element.durationFrom | date:'mediumDate'}} </mat-cell>
+                    </ng-container>
+    
+                    <ng-container matColumnDef="durationTo">
+                      <mat-header-cell *matHeaderCellDef mat-sort-header>Date of Completion</mat-header-cell>
+                      <mat-cell *matCellDef="let element"> {{element.durationTo | date:'mediumDate'}} </mat-cell>
+                    </ng-container>
+    
+                    <ng-container matColumnDef="remark">
+                      <mat-header-cell *matHeaderCellDef mat-sort-header>Remarks  </mat-header-cell>
+                      <mat-cell *matCellDef="let element"> {{element.remark}} </mat-cell>
+                    </ng-container>
+    
+                    <!-- <ng-container matColumnDef="professional">
+                      <mat-header-cell class="tbl-custom-s-pro" *matHeaderCellDef mat-sort-header>Professional  </mat-header-cell>
+                      <mat-cell class="tbl-custom-s-pro" *matCellDef="let element"> {{element.professional}} </mat-cell>
+                    </ng-container> -->
+    
+                    <!-- <ng-container matColumnDef="nbcd">
+                      <mat-header-cell class="tbl-custom-s-nbc" *matHeaderCellDef mat-sort-header>NBCD  </mat-header-cell>
+                      <mat-cell class="tbl-custom-s-nbc" *matCellDef="let element"> {{element.nbcd}} </mat-cell>
+                    </ng-container> -->
+
+                    <!-- <ng-container matColumnDef="daysCalculate">
+                      <mat-header-cell *matHeaderCellDef mat-sort-header>Week  </mat-header-cell>
+                      <mat-cell *matCellDef="let element"> {{getDaysfromDate(element.durationFrom | date:'mediumDate',element.durationTo | date:'mediumDate', 0)}} Week(s) </mat-cell>
+                    </ng-container> -->
+                    <ng-container matColumnDef="daysCalculate">
+                      <mat-header-cell *matHeaderCellDef mat-sort-header>NBCD Week  </mat-header-cell>
+                      <mat-cell *matCellDef="let element"> {{element.nbcd}} Week(s) </mat-cell>
+                    </ng-container>
+
+                    <ng-container matColumnDef="comeform">
+                      <mat-header-cell *matHeaderCellDef mat-sort-header>Come From  </mat-header-cell>
+                      <mat-cell *matCellDef="let element"> {{element.schoolName}}</mat-cell>
+                    </ng-container>
+
+                    <ng-container matColumnDef="actions">
+                      <mat-header-cell ngClass="custom-action local" *matHeaderCellDef class="pr-0">Actions</mat-header-cell>
+                      <mat-cell ngClass="custom-action local" *matCellDef="let row; let i=index;" class="pr-0">
+                        <!-- <button mat-icon-button class="btn-tbl-nomination" title="Subject Instructor List" [routerLink]="['/admin/dashboard/view-subjectinstructors',row.baseSchoolNameId ,row.courseDurationId, row.courseNameId]">
+                          <mat-icon aria-label="Edit" class="col-white">wc</mat-icon>
+                        </button>
+                        <button mat-icon-button color="accent" title="Course Routine List" class="btn-tbl-view" 
+                          [routerLink]="['/admin/dashboard/routinebycourse-list', row.baseSchoolNameId, row.courseNameId, row.courseDurationId]">
+                          <mat-icon aria-label="Edit" class="col-white">book</mat-icon>
+                        </button> *ngIf="row.countWeek == 0" -->
+                       
+                        <!-- <span> {{checkCourseWeeks(row.courseDurationId) }}</span> -->
+                        <button *ngIf="row.countWeek == 0"  mat-icon-button color="accent" title="Course Week Generate" class="btn-tbl-nomination" (click)="$event.stopPropagation()"
+                        (click)="courseWeekGenerate(row)">
+                          <mat-icon aria-label="Delete" class="col-white">alarm</mat-icon>
+                        </button>
+                        <!-- <button *ngIf="this.school != this.masterData.schoolName.NBCDSchool" mat-icon-button class="btn-tbl-view" title="Course Details" [routerLink]="['/admin/dashboard/course-details',row.courseDurationId,row.baseSchoolNameId]">
+                          <mat-icon aria-label="Edit" class="col-white">visibility</mat-icon>
+                        </button> -->
+                        <button  mat-icon-button class="btn-tbl-view" title="Course Details" [routerLink]="['/admin/dashboard/view-course-details',row.courseDurationId,row.baseSchoolNameId]">
+                          <mat-icon aria-label="Edit" class="col-white">visibility</mat-icon>
+                        </button>
+                        
+                        <button mat-icon-button class="btn-tbl-nomination" title="Nomination" [routerLink]="['/admin/dashboard/traineenomination-list', row.courseDurationId,5]">
+                          <mat-icon aria-label="Edit" class="col-white">supervisor_account</mat-icon>
+                        </button>
+                        <!-- <button *ngIf="this.school != this.masterData.schoolName.NBCDSchool" mat-icon-button color="accent" title="Syllabus" class="btn-tbl-view" 
+                            [routerLink]="['/admin/dashboard/view-syllabusfromschool', row.baseSchoolNameId, row.courseNameId, row.courseDurationId,5]">
+                              <mat-icon aria-label="Edit" class="col-white">book</mat-icon>
+                            </button> -->
+                      </mat-cell>
+                    </ng-container>  
+                    <mat-header-row *matHeaderRowDef="displayedNbcdUpcomingColumns"></mat-header-row>
+                    <mat-row *matRowDef="let row; columns: displayedNbcdUpcomingColumns;"></mat-row>
+                  </mat-table>
+
+                  <table *ngIf="(role == userRole.CO || role == userRole.TrainingOffice || role == userRole.TC || role == userRole.TCO) && viewStatus != 3" class="table  tbl-by-group running-c-base">
+                    <thead>
+                      <tr>
+                        <th class="cl-scl"><h5> School </h5></th>
+                        <th class="course-name-col"><h5> Course </h5></th>
+                        <th><h5> Dt of Commence</h5></th>
+                        <th><h5> Dt of Completion</h5></th>
+                        <th class="course-weekno"><h5> Duration</h5></th>
+                        <th><h5> Syllabus</h5></th>
+                        <th class="cl-action"><h5> Action</h5></th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <ng-container *ngFor="let data of groupArrays;let i= index;">
+                        <tr>
+                          <td class="cl-scl" [attr.rowspan]="data.courses.length + 1">{{data.schoolName}}</td>
+                        </tr>
+                        <tr *ngFor="let number of data.courses;">
+                          <td class="course-name-col">
+                            {{getDateComparision(number)}}
+                            {{number.course}} - {{number.courseTitle}}
+                            <span *ngIf="passOutStatus === 1" style="color:red;font-weight:bold;"> (Passing Out)</span>
+                          </td> 
+                          <td>{{number.durationFrom | date:'mediumDate'}}</td>   
+                          <td>{{number.durationTo | date:'mediumDate'}}</td>                         
+                          <td class="course-weekno"><a [routerLink]="['/admin/dashboard/view-courseweekbyduration',number.courseDurationId]"> {{number.completeWeek}} / {{number.countWeek}} (Week)</a></td>                          
+                          
+                          <td>
+                            <button *ngIf="number.courseSyllabus" mat-icon-button class="btn-tbl-view" title="View Course Syllabus">
+                              <a [href]='this.fileUrl+number.courseSyllabus' target='_blank'><mat-icon aria-label="Edit" class="col-white">picture_as_pdf</mat-icon></a>
+                            </button>  
+                          </td>
+                          <td class="cl-action">
+                            <!-- <button *ngIf="number.countWeek == 0" mat-icon-button color="accent" title="Course Week Generate" class="btn-tbl-nomination" (click)="$event.stopPropagation()"
+                            (click)="courseWeekGenerate(number)">
+                              <mat-icon aria-label="Delete" class="col-white">alarm</mat-icon>
+                            </button> -->
+                            <button mat-icon-button class="btn-tbl-view" title="Course Details" [routerLink]="['/admin/dashboard/course-details',number.courseDurationId,number.baseSchoolNameId]">
+                              <mat-icon aria-label="Edit" class="col-white">visibility</mat-icon>
+                            </button>
+                            <button *ngIf="role != dataEnty && role != userRole.TrainingOffice" mat-icon-button color="accent" title="Trainee Mark List" class="btn-tbl-view" 
+                              [routerLink]="['/course-management/marklistbycourse-list', number.courseDurationId, 1]">
+                              <mat-icon mat-icon aria-label="Edit" class="col-white">toc</mat-icon>
+                            </button>
+                            <!-- <button mat-icon-button class="btn-tbl-view" title="Exam Instructor List" [routerLink]="['/admin/dashboard/view-examinstructor',row.baseSchoolNameId, row.courseNameId]">
+                              <mat-icon aria-label="Edit" class="col-white">person</mat-icon>
+                            </button> -->
+                            <button mat-icon-button class="btn-tbl-nomination" title="Subject Instructor List" [routerLink]="['/admin/dashboard/view-subjectinstructors',number.baseSchoolNameId ,number.courseDurationId, number.courseNameId]">
+                              <!-- <mat-icon aria-label="Edit" class="col-white">wc</mat-icon> -->
+                              <img src="../../../assets/images/app-icon/Instructor.png" class="instructor-icon"/>
+                            </button>
+                            <button mat-icon-button color="accent" title="Weekly Training Program" class="btn-tbl-view" 
+                              [routerLink]="['/admin/dashboard/view-routinebycourse', number.baseSchoolNameId, number.courseNameId, number.courseDurationId]">
+                              <!-- <mat-icon aria-label="Edit" class="col-white">hourglass_empty</mat-icon> -->
+                              <img src="../../../assets/images/app-icon/routine.png" class="routine-icon"/>
+                            </button>
+                            <button mat-icon-button class="btn-tbl-nomination" title="List of Trainee" [routerLink]="['/admin/dashboard/traineenomination-list',number.courseDurationId,1,2,3,4,5]">
+                              <!-- <mat-icon aria-label="Edit" class="col-white">supervisor_account</mat-icon> -->
+                              <img src="../../../assets/images/app-icon/biodata.png" class="biodata-icon"/>
+                            </button>
+                            <button mat-icon-button color="accent" title="Syllabus" class="btn-tbl-view" 
+                            [routerLink]="['/admin/dashboard/view-syllabusfromschool', number.baseSchoolNameId, number.courseNameId, number.courseDurationId,number.baseSchoolNameId]">
+                              <!-- <mat-icon aria-label="Edit" class="col-white">book</mat-icon> -->
+                              <img src="../../../assets/images/app-icon/material.png" class="syllabus-icon"/>
+                            </button>
+                            <button mat-icon-button class="btn-tbl-nomination" title="Exam Status" [routerLink]="['/admin/dashboard/view-examstatusbysubjectlist', number.baseSchoolNameId, number.courseNameId, number.courseDurationId]">
+                              <!-- <mat-icon aria-label="Edit" class="col-white">assessment</mat-icon> -->
+                              <img src="../../../assets/images/app-icon/exam.png" class="exam-icon"/>
+                            </button>
+                          </td>
+                          
+                        </tr>
+                      </ng-container>
+                    </tbody>
+                  </table>
+                  <table *ngIf="(role == userRole.CO || role == userRole.TrainingOffice || role == userRole.TC || role == userRole.TCO) && viewStatus == 3" class="table  tbl-by-group running-c-base">
+                    <thead>
+                      <tr>
+                        <th class="cl-srl"><h5> School </h5></th>
+                        <th class="course-name-col"><h5> Course </h5></th>
+                        <th><h5> Duration</h5></th>
+                        <th><h5> Week</h5></th>
+                        <th ><h5> Action</h5></th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <ng-container *ngFor="let data of groupArrays;let i= index;">
+                        <tr>
+                          <td class="cl-srl" [attr.rowspan]="data.courses.length + 1">{{data.schoolName}}</td>
+                        </tr>
+                        <tr *ngFor="let number of data.courses;">
+                          <td class="course-name-col">
+                            {{number.course}} - {{number.courseTitle}} - <span style="color:red;font-weight:bold;">(Left {{getRemainingDays(number.durationFrom | date:'mediumDate')}} Days)</span>
+                          </td>
+                          <td>{{number.durationFrom | date:'mediumDate'}} - {{number.durationTo | date:'mediumDate'}}</td>                          
+                          <td> {{getDaysfromDate(number.durationFrom | date:'mediumDate',number.durationTo | date:'mediumDate', 0)}} Week(s) </td>
+                          <td >
+                            <button mat-icon-button class="btn-tbl-nomination" title="Nomination" [routerLink]="['/admin/dashboard/traineenomination-list', number.courseDurationId,5]">
+                              <mat-icon aria-label="Edit" class="col-white">supervisor_account</mat-icon>
+                            </button>
+                            <button mat-icon-button color="accent" title="Syllabus" class="btn-tbl-view" 
+                            [routerLink]="['/admin/dashboard/view-syllabusfromschool', number.baseSchoolNameId, number.courseNameId, number.courseDurationId,5]">
+                              <mat-icon aria-label="Edit" class="col-white">book</mat-icon>
+                            </button>
+                          </td>
+                          
+                        </tr>
+                      </ng-container>
+                    </tbody>
+                  </table>
+
+
+                </div>
+              </div>
+            </div>
+          </div>
+          
+        </div>
+      </div>
+    </div>
+
+      
+  </div>
+ 
+</section>

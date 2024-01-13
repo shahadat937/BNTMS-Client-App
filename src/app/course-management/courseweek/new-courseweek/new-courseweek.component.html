@@ -1,0 +1,114 @@
+<section class="content">
+    <div class="container-fluid">
+      <div class="block-header">
+        <div class="row">
+          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <ul class="breadcrumb breadcrumb-style ">
+              <li class="breadcrumb-item">
+                <h4 class="page-title">{{pageTitle}}</h4>
+              </li>
+              <li class="breadcrumb-item bcrumb-1">
+                <a routerLink="/admin/dashboard/main"><i class="fas fa-home"></i></a>
+              </li>
+              <li class="breadcrumb-item bcrumb-2">
+                <a href="#" onClick="return false;">Course Week</a>
+              </li>
+              <li class="breadcrumb-item active">{{destination}}</li>
+            </ul> 
+          </div>
+        </div>
+      </div>
+      <div class="row clearfix">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+          <div class="card">
+            <div class="header">
+            </div>
+            <div class="body">
+              <form class="m-4" [formGroup]="CourseWeekForm" (ngSubmit)="onSubmit()">
+                <div class="row">                  
+                    
+                      <div *ngIf="role != 'Super Admin'" class="col-xl-4 col-lg-4 col-md-6 col-sm-12 mb-2">
+                        <mat-form-field class="example-full-width mb-3" appearance="outline">
+                            <mat-label>School</mat-label>
+                            <mat-select formControlName="baseSchoolNameId" required (selectionChange)="getselectedcoursedurationbyschoolname()">
+                              <mat-option  value="0">--Select--</mat-option >
+                                <mat-option *ngFor="let school of selectedbaseschool" [value]="school.value">
+                                    {{school.text}} 
+                                  </mat-option>                          
+                            </mat-select>
+                            <mat-error *ngIf="CourseWeekForm.get('baseSchoolNameId').hasError('required')">
+                                Select Any School
+                            </mat-error>
+                        </mat-form-field>
+                      </div>
+<!--     
+                      <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 mb-2">
+                        <mat-form-field class="example-full-width mb-3" appearance="outline">
+                            <mat-label>Course Title</mat-label>                        
+                            <mat-select formControlName="courseName">
+                              <mat-option  value="0">--Select--</mat-option >
+                                <mat-option *ngFor="let dropdown of selectedcoursedurationbyschoolname" [value]="dropdown" (onSelectionChange)="getselectedbnasubjectname(dropdown)">
+                                    {{dropdown.text}}  
+                                  </mat-option>                          
+                            </mat-select>
+                            <mat-error *ngIf="CourseWeekForm.get('courseName').hasError('required')">
+                              Course Title is Required!
+                            </mat-error>
+                        </mat-form-field>
+                      </div> -->
+                    
+                    
+                    <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 mb-2">
+                        <mat-form-field class="example-full-width mb-3" appearance="outline">
+                            <mat-label>Course Week Name</mat-label>                        
+                            <input matInput formControlName="weekName" required>
+                            <mat-error *ngIf="CourseWeekForm.get('weekName').hasError('required')">
+                              Course Week Name is Required 
+                            </mat-error>
+                        </mat-form-field>
+                    </div> 
+                    <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 mb-2">
+                      <mat-form-field class="example-full-width mb-3" appearance="outline">
+                        <mat-label>Date From</mat-label>
+                          <input matInput [matDatepicker]="frompicker" formControlName="dateFrom" >
+                          <mat-datepicker-toggle matSuffix [for]="frompicker"></mat-datepicker-toggle>
+                         <mat-datepicker #frompicker></mat-datepicker>                                            
+                      </mat-form-field>
+                    </div> 
+
+                    <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 mb-2">
+                      <mat-form-field class="example-full-width mb-3" appearance="outline">
+                        <mat-label>Date To</mat-label>
+                          <input matInput [matDatepicker]="topicker" formControlName="dateTo" >
+                          <mat-datepicker-toggle matSuffix [for]="topicker"></mat-datepicker-toggle>
+                         <mat-datepicker #topicker></mat-datepicker>                                            
+                      </mat-form-field>
+                    </div> 
+                    <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 mb-2">
+                        <mat-form-field class="example-full-width mb-3" appearance="outline">
+                            <mat-label>Remarks</mat-label>                        
+                            <input matInput formControlName="remarks">
+                            
+                        </mat-form-field>
+                    </div>  
+
+               
+                  
+                    <div class="row">
+                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+                        <button class="btn-space" [class.auth-spinner]="loading" [disabled]="loading" [disabled]="!CourseWeekForm.valid " mat-raised-button
+                            color="primary">{{buttonText}}</button>
+                        <button type="button" mat-button routerLink="/course-management/weekbycourse-list">Cancel</button>
+                        <!-- <button type="button" mat-button [routerLink]="['/course-management/foreigntraineenomination-list',this.courseDurationId]">Cancel</button> -->
+                    </div>
+                    </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+

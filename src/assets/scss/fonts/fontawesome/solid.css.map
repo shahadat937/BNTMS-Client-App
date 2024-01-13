@@ -1,0 +1,10 @@
+{
+    "version": 3,
+    "mappings": "AAAA;;;GAGG;AAGH,UAAU;EACR,WAAW,EAAE,qBAAqB;EAClC,UAAU,EAAE,MAAM;EAClB,WAAW,EAAE,GAAG;EAChB,YAAY,ECLI,KAAK;EDMrB,GAAG,EAAE,kDAAwC;EAC7C,GAAG,EAAE,yDAA+C,CAAC,2BAA2B,EAChF,oDAA0C,CAAC,eAAe,EAC1D,mDAAyC,CAAC,cAAc,EACxD,kDAAwC,CAAC,kBAAkB,EAC3D,8DAAoD,CAAC,aAAa;;;AAGpE,AAAA,GAAG;AACH,IAAI,CAAC;EACH,WAAW,EAAE,qBAAqB;EAClC,WAAW,EAAE,GAAG;CACjB",
+    "sources": [
+        "solid.scss",
+        "_variables.scss"
+    ],
+    "names": [],
+    "file": "solid.css"
+}

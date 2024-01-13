@@ -1,0 +1,148 @@
+<section class="content">
+    <div class="container-fluid">
+      <div class="block-header">
+        <div class="row">
+          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <ul class="breadcrumb breadcrumb-style ">
+              <li class="breadcrumb-item">
+                <h4 class="page-title">Course Week</h4>
+              </li>
+              <li class="breadcrumb-item bcrumb-1">
+                <a routerLink="/admin/dashboard/main"><i class="fas fa-home"></i></a>
+              </li>
+              <li class="breadcrumb-item bcrumb-2">
+                <a href="#" onClick="return false;">Course Week</a> 
+              </li>
+              <li class="breadcrumb-item active">All</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+          <div class="card">
+            <div class="body">
+              <div class="responsive_table">
+                <div class="materialTableHeader"> 
+                  <div class="row">
+                    <div class="col-8">
+                      <ul class="header-buttons-left ml-0">
+                        <li class="dropdown">
+                        </li>
+                        <!-- <li class="dropdown">
+                          <input placeholder="Search" type="text" [(ngModel)]="searchText"  #filter class="browser-default search-field"
+                          aria-label="Search box">
+                        </li>
+                        <li> 
+                          <div class="icon-button-demo m-l-10">
+                            <button mat-mini-fab color="accent" (click)="applyFilter(searchText)">
+                              <mat-icon class="col-white">search</mat-icon>
+                            </button>
+                          </div>
+                          
+                          
+                        </li> -->
+                      </ul>
+                    </div>
+                    <div class="col-4">
+                      <ul class="header-buttons">
+                        <li>
+                          <div class="icon-button-demo">
+                            <!---->
+                            <!-- <button class="btn-space"  mat-raised-button
+                            color="primary" routerLink="/course-management/add-courseweek"> Add
+                              <mat-icon class="col-white">add</mat-icon>
+                            </button> -->
+                          </div>
+                        </li>
+                       
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+                <div id="print-routine">
+                  
+                <table class="table  tbl-by-group db-li-s-in">
+                  <thead>
+                    <tr>
+                      <!-- <th class="cl-srl"><h5>Ser</h5></th> -->
+                      <!-- <th class="cl-nm-rnk"><h5>Module</h5></th> -->
+                      <th class="cl-mrk"><h5>Name of Course</h5></th>
+                      <th class="cl-mrk-rmrk"><h5>Date of Commencement</h5></th>
+                      <th class="cl-mrk-rmrk"><h5>Date of Completion</h5></th>
+                      <th class="cl-mrk-rmrk"><h5>Duration</h5></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <ng-container *ngFor="let data of runningCourses;let i= index;">
+                      <!-- <tr>
+                        <td [attr.rowspan]="data.courses.length + 1">{{data.courseModule}}</td>
+                      </tr> -->
+                      <tr >
+                        <!-- <td>{{data.subjectName}} </td> -->
+                        <td>
+                          {{getDateComparision(data)}}
+                          {{data.course}} - {{data.courseTitle}}
+                          <span *ngIf="passOutStatus === 1" style="color:red;font-weight:bold;"> (Passing Out)</span>
+                        </td>
+                        <td>{{data.durationFrom | date:'mediumDate'}}</td>
+                        <td>{{data.durationTo | date:'mediumDate'}}</td>
+                        <td><a [routerLink]="['/course-management/courseweek-list',data.courseDurationId]">{{data.completeWeek}} / {{data.countWeek}} (Week)</a></td>
+                        
+                      </tr>                    
+                    </ng-container>
+                   
+                  </tbody>
+                </table>
+                </div>
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 div-class div-left m-t-20">
+                  <button class="btn-space"  mat-raised-button color="primary" (click)="printSingle()"> Print
+                    <mat-icon class="col-white">print</mat-icon>
+                  </button>
+                </div>
+                <!-- <mat-table #table [dataSource]="runningCourses" matSort class="mat-cell notice-list db-tbl scl-db">               
+                  <ng-container matColumnDef="ser">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header> Ser: </mat-header-cell>
+                    <mat-cell *matCellDef="let element; let i = index;"> {{ ((paging.pageIndex-1) *  paging.pageSize) + i+1}} </mat-cell>
+                  </ng-container>    
+
+                  <ng-container matColumnDef="course">
+                    <mat-header-cell class="course-col" *matHeaderCellDef mat-sort-header>Name of Course </mat-header-cell>
+                    <mat-cell class="course-col" *matCellDef="let element"> {{element.course}} - {{element.courseTitle}} </mat-cell>
+                  </ng-container>
+
+
+
+                  <ng-container matColumnDef="durationFrom">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header> Date of Commencement</mat-header-cell>
+                    <mat-cell *matCellDef="let element"> {{element.durationFrom | date:'mediumDate'}} </mat-cell>
+                  </ng-container>
+
+                  <ng-container matColumnDef="durationTo">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>Date of Completion</mat-header-cell>
+                    <mat-cell *matCellDef="let element"> {{element.durationTo | date:'mediumDate'}} </mat-cell>
+                  </ng-container>
+                  
+                  <ng-container matColumnDef="countWeek">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header> Duration</mat-header-cell>
+                    <mat-cell *matCellDef="let element"><a [routerLink]="['/course-management/courseweek-list',element.courseDurationId]"> {{element.countWeek}} (Week)</a></mat-cell>
+                  </ng-container>
+           
+                  
+
+                  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                  <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+                </mat-table> -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  
+  
+  
+   
+

@@ -1,0 +1,92 @@
+<section class="content">
+    <div class="container-fluid">
+      <div class="block-header">
+        <div class="row">
+          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <ul class="breadcrumb breadcrumb-style ">
+              <li class="breadcrumb-item">
+                <h4 class="page-title">{{pageTitle}}</h4>
+              </li>
+              <li class="breadcrumb-item bcrumb-1">
+                <a routerLink="/admin/dashboard/main">
+                  <i class="fas fa-home"></i> </a>
+              </li>
+              <li class="breadcrumb-item bcrumb-2">
+                <a href="#" onClick="return false;">Country</a>
+              </li>
+              <li class="breadcrumb-item active">{{destination}}</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="row clearfix">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+          <div class="card">
+            
+            <div class="body">
+              <form class="m-4" [formGroup]="countryForm" (ngSubmit)="onSubmit()">
+                <div class="row">
+                  <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                      <mat-label>Country Name</mat-label>
+                      <input matInput formControlName="countryName" required>
+                      <mat-error *ngIf="countryForm.get('countryName').hasError('required')">
+                        country name is required
+                      </mat-error>
+                    </mat-form-field>
+                  </div>
+
+                  <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                        <mat-label>Country Group</mat-label>                        
+                        <mat-select formControlName="countryGroupId" required>
+                            <mat-option *ngFor="let dropdown of selectedCountryGroup" [value]="dropdown.value">
+                                {{dropdown.text}} 
+                              </mat-option>                          
+                        </mat-select>
+                        <mat-error *ngIf="countryForm.get('countryGroupId').hasError('required')">
+                          Country Group is Required!
+                        </mat-error>
+                    </mat-form-field>
+                  </div>
+
+                  <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                        <mat-label>Currency Name</mat-label>                        
+                        <mat-select formControlName="currencyNameId" required>
+                            <mat-option *ngFor="let dropdown of selectedCurrencyName" [value]="dropdown.value">
+                                {{dropdown.text}} 
+                              </mat-option>                          
+                        </mat-select>
+                        <mat-error *ngIf="countryForm.get('currencyNameId').hasError('required')">
+                          Currency Name is Required!
+                        </mat-error>
+                    </mat-form-field>
+                  </div>
+
+                  <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                      <mat-label>Current Price</mat-label>
+                      <input matInput formControlName="currentPrice" required>
+                      <mat-error *ngIf="countryForm.get('currentPrice').hasError('required')">
+                        current Price is required 
+                      </mat-error>
+                    </mat-form-field>
+                  </div>
+                  
+                </div>
+                <div class="row">
+                  <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+                    <button class="btn-space" [class.auth-spinner]="loading" [disabled]="loading" [disabled]="!countryForm.valid " mat-raised-button
+                      color="primary">{{buttonText}}</button>
+                    <button type="button" mat-button routerLink="/allowance-management/country-list">Cancel</button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  

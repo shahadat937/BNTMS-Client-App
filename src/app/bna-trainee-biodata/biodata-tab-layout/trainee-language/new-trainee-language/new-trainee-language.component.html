@@ -1,0 +1,110 @@
+<div class="block-header">
+    <div class="row">
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <ul class="breadcrumb breadcrumb-style ">
+          <li class="breadcrumb-item">
+            <h4 class="page-title">{{pageTitle}}</h4>
+          </li>
+          <li class="breadcrumb-item bcrumb-1">
+            <a routerLink="/admin/dashboard/main"><i class="fas fa-home"></i> </a>
+          </li>
+          <li class="breadcrumb-item bcrumb-2">
+            <a href="#" onClick="return false;">Languages</a>
+          </li>
+          <li class="breadcrumb-item active">{{destination}}</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="row clearfix">
+    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+      <div class="card">
+        <div class="header">
+        </div>
+        <div class="body">
+          <form class="m-4" [formGroup]="TraineeLanguageForm" (ngSubmit)="onSubmit()">
+            <div class="row">
+
+              <div hidden class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                <mat-form-field class="example-full-width mb-3" appearance="outline">
+                  <mat-label>Trainee Id</mat-label>
+                  <input matInput formControlName="traineeId" required>
+                  <mat-error *ngIf="TraineeLanguageForm.get('traineeId').hasError('required')">
+                    Trainee name is required
+                  </mat-error>
+                </mat-form-field>
+              </div>
+
+              <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                <mat-form-field class="example-full-width mb-3" appearance="outline">
+                  <mat-label>Language</mat-label>
+                  <mat-select formControlName="languageId" required>
+                    <mat-option *ngFor="let language of selectedLanguages" [value]="language.value">
+                        {{language.text}}
+                    </mat-option>                          
+                  </mat-select>
+                  <mat-error *ngIf="TraineeLanguageForm.get('languageId').hasError('required')">
+                    languageId is required
+                  </mat-error>
+                </mat-form-field>
+              </div>
+          
+              <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                <mat-form-field class="example-full-width mb-3" appearance="outline">
+                  <mat-label>Speaking</mat-label>
+                  <input matInput formControlName="speaking" required>
+                  <mat-error *ngIf="TraineeLanguageForm.get('speaking').hasError('required')">
+                    Speaking is required
+                  </mat-error>
+                </mat-form-field>
+              </div>
+              <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                <mat-form-field class="example-full-width mb-3" appearance="outline">
+                  <mat-label>Writing</mat-label>
+                  <input matInput formControlName="writing" required>
+                  <mat-error *ngIf="TraineeLanguageForm.get('writing').hasError('required')">
+                    Writing is required
+                  </mat-error>
+                </mat-form-field>
+              </div>
+              <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                <mat-form-field class="example-full-width mb-3" appearance="outline">
+                  <mat-label>Reading</mat-label>
+                  <input matInput formControlName="reading" required>
+                  <mat-error *ngIf="TraineeLanguageForm.get('reading').hasError('required')">
+                    Reading is required
+                  </mat-error>
+                </mat-form-field>
+              </div>
+             
+              <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                <mat-form-field class="example-full-width mb-3" appearance="outline">
+                  <mat-label>Additional Information</mat-label>
+                  <input matInput formControlName="additionalInformation">                  
+                </mat-form-field>
+              </div>
+              <!-- <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                <mat-form-field class="example-full-width mb-3" appearance="outline">
+                  <mat-label>status</mat-label>
+                  <input matInput formControlName="status" required>
+                  <mat-error *ngIf="TraineeLanguageForm.get('status').hasError('required')">
+                    status is required
+                  </mat-error>
+                </mat-form-field>
+              </div> -->
+            </div>
+            <div class="row">
+              <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+                <button class="btn-space" [class.auth-spinner]="loading" [disabled]="loading" [disabled]="!TraineeLanguageForm.valid " mat-raised-button
+                  color="primary">{{buttonText}}</button>
+                <button type="button" mat-button [routerLink]="['/trainee-biodata/trainee-biodata-tab/main-tab-layout/main-tab/trainee-language-details',this.traineeId]">Cancel</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+

@@ -1,0 +1,152 @@
+<section class="content">
+    <div class="container-fluid">
+      <div class="block-header">
+        <div class="row">
+          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <ul class="breadcrumb breadcrumb-style ">
+              <li class="breadcrumb-item">
+                <h4 class="page-title">{{pageTitle}} List</h4>
+              </li>
+              <li class="breadcrumb-item bcrumb-1"> 
+                <a routerLink="/admin/dashboard/main"><i class="fas fa-home"></i></a>
+              </li>
+              <li class="breadcrumb-item bcrumb-2">
+                <a href="#" onClick="return false;"> {{pageTitle}}</a>
+              </li>
+              <li class="breadcrumb-item active">All</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+          <div class="card">
+            <div class="body">
+              <div class="responsive_table">
+                <div class="materialTableHeader"> 
+                  <div class="row">
+                    <div class="col-8">
+                      <ul class="header-buttons-left ml-0">
+                        <li class="dropdown">
+                        </li>
+                        <li class="dropdown">
+                          
+                        </li>
+                        <li> 
+                          <div class="icon-button-demo m-l-10">
+                            
+                          </div>
+                        </li>
+                      </ul>
+                    </div>
+
+                    <div class="col-4">
+                      <ul class="header-buttons">
+                        <li>
+                          <div class="icon-button-demo">
+                            <button *ngIf="documentTypeId" class="btn-space"  mat-raised-button
+                            color="warn" routerLink="/admin/dashboard/view-readingmaterial"> 
+                            <mat-icon class="col-white">keyboard_backspace</mat-icon> Back
+                            </button>
+                            <button *ngIf="!documentTypeId" class="btn-space"  mat-raised-button
+                            color="warn" routerLink="/admin/dashboard/trainee-dashboard"> 
+                            <mat-icon class="col-white">keyboard_backspace</mat-icon> Back
+                            </button>
+                          </div>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+
+                <table *ngIf="role != userRole.Student && documentTypeId != masterData.readingMaterial.videos" class="table  tbl-by-group">
+                  <thead>
+                    <tr>
+                      <th class="cl-srl"><h5>Ser</h5></th>
+                      <th class="cl-mrk"><h5>Document Name</h5></th>
+                      <th class="cl-mrk"><h5>Author</h5></th>
+                      <th class="cl-mrk"><h5>Publisher</h5></th>
+                      <th class="cl-mrk"><h5>Doc</h5></th>
+                      
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <ng-container>                      
+                      <tr *ngFor="let number of ReadingMaterialBySchoolAndCourse; let i = index;">
+                        <td>
+                          {{i+1}}
+                        </td>
+                        <td>
+                          {{number.documentName}}
+                        </td>
+                        <td>
+                          {{number.aurhorName}}
+                        </td>
+                        <td>
+                          {{number.publisherName}}
+                        </td>
+                        <td>
+                          <mat-lebel *ngIf="number.documentLink"><a target="_blank" [href]="fileIUrl+number.documentLink"><mat-icon>picture_as_pdf</mat-icon></a></mat-lebel>
+                        </td>
+                      </tr>
+                    </ng-container>
+                  </tbody>
+                </table>
+
+                <table  *ngIf="role == userRole.Student && !documentTypeId" class="table  tbl-by-group">
+                  <thead>
+                    <tr>
+                      <th class="cl-srl"><h5>Material Title</h5></th>
+                      <th class="cl-mrk"><h5>Document Name</h5></th>
+                      <th class="cl-mrk"><h5>Author</h5></th>
+                      <th class="cl-mrk"><h5>Publisher</h5></th>
+                      <th class="cl-mrk"><h5>Doc</h5></th>
+                      
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <ng-container *ngFor="let data of groupArrays;let i= index;">
+                      <tr>
+                        <td class="cl-srl" [attr.rowspan]="data.courses.length + 1">{{data.readingMaterialTitle}}</td>
+                      </tr>
+                      <tr *ngFor="let number of data.courses;">
+                        <td>
+                          {{number.documentName}}
+                        </td>
+                        <td>
+                          {{number.aurhorName}}
+                        </td>
+                        <td>
+                          {{number.publisherName}}
+                        </td>
+                        <td>
+                          <mat-lebel *ngIf="number.documentLink"><a target="_blank" [href]="number.documentLink"><mat-icon>{{number.documentIcon}}</mat-icon></a></mat-lebel>
+                        </td>
+                      </tr>
+                    </ng-container>
+                  </tbody>
+                </table>
+
+                <div class="mat-videos row" *ngIf="documentTypeId == masterData.readingMaterial.videos">
+                  <div *ngFor="let item of ReadingMaterialBySchoolAndCourse; let i = index" class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
+                    <div class="video" >
+                      <video controls (click)="toggleVideo()" #videoPlayer>
+                          <source src="{{fileIUrl+item.documentLink}}" type="video/mp4" />
+                          Browser not supported
+                      </video>
+                      <p><b>{{item.documentName}}</b></p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  
+  
+  
+   
+

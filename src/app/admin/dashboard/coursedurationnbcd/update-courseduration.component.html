@@ -1,0 +1,109 @@
+<section class="content">
+    <div class="container-fluid">
+      <div class="block-header">
+        <div class="row">
+          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <ul class="breadcrumb breadcrumb-style ">
+              <li class="breadcrumb-item">
+                <h4 class="page-title">{{pageTitle}}</h4>
+              </li>
+              <li class="breadcrumb-item bcrumb-1">
+                <a routerLink="/admin/dashboard/main"><i class="fas fa-home"></i></a>
+              </li>
+              <li class="breadcrumb-item bcrumb-2">
+                <a href="#" onClick="return false;">Update Nbcd School</a>
+              </li>
+              <li class="breadcrumb-item active">{{destination}}</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="row clearfix">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+          <div class="card">
+            <div class="body">
+              <form class="m-4" [formGroup]="CourseDurationForm" (ngSubmit)="onSubmit()">
+                <div class="row">
+                  <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mb-2">
+                    <h4 class="nbcd-school">{{selectedSchoolName}}</h4>
+                    <!-- <mat-form-field class="example-full-width mb-3" appearance="outline">
+                        <mat-label>NBCD School</mat-label>                        
+                        <mat-select formControlName="nbcdSchoolId" (selectionChange)="onSchoolSelectionChange()" required>
+                            <mat-option *ngFor="let dropdown of selectedbaseschool" [value]="dropdown.value">
+                                {{dropdown.text}} 
+                              </mat-option>                          
+                        </mat-select>
+                        <mat-error *ngIf="CourseDurationForm.get('nbcdSchoolId').hasError('required')">
+                          NBCD School is Required!
+                        </mat-error>
+                    </mat-form-field> -->
+                  </div>
+
+
+                  <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                      <mat-label>Duration From</mat-label>
+                        <input matInput [matDatepicker]="frompicker" formControlName="nbcdDurationFrom" >
+                        <mat-datepicker-toggle matSuffix [for]="frompicker"></mat-datepicker-toggle>
+                       <mat-datepicker #frompicker></mat-datepicker>                                            
+                    </mat-form-field>
+                  </div>
+
+                  <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                      <mat-label>Duration To</mat-label>
+                        <input matInput [matDatepicker]="topicker" formControlName="nbcdDurationTo" >
+                        <mat-datepicker-toggle matSuffix [for]="topicker"></mat-datepicker-toggle>
+                       <mat-datepicker #topicker></mat-datepicker>                                            
+                    </mat-form-field>
+                  </div>
+                </div>
+            
+            
+               
+                <div class="row">
+                  <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+                    <!-- <button *ngIf="this.nbcdStatus === 0 || this.nbcdStatus === null" class="btn-space" [class.auth-spinner]="loading" [disabled]="loading" [disabled]="!CourseDurationForm.valid " mat-raised-button
+                    color="primary">Save</button> -->
+                    <button  class="btn-space" [class.auth-spinner]="loading" [disabled]="loading" [disabled]="!CourseDurationForm.valid " mat-raised-button
+                      color="primary">Save</button>
+                    <button type="button" mat-button routerLink="/admin/dashboard/school-dashboard">Cancel</button>
+                  </div>
+                </div>
+              </form>
+              <div id="print-routine">
+                  
+                <table class="table  tbl-by-group db-li-s-in">
+                  <thead>
+                    <tr>
+                      <th class="th-cell-ser">Ser:</th>
+                      <th class="cl-mrk"><h5>School Name</h5></th>
+                      <th class="cl-mrk-rmrk"><h5>Duration From</h5></th>
+                      <th class="cl-mrk-rmrk"><h5>Duration To</h5></th>
+                      <th class="cl-mrk-rmrk"><h5>Status</h5></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <ng-container>
+                      <tr *ngFor="let number of  this.nbcdCourseList; let i = index">
+                        <td>
+                          {{i+1}}
+                        </td>
+                        <td>{{number.schoolName}} </td>
+                        <td>{{number.nbcdDurationFrom | date:'mediumDate'}}</td>
+                        <td>{{number.nbcdDurationTo | date:'mediumDate'}}</td>
+                        <td *ngIf="number.nbcdStatus ===1 ">Received</td>
+                        <td *ngIf="number.nbcdStatus === 0">Send</td>
+                      </tr>                    
+                    </ng-container>
+                  </tbody>
+                </table>
+                </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  

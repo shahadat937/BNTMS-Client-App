@@ -1,0 +1,121 @@
+<section class="content">
+    <div class="container-fluid">
+      <div class="block-header">
+        <div class="row">
+          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <ul class="breadcrumb breadcrumb-style ">
+              <li class="breadcrumb-item">
+                <h4 class="page-title">Weekly Attendance List</h4>
+              </li>
+              <li class="breadcrumb-item bcrumb-1"> 
+                <a routerLink="/admin/dashboard/main"><i class="fas fa-home"></i></a>
+              </li>
+              <li class="breadcrumb-item bcrumb-2">
+                <a href="#" onClick="return false;"> Weekly Attendance</a>
+              </li>
+              <li class="breadcrumb-item active">All</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+          <div class="card">
+            <div class="body">
+              <div class="responsive_table">
+                <div class="materialTableHeader"> 
+                  <div class="row">
+                    <div class="col-8">
+                      <ul class="header-buttons-left ml-0">
+                        <li class="dropdown">
+                        </li>
+                        <li class="dropdown">
+                          
+                        </li>
+                        <li> 
+                          <div class="icon-button-demo m-l-10">
+                            
+                          </div>
+                        </li>
+                      </ul>
+                    </div>
+
+                    <div class="col-4">
+                      <ul class="header-buttons">
+                        <li>
+                          <div class="icon-button-demo">
+                            <button class="btn-space"  mat-raised-button
+                            color="warn" routerLink="/admin/dashboard/trainee-dashboard"> 
+                            <mat-icon class="col-white">keyboard_backspace</mat-icon> Back
+                            </button>
+                          </div>
+                      </ul>
+                    </div>
+                  </div>
+                </div>              
+              </div>
+            </div>
+            <div class="body">
+              <div class="row dash-cd-m-0">
+                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 div-class div-left">
+                  <h3>Weekly Attendance</h3>
+                </div>
+                <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 div-class div-left">
+                  <h4 class="att-present">Attendance Percentange : ({{traineeParcentage}}%) </h4>
+                </div>
+                <div class="col-xl-2 col-lg-2 col-md-6 col-sm-12 div-class div-left">
+                  <h4 class="att-absent">Absent List</h4>
+                </div>
+              </div>
+              
+              <div id="print-routine">
+              <table class="table  tbl-by-group ">
+                <thead>
+                  <tr>
+                    <th class="cl-srl"><h5>Attendance Date</h5></th>
+                    <th class="cl-nm-rnk"><h5>Period Name</h5></th>
+                    <th class="cl-mrk-rmrk"><h5>Subject </h5></th>
+                    <th class="cl-mrk-rmrk"><h5>Status</h5></th>
+                    <th class="cl-mrk-rmrk"><h5>Remarks</h5></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <ng-container *ngFor="let data of groupArrays;let i= index;">
+                    <tr>
+                      <!-- <td [attr.rowspan]="data.attendance.length + 1">{{i+1}}</td> -->
+                      <td [attr.rowspan]="data.attendance.length + 1">{{data.attendanceDate | date:'mediumDate'}} </td>
+                    </tr>
+                    <tr *ngFor="let number of data.attendance;">
+                      <td>{{number.periodName}} ({{number.durationForm}}-{{number.durationTo}})</td>
+                      <!-- <td>{{number.subjectName}} ({{number.classCountPeriod}}/{{number.subjectCountPeriod}})</td> -->
+                      <td>{{number.subjectName}}</td>
+                      <td>
+                        <div *ngIf="number.attendanceStatus === true;else rightName">
+                          <span class="att-present">Present</span>                       
+                        </div> 
+                        <ng-template #rightName><span  class="att-absent">Absent</span> </ng-template>
+                      </td>
+                      <!-- <td><a [routerLink]="['/admin/dashboard/view-attendancebyroutine', courseNameId, schoolId, durationId, number.classRoutineId]"> {{number.absentCount}}</a></td> -->
+                      <td>{{number.attendanceRemarksCause}}</td> 
+                    </tr>
+                  </ng-container>
+                </tbody>
+              </table>
+              </div>
+              <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 div-class div-left m-t-20">
+                <button class="btn-space"  mat-raised-button color="primary" (click)="printSingle()"> Print
+                  <mat-icon class="col-white">print</mat-icon>
+                </button>
+              </div> 
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  
+  
+  
+   
+

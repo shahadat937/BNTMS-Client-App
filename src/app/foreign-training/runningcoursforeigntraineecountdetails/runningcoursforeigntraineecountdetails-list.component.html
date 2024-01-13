@@ -1,0 +1,258 @@
+<section class="content">
+  <div class="container-fluid">
+    <div class="block-header">
+      <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <ul class="breadcrumb breadcrumb-style ">
+            <li class="breadcrumb-item">
+              <h4 class="page-title">OnGoing Course Details</h4>
+            </li>
+            <li class="breadcrumb-item bcrumb-1">
+              <a routerLink="/admin/dashboard/main"><i class="fas fa-home"></i></a>
+            </li>
+            <li class="breadcrumb-item bcrumb-2">
+              <a href="#" onClick="return false;">OnGoing Course Details</a>
+            </li>
+            <li class="breadcrumb-item active">All</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="card">
+          <div class="body">
+            <div class="responsive_table">
+              <div class="materialTableHeader"> 
+                <div class="row">
+                  <div class="col-8">
+                    <ul class="header-buttons-left ml-0">
+                      <li class="dropdown">
+                      </li>
+                      <!-- <h4 class="on-going">BREAKDOWN OF ONGOING TRAINEES IN ABROAD</h4> -->
+                      <!-- <li class="dropdown">
+                        <input placeholder="Search" type="text" [(ngModel)]="searchText"  #filter class="browser-default search-field"
+                        aria-label="Search box">
+                      </li>
+                      <li> 
+                        <div class="icon-button-demo m-l-10">
+                          <button mat-mini-fab color="accent" (click)="applyFilter(searchText)">
+                            <mat-icon class="col-white">search</mat-icon>
+                          </button>
+                        </div>
+                        
+                        
+                      </li> -->
+                    </ul>
+                  </div>
+                  <div class="col-4">
+                    <ul class="header-buttons">
+                      <li>
+                        <div class="icon-button-demo">                            
+                          <button *ngIf="role === 'Foreign Training'"  class="btn-space"  mat-raised-button
+                            color="primary" [routerLink]="['/admin/dashboard/foreigntraining-dashboard']"> 
+                            <mat-icon class="col-white" color="primary">keyboard_backspace</mat-icon> Go to Dashboard
+                          </button>
+                          
+                          
+                        </div>
+                      </li>
+                     
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
+              <div id="print-routine">
+                <!-- <h3 class="on-going" style="text-align:center; color: navy;">OnGoing Details</h3> -->
+              <table class="table  tbl-by-group db-li-s-in">
+                <thead>
+                  <!-- <tr>
+                    <th class="cl-srl-ft"><h5>Ser</h5></th>
+                    <th class="cl-nm-rnk"><h5>Country </h5></th>
+                    <th class="cl-nm-rnk"><h5>Total </h5></th>
+                
+                  </tr> -->
+                </thead>
+                <tbody>
+                  <ng-container *ngFor="let v_country of runningCoursesCountry;let k= index;">
+                    <tr>
+                      <!-- <td class="cl-srl-ft">
+                        {{
+                          (paging.pageIndex - 1) * paging.pageSize + i + 1
+                        }}
+                      </td> -->
+                      <h3 style="text-align: center;"> <span style="text-align:center; color: navy;">Name of Country: {{v_country.countryName}}</span> - <span style="text-align:left; color: rgb(0, 128, 75);">Total Count: {{v_country.count_county}}</span> </h3>
+                      <!-- <h3 style="text-align:center; color: navy;">Name of Country: {{v_country.countryName}} Total Count: {{v_country.count_county}}</h3> -->
+                      <!-- <td>{{v_country.countryName}} </td>
+                      <td>{{v_country.count_county}} </td> -->
+                          </tr>
+
+
+                          <div>
+                            <!-- <h3 class="on-going" style="text-align:center; color: navy;">OnGoing Designation</h3> -->
+                          <table class="table  tbl-by-group db-li-s-in">
+                            <thead>
+                              <!-- <tr>
+                                <th class="cl-srl-ft"><h5>Ser</h5></th>
+                                <th class="cl-nm-rnk"><h5>designation</h5></th>
+                                <th class="cl-mrk"><h5>Total</h5></th>
+                                <th class="cl-mrk-rmrk"><h5>Country</h5></th>
+                            
+                              </tr> -->
+                            </thead>
+                            <tbody>
+                              <ng-container *ngFor="let v_deg of runningCoursesDesignation;let j= index;">
+                                <ng-template [ngIf]="v_country.countryName === v_deg.countryName">   
+                                  <h3> <span style="text-align:left; color: navy;">{{v_deg.designation}}</span> <span style="text-align:left; color: rgb(0, 128, 75);">({{v_deg.count_deg}})</span> </h3>
+                                  <tr>
+                                  <!-- <td class="cl-srl-ft">
+                                    {{
+                                      (paging.pageIndex - 1) * paging.pageSize + j + 1
+                                    }}
+                                  </td>
+                                  <td>{{v_deg.designation}}</td>
+                                  <td>{{v_deg.count_deg}} </td>
+                                  <td>{{v_deg.countryName}}</td> -->
+                                </tr>  
+                                <tr>
+                                  <div id="print-routine">
+                                  <!-- <h3 class="on-going" style="text-align:center; color: navy;">OnGoing Details</h3> -->
+                                <table class="table  tbl-by-group db-li-s-in">
+                                  <thead>
+                                    <tr>
+                                      <!-- <th class="cl-srl-ft"><h5>Ser</h5></th> -->
+                                      <th class="cl-nm-rnk"><h5>Name & Rank</h5></th>
+                                      <th class="cl-mrk"><h5>Servic No</h5></th>
+                                      <th class="cl-mrk-rmrk"><h5>Name of Course</h5></th>
+                                      <th class="cl-mrk-rmrk"><h5>Country </h5></th>
+                                      <th class="cl-mrk-rmrk"><h5>Duration From</h5></th>
+                                      <th class="cl-mrk-rmrk"><h5>Duration To </h5></th>
+                                      <th class="cl-mrk-rmrk"><h5>Email/Contact </h5></th>
+                                      <th class="cl-mrk-rmrk"><h5> Remarks </h5></th>
+                                  
+                                    </tr>
+                                  </thead>
+                                  <tbody>
+                                    <ng-container *ngFor="let data of runningCourses;let i= index;">
+                                    <ng-template [ngIf]="v_deg.countryName===data.countryName">
+                                      <ng-template [ngIf]="v_deg.designation===data.designation">
+                                        <tr>
+                                        <!-- <td class="cl-srl-ft">
+                                          {{
+                                            (paging.pageIndex - 1) * paging.pageSize + i + 1
+                                          }}
+                                        </td> -->
+                                        <td>{{data.rankPosition}} {{data.traineeName}}  {{data.sailorRank}}</td>
+                                        <td>{{data.pno}} </td>
+                                        <td>{{data.course}} - {{data.courseTitle}}</td>
+                                        <td>{{data.countryName}} </td>
+                                        <td>{{data.durationFrom | date:'mediumDate'}} </td>
+                                        <td>{{data.durationTo | date:'mediumDate'}} </td>
+                                        <td>{{data.email}} </td>
+                                        <td>{{data.remark}} </td>
+                                      </tr>   
+                                    </ng-template>
+                                  </ng-template>        
+                                    </ng-container>
+                                  </tbody>
+                                </table>
+                              </div>
+                                
+                              </tr> 
+                              </ng-template>                  
+                              </ng-container>
+                            </tbody>
+                          </table>
+                        </div>
+
+                   
+                  </ng-container>
+                </tbody>
+              </table>
+            </div>
+
+            <!-- <div>
+              <h3 class="on-going" style="text-align:center; color: navy;">OnGoing Designation</h3>
+            <table class="table  tbl-by-group db-li-s-in">
+              <thead>
+                <tr>
+                  <th class="cl-srl-ft"><h5>Ser</h5></th>
+                  <th class="cl-nm-rnk"><h5>designation</h5></th>
+                  <th class="cl-mrk"><h5>Total</h5></th>
+                  <th class="cl-mrk-rmrk"><h5>Country</h5></th>
+              
+                </tr>
+              </thead>
+              <tbody>
+                <ng-container *ngFor="let v_deg of runningCoursesDesignation;let i= index;">
+                  <tr>
+                    <td class="cl-srl-ft">
+                      {{
+                        (paging.pageIndex - 1) * paging.pageSize + i + 1
+                      }}
+                    </td>
+                    <td>{{v_deg.designation}}</td>
+                    <td>{{v_deg.count_deg}} </td>
+                    <td>{{v_deg.countryName}}</td>
+                  </tr>                    
+                </ng-container>
+              </tbody>
+            </table>
+          </div> -->
+
+              <!-- <div id="print-routine">
+                <h3 class="on-going" style="text-align:center; color: navy;">OnGoing Details</h3>
+              <table class="table  tbl-by-group db-li-s-in">
+                <thead>
+                  <tr>
+                    <th class="cl-srl-ft"><h5>Ser</h5></th>
+                    <th class="cl-nm-rnk"><h5>Name & Rank</h5></th>
+                    <th class="cl-mrk"><h5>Servic No</h5></th>
+                    <th class="cl-mrk-rmrk"><h5>Name of Course</h5></th>
+                    <th class="cl-mrk-rmrk"><h5>Country </h5></th>
+                    <th class="cl-mrk-rmrk"><h5>Duration From</h5></th>
+                    <th class="cl-mrk-rmrk"><h5>Duration To </h5></th>
+                    <th class="cl-mrk-rmrk"><h5>Email/Contact </h5></th>
+                    <th class="cl-mrk-rmrk"><h5> Remarks </h5></th>
+                
+                  </tr>
+                </thead>
+                <tbody>
+                  <ng-container *ngFor="let data of runningCourses;let i= index;">
+                    <tr>
+                      <td class="cl-srl-ft">
+                        {{
+                          (paging.pageIndex - 1) * paging.pageSize + i + 1
+                        }}
+                      </td>
+                     
+                      <td>{{data.officerRank}} {{data.traineeName}}  {{data.sailorRank}}</td>
+                      <td>{{data.pno}} </td>
+                      <td>{{data.course}} - {{data.courseTitle}}</td>
+                      <td>{{data.countryName}} </td>
+                      <td>{{data.durationFrom}} </td>
+                      <td>{{data.durationTo}} </td>
+                      <td>{{data.email}} </td>
+                      <td>{{data.remark}} </td>
+                    </tr>                    
+                  </ng-container>
+                </tbody>
+              </table>
+            </div> -->
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 div-class div-left m-t-20">
+              <button class="btn-space"  mat-raised-button color="primary" (click)="printSingle()"> Print
+                <mat-icon class="col-white">print</mat-icon>
+              </button>
+            </div>
+              <!-- <mat-paginator [length]="paging.length" [showFirstLastButtons]="masterData.paging.showFirstLastButtons"
+                [pageSize]="paging.pageSize" [pageSizeOptions]="masterData.paging.pageSizeOptions"
+                (page)="pageChanged($event)">
+              </mat-paginator> -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

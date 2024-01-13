@@ -1,0 +1,789 @@
+<section class="content">
+  <div class="container-fluid">
+    <div class="block-header">
+      <div class="row">
+        <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
+          <ul class="breadcrumb breadcrumb-style ">
+            <li class="breadcrumb-item">
+              <h4 class="page-title">Trainee Dashboard</h4>
+            </li>
+            <li class="breadcrumb-item bcrumb-1">
+              <a routerLink="/student/dashboard">
+                <i class="fas fa-home"></i> </a>
+            </li>
+            <li class="breadcrumb-item active">Trainee Dashboard</li>
+          </ul>
+        </div>
+        <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+          <h4 class="user-manual manual-btn">
+            <a [href]='this.fileUrl+userManual' target='_blank'>User Manual (Download)</a>
+          </h4>            
+        </div>
+      </div>
+    </div>
+    
+    <div class="row">
+      <div class="col-xl-5 col-lg-5 col-md-12 col-sm-12 info-block">
+        <div class="card">
+          <div class="body">
+            <!-- <form [formGroup]="GetStudentIdForm" (ngSubmit)="onSubmit()">
+              <div class="row">
+                <div class="col-xl-8 col-lg-8 col-md-8 col-sm-12 mb-2">
+                  <mat-form-field class="example-full-width mb-3" appearance="outline">
+                    <mat-label>Trainee Id</mat-label>                        
+                    <input matInput formControlName="traineeId">
+                  </mat-form-field>
+                </div>
+                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mb-2">
+                  <button class="btn-space" [class.auth-spinner]="loading" [disabled]="loading" [disabled]="!GetStudentIdForm.valid " mat-raised-button
+                      color="primary">Find</button>
+                </div>
+              </div>
+              
+            </form> -->
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+              <div class="row">
+                <div class="responsive_table">
+                  <table class="full-width col-12">
+                    <tr>
+                      <th>PNO, NAME & RANK</th>
+                      <td>{{pno}}, {{position}}  {{name}}</td>
+                    </tr>
+                    <tr>
+                      <th>MOBILE NO</th>
+                      <td>{{phoneNo}}</td>
+                    </tr>
+                    <tr>
+                      <th>EMAIL</th>
+                      <td>{{email}}</td>
+                    </tr>
+                    <tr>
+                      <th>PRESENT BILLET</th>
+                      <td>{{presentBillet}}</td>
+                    </tr>
+                    <tr>
+                      <th>DATE OF COMMISSION</th>
+                      <td>{{joinDate | date:'dd/mm/yyyy'}}</td>
+                    </tr>
+                    <tr *ngIf="completeStatus === 0">
+                      <th>NAME OF COURSE</th>
+                      <td>{{course}} - {{courseTitle}}</td>
+                    </tr>
+                    <tr *ngIf="completeStatus === 0">
+                      <th>COURSE TYPE</th>
+                      <td>{{courseTypeName}}</td>
+                    </tr>
+                    
+                    <tr *ngIf="courseTypeId === 3 && completeStatus === 0">
+                      <th>NAME OF SCHOOL</th>
+                      <td>{{schoolName}}</td>
+                    </tr>
+                    <tr *ngIf="courseTypeId === 18">
+                      <th>COUNTRY</th>
+                      <td>{{countryName}}</td>
+                    </tr>
+                    <tr *ngIf="courseTypeId === 18">
+                      <th>FAMILY ALLOW</th>
+                      <td>{{familyAllowId}}</td>
+                    </tr>
+                    <tr *ngIf="(courseTypeId === 1021 && courseNameId === 1251) || (courseTypeId === 1021 && courseNameId === 1252)">
+                      <th>EXAM CENTER</th>
+                      <td>{{examCenterName}}</td>
+                    </tr>
+                    <tr *ngIf="(courseTypeId === 1021 && courseNameId === 1251) || (courseTypeId === 1021 && courseNameId === 1252)">
+                      <th>NO OF ATTEMPT</th>
+                      <td>{{attemptCount}} / {{attemptName}}</td>
+                    </tr>
+                    <tr *ngIf="completeStatus === 0">
+                      <th>COURSE DURATION </th>
+                      <td>{{durationFrom | date:'mediumDate'}} <b>TO</b> {{durationTo | date:'mediumDate'}}</td>
+                    </tr>
+                    <tr *ngIf="courseTypeId === 18">                      
+                      <th>GO DOCUMENT</th>
+                      <td *ngFor="let data of studentGoDocumentList;">
+                        
+                        <a target="_blank" [href]="fileUrl+data.fileUpload"><mat-icon>picture_as_pdf</mat-icon></a>
+                      </td>
+                    </tr> 
+                  </table>
+                </div>
+                
+              </div>
+            </div>
+            
+          </div>
+        </div>
+      </div>
+      <div class="col-xl-2 col-lg-2 col-md-12 col-sm-12 info-block">
+        <div class="card">
+          
+          <div class="body">
+            <div class="row">
+              <div class="trainee-img">
+                <img class="trainee" [src]='fileUrl+traineeImg' alt="upload image">
+              </div>
+              <div class="universal-btn">
+                <div class="col-12 ins-dash-menu-item">
+                  <!-- <a title="E-Library" [routerLink]="['/admin/dashboard/view-readingmateriallist', baseSchoolNameId, courseNameId]"><mat-icon>library_books</mat-icon> E-Library</a> -->
+                  <a [routerLink]="['/admin/dashboard/view-traineecourseprofile', inputId]"><mat-icon>group_work</mat-icon> Course Details</a>
+                </div>
+                <div class="col-12 ins-dash-menu-item">
+                  <a title="Reading Materials" [routerLink]="['/admin/dashboard/view-readingmaterial']"><mat-icon>collections_bookmark</mat-icon> Reading Materials</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+      </div>
+      <div *ngIf="courseTypeId === masterData.coursetype.InterService" class="col-lg-5 col-md-5 col-sm-5 col-xs-12 trainee-documents-list">
+        <div class="card">
+          <div class="body">
+            <div class="row ins-dash-menu foreign-remittance-list">
+              <mat-table #table [dataSource]="InterServiceDocumentList" matSort class="mat-cell">
+                <ng-container matColumnDef="ser">
+                  <mat-header-cell class="col-ser" *matHeaderCellDef mat-sort-header> Ser. </mat-header-cell>
+                  <mat-cell class="col-ser"  *matCellDef="let element; let i = index;"> {{ ((paging.pageIndex-1) * paging.pageSize) +
+                    i+1}} </mat-cell>
+                </ng-container>
+    
+                <ng-container matColumnDef="name">
+                  <mat-header-cell class="col-doc-name" *matHeaderCellDef mat-sort-header>Document Type </mat-header-cell>
+                  <mat-cell class="col-doc-name" *matCellDef="let element"> {{element.name}} </mat-cell>
+                </ng-container>
+    
+                <ng-container matColumnDef="fileUpload">
+                  <mat-header-cell class="col-doc" *matHeaderCellDef mat-sort-header>Doc</mat-header-cell>
+                  <mat-cell class="col-doc" *matCellDef="let element">
+                    <a target="_blank" [href]="fileUrl+element.documentUpload"><mat-icon>picture_as_pdf</mat-icon></a> 
+                  </mat-cell>
+                </ng-container>
+                
+    
+                <mat-header-row *matHeaderRowDef="displayedDocumentsColumns"></mat-header-row>
+                <mat-row *matRowDef="let row; columns: displayedDocumentsColumns;"></mat-row>
+              </mat-table> 
+              
+                    
+              
+            </div>
+          </div>
+        </div>
+        
+        
+      </div>
+      <div *ngIf="isShown && (courseTypeId === 3) || (courseTypeId === 1021 && courseNameId != 1251)" class="col-xl-5 col-lg-5 col-md-12 col-sm-12 trainee-notice-board">
+        <div class="card">
+          
+          <div class="body">
+            <div class="row dash-cd-m-0">
+              <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 div-class div-left">
+                <h3>Notice Board</h3>
+              </div>
+            </div>
+            <div class="recent-comment" style="position: relative;min-height: 145px; max-height: 145px;" [perfectScrollbar]>
+              
+              <div *ngFor="let notice of NoticeForStudent;" class="notice-board">
+                <!-- <div class="table-img">
+                  <img class="notice-object" src="assets/images/user/user6.jpg" alt="...">
+                </div> -->
+                <div class="notice-body">
+                  <h5 class="notice-heading col-green">{{notice.noticeHeading}}</h5>
+                  <div class="notification-sign">
+                    <span class="notification-flicker">{{notice.newStatus}}</span>
+                  </div> 
+                  <p> {{notice.noticeDetails}}</p>                  
+                </div>
+              </div>
+              
+            </div>
+          </div>
+        </div>
+        
+      </div>
+      <div *ngIf="courseTypeId === 1021 && courseNameId === 1251" class="col-xl-5 col-lg-5 col-md-12 col-sm-12 trainee-notice-board">
+        <div class="card">
+          
+          <div class="body">
+            <div class="row dash-cd-m-0">
+              <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 div-class div-left">
+                <h3>Exam Routine </h3>
+              </div>
+            </div>
+            <div class="row">
+              <!-- <div *ngIf="isNoDataFound">
+                <h3>No Data Found</h3>
+              </div> -->
+              <mat-table #table [dataSource]="StuffClgRoutineList" matSort class="mat-cell db-tbl trainee-db-left-routine">
+                <ng-container matColumnDef="ser">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header> Ser. </mat-header-cell>
+                  <mat-cell *matCellDef="let element; let i = index;"> {{ ((paging.pageIndex-1) * paging.pageSize) +
+                    i+1}} </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="bnaSubjectName">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header>Subject Name </mat-header-cell>
+                  <mat-cell *matCellDef="let element"> {{element.bnaSubjectName}} </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="date">
+                  <mat-header-cell class="date-col" *matHeaderCellDef mat-sort-header>Date</mat-header-cell>
+                  <mat-cell class="date-col" *matCellDef="let element"> {{element.date | date:'fullDate'}} </mat-cell>
+                </ng-container>
+                <!-- {{element.date | date:'mediumDate'}} -->
+                <ng-container matColumnDef="timeDuration">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header>Time</mat-header-cell>
+                  <mat-cell *matCellDef="let element"> {{element.timeDuration}} </mat-cell>
+                </ng-container>
+
+                <mat-header-row *matHeaderRowDef="displayedStuffClgRoutineColumns"></mat-header-row>
+                <mat-row *matRowDef="let row; columns: displayedStuffClgRoutineColumns;"></mat-row>
+              </mat-table>
+            </div>
+          </div>
+        </div>
+        
+      </div>
+      <div *ngIf="courseTypeId === masterData.coursetype.ForeignCourse" class="col-xl-5 col-lg-5 col-md-12 col-sm-12 trainee-notice-board trainee-documents-list">
+        <div class="card">          
+          <div class="body">
+            <div class="row ins-dash-menu foreign-remittance-list">
+              <mat-table #table [dataSource]="studentOtherDocumentList" matSort class="mat-cell">
+                <ng-container matColumnDef="ser">
+                  <mat-header-cell class="col-ser" *matHeaderCellDef mat-sort-header> Ser. </mat-header-cell>
+                  <mat-cell class="col-ser"  *matCellDef="let element; let i = index;"> {{ ((paging.pageIndex-1) * paging.pageSize) +
+                    i+1}} </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="name">
+                  <mat-header-cell class="col-doc-name" *matHeaderCellDef mat-sort-header>Document Name </mat-header-cell>
+                  <mat-cell class="col-doc-name" *matCellDef="let element"> {{element.name}} </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="fileUpload">
+                  <mat-header-cell class="col-doc" *matHeaderCellDef mat-sort-header>Doc</mat-header-cell>
+                  <mat-cell class="col-doc" *matCellDef="let element">
+                    <a target="_blank" [href]="fileUrl+element.fileUpload"><mat-icon>picture_as_pdf</mat-icon></a> 
+                  </mat-cell>
+                </ng-container>
+                
+
+                <mat-header-row *matHeaderRowDef="displayedDocumentsColumns"></mat-header-row>
+                <mat-row *matRowDef="let row; columns: displayedDocumentsColumns;"></mat-row>
+              </mat-table> 
+              
+                    
+              
+            </div>
+            <div class="row ins-dash-menu">
+              
+              <div *ngIf="courseTypeId === masterData.coursetype.InterService" class="col-xl-12 col-lg-12 col-md-12 ins-dash-menu-item">
+                <a [routerLink]="['/admin/dashboard/view-interservicereportsubmit', inputId, courseNameId, courseDurationId]">Course Report Upload</a>
+              </div>
+              <div *ngIf="courseTypeId === masterData.coursetype.ForeignCourse" class="col-xl-12 col-lg-12 col-md-12 ins-dash-menu-item">
+                <a [routerLink]="['/admin/dashboard/view-foreigntrainingreportsubmit', inputId, courseNameId, courseDurationId]">Course Report Upload</a>
+              </div>
+
+              <div class="col-xl-12 col-lg-12 col-md-12 ins-dash-menu-item navy-blue">
+                <a [routerLink]="['/admin/dashboard/Installment-list', courseDurationId]"> Installment/Remittance </a>
+              </div>                            
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- <div class="row ins-dash-menu">
+        <div class="col-xl-6 col-lg-6 col-md-6 ins-dash-menu-item">
+          <a [routerLink]="['/admin/dashboard/view-traineecourseprofile', inputId]">Trainee Course Profile</a>
+        </div>
+      </div> -->
+    </div>
+    <div  *ngIf="isBulletinShown" class="container-fluid  m-b-10 bulletin">
+      <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 bulletin-section">
+        <div class="row">
+          <div class="col-lg-1 col-md-1 ">
+            <div class="title">
+              <h4>Bulletin:</h4>
+            </div>
+            
+          </div>
+          <div class="col-lg-11 col-md-11">
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 scrollbar">
+              <ng-marquee [stopOnHover]="true" duration="25s" >
+                <mark class="bulletin-item" *ngFor="let data of bulletinList;">{{data.buletinDetails}}</mark>                
+              </ng-marquee>
+            </div>
+            
+            
+          </div>
+        </div>
+        
+      </div>
+    </div>
+
+    
+
+    <div *ngIf="courseTypeId === masterData.coursetype.ForeignCourse" class="row m-b-5 trainee-db-qexam-row">
+      <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+        <div class="card">
+          
+          <div class="body">
+            <div class="row dash-cd-m-0">
+              <!-- <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 div-class div-left">
+                <h3>Course Relevent Work Status</h3>
+              </div> -->
+            </div>
+              <!--   -->
+              <div *ngIf="isShown" class="row clearfix">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 p-0 ex-mrk-entry-li">
+                  <div class="card">
+                    
+                    <div class="body table-responsive">
+                      <table class="table ex-mrk-entry trainee-doc-info">
+                        <thead>
+                          <tr>                              
+                            <th class="cl-mrk-foreign"><h5>Ticket</h5></th>
+                            <th class="cl-mrk-rmrk-foreign"><h5>Visa</h5></th>
+                            <th class="cl-mrk-rmrk-foreign"><h5>Passport</h5></th>
+                            <th class="cl-mrk-rmrk-foreign"><h5>Covid19</h5></th>
+                            <th class="cl-mrk-rmrk-foreign"><h5>DGFI Breafing</h5></th>
+                            <th class="cl-mrk-rmrk-foreign"><h5>DNI Breafing</h5></th>
+                            <th class="cl-mrk-rmrk-foreign"><h5>Embassi Breafing</h5></th>
+                            <th class="cl-mrk-rmrk-foreign"><h5>Sanction</h5></th>
+                            <th class="cl-mrk-rmrk-foreign"><h5>Ex.BD Leave</h5></th>
+                            <!-- <th class="cl-mrk-rmrk-foreign"><h5>Family Go</h5></th>
+                            <th class="cl-mrk-rmrk-foreign"><h5>Medical Doc</h5></th> -->
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr class="trainee-other-doc-row" *ngFor="let data of studentOtherDocInfoList;">
+                            <td>
+                              <span style="color: green; font-weight: bold;" class="doc-yes" *ngIf="data.ticket == true"> Yes </span>
+                              <span style="color: red; font-weight: bold;" class="doc-no" *ngIf="data.ticket != true"> No </span>
+                            </td>
+                            <td>
+                              <span style="color: green; font-weight: bold;" class="doc-yes" *ngIf="data.visa == true"> Yes </span>
+                              <span class="doc-no" *ngIf="data.visa != true"> No </span>
+                            </td>
+                            <td>
+                              <span style="color: green; font-weight: bold;" class="doc-yes" *ngIf="data.passport == true"> Yes </span>
+                              <span style="color: red; font-weight: bold;" class="doc-no" *ngIf="data.passport != true"> 
+                                <button class="btn-doc-update" (click)="changeDocStatus(data, 1)"  (click)="$event.stopPropagation()">Yes</button>
+                              </span>
+                            </td>
+                            <td>
+                              <span style="color: green; font-weight: bold;" class="doc-yes" *ngIf="data.covidTest == true"> Yes </span>
+                              <span style="color: red; font-weight: bold;" class="doc-no" *ngIf="data.covidTest != true"> No </span>
+                            </td>
+                            <td>
+                              <span style="color: green; font-weight: bold;" class="doc-yes" *ngIf="data.dgfiBreafing == true"> Yes </span>
+                              <span style="color: red; font-weight: bold;" class="doc-no" *ngIf="data.dgfiBreafing != true"> 
+                                <button class="btn-doc-update" (click)="changeDocStatus(data, 2)"  (click)="$event.stopPropagation()">Yes</button>
+                              </span>
+                            </td>
+                            <td>
+                              <span style="color: green; font-weight: bold;" class="doc-yes" *ngIf="data.dniBreafing == true"> Yes </span>
+                              <span style="color: red; font-weight: bold;" class="doc-no" *ngIf="data.dniBreafing != true"> No </span>
+                            </td>
+                            <td>
+                              <span style="color: green; font-weight: bold;" class="doc-yes" *ngIf="data.embassiBreafing == true"> Yes </span>
+                              <span style="color: red; font-weight: bold;" class="doc-no" *ngIf="data.embassiBreafing != true"> No </span>
+                            </td>
+                            <td>
+                              <span style="color: green; font-weight: bold;" class="doc-yes" *ngIf="data.financialSanction == true"> Yes </span>
+                              <span style="color: red; font-weight: bold;" class="doc-no" *ngIf="data.financialSanction != true"> No </span>
+                            </td>
+                            <td>
+                              <span style="color: green; font-weight: bold;" class="doc-yes" *ngIf="data.exBdLeave == true"> Yes </span>
+                              <span style="color: red; font-weight: bold;" class="doc-no" *ngIf="data.exBdLeave != true"> No </span>
+                            </td>
+                          </tr>
+                                               
+                        </tbody>
+                      </table>  
+
+                      <div class="display-msg doc-info" *ngIf="!ApproveMsgScreen">
+                        <p style="margin: 0;">N.B :- Please Confirm Passport & DGFI Breafing by Yourself.</p>
+                      </div>
+                      
+                      <div class="display-msg doc-info" *ngIf="ApproveMsgScreen">
+                        <h3>{{ApproveMsg}}</h3>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                
+              </div>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="isShown && courseTypeId === masterData.coursetype.LocalCourse" class="row m-b-10 trainee-db-useful-row">
+      <div class="col-lg-7 col-md-7 col-sm-12 col-xs-12 ">
+        <div class="card">
+          <div class="body">
+            <div class="row dash-cd-m-0">
+              <!-- <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 div-class div-left">
+                <h3>Useful Links</h3>
+              </div> -->
+            </div>
+            <div class="row ins-dash-menu">
+              
+              <div class="col-xl-4 col-lg-4 col-md-4 ins-dash-menu-item">
+                <a [routerLink]="['/admin/dashboard/studentassignment-list', inputId, baseSchoolNameId, courseNameId, courseDurationId]">Assignment <span class="notification count" *ngIf="StudentAssignmentCount > 0">{{StudentAssignmentCount}}</span> </a>
+              </div>
+
+              <div class="col-xl-4 col-lg-4 col-md-4 ins-dash-menu-item">
+                <a [routerLink]="['/admin/dashboard/traineeassessment-list',courseDurationId]">Trainee Assessment <span class="notification count" *ngIf="StudentAssessnmentCount > 0">{{StudentAssessnmentCount}}</span></a>
+              </div>
+
+              <div class="col-xl-4 col-lg-4 col-md-4 ins-dash-menu-item">
+                <a [routerLink]="['/admin/dashboard/teacherevaluation-list', inputId, baseSchoolNameId, courseNameId, courseDurationId]">Teacher Evaluation</a>
+              </div>
+
+
+              <div class="col-xl-4 col-lg-4 col-md-4 ins-dash-menu-item">
+                <a [routerLink]="['/admin/dashboard/view-weeklyprogram', baseSchoolNameId, courseNameId, courseDurationId, courseSectionId]">Weekly Program</a>
+              </div>
+              
+              <div class="col-xl-4 col-lg-4 col-md-4 ins-dash-menu-item">
+                <a [routerLink]="['/admin/dashboard/view-coursemateriallist', baseSchoolNameId, courseNameId]">Pre-Course Materials</a>
+              </div>
+              <div class="col-xl-4 col-lg-4 col-md-4 ins-dash-menu-item">
+                <a [routerLink]="['/admin/dashboard/view-weeklyattendance', inputId, courseDurationId]">Class Attendance</a>
+              </div>
+
+              <div class="col-xl-4 col-lg-4 col-md-4 ins-dash-menu-item">
+                <a [routerLink]="['/admin/dashboard/examroutinelist', courseDurationId]">Exam Schedule</a>
+              </div>
+
+              <div class="col-xl-4 col-lg-4 col-md-4 ins-dash-menu-item">
+                <a [routerLink]="['/admin/dashboard/view-traineemarksheet', inputId, courseDurationId]">Result Information</a>
+              </div>
+
+              <div class="col-xl-4 col-lg-4 col-md-4 ins-dash-menu-item">
+                <a [routerLink]="['/admin/dashboard/view-syllabus', inputId, baseSchoolNameId, courseNameId, courseDurationId, 1]">Syllabus</a>
+              </div>
+              
+            </div>
+
+            <!-- <div class="row ins-dash-menu">
+              <div class="col-xl-6 col-lg-6 col-md-6 ins-dash-menu-item">
+                <a [routerLink]="['/admin/dashboard/view-traineecourseprofile', inputId]">Trainee Course Profile</a>
+              </div>
+              <div class="col-xl-6 col-lg-6 col-md-6 ins-dash-menu-item">
+                <a [routerLink]="['/admin/dashboard/viewobtainmark', baseSchoolNameId, courseDurationId, inputId]">View Obtain Mark</a>
+              </div>
+            </div> -->
+            
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-5 col-md-5 col-sm-12 col-xs-12 ">
+        <div class="card">
+          <div class="body">
+            <div class="row dash-cd-m-0">
+              <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 div-class div-left">
+                <h3>Upcoming Class Schedule</h3> 
+              </div>
+            </div>
+            <div class="row ins-dash-menu">
+              
+            <mat-table  #table [dataSource]="todayroutine" matSort class=" mat-cell db-tbl s-db-t-6 stu-db p-0">               
+                  
+    
+              <ng-container matColumnDef="duration">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>Class Time </mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{element.periodName}} ({{element.durationForm}}-{{element.durationTo}}) </mat-cell>
+              </ng-container>
+    
+              <ng-container matColumnDef="subject">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>Subject  </mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{element.subjectShortName}}-{{element.classCountPeriod}}/{{element.subjectCountPeriod}} - {{element.shortCode}} </mat-cell>
+              </ng-container>
+
+    
+              <mat-header-row *matHeaderRowDef="displayedRoutineColumns"></mat-header-row>
+              <mat-row *matRowDef="let row; columns: displayedRoutineColumns;"></mat-row>
+            </mat-table>
+              
+            </div>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="courseTypeId === masterData.coursetype.InterService" class="row m-b-10 trainee-db-useful-row">
+      <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
+        <div class="card">
+          <div class="body">
+            <div class="row dash-cd-m-0">
+              <!-- <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 div-class div-left">
+                <h3>Useful Links</h3>
+              </div> -->
+            </div>
+            <div class="row ins-dash-menu">
+              
+              <div class="col-xl-12 col-lg-12 col-md-12 ins-dash-menu-item">
+                <a [routerLink]="['/admin/dashboard/view-interservicereportsubmit', inputId, courseNameId, courseDurationId]">Course Report Upload</a>
+              </div>
+
+              <div class="col-xl-12 col-lg-12 col-md-12 ins-dash-menu-item navy-blue">
+                <a [routerLink]="['/admin/dashboard/update-interservicetraineestate', traineeNominationId]">Attendence</a>
+              </div>
+
+              
+              
+            </div>
+            
+          </div>
+        </div>
+      </div>
+      <!-- <div class="col-lg-5 col-md-5 col-sm-12 col-xs-12 ">
+        <div class="card">
+          <div class="body">
+            <div class="row dash-cd-m-0">
+              <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 div-class div-left">
+                <h3>Upcoming Class Schedule</h3> 
+              </div>
+            </div>
+            <div class="row ins-dash-menu">
+              
+            <mat-table  #table [dataSource]="todayroutine" matSort class=" mat-cell db-tbl s-db-t-6 stu-db p-0">               
+                  
+    
+              <ng-container matColumnDef="duration">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>Class Time </mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{element.periodName}} ({{element.durationForm}}-{{element.durationTo}}) </mat-cell>
+              </ng-container>
+    
+              <ng-container matColumnDef="subject">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>Subject  </mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{element.subjectShortName}}-{{element.classCountPeriod}}/{{element.subjectCountPeriod}} - {{element.shortCode}} </mat-cell>
+              </ng-container>
+
+    
+              <mat-header-row *matHeaderRowDef="displayedRoutineColumns"></mat-header-row>
+              <mat-row *matRowDef="let row; columns: displayedRoutineColumns;"></mat-row>
+            </mat-table>
+              
+            </div>
+            
+          </div>
+        </div>
+      </div> -->
+    </div>
+
+    <div *ngIf="courseTypeId === masterData.coursetype.CentralExam && courseNameId === masterData.courseName.JCOsTraining" class="row m-b-10 trainee-db-useful-row">
+      <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 ">
+        <div class="card">
+          <div class="body">
+            <div class="row dash-cd-m-0">
+              <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 div-class div-left">
+                <h3>JCO's Exam Subject List</h3> 
+              </div>
+            </div>
+            <div class="row ins-dash-menu">
+              
+              <mat-table #table [dataSource]="subjectListBySaylorBranch" matSort class="mat-cell">
+                <ng-container matColumnDef="paperNo">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header>Paper No </mat-header-cell>
+                  <mat-cell *matCellDef="let element"> {{element.paperNo}} </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="subjectName">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header>Subject Name </mat-header-cell>
+                  <mat-cell *matCellDef="let element"> {{element.subjectName}} </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="totalMark">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header>Total Mark</mat-header-cell>
+                  <mat-cell *matCellDef="let element"> {{element.totalMark}} </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="passMarkBna">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header>Pass Mark</mat-header-cell>
+                  <mat-cell *matCellDef="let element"> {{element.passMarkBNA}} </mat-cell>
+                </ng-container>
+ 
+                <mat-header-row *matHeaderRowDef="displayedJcoSubjectColumns"></mat-header-row>
+                <mat-row *matRowDef="let row; columns: displayedJcoSubjectColumns;"></mat-row>
+              </mat-table>  
+              
+            </div>
+            
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 ">
+        <div class="card">
+          <div class="body">
+            <div class="row dash-cd-m-0">
+              <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 div-class div-left">
+                <h3>Exam Routine</h3> 
+              </div>
+            </div>
+            <div class="row ins-dash-menu">
+              
+            <mat-table  #table [dataSource]="todayroutine" matSort class=" mat-cell db-tbl s-db-t-6 stu-db p-0">               
+                  
+    
+              <ng-container matColumnDef="subject">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>Subject Name </mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{element.subjectName}} </mat-cell>
+              </ng-container>
+    
+              <ng-container matColumnDef="date">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>Exam Date  </mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{element.date | date:'mediumDate'}}</mat-cell>
+              </ng-container>
+
+              <ng-container matColumnDef="time">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>Exam Time  </mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{element.timeDuration}}</mat-cell>
+              </ng-container>
+
+    
+              <mat-header-row *matHeaderRowDef="displayedJcoRoutineColumns"></mat-header-row>
+              <mat-row *matRowDef="let row; columns: displayedJcoRoutineColumns;"></mat-row>
+            </mat-table>
+              
+            </div>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="(courseTypeId === 1021 && courseNameId === 1252)" class="row m-b-10 trainee-db-qexam-row">
+      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
+        <div class="card">
+          <div class="body">
+            <div class="row dash-cd-m-0">
+              <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 div-class div-left">
+                <h3>SYLLABUS FOR LT CDR 'Q' EXAMINATION <span class="branch-name">{{branchName}}</span> BRANCH OFFICERS SUBJECT LIST</h3>
+              </div>
+            </div>
+            <div class="row ins-dash-menu qexam-sub-list">
+              <mat-table #table [dataSource]="QexamSubjectList" matSort class="mat-cell">
+                <ng-container matColumnDef="paperNo">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header>Paper No </mat-header-cell>
+                  <mat-cell *matCellDef="let element"> {{element.paperNo}} </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="subjectName">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header>Subject Name </mat-header-cell>
+                  <mat-cell *matCellDef="let element"> {{element.subjectName}} </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="totalMark">
+                  <mat-header-cell class="total-mark" *matHeaderCellDef mat-sort-header>Total Mark</mat-header-cell>
+                  <mat-cell class="total-mark" *matCellDef="let element"> {{element.totalMark}} </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="passMarkBna">
+                  <mat-header-cell class="pass-mark" *matHeaderCellDef mat-sort-header>Pass Mark</mat-header-cell>
+                  <mat-cell class="pass-mark" *matCellDef="let element"> {{element.passMarkBna}} </mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="qExamTime">
+                  <mat-header-cell class="xm-time" *matHeaderCellDef mat-sort-header>Time</mat-header-cell>
+                  <mat-cell class="xm-time" *matCellDef="let element"> {{element.qExamTime}} </mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="remarks">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header>Remarks</mat-header-cell>
+                  <mat-cell *matCellDef="let element"> {{element.remarks}} </mat-cell>
+                </ng-container>
+                
+ 
+                <mat-header-row *matHeaderRowDef="displayedQexamSubjectListColumns"></mat-header-row>
+                <mat-row *matRowDef="let row; columns: displayedQexamSubjectListColumns;"></mat-row>
+              </mat-table>        
+              
+            </div>
+            
+          </div>
+        </div>
+      </div>      
+    </div>
+
+    <div *ngIf="(courseTypeId === 1021 && courseNameId === 1252)" class="row m-b-10 trainee-db-qexam-row">
+      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
+        <div class="card">
+          <div class="body">
+            <div class="row dash-cd-m-0">
+              <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 div-class div-left">
+                <h3>Q Exam Routine List</h3>
+              </div>
+            </div>
+            <div class="row ins-dash-menu qexam-sub-list">
+              <table mat-table [dataSource]="QexamRoutineList" class="mat-elevation-z8 demo-table dynamic-tbl-forroutine qexam-routine">
+                <!-- Position Column -->
+                <ng-container [matColumnDef]="col" *ngFor="let col of displayedColumns">
+                  <th class="rotate" mat-header-cell *matHeaderCellDef>
+                    <!-- <div *ngif="col"><span>{{col}}</span></div> --> 
+                    <div><span>{{col}}</span></div>
+                  </th>
+                  <td class="td-cell" mat-cell *matCellDef="let element">
+                    {{element[col]}}
+                  </td>
+                </ng-container>
+              
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+              </table>       
+              
+            </div>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="courseTypeId === 1021 && courseNameId === 1251" class="row m-b-10 trainee-db-qexam-row">
+      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
+        <div class="card">
+          <div class="body">
+            <div class="row dash-cd-m-0">
+              <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 div-class div-left">
+                <h3>NAVAL STUFF COURSE SUBJECT LIST</h3>
+              </div>
+            </div>
+            <div class="row ins-dash-menu qexam-sub-list">
+              <mat-table #table [dataSource]="StuffClgSubjectList" matSort class="mat-cell">
+                <ng-container matColumnDef="paperNo">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header>Paper No </mat-header-cell>
+                  <mat-cell *matCellDef="let element"> {{element.paperNo}} </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="subjectName">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header>Subject Name </mat-header-cell>
+                  <mat-cell *matCellDef="let element"> {{element.subjectName}} </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="totalMark">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header>Total Mark</mat-header-cell>
+                  <mat-cell *matCellDef="let element"> {{element.totalMark}} </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="passMarkBna">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header>Pass Mark</mat-header-cell>
+                  <mat-cell *matCellDef="let element"> {{element.passMarkBna}} </mat-cell>
+                </ng-container>
+ 
+                <mat-header-row *matHeaderRowDef="displayedStuffClgColumns"></mat-header-row>
+                <mat-row *matRowDef="let row; columns: displayedStuffClgColumns;"></mat-row>
+              </mat-table>     
+              
+            </div>
+            
+          </div>
+        </div>
+      </div>
+      
+    </div>
+
+
+  </div>
+</section>

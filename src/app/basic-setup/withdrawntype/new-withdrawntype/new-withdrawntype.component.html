@@ -1,0 +1,147 @@
+<section class="content">
+    <div class="container-fluid">
+      <div class="block-header">
+        <div class="row">
+          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <ul class="breadcrumb breadcrumb-style "> 
+              <li class="breadcrumb-item">
+                <h4 class="page-title">{{pageTitle}}</h4>
+              </li>
+              <li class="breadcrumb-item bcrumb-1">
+                <a routerLink="/admin/dashboard/main"><i class="fas fa-home"></i></a>
+              </li>
+              <li class="breadcrumb-item bcrumb-2">
+                <a href="#" onClick="return false;">Withdrawn Type</a>
+              </li>
+              <li class="breadcrumb-item active">{{destination}}</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="row clearfix">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+          <div class="card">
+            <div class="header">
+             
+  
+            </div>
+            <div class="body">
+              <form class="m-4" [formGroup]="WithdrawnTypeForm" (ngSubmit)="onSubmit()">
+                <div class="row">
+                  <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                      <mat-label>Name</mat-label>
+                      <input matInput formControlName="name" required>
+                      <mat-error *ngIf="WithdrawnTypeForm.get('name').hasError('required')">
+                         Name is required
+                      </mat-error>
+                    </mat-form-field>
+                  </div>
+                  <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                      <mat-label>Short Name</mat-label>
+                      <input matInput formControlName="shortName">
+                    </mat-form-field>
+                  </div>
+                  <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                      <mat-label>Menu Position</mat-label>
+                      <input matInput formControlName="menuPosition" required>
+                      <mat-error *ngIf="WithdrawnTypeForm.get('menuPosition').hasError('required')">
+                        Menu Position is required
+                      </mat-error>
+                    </mat-form-field>
+                  </div>
+                </div>
+               
+                <div class="row">
+                  <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+                    <button class="btn-space" [class.auth-spinner]="loading" [disabled]="loading" [disabled]="!WithdrawnTypeForm.valid " mat-raised-button
+                      color="primary">{{buttonText}}</button>
+                    <button type="button" mat-button routerLink="/basic-setup/withdrawntype-list">Cancel</button>
+                  </div>
+                </div>
+              </form>
+              <div class="materialTableHeader">
+                <div class="row">
+                  <div class="col-8">
+                    <ul class="header-buttons-left ml-0">
+                      <li class="dropdown">
+                        
+                      </li>
+                      <li class="dropdown">
+                        <input placeholder="Search" type="text" [(ngModel)]="searchText"  #filter class="browser-default search-field"
+                        aria-label="Search box">
+                      </li>
+                      <li> 
+                        <div class="icon-button-demo m-l-10">
+                          <button mat-mini-fab color="accent" (click)="applyFilter(searchText)">
+                            <mat-icon class="col-white">search</mat-icon>
+                          </button>
+                        </div>
+                      </li>
+                    </ul>
+                  </div>
+                  <div class="col-4">
+                    <ul class="header-buttons">
+                      <li>
+                        <div class="icon-button-demo">
+                          <h4 class="page-title">Withdrawn Type</h4>
+                          <!-- <button class="btn-space"  mat-raised-button
+                          color="primary" routerLink="/basic-setup/add-withdrawntype"> Add
+                            <mat-icon class="col-white">add</mat-icon>
+                          </button> -->
+                        </div>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              <mat-table #table [dataSource]="dataSource" matSort class="mat-cell">
+                <ng-container matColumnDef="ser">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header> Ser: </mat-header-cell>
+                  <mat-cell *matCellDef="let element; let i = index;"> {{ ((paging.pageIndex-1) *  paging.pageSize) + i+1}} </mat-cell>
+                </ng-container>    
+                  
+                <ng-container matColumnDef="name">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header> Name </mat-header-cell>
+                  <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="shortName">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header> Short Name </mat-header-cell>
+                  <mat-cell *matCellDef="let element"> {{element.shortName}} </mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="menuPosition">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header> Menu Position </mat-header-cell>
+                  <mat-cell *matCellDef="let element"> {{element.menuPosition}} </mat-cell>
+                </ng-container>
+                
+                <ng-container matColumnDef="actions">
+                  <mat-header-cell *matHeaderCellDef class="pr-0">Actions</mat-header-cell>
+                  <mat-cell *matCellDef="let row; let i=index;" class="pr-0">
+                    <button mat-icon-button color="accent" class="btn-tbl-edit" 
+                    [routerLink]="['/basic-setup/update-withdrawntype', row.withdrawnTypeId]">
+                      <mat-icon aria-label="Edit" class="col-white">edit</mat-icon>
+                    </button>
+                    <button mat-icon-button color="accent" class="btn-tbl-delete" (click)="$event.stopPropagation()"
+                      (click)="deleteItem(row)">
+                      <mat-icon aria-label="Delete" class="col-white">delete</mat-icon> 
+                    </button>
+                  </mat-cell>
+                </ng-container>
+              
+                <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+              </mat-table>
+              <mat-paginator [length]="paging.length" [showFirstLastButtons]="masterData.paging.showFirstLastButtons"
+              [pageSize]="paging.pageSize" [pageSizeOptions]="masterData.paging.pageSizeOptions"
+              (page)="pageChanged($event)">
+              </mat-paginator>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  

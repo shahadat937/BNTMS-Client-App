@@ -1,0 +1,166 @@
+<section class="content">
+  <div class="container-fluid">
+    <div class="block-header">
+      <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <ul class="breadcrumb breadcrumb-style ">
+            <li class="breadcrumb-item">
+              <h4 class="page-title">{{pageTitle}}</h4>
+            </li>
+            <li class="breadcrumb-item bcrumb-1">
+              <a routerLink="/admin/dashboard/main">
+                <i class="fas fa-home"></i> </a>
+            </li>
+            <li class="breadcrumb-item bcrumb-2">
+              <a href="#" onClick="return false;">Subject Mark Entry</a>
+            </li>
+            <li class="breadcrumb-item active">{{destination}}</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="row clearfix">
+      <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+        <div class="card">
+          <div class="body">
+            <form class="m-4" [formGroup]="InterServiceMarkForm" (ngSubmit)="onSubmit()">
+              <div class="row">
+
+                <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12 mb-2">
+                  <mat-form-field class="example-full-width mb-3" appearance="outline">
+                    <mat-label>Organization Name</mat-label>
+                    <mat-select formControlName="organizationNameId"
+                      (selectionChange)="onOrganizationNameSelectionChangeGetCourse($event.value)">
+                      <mat-option value="0">--Select--</mat-option>
+                      <mat-option *ngFor="let course of selectedOrganization" [value]="course.value">
+                        {{course.text}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+
+                <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12 mb-2">
+                  <mat-form-field class="example-full-width mb-3" appearance="outline">
+                    <mat-label>Course Name</mat-label>
+                    <mat-select formControlName="courseDurationId">
+                      <mat-option value="0">--Select--</mat-option>
+                      <mat-option (onSelectionChange)="onCourseNameSelectionChangeGetTraineeList($event)"
+                        *ngFor="let course of selectedCourseValue" [value]="course.value">
+                        {{course.text}}
+                      </mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="InterServiceMarkForm.get('courseDurationId').hasError('required')">
+                      Course Name is Required!
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12 mb-2">
+                  <h5 class="m-t-21">DurationFrom : <span class="d-color">{{durateDateForm | date:'mediumDate'}}</span> </h5>
+                   
+               </div>
+                <div class="col-xl-3col-lg-3 col-md-3 col-sm-12 mb-2">
+                  <h5 class="m-t-21">DurationTo : <span class="d-color">{{durationDateTo | date:'mediumDate'}}</span> </h5>
+                </div>
+
+
+
+              </div>
+              <!-- Basic Table -->
+              <div *ngIf="isShown" class="row clearfix">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 p-0 ex-mrk-entry-li">
+                  <div class="card">
+
+                    <div class="body table-responsive">
+                      <table class="table ex-mrk-entry">
+                        <thead>
+                          <tr>
+                            <th class="cl-srl">
+                              <h5>Ser</h5>
+                            </th>
+                            <!-- <th class="cl-nm-rnk"><h5>Organization Name</h5></th> -->
+                            <th class="cl-mrk">
+                              <h5>Rank & Name</h5>
+                            </th>
+                            <th class="cl-mrk">
+                              <h5>Course Position</h5>
+                            </th>
+                            <th class="cl-mrk">
+                              <h5>Obtained Marks (%)</h5>
+                            </th>
+                            <th class="cl-mrk">
+                              <h5>Document</h5>
+                            </th>
+                            <th class="cl-mrk">
+                              <h5>Remarks</h5>
+                            </th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr
+                            *ngFor="let unit of InterServiceMarkForm.get('traineeListForm')['controls']; let i = index"
+                            [formGroup]="unit">
+                            <th class="cl-srl" scope="row">{{i+1}}</th>
+                            
+                            <td class="cl-nm-rnk">
+                              {{getControlLabel(i,'rankPosition')}} - {{getControlLabel(i,'traineeName')}} - <span
+                                class="t-n-pno-d">(P No {{getControlLabel(i,'traineePNo')}})</span>
+                            </td>
+
+                            <td class="cl-mrk">
+                              <mat-form-field class="example-full-width mb-3" appearance="outline">
+                                <input matInput type="text" formControlName="coursePosition" required />
+                                <mat-error *ngIf="InterServiceMarkForm.get('coursePosition').hasError('required')">
+                                  Course Position is Required!
+                                </mat-error>
+                              </mat-form-field>
+                            </td>
+                            <td class="cl-mrk">
+                              <mat-form-field class="example-full-width mb-3" appearance="outline">
+                                <input matInput type="text" formControlName="obtaintMark" required />
+                                <mat-error *ngIf="InterServiceMarkForm.get('obtaintMark').hasError('required')">
+                                  Obtaint Mark is Required!
+                                </mat-error>
+                              </mat-form-field>
+                            </td>
+
+                            <td class="cl-mrk-rmrk">
+                              <mat-form-field class="example-full-width mb-3" appearance="outline">
+                                <mat-label>Browse</mat-label>                        
+                                <!-- <input matInput formControlName="documentLink"> -->
+                                <ngx-mat-file-input (change)="onFileChanged($event,unit)" accept=".txt,.pdf,.xls,.xlsx,.doc,.docx,.ppt,.pptx">
+                                </ngx-mat-file-input>
+                                <mat-icon matSuffix>attachment</mat-icon>
+                              </mat-form-field>
+                              <!-- <div class="custom-file">
+                                <input type="file" class="custom-file-input" id="customFile"
+                                       (change)="onFileChanged($event)" accept=".pdf">
+                              </div> -->
+                            </td>
+                            <td class="cl-mrk">
+                              <mat-form-field class="example-full-width mb-3" appearance="outline">
+                                <input matInput type="text" formControlName="remarks" />
+                              </mat-form-field>
+                            </td>
+                          </tr>
+
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- #END# Basic Table -->
+              <div class="row">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+                  <button class="btn-space" [class.auth-spinner]="loading" [disabled]="loading" [disabled]="!InterServiceMarkForm.valid " mat-raised-button
+                    color="primary">{{buttonText}}</button>
+                  <!-- <button type="button" mat-button routerLink="/inter-service/interservicemark-list">Cancel</button> -->
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,221 @@
+<section class="content">
+    <div class="container-fluid">
+      <div class="block-header">
+        <div class="row">
+          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <ul class="breadcrumb breadcrumb-style ">
+              <li class="breadcrumb-item">
+                <h4 class="page-title">Course Instructor</h4>
+              </li>
+              <li class="breadcrumb-item bcrumb-1">
+                <a routerLink="/admin/dashboard/main"><i class="fas fa-home"></i></a>
+              </li>
+              <li class="breadcrumb-item bcrumb-2">
+                <a href="#" onClick="return false;">Course Instructor</a>
+              </li>
+              <li class="breadcrumb-item active">All</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+          <div class="card">
+            <div class="body">
+              <div class="responsive_table">
+                <div class="materialTableHeader"> 
+                  <div class="row">
+                    <div class="col-8">
+                      <ul class="header-buttons-left ml-0">
+                        <li class="dropdown">
+                        </li>
+                        <!-- <li class="dropdown">
+                          <input placeholder="Search" type="text" [(ngModel)]="searchText"  #filter class="browser-default search-field"
+                          aria-label="Search box">
+                        </li>
+                        <li> 
+                          <div class="icon-button-demo m-l-10">
+                            <button mat-mini-fab color="accent" (click)="applyFilter(searchText)">
+                              <mat-icon class="col-white">search</mat-icon>
+                            </button>
+                          </div>
+                          
+                          
+                        </li> -->
+                      </ul>
+                    </div>
+                    <div class="col-4">
+                      <ul class="header-buttons">
+                        <li>
+                          <div class="icon-button-demo">
+                            <!-- <button class="btn-space"  mat-raised-button
+                            color="warn" routerLink="/admin/dashboard/main"> 
+                            <mat-icon class="col-white">keyboard_backspace</mat-icon> Back
+                            </button> -->
+                            <button *ngIf="role === userRole.SuperAdmin || role === userRole.BNASchool || role === userRole.JSTISchool || role === userRole.SchoolOIC || role === userRole.CO  || role === userRole.TrainingOffice || role === userRole.TC || role === userRole.AreaCommander" class="btn-space"  mat-raised-button
+                            color="warn" [routerLink]="['/admin/dashboard/school-dashboard']"> 
+                            <mat-icon class="col-white">keyboard_backspace</mat-icon> Back
+                          </button>
+
+                            <button *ngIf="courseTypeId" class="btn-space"  mat-raised-button
+                              color="warn" [routerLink]="['/admin/dashboard/view-runningcourses',courseTypeId]"> 
+                              <mat-icon class="col-white">keyboard_backspace</mat-icon> Back
+                            </button>
+
+                            <button *ngIf="this.courseNameId == this.masterData.courseName.JCOsTraining" class="btn-space"  mat-raised-button
+                              color="warn" [routerLink]="['/admin/dashboard/Jcoexamlistindashboard-list']"> 
+                              <mat-icon class="col-white">keyboard_backspace</mat-icon> Back
+                            </button>
+                            <button *ngIf="dbType" class="btn-space"  mat-raised-button
+                              color="warn" [routerLink]="['/admin/dashboard/runningcourses-list',baseSchoolNameId]"> 
+                              <mat-icon class="col-white">keyboard_backspace</mat-icon> Back
+                            </button>
+                            <button *ngIf="(role === userRole.InterSeeviceCourse || role === userRole.InterSeeviceDesk || role === userRole.DDNT) && routingType == 1" class="btn-space"  mat-raised-button
+                              color="warn" [routerLink]="['/admin/dashboard/Jcoexamlistindashboard-list']"> 
+                              <mat-icon class="col-white">keyboard_backspace</mat-icon> Back
+                            </button>
+                          </div>
+                        </li>
+                       
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              <div *ngIf="role === userRole.InterSeeviceCourse || role === userRole.InterSeeviceDesk || role === userRole.DDNT" id="print-routine">
+                <table  class="table  tbl-by-group sub-ins-list">
+                  <thead>
+                    <tr>
+                      <th class="cl-srl"><h5>Ser</h5></th>
+                      <!-- <th class="cl-module"><h5>Branch</h5></th> -->
+                      <th class="cl-sub"><h5> Subject Name</h5></th>
+                      <th class="cl-ins"><h5>Examiner</h5></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <ng-container *ngFor="let number of GetInstructorByParameters;let i= index;">                      
+                      <tr>
+                        <td class="cl-sub">{{i+1}}</td>
+                        <td class="cl-ins">{{number.subjectname}}</td>
+                        <td>{{number.position}} {{number.name}} -  <span *ngIf="number.pno" class="t-n-pno-d">(P No {{number.pno}})</span></td>
+                        
+                      </tr>
+                    </ng-container>
+                  </tbody>
+                </table>
+              </div>
+              <div *ngIf="this.courseNameId == this.masterData.courseName.JCOsTraining" id="print-routine">
+                <table  class="table  tbl-by-group sub-ins-list">
+                  <thead>
+                    <tr>
+                      <!-- <th class="cl-srl"><h5>Ser</h5></th> -->
+                      <th class="cl-module"><h5>Branch</h5></th>
+                      <th class="cl-srl"><h5> Subject Name</h5></th>
+                      <th class="cl-ins"><h5>Examiner</h5></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <ng-container *ngFor="let data of groupArrays;let i= index;">
+                      <tr>
+                        <td class="cl-module" [attr.rowspan]="data.courses.length + 1">{{data.courseModule}}</td>
+                      </tr>
+                      <tr *ngFor="let number of data.courses;">
+                        <td class="cl-srl">{{number.subjectname}}</td>
+                        <td>{{number.position}} {{number.name}} -  <span *ngIf="number.pno" class="t-n-pno-d">(P No {{number.pno}})</span></td>
+                        
+                      </tr>
+                    </ng-container>
+                  </tbody>
+                </table>
+              </div>
+              <div *ngIf="role === userRole.SuperAdmin || role === userRole.BNASchool || role === userRole.JSTISchool || role === userRole.SchoolOIC || role === userRole.CO || role === userRole.TrainingOffice || role === userRole.TC || role === userRole.AreaCommander || role === userRole.MasterAdmin && this.courseNameId != this.masterData.courseName.JCOsTraining" id="print-routine">
+                <!-- <table  class="table  tbl-by-group">
+                  <thead>
+                    <tr>
+                      <th class="cl-srl cl-instructor-name"><h5>Instructor</h5></th>
+                      <th class="cl-srl"><h5> Subject Name</h5></th>
+                      <th class="cl-module"><h5>Short Code</h5></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <ng-container *ngFor="let data of groupArrays;let i= index;">
+                      <tr *ngFor="let number of data.courses;">
+                        <td>{{number.position}} {{number.name}} -  <span *ngIf="number.pno" class="t-n-pno-d">(P No {{number.pno}})</span></td>
+                        <td class="cl-srl">{{number.subjectname}}({{number.shortName}})</td>
+                        <td class="cl-module">{{number.shortCode}}</td>
+                      </tr>
+                    </ng-container>
+                  </tbody>
+                </table> -->
+                <table  class="table tbl-by-group db-li-s-in">
+                  <thead>
+                    <tr>
+                      <th class="th-cell-ser">Ser:</th>
+                      <th class="th-cell-instructor"> Instructor </th>
+                      <th class="td-cell-shortcode">Short Code </th>
+                      <th class="th-cell-course">Subject Name</th>
+                      <th class="th-cell-course-subjectshort">Subject Short Name </th>
+                    
+                      <!-- <th class="cl-action">Individual Mark Sheet</th> -->
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <ng-container *ngFor="let data of GetInstructorByParameters; let i = index" >
+                     
+                      <tr >
+                        <td class="td-cell">
+                          {{i+1}}
+                        </td>
+                        <!-- <td class="td-cell">
+                          {{data.position}} {{data.name}}  <span class="t-n-pno-d">(P No {{data.pno}})</span>
+                        </td> -->
+                        <td class="td-cell-instructor">
+                          {{data.position}} {{data.name}}  <span class="t-n-pno-d">(P No {{data.pno}})</span>
+                        </td>  
+                        <td class="td-cell-shortcode">
+                          {{data.shortCode}}
+                        </td>
+                        <td class="td-cell">
+                          {{data.subjectname}} ({{data.shortName}})
+                        </td>
+                        <td class="th-cell-course-subjectshort">
+                          {{data.subjectShortName}}
+                        </td>
+                      
+                     
+                        <!-- <td class="td-cell">
+                          <a [routerLink]="['/admin/dashboard/view-traineeattendance/',data.traineeId,this.courseDuration]">{{data.percentage}}% </a>
+                        </td> -->
+                       
+                        <!-- <td class="cl-action">
+                          <button mat-icon-button class="btn-tbl-view" title="Subject Mark" [routerLink]="['/admin/dashboard/viewobtainmark/',this.branchId,this.courseDuration,data.traineeId]">
+                            <mat-icon aria-label="Edit" class="col-white">visibility</mat-icon>
+                          </button>
+                        </td> -->
+                      </tr>
+                    </ng-container>
+                  </tbody>
+                </table>
+                </div>
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 div-class div-left m-t-20">
+                  <button class="btn-space"  mat-raised-button color="primary" (click)="printSingle()"> Print
+                    <mat-icon class="col-white">print</mat-icon>
+                  </button>
+                </div>
+            
+                 <!-- <mat-paginator [length]="paging.length" [showFirstLastButtons]="masterData.paging.showFirstLastButtons"
+                [pageSize]="paging.pageSize" [pageSizeOptions]="masterData.paging.pageSizeOptions"
+                (page)="pageChanged($event)">
+                </mat-paginator> -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  
+  
+  
+   
+

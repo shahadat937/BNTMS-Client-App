@@ -1,0 +1,208 @@
+<section class="content">
+  <div class="container-fluid">
+    <div class="block-header">
+      <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <ul class="breadcrumb breadcrumb-style ">
+            <li class="breadcrumb-item">
+              <h4 class="page-title">Inter Service Course List</h4>
+            </li>
+            <li class="breadcrumb-item bcrumb-1">
+              <a routerLink="/admin/dashboard/main"><i class="fas fa-home"></i></a>
+            </li>
+            <li class="breadcrumb-item bcrumb-2">
+              <a href="#" onClick="return false;">Inter Service Course</a>
+            </li>
+            <li class="breadcrumb-item active">All</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="card">
+          <div class="body">
+            <div class="responsive_table">
+              <div class="materialTableHeader">
+                <div class="row">
+                  <div class="col-8">
+                    <ul class="header-buttons-left ml-0">
+                      <li class="dropdown">
+                      </li>
+                      <li class="dropdown">
+                        <input placeholder="Search" type="text" [(ngModel)]="searchText" #filter
+                          class="browser-default search-field" aria-label="Search box">
+                      </li>
+                      <li>
+                        <div class="icon-button-demo m-l-10">
+                          <button mat-mini-fab color="accent" (click)="applyFilter(searchText)">
+                            <mat-icon class="col-white">search</mat-icon>
+                          </button>
+                        </div>
+                      </li>
+                    </ul>
+                  </div>
+                  <div class="col-4">
+                    <ul class="header-buttons">
+                      <li>
+                        <div class="icon-button-demo">
+
+                          <button class="btn-space" mat-raised-button color="primary"
+                            [routerLink]="['/inter-service/add-interservicecourse',this.courseTypeId]"> Add
+                            <mat-icon class="col-white">add</mat-icon>
+                          </button>
+                        </div>
+                      </li>
+                      <li>
+                        <div class="icon-button-demo">
+                          <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mb-2 db-p">
+                          <button class="btn-space" mat-raised-button color="primary" (click)="printSingle()">
+                            <mat-icon class="col-white">print</mat-icon>
+                          </button>
+                         
+                        </div>
+                         
+                        </div>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              <div id="print-routine">
+              <table class="tblinterserviceList">
+                <thead>
+                  <tr>
+                    <th class="th-cell-ser">Ser:</th>
+                    <th class="th-cell-course">Course Name</th>
+                    <th class="th-cell-organiztion">Organization Name</th>
+                    <th class="th-cell-noofcandidates">No of Candidates</th>
+                    <th class="th-cell-durationform">Duration From</th>
+                    <th class="th-cell-durationform">Duration To</th>
+                    <th class="th-cell-status">Status</th>
+                    <th class="th-cell-action">Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let number of this.dataSource.data; let i = index">
+                      <td class="td-cell" scope="row"> {{ ((paging.pageIndex-1) * paging.pageSize) +
+                        i+1}}</td>   
+                      <td class="td-cell">courseTitle
+                        {{number.course}} - {{number.courseTitle}}
+                      </td>
+                      <td class="td-cell">
+                        {{number.orgName}}
+                      </td>
+                      <td class="td-cell">
+                        {{number.candidates}}
+                      </td>
+                      <td class="td-cell">
+                        {{number.durationFrom | date:'mediumDate'}}
+                      </td>
+                      <td class="td-cell">
+                        {{number.durationTo | date:'mediumDate'}}
+                      </td>
+                      <td class="td-cell">
+                        <button style="color: red !important;" *ngIf="number.isCompletedStatus == 0" mat-raised-button class="custom-status-btn"  (click)="inActiveItem(number)"  (click)="$event.stopPropagation()">Not Completed</button>
+                        <span *ngIf="number.isCompletedStatus == 1" style="color: green;font-weight: bold;"> Completed</span>
+                      </td>
+                      <td class="td-cell">
+                        <button mat-icon-button class="btn-tbl-nomination" title="Nomination"
+                        [routerLink]="['/inter-service/traineenomination-list', number.courseDurationId]">
+                        <mat-icon aria-label="Edit" class="col-white">supervisor_account</mat-icon>
+                      </button>
+  
+                      <button mat-icon-button color="accent" title="Edit" class="btn-custom btn-tbl-edit"
+                        [routerLink]="['/inter-service/update-interservicecourse', number.courseDurationId]">
+                        <mat-icon aria-label="Edit" class="col-white">edit</mat-icon>
+                      </button>
+  
+                      <button mat-icon-button color="accent" title="Delete" class="btn-tbl-delete btn-custom"
+                        (click)="$event.stopPropagation()" (click)="deleteItem(number)">
+                        <mat-icon aria-label="Delete" class="col-white">delete</mat-icon>
+                      </button>
+                      </td>
+                    </tr>
+                </tbody>
+              </table>
+          
+               <!-- <mat-paginator [length]="paging.length" [showFirstLastButtons]="masterData.paging.showFirstLastButtons"
+              [pageSize]="paging.pageSize" [pageSizeOptions]="masterData.paging.pageSizeOptions"
+              (page)="pageChanged($event)">
+              </mat-paginator> -->
+      </div>
+              <!-- <mat-table #table [dataSource]="dataSource" matSort class="mat-cell tbl-local">
+                <ng-container matColumnDef="ser">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header> Ser: </mat-header-cell>
+                  <mat-cell *matCellDef="let element; let i = index;"> {{ ((paging.pageIndex-1) * paging.pageSize) +
+                    i+1}} </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="courseName">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header>Course Name </mat-header-cell>
+                  <mat-cell *matCellDef="let element"> {{element.courseName}} </mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="organizationName">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header>Organization Name</mat-header-cell>
+                  <mat-cell *matCellDef="let element"> {{element.organizationName}} </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="noOfCandidates">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header>No of Candidates</mat-header-cell>
+                  <mat-cell *matCellDef="let element"> {{element.noOfCandidates}} </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="durationFrom">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header> Duration From</mat-header-cell>
+                  <mat-cell *matCellDef="let element"> {{element.durationFrom | date:'mediumDate'}} </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="durationTo">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header>Duration To </mat-header-cell>
+                  <mat-cell *matCellDef="let element"> {{element.durationTo | date:'mediumDate'}} </mat-cell>
+                </ng-container>
+                
+                <ng-container matColumnDef="status">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header>Status </mat-header-cell>
+                  <mat-cell *matCellDef="let element"> 
+                    <button style="color: red !important;" *ngIf="element.isCompletedStatus == 0" mat-raised-button class="custom-btn courseplan-btn"  (click)="inActiveItem(element)"  (click)="$event.stopPropagation()">Not Completed</button>
+                    <span *ngIf="element.isCompletedStatus == 1" style="color: green;font-weight: bold;"> Completed</span>
+                  </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="actions">
+                  <mat-header-cell ngClass="custom-action local" *matHeaderCellDef class="pr-0">Actions
+                  </mat-header-cell>
+                  <mat-cell ngClass="custom-action local" *matCellDef="let row; let i=index;" class="pr-0">
+                    
+                    <button mat-icon-button class="btn-tbl-nomination" title="Nomination"
+                      [routerLink]="['/inter-service/traineenomination-list', row.courseDurationId]">
+                      <mat-icon aria-label="Edit" class="col-white">supervisor_account</mat-icon>
+                    </button>
+
+                    <button mat-icon-button color="accent" title="Edit" class="btn-custom btn-tbl-edit"
+                      [routerLink]="['/inter-service/update-interservicecourse', row.courseDurationId]">
+                      <mat-icon aria-label="Edit" class="col-white">edit</mat-icon>
+                    </button>
+
+                    <button mat-icon-button color="accent" title="Delete" class="btn-tbl-delete btn-custom"
+                      (click)="$event.stopPropagation()" (click)="deleteItem(row)">
+                      <mat-icon aria-label="Delete" class="col-white">delete</mat-icon>
+                    </button>
+                  </mat-cell>
+                </ng-container>
+
+                <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+              </mat-table>
+
+              <mat-paginator [length]="paging.length" [showFirstLastButtons]="masterData.paging.showFirstLastButtons"
+                [pageSize]="paging.pageSize" [pageSizeOptions]="masterData.paging.pageSizeOptions"
+                (page)="pageChanged($event)">
+              </mat-paginator> -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

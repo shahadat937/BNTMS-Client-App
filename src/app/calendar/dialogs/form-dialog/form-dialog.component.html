@@ -1,0 +1,68 @@
+<div class="addContainer">
+  <div class="modalHeader">
+    <div class="editRowModal">
+      <div class="modalHeader clearfix">
+        <div class="modal-about">
+          <div class="font-weight-bold p-t-5 p-l-10 font-17">
+            {{dialogTitle}}</div>
+        </div>
+      </div>
+    </div>
+    <button mat-icon-button (click)="dialogRef.close()" aria-label="Close dialog">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+  <div mat-dialog-content>
+    <form class="register-form m-4" [formGroup]="calendarForm">
+      <div class="row">
+        <table class="table table-bordered">
+          <thead></thead>
+          <tbody>
+            <tr>
+              <!-- <th scope="row">Trainee Id</th>
+              <td>{{traineeId}}</td> -->
+              <th scope="row">Course Title</th>
+              <td>{{courseTitle}}</td>
+              <th scope="row">No Of Candidates</th>
+              <td>{{noOfCandidates}}</td>
+            </tr>
+            <tr>                    
+              <th scope="row">Duration From</th>
+              <td>{{durationFrom | date:'mediumDate'}}</td>
+              <th scope="row">Duration To</th>
+              <td>{{durationTo | date:'mediumDate'}}</td>
+            </tr>
+            <tr>                      
+              <th scope="row">Professional</th>
+              <td>{{professional}}</td>
+              <th scope="row">nbcd</th>
+              <td>{{nbcd}}</td>
+            </tr>
+            <tr>
+              <th scope="row">Location</th>
+              <td>{{location}}</td>
+              <th scope="row">Remark</th>
+              <td>{{remark}}</td>
+            </tr>                    
+          </tbody>
+        </table> 
+      </div>
+      <!-- <div class="row">
+        <div class="col-xl-10 col-lg-10 col-md-12 col-sm-12">
+          <div class="example-button-row">
+            <button mat-raised-button color="primary"  [disabled]="!calendarForm.valid"
+              >Save</button>
+            <button mat-raised-button color="warn" (click)="dialogRef.close()" tabindex="-1">Cancel</button>
+          </div>
+        </div>
+        <div class="col-xl-2 col-lg-2 col-md-12 col-sm-12">
+          <div class="example-button-row" *ngIf="showDeleteBtn">
+            <button mat-mini-fab aria-label color="warn" (click)="deleteEvent()">
+              <mat-icon class="font-20">delete</mat-icon>
+            </button>
+          </div>
+        </div>
+      </div> -->
+    </form>
+  </div>
+</div>

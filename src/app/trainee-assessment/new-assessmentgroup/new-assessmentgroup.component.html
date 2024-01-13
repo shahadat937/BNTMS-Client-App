@@ -1,0 +1,165 @@
+<section class="content">
+  <div class="container-fluid">
+    <div class="block-header">
+      <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <ul class="breadcrumb breadcrumb-style ">
+            <li class="breadcrumb-item">
+              <h4 class="page-title">{{pageTitle}}</h4>
+            </li>
+            <li class="breadcrumb-item bcrumb-1">
+              <a routerLink="/admin/dashboard/main"><i class="fas fa-home"></i></a>
+            </li>
+            <li class="breadcrumb-item bcrumb-2">
+              <a href="#" onClick="return false;"> Attendance</a>
+            </li>
+            <li class="breadcrumb-item active">{{destination}}</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="row clearfix">
+      <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+        <div class="card">
+          <div class="header">
+          </div>
+          <div class="body">
+            <form class="m-4" [formGroup]="TraineeAssessmentGroupForm" (ngSubmit)="onSubmit()">
+              <div class="row">
+                <div class="form-border-design col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+                  <div class="row">
+                    
+
+                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 mb-2">
+                      <mat-form-field class="example-full-width mb-3" appearance="outline">
+                        <mat-label>Course Name</mat-label>
+                        <mat-select formControlName="courseName" (selectionChange)="onCourseSelectionGetTraineeList()">
+                          <mat-option value="0">--Select--</mat-option>
+                          <mat-option *ngFor="let dropdown of selectedCourse" [value]="dropdown.value">
+                            {{dropdown.text}}
+                          </mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                    </div>
+
+
+                    <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12 mb-2">
+                      <mat-form-field class="example-full-width mb-3" appearance="outline">
+                        <mat-label>trainee Assissment Create</mat-label>
+                        <mat-select formControlName="traineeAssissmentCreateId">
+                          <mat-option value="0">--Select--</mat-option>
+                          <mat-option *ngFor="let dropdown of selectedTraineeAssessmentCreates" [value]="dropdown.value">
+                            {{dropdown.text}}
+                          </mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                    </div>
+
+
+                    <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12 mb-2">
+                      <!-- <mat-form-field class="example-full-width mb-3" appearance="outline">
+                        <mat-label>Class Period / Section</mat-label>
+                        <mat-select formControlName="classPeriod" (selectionChange)="onClassPeriodSelectionChangeGetCourseDuration()">
+                          <mat-option value="0">--Select--</mat-option>
+                          <mat-option *ngFor="let dropdown of selectedClassPeriodByBaseSchoolNameIdAndCourseNameId" [value]="dropdown.value">
+                            {{dropdown.text}}
+                          </mat-option>
+                        </mat-select>
+                      </mat-form-field> -->
+                      <mat-form-field class="example-full-width mb-3" appearance="outline">
+                        <mat-label>Assissment Group Name</mat-label>
+                        <input matInput  type="text" formControlName="assissmentGroupName"/>
+                      </mat-form-field>
+                    </div>
+
+                    <!-- <div class="col-xl-2 col-lg-2 col-md-2 col-sm-12 mb-2">
+                      <mat-form-field class="example-full-width mb-3" appearance="outline">
+                          <mat-label>Course Section</mat-label>                        
+                          <mat-select formControlName="courseSectionId" required (selectionChange)="onCourseSectionSelectionGet()">
+                            <mat-option  value="0">--Select--</mat-option >
+                              <mat-option *ngFor="let dropdown of selectedCourseSection" [value]="dropdown.value">
+                                  {{dropdown.text}} 
+                                </mat-option>                          
+                          </mat-select>
+                      </mat-form-field>
+                    </div> -->
+               
+                  </div>
+ 
+                </div>
+
+          
+                
+
+                <div *ngIf="isShown" class="container mt-2 att-tbl">
+                  <h4 class="text-center">Trainee List</h4>
+                  <table class="table ex-mrk-entry" style="background-color: #ffffff;">
+                    <thead>
+                      <tr>
+                        <th class="cl-srl"><h5>Ser</h5></th>
+                        <th class="cl-nm-rnk"><h5>Name & Rank</h5></th>
+                        <th class="cl-mrk"><h5>Select</h5></th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let unit of TraineeAssessmentGroupForm.get('assessmentTraineeGroupListForm')['controls']; let i = index" [formGroup]="unit">
+                        <th class="cl-srl" scope="row">{{i+1}}</th>
+
+                        <td  class="cl-nm-rnk"> 
+                          {{getControlLabel(i,'rankPosition')}} - {{getControlLabel(i,'traineeName')}} -  <span class="t-n-pno-d">(P No {{getControlLabel(i,'traineePNo')}})</span>
+                        </td>
+                        
+                        <!-- <td class="cl-mrk">
+                          <mat-form-field class="example-full-width mb-3" appearance="outline">
+                            <input matInput  type="text" formControlName="classLeaderName"/>
+                          </mat-form-field>
+                        </td> -->
+
+                        <td class="cl-mrk">
+                            <mat-checkbox formControlName="selectedStatus"  #checkBox   [ngClass]="'tbl-checkbox'">                      
+                            </mat-checkbox>
+                        </td>
+
+                        <!-- <td class="cl-mrk-rmrk">
+                          <mat-form-field class="example-full-width mb-3" appearance="outline">
+                            <mat-select formControlName="bnaAttendanceRemarksId">
+                              <mat-option  value="">--Select--</mat-option >
+                              <mat-option *ngFor="let dropdown of selectedbnaattendanceremark" [value]="dropdown.value">
+                                {{dropdown.text}} 
+                              </mat-option>                          
+                            </mat-select>
+                          </mat-form-field>    
+                        </td> -->
+                      </tr>
+                      
+                    </tbody>
+                  </table>
+                  
+                </div>
+                
+
+              <div class="row mt-2">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+                  <button class="btn-space" [class.auth-spinner]="loading" [disabled]="loading" [disabled]="!TraineeAssessmentGroupForm.valid " mat-raised-button
+                    color="primary">{{buttonText}}</button>
+
+                    <!-- <div class="icon-button-demo"> -->
+                      <button class="btn-space"  mat-raised-button
+                        color="warn" routerLink="/admin/dashboard/school-dashboard"> 
+                        <mat-icon class="col-white">keyboard_backspace</mat-icon> Back
+                      </button>
+                      <!-- <button *ngIf="schoolId == 0" class="btn-space"  mat-raised-button
+                        color="warn" routerLink="/admin/dashboard/main"> 
+                        <mat-icon class="col-white">keyboard_backspace</mat-icon> Back
+                      </button> -->
+                    <!-- </div> -->
+                </div>
+              </div>
+            </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

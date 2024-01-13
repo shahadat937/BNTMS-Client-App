@@ -1,0 +1,84 @@
+
+              <div class="responsive_table">
+                <div class="materialTableHeader">
+                  <div class="row">
+                    <div class="col-8">
+                      <ul class="header-buttons-left ml-0">
+                        <li class="dropdown">
+                          <h4>Family Information </h4>
+                        </li>
+                        <!-- <li class="dropdown">
+                          <input placeholder="Search" type="text" [(ngModel)]="searchText"  #filter class="browser-default search-field"
+                          aria-label="Search box">
+                        </li>
+                        <li> 
+                          <div class="icon-button-demo m-l-10">
+                            <button mat-mini-fab color="accent" (click)="applyFilter(searchText)">
+                              <mat-icon class="col-white">search</mat-icon>
+                            </button>
+                          </div>
+                        </li> -->
+                      </ul> 
+                    </div>
+                    <div class="col-4">
+                      <ul class="header-buttons">
+                        <li>
+                          <div class="icon-button-demo">
+                            <button class="btn-space"  mat-raised-button
+                            color="warn" [routerLink]="['/trainee-biodata/sailor-biodata-tab/main-tab-layout/main-tab/family-info-details', this.traineeId]"> 
+                              <mat-icon class="col-white">keyboard_backspace</mat-icon> Back
+                            </button>
+                            <button class="btn-space"  mat-raised-button
+                            color="primary" [routerLink]="['/trainee-biodata/sailor-biodata-tab/main-tab-layout/main-tab/update-family-info-details', this.traineeId, this.parentRelativeId]"> Update
+                            
+                              <mat-icon class="col-white">update</mat-icon>
+                            </button>
+                          </div>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+
+                <table class="table table-bordered">
+                  <thead>
+                    
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <th scope="row">Full Name</th>
+                      <td>{{nameInFull}}</td>
+                      <th scope="row">Relation Type</th>
+                      <td>{{relationType}}</td>                      
+                    </tr> 
+                    <tr>
+                      <th scope="row">Dead Status</th>
+                      <td>{{deadStatusValue}}</td>
+                      <th scope="row">Occupation</th>
+                      <td>{{occupation}}</td>
+                    </tr>
+                    
+                      
+                    
+                    <tr>                      
+                      <th colspan="2" scope="row">Mobile</th>
+                      <td colspan="2">{{mobile}}</td>
+                    </tr>
+                      
+                    <!-- <tr>
+                      
+                      <th scope="row">status</th>
+                      <td>{{status}}</td>
+                    </tr>                     -->
+                  </tbody>
+                </table>
+
+                
+              </div>
+  
+  
+  
+  
+   
+
+

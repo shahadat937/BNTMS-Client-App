@@ -1,0 +1,119 @@
+<section class="content">
+    <div class="container-fluid">
+      <div class="block-header">
+        <div class="row">
+          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <ul class="breadcrumb breadcrumb-style ">
+              <li class="breadcrumb-item">
+                <h4 class="page-title">Course Instructor</h4>
+              </li>
+              <li class="breadcrumb-item bcrumb-1">
+                <a routerLink="/admin/dashboard/main"><i class="fas fa-home"></i></a>
+              </li>
+              <li class="breadcrumb-item bcrumb-2">
+                <a href="#" onClick="return false;">Course Instructor</a>
+              </li>
+              <li class="breadcrumb-item active">All</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+          <div class="card">
+            <div class="body">
+              <div class="responsive_table">
+                <div class="materialTableHeader"> 
+                  <div class="row">
+                    <div class="col-8">
+                      <ul class="header-buttons-left ml-0">
+                        <li class="dropdown">
+                        </li>
+                        <!-- <li class="dropdown">
+                          <input placeholder="Search" type="text" [(ngModel)]="searchText"  #filter class="browser-default search-field"
+                          aria-label="Search box">
+                        </li>
+                        <li> 
+                          <div class="icon-button-demo m-l-10">
+                            <button mat-mini-fab color="accent" (click)="applyFilter(searchText)">
+                              <mat-icon class="col-white">search</mat-icon>
+                            </button>
+                          </div>
+                          
+                          
+                        </li> -->
+                      </ul>
+                      <div class="row dash-cd-m-0">
+                        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 div-class div-left">
+                          <h3>Trainee Absent Details</h3>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-4">
+                      <ul class="header-buttons">
+                        <li>
+                          <div class="icon-button-demo">
+                            <button class="btn-space"  mat-raised-button
+                              color="warn" [routerLink]="['/admin/dashboard/school-dashboard']"> 
+                              <mat-icon class="col-white">keyboard_backspace</mat-icon> Back
+                            </button>
+                          </div>
+                        </li>
+                       
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+                <mat-table #table [dataSource]="TraineeAbsentDetail" matSort class="mat-cell db-li-n">               
+                  <ng-container matColumnDef="ser">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header> Ser: </mat-header-cell>
+                    <mat-cell *matCellDef="let element; let i = index;"> {{ ((paging.pageIndex-1) *  paging.pageSize) + i+1}} </mat-cell>
+                  </ng-container> 
+
+                  <ng-container matColumnDef="subjectName">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header> Subject Name </mat-header-cell>
+                    <mat-cell *matCellDef="let element"> {{element.subjectName}} </mat-cell>
+                  </ng-container>
+
+                  <ng-container matColumnDef="attendanceDate">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>Absent Date</mat-header-cell>
+                    <mat-cell *matCellDef="let element">{{element.attendanceDate | date:'mediumDate'}}</mat-cell>
+                  </ng-container>
+
+                  <ng-container matColumnDef="moduleName">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>Module Name</mat-header-cell>
+                    <mat-cell *matCellDef="let element">{{element.moduleName}}</mat-cell>
+                  </ng-container>
+
+                  <ng-container matColumnDef="attendanceRemarksCause">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>Attendance Remarks Cause</mat-header-cell>
+                    <mat-cell *matCellDef="let element">{{element.attendanceRemarksCause}}</mat-cell>
+                  </ng-container>
+
+                  <ng-container matColumnDef="periodName">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>Period Name</mat-header-cell>
+                    <mat-cell *matCellDef="let element">{{element.periodName}}</mat-cell>
+                  </ng-container>
+
+
+                  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                  <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+                </mat-table>
+            
+                 <!-- <mat-paginator [length]="paging.length" [showFirstLastButtons]="masterData.paging.showFirstLastButtons"
+                [pageSize]="paging.pageSize" [pageSizeOptions]="masterData.paging.pageSizeOptions"
+                (page)="pageChanged($event)">
+                </mat-paginator> -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  
+  
+  
+   
+

@@ -1,0 +1,138 @@
+<section class="content">
+    <div class="container-fluid">
+      <div class="block-header">
+        <div class="row">
+          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <ul class="breadcrumb breadcrumb-style ">
+              <li class="breadcrumb-item"> 
+                <h4 class="page-title">Teacher Evaluation Form</h4>
+              </li>
+              <li class="breadcrumb-item bcrumb-1">
+                <a routerLink="/admin/dashboard/main"><i class="fas fa-home"></i></a>
+              </li>
+              <li class="breadcrumb-item bcrumb-2">
+                <a href="#" onClick="return false;">Teacher Evaluation</a>
+              </li>
+              <li class="breadcrumb-item active">{{destination}}</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="row clearfix">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12"> 
+          <div class="card">
+            <div class="header">
+            </div>
+            <div class="body">
+              <form class="m-4" [formGroup]="BNAExamMarkForm" (ngSubmit)="onSubmit()">
+                <div class="row">
+                  
+                </div> 
+
+                <!-- Basic Table -->
+                <div class="row clearfix">
+                  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 p-0 ex-mrk-entry-li ">
+                    <div class="card">
+                      <div class="row">
+                        <!-- <div class="col-lg-3 col-md-6 col-sm-12 m-t-10 ">
+                          <p class="m-b-0 p-l-10"><b>Course:- {{courseName}} - {{courseTitle}}</b></p>
+                        </div> -->
+                        <div class="col-lg-5 col-md-5 col-sm-12 m-t-10">
+                          <p class="m-b-0"><b>Subject:- {{subjectName}}</b></p>
+                        </div>
+                        <div class="col-lg-7 col-md-7 col-sm-12 m-t-10">
+                          <p class="m-b-0"><b>Instructor:- {{InstructorRank}} {{Instructor}} (P no - {{InstructorPno}})</b></p>
+                        </div>
+                      </div>
+                      <div class="body table-responsive">
+                        <table class="table ex-mrk-entry">
+                          <thead>
+                            <tr>
+                              <th class="cl-srl"><h5>Ser</h5></th>
+                              <th class="cl-nm-rnk"><h5>Question</h5></th>
+                              <th class="cl-mrk-rmrk"><h5>Answer</h5></th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr *ngFor="let unit of BNAExamMarkForm.get('approveTraineeListForm')['controls']; let i = index" [formGroup]="unit">
+                              <th class="cl-srl" scope="row">{{i+1}}</th>
+
+                              <td  class="cl-nm-rnk"> 
+                                {{getControlLabel(i,'tdecQuestionName')}}
+                              </td>                              
+
+                              <td class="cl-mrk-rmrk">
+                                <mat-form-field class="example-full-width mb-3" appearance="outline">
+                                  <mat-select formControlName="TdecActionStatusId">
+                                    <mat-option  value="">--Select--</mat-option >
+                                    <mat-option *ngFor="let dropdown of SelectedTdecActionStatus" [value]="dropdown.value">
+                                      {{dropdown.text}} 
+                                    </mat-option>                          
+                                  </mat-select>
+                                </mat-form-field>    
+                              </td>
+                            </tr>
+                            
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div *ngIf="ApproveMsgScreen" class="row clearfix">
+                  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 p-0 ex-mrk-entry-li res-msg">
+                    <div class="card">
+                      
+                      <div class="body table-responsive">
+                        <table class="table ex-mrk-entry">
+                          <thead>
+                            <tr>
+                              <th class="cl-srl"><h5>Ser</h5></th>
+                              <th class="cl-nm-rnk"><h5>Question</h5></th>
+                              <th class="cl-mrk-rmrk"><h5>Answer</h5></th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+                              <td colspan="4"><h4>{{ApproveMsg}}</h4></td>
+                            </tr>
+                            
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row mt-2">
+                  <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+                    <button class="btn-space" [class.auth-spinner]="loading" [disabled]="loading" [disabled]="!BNAExamMarkForm.valid " mat-raised-button
+                        color="primary">Submit</button>
+                        <!-- admin/dashboard/teacherevaluation-list/45120/20/1065/3089 -->
+                        <!-- [routerLink]="['/admin/dashboard/view-teacherevaluationbysubject',traineeId,row.baseSchoolNameId, row.courseNameId, row.courseDurationId, row.bnaSubjectNameId]" -->
+                        <button class="btn-space"  mat-raised-button
+                        color="warn" [routerLink]="['/admin/dashboard/teacherevaluation-list',traineeId,this.baseSchool,this.courseNames,this.courseDurations]"> 
+                        Back
+                        </button>
+                    <!-- <button type="button" mat-button routerLink="/exam-management/bnaexammark-list">Cancel</button> -->
+                  </div>
+                </div>
+
+                <!-- <div class="col-4"> -->
+                  <!-- <ul class="header-buttons">
+                    <li> -->
+                      <!-- <div class="icon-button-demo"> -->
+                      
+                      <!-- </div>
+                  </ul> -->
+                <!-- </div> -->
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+

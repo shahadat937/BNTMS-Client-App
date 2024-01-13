@@ -1,0 +1,185 @@
+<section class="content">
+    <div class="container-fluid">
+      <div class="block-header">
+        <div class="row">
+          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <ul class="breadcrumb breadcrumb-style ">
+              <li class="breadcrumb-item">
+                <h4 class="page-title">{{pageTitle}}</h4>
+              </li>
+              <li class="breadcrumb-item bcrumb-1">
+                <a routerLink="/admin/dashboard/main">
+                  <i class="fas fa-home"></i> </a>
+              </li>
+              <li class="breadcrumb-item bcrumb-2">
+                <a href="#" onClick="return false;">Allowance </a>
+              </li>
+              <li class="breadcrumb-item active">{{destination}}</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="row clearfix">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+          <div class="card">
+            
+            <div class="body">
+              <form class="m-4" [formGroup]="AllowanceForm" (ngSubmit)="onSubmit()">
+                <div class="row">
+
+                  
+                  <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                        <mat-label>Course Name</mat-label>                        
+                        <mat-select formControlName="courseNameId" required>
+                            <mat-option *ngFor="let dropdown of selectedcourse" [value]="dropdown.value">
+                                {{dropdown.text}} 
+                              </mat-option>                          
+                        </mat-select>
+                        <mat-error *ngIf="AllowanceForm.get('courseNameId').hasError('required')">
+                         Course Name  is Required!
+                        </mat-error>
+                    </mat-form-field>
+                  </div>
+                  
+
+                  <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                        <mat-label>Country</mat-label>                        
+                        <mat-select formControlName="countryId" required>
+                            <mat-option *ngFor="let dropdown of selectedCountry" [value]="dropdown.value">
+                                {{dropdown.text}} 
+                              </mat-option>                          
+                        </mat-select>
+                        <mat-error *ngIf="AllowanceForm.get('countryId').hasError('required')">
+                         Country  is Required!
+                        </mat-error>
+                    </mat-form-field>
+                  </div>
+
+                  <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                      <mat-label>Duration From</mat-label>
+                        <input matInput [matDatepicker]="frompicker" formControlName="durationFrom" >
+                        <mat-datepicker-toggle matSuffix [for]="frompicker"></mat-datepicker-toggle>
+                       <mat-datepicker #frompicker></mat-datepicker>                                            
+                    </mat-form-field>
+                  </div>
+
+                  <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                      <mat-label>Duration To</mat-label>
+                        <input matInput [matDatepicker]="topicker" formControlName="durationTo" >
+                        <mat-datepicker-toggle matSuffix [for]="topicker"></mat-datepicker-toggle>
+                       <mat-datepicker #topicker></mat-datepicker>                                            
+                    </mat-form-field>
+                  </div>
+
+                  <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                      <mat-label>Vacancy</mat-label>
+                      <input matInput formControlName="vacancy" required>
+                      <mat-error *ngIf="AllowanceForm.get('vacancy').hasError('required')">
+                        vacancy is required 
+                      </mat-error>
+                    </mat-form-field>
+                  </div>
+
+                  <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                      <mat-label>Provide By Authority</mat-label>
+                      <input matInput formControlName="provideByAuthority" required>
+                      <mat-error *ngIf="AllowanceForm.get('provideByAuthority').hasError('required')">
+                        provide By Authority is required 
+                      </mat-error>
+                    </mat-form-field>
+                  </div>
+
+                  <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                      <mat-label>Tarminal</mat-label>
+                      <input matInput formControlName="tarminal" required>
+                      <mat-error *ngIf="AllowanceForm.get('tarminal').hasError('required')">
+                        Tarminal is required 
+                      </mat-error>
+                    </mat-form-field>
+                  </div>
+
+                  <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                      <mat-label>Transit</mat-label>
+                      <input matInput formControlName="transit" required>
+                      <mat-error *ngIf="AllowanceForm.get('transit').hasError('required')">
+                        transit is required 
+                      </mat-error>
+                    </mat-form-field>
+                  </div>
+
+                  <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                      <mat-label>Bank Commission</mat-label>
+                      <input matInput formControlName="bankCommission" required>
+                      <mat-error *ngIf="AllowanceForm.get('bankCommission').hasError('required')">
+                        Bank Commission is required 
+                      </mat-error>
+                    </mat-form-field>
+                  </div>
+
+                  <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                        <mat-label>From Rank</mat-label>                        
+                        <mat-select formControlName="fromRankId" required>
+                          <mat-option  value="0">--Select--</mat-option >
+                            <mat-option *ngFor="let dropdown of selectedRanks" [value]="dropdown.value">
+                                {{dropdown.text}} 
+                              </mat-option>                          
+                        </mat-select>
+                        <mat-error *ngIf="AllowanceForm.get('fromRankId').hasError('required')">
+                          From Rank  is Required!
+                        </mat-error>
+                    </mat-form-field>
+                  </div>
+
+                  <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                        <mat-label>To Rank</mat-label>                        
+                        <mat-select formControlName="toRankId" required (selectionChange)="getSelectedAllowanceNameByFromRankIdAndToRankId()">
+                          <mat-option  value="0">--Select--</mat-option >
+                            <mat-option *ngFor="let torRank of selectedRanks" [value]="torRank.value">
+                                {{torRank.text}} 
+                              </mat-option>                          
+                        </mat-select>
+                        <mat-error *ngIf="AllowanceForm.get('toRankId').hasError('required')">
+                          To Rank  is Required!
+                        </mat-error>
+                    </mat-form-field>
+                  </div>
+
+                  <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                        <mat-label>Allowance Type</mat-label>                        
+                        <mat-select formControlName="AllowanceCategoryId" required>
+                          <mat-option  value="0">--Select--</mat-option >
+                            <mat-option *ngFor="let dropdown of selectedAllowanceNamebyFromRankIdandToRankId" [value]="dropdown.value">
+                                {{dropdown.text}} 
+                              </mat-option>                          
+                        </mat-select>
+                    </mat-form-field>
+                  </div>
+                  
+                </div>
+                <div class="row">
+                  <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+                    <button class="btn-space" [class.auth-spinner]="loading" [disabled]="loading" [disabled]="!AllowanceForm.valid " mat-raised-button
+                      color="primary">{{buttonText}}</button>
+                    <button type="button" mat-button routerLink="/allowance-management/allowance-list">Cancel</button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  

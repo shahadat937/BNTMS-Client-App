@@ -1,0 +1,176 @@
+<section class="content">
+    <div class="container-fluid">
+      <div class="block-header">
+        <div class="row">
+          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <ul class="breadcrumb breadcrumb-style ">
+              <li class="breadcrumb-item">
+                <h4 class="page-title">Performance Details</h4>
+              </li>
+              <li class="breadcrumb-item bcrumb-1"> 
+                <a routerLink="/admin/dashboard/main"><i class="fas fa-home"></i></a>
+              </li>
+              <li class="breadcrumb-item bcrumb-2">
+                <a href="#" onClick="return false;">Performance Details</a>
+              </li>
+              <li class="breadcrumb-item active">All</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+          <div class="card">
+            <div class="body">
+              <div class="responsive_table">
+                <div class="materialTableHeader syllabus"> 
+                  <div class="row">
+                    <div class="col-8">
+                      <div class="heading">
+                        <p style="margin-bottom: 10px;">Trainee:- {{trainee}}</p>
+                        <p style="margin-bottom: 10px;">Course:- {{course}}</p>
+                        <p style="margin-bottom: 10px;">School:- {{schoolName}}</p>
+                      </div>
+                      <div  class="align-center">            
+                      </div>
+                      <ul class="header-buttons-left ml-0">
+                        <li class="dropdown">
+                        </li>
+                        <li class="dropdown">
+                        </li>
+                        <li> 
+                          <div class="icon-button-demo m-l-10">
+                          </div>
+                        </li>
+                      </ul>
+                    </div>
+
+                    <div class="col-4">
+                      <ul class="header-buttons">
+                        <li>
+                          <div class="icon-button-demo">
+                            <button class="btn-space"  mat-raised-button color="primary" (click)="printSingle()"> Print
+                              <mat-icon class="col-white">print</mat-icon>
+                            </button>
+
+                            <button *ngIf="role != 'Student' && courseType3 == 6" class="btn-space"  mat-raised-button
+                              color="warn" [routerLink]="['/admin/dashboard/upcomingcourses-list',baseSchoolNameId]"> 
+                              <mat-icon class="col-white">keyboard_backspace</mat-icon> Back
+                            </button>
+
+                            <button *ngIf="schoolDb !=5 && !courseListStatus && (role === userRole.SuperAdmin || role === userRole.BNASchool || role === userRole.JSTISchool || role === userRole.CO || role === userRole.SchoolOIC || role === userRole.TrainingOffice || role === userRole.TC || role === userRole.AreaCommander)" class="btn-space"  mat-raised-button
+                              color="warn" [routerLink]="['/admin/dashboard/traineenomination-list',courseDurationId,1,2,3,4]"> 
+                              <mat-icon class="col-white">keyboard_backspace</mat-icon> Back
+                            </button>
+                            <button *ngIf="schoolDb == 5 && (role === userRole.SuperAdmin || role === userRole.BNASchool || role === userRole.JSTISchool || role === userRole.CO || role === userRole.TC || role === userRole.AreaCommander)" class="btn-space"  mat-raised-button
+                              color="warn" [routerLink]="['/admin/dashboard/upcomingcourses-list', branchId]"> 
+                              <mat-icon class="col-white">keyboard_backspace</mat-icon> Back
+                            </button>
+                            <button *ngIf="courseListStatus == 1 && role != 'Master Admin'" class="btn-space"  mat-raised-button
+                              color="warn" [routerLink]="['/admin/dashboard/view-courselistbyschool',baseSchoolNameId]"> 
+                              <mat-icon class="col-white">keyboard_backspace</mat-icon> Back
+                            </button>
+                            <button *ngIf="courseListStatus == 1 && role === 'Master Admin'" class="btn-space"  mat-raised-button
+                              color="warn" [routerLink]="['/admin/dashboard/view-courselistbyschool',0]"> 
+                              <mat-icon class="col-white">keyboard_backspace</mat-icon> Back
+                            </button>
+                            <button *ngIf="role === 'Master Admin'" class="btn-space"  mat-raised-button
+                              color="warn" [routerLink]="['/course-management/add-traineenomination',courseDurationId]"> 
+                              <mat-icon class="col-white">keyboard_backspace</mat-icon> Back
+                            </button>
+                            <button *ngIf="!courseListStatus && courseTypeId && role === 'Master Admin'" class="btn-space"  mat-raised-button
+                              color="warn" [routerLink]="['/admin/dashboard/view-runningcourses',courseTypeId]"> 
+                              <mat-icon class="col-white">keyboard_backspace</mat-icon> Back
+                            </button>
+                            <button *ngIf="role === 'Student'" class="btn-space"  mat-raised-button
+                              color="warn" [routerLink]="['/admin/dashboard/view-traineecourseprofile',traineeId]"> 
+                              <mat-icon class="col-white">keyboard_backspace</mat-icon> Back
+                            </button>
+
+                          </div>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+
+              
+
+                <div id="print-routine">
+                  
+                  <table class="table  tbl-by-group db-li-s-in traine-performance-details">
+                    <thead>
+                      <tr>
+                        <th class="th-cell-ser"><h5>Ser.</h5></th>
+                        <th class="cl-mrk"><h5>Subject Name</h5></th>
+                        <th class="cl-mrk-rmrk"><h5>Full Marks</h5></th>
+                        <!-- <th class="cl-mrk-rmrk"><h5>Pass Mark</h5></th> -->
+                        <th class="cl-mrk-rmrk"><h5>Marks Obtained</h5></th>
+                        <th class="cl-mrk-rmrk"><h5>Highest Marks of the Class</h5></th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <ng-container>
+                        <tr *ngFor="let number of this.getMarkList; let i = index">
+                          <td>
+                            {{i+1}}
+                          </td>
+                          <td class="cl-mrk sub-name">{{number.subjectName}} </td>
+                          <td>{{number.totalMark | number:'0.2'}}</td>
+                          <td>{{number.obtaintMark | number:'0.2'}}</td>
+                          <td>{{number.highestMark | number:'0.2'}}</td>
+                        </tr>                    
+                      </ng-container>
+                    </tbody>
+                  </table>
+                  <br class="only-for-print">
+                  <br class="only-for-print">
+                  <br class="only-for-print">
+                  <br class="only-for-print">
+                  <br class="only-for-print">
+                  <br class="only-for-print">
+                  <br class="only-for-print">
+                  <div class="only-for-print incharge-font">
+                    Officer-in-Charge
+                  </div>
+                </div>
+
+                <!-- <div id="print-routine">                  
+                  <table class="table  tbl-by-group db-li-s-in">
+                    <thead>
+                      <tr>
+                        <th class="cl-mrk"><h5>Subject Name</h5></th>
+                        <th class="cl-mrk-rmrk"><h5>Total Mark</h5></th>
+                        <th class="cl-mrk-rmrk"><h5>Pass Mark</h5></th>
+                        <th class="cl-mrk-rmrk"><h5>Obtain Mark</h5></th>
+                        <th class="cl-mrk-rmrk"><h5>Exam Status</h5></th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <ng-container>
+                        <tr *ngFor="let number of this.getMarkList;">
+                          <td>{{number.subjectName}} </td>
+                          <td>{{number.totalMark}}</td>
+                          <td>{{number.passMarkBNA}}</td>
+                          <td>{{number.obtaintMark}}</td>
+                          <td *ngIf="number.reExamStatus == 0">Regular</td>
+                          <td *ngIf="number.reExamStatus == 1">Re-Exam</td>
+                          <td *ngIf="number.reExamStatus == null"></td>
+                        </tr>                    
+                      </ng-container>
+                    </tbody>
+                  </table>
+                </div> -->
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  
+  
+  
+   
+

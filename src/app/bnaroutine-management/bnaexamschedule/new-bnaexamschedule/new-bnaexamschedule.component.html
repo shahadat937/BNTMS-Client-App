@@ -1,0 +1,184 @@
+<section class="content">
+    <div class="container-fluid">
+      <div class="block-header">
+        <div class="row">
+          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <ul class="breadcrumb breadcrumb-style ">
+              <li class="breadcrumb-item">
+                <h4 class="page-title">{{pageTitle}}</h4>
+              </li>
+              <li class="breadcrumb-item bcrumb-1">
+                <a routerLink="/admin/dashboard/main"><i class="fas fa-home"></i></a>
+              </li>
+              <li class="breadcrumb-item bcrumb-2">
+                <a href="#" onClick="return false;">BNA Exam Schedule</a>
+              </li>
+              <li class="breadcrumb-item active">{{destination}}</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="row clearfix">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+          <div class="card">
+            <div class="header">
+            </div>
+            <div class="body">
+              <form class="m-4" [formGroup]="BNAExamScheduleForm" (ngSubmit)="onSubmit()">
+                <div class="row">
+                  <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                        <mat-label>bnaSemesterDurationId</mat-label>                        
+                        <input matInput formControlName="bnaSemesterDurationId" required>
+                        <mat-error *ngIf="BNAExamScheduleForm.get('bnaSemesterDurationId').hasError('required')">
+                          bnaSemesterDurationId is Required
+                        </mat-error>
+                    </mat-form-field>
+                  </div>
+
+                  <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                      <mat-label>examDate</mat-label>
+                        <input matInput [matDatepicker]="exampicker" formControlName="examDate" required>
+                        <mat-datepicker-toggle matSuffix [for]="exampicker"></mat-datepicker-toggle>
+                        <mat-datepicker #exampicker></mat-datepicker>  
+                        <mat-error *ngIf="BNAExamScheduleForm.get('bnaSemesterDurationId').hasError('required')">
+                          examDate is Required
+                        </mat-error>                                          
+                    </mat-form-field>
+                  </div>
+                  <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                        <mat-label>BNA Subject Name</mat-label>                        
+                        <mat-select formControlName="bnaSubjectNameId" required>
+                            <mat-option *ngFor="let dropdown of selectedsubjectname" [value]="dropdown.value">
+                                {{dropdown.text}} 
+                              </mat-option>                          
+                        </mat-select>
+                        <mat-error *ngIf="BNAExamScheduleForm.get('bnaSubjectNameId').hasError('required')">
+                          BNA Subject Name is Required!
+                        </mat-error>
+                    </mat-form-field>
+                  </div>
+
+                  <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                        <mat-label>BNA Semester</mat-label>                        
+                        <mat-select formControlName="bnaSemesterId" required>
+                            <mat-option *ngFor="let dropdown of selectedsemester" [value]="dropdown.value">
+                                {{dropdown.text}} 
+                              </mat-option>                          
+                        </mat-select>
+                        <mat-error *ngIf="BNAExamScheduleForm.get('bnaSemesterId').hasError('required')">
+                          BNA Semester is Required!
+                        </mat-error>
+                    </mat-form-field>
+                  </div>
+
+
+                  <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                        <mat-label>BNA Batch</mat-label>                        
+                        <mat-select formControlName="bnaBatchId" required>
+                            <mat-option *ngFor="let dropdown of selectedbatch" [value]="dropdown.value">
+                                {{dropdown.text}} 
+                              </mat-option>                          
+                        </mat-select>
+                        <mat-error *ngIf="BNAExamScheduleForm.get('bnaBatchId').hasError('required')">
+                          BNA Batch is Required!
+                        </mat-error>
+                    </mat-form-field>
+                  </div>
+
+
+                  <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                        <mat-label>Exam Type</mat-label>                        
+                        <mat-select formControlName="examTypeId" required>
+                            <mat-option *ngFor="let dropdown of selectedexamtype" [value]="dropdown.value">
+                                {{dropdown.text}} 
+                              </mat-option>                          
+                        </mat-select>
+                        <mat-error *ngIf="BNAExamScheduleForm.get('examTypeId').hasError('required')">
+                          Exam Type is Required!
+                        </mat-error>
+                    </mat-form-field>
+                  </div>
+
+
+                  <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                      <mat-label>duration From</mat-label>
+                        <input matInput [matDatepicker]="frompicker" formControlName="durationFrom" >
+                        <mat-datepicker-toggle matSuffix [for]="frompicker"></mat-datepicker-toggle>
+                       <mat-datepicker #frompicker></mat-datepicker>                                            
+                    </mat-form-field>
+                  </div>
+
+                  <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                      <mat-label>duration To</mat-label>
+                        <input matInput [matDatepicker]="topicker" formControlName="durationTo" >
+                        <mat-datepicker-toggle matSuffix [for]="topicker"></mat-datepicker-toggle>
+                       <mat-datepicker #topicker></mat-datepicker>                                            
+                    </mat-form-field>
+                  </div>
+
+
+
+                  <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                        <mat-label>examLocation</mat-label>                        
+                        <input matInput formControlName="examLocation">                        
+                    </mat-form-field>
+                  </div>
+
+                  <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                        <mat-label>examSheduleStatus</mat-label>                        
+                        <input matInput formControlName="examSheduleStatus">                        
+                    </mat-form-field>
+                  </div>
+
+
+                 
+                  <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                        <mat-label>isApproved</mat-label>                        
+                        <input matInput formControlName="isApproved" >                        
+                    </mat-form-field>
+                  </div>                                                     
+                   
+                  <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                      <mat-label>isApprovedDate</mat-label>
+                        <input matInput [matDatepicker]="approvepicker" formControlName="isApprovedDate" >
+                        <mat-datepicker-toggle matSuffix [for]="approvepicker"></mat-datepicker-toggle>
+                       <mat-datepicker #approvepicker></mat-datepicker>                                            
+                    </mat-form-field>
+                  </div>
+                  <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                        <mat-label>approvedBy</mat-label>                        
+                        <input matInput formControlName="approvedBy" >                        
+                    </mat-form-field>
+                  </div> 
+                </div>
+
+               
+                <div class="row">
+                  <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+                    <button class="btn-space" [class.auth-spinner]="loading" [disabled]="loading" [disabled]="!BNAExamScheduleForm.valid " mat-raised-button
+                        color="primary">{{buttonText}}</button>
+                    <button type="button" mat-button routerLink="/routine-management/bnaexamschedule-list">Cancel</button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+

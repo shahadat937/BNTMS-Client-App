@@ -1,0 +1,107 @@
+<section class="content">
+    <div class="container-fluid">
+      <div class="block-header">
+        <div class="row">
+          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <ul class="breadcrumb breadcrumb-style ">
+              <li class="breadcrumb-item">
+                <h4 class="page-title">Instructor List</h4>
+              </li>
+              <li class="breadcrumb-item bcrumb-1">
+                <a routerLink="/admin/dashboard/main"><i class="fas fa-home"></i></a>
+              </li>
+              <li class="breadcrumb-item bcrumb-2">
+                <a href="#" onClick="return false;">{{destination}} List</a>
+              </li>
+              <li class="breadcrumb-item active">All</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+          <div class="card">
+            <div class="body">
+              <div class="responsive_table">
+                <div class="materialTableHeader"> 
+                  <div class="row">
+                    <div class="col-8">
+                      <ul class="header-buttons-left ml-0">
+                        <li class="dropdown">
+                          <h3>Course:- {{courseName}}</h3>
+                        </li>
+                      </ul>
+                    </div>
+                    <div class="col-4">
+                      <ul class="header-buttons">
+                        <li>
+                          <div class="icon-button-demo">
+                            <!-- <button class="btn-space"  mat-raised-button
+                            color="warn" routerLink="/admin/dashboard/school-dashboard"> 
+                            <mat-icon class="col-white">keyboard_backspace</mat-icon> Back
+                            </button> -->
+                            <button class="btn-space"  mat-raised-button
+                            color="warn" [routerLink]="['/admin/dashboard/courseinstructorlist',schoolId]"> 
+                            <mat-icon class="col-white">keyboard_backspace</mat-icon> Back
+                          </button>
+                          </div>
+                        </li>
+                       
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+                <mat-table  #table [dataSource]="InstructorByCourse" matSort class="mat-cell db-tbl stu-db ins-lst">               
+                  <ng-container matColumnDef="ser">
+                    <mat-header-cell class="ser-col" *matHeaderCellDef mat-sort-header> Ser: </mat-header-cell>
+                    <mat-cell class="ser-col" *matCellDef="let element; let i = index;"> {{ ((paging.pageIndex-1) *  paging.pageSize) + i+1}} </mat-cell>
+                  </ng-container>  
+    
+                  <ng-container matColumnDef="subject">
+                    <mat-header-cell class="sub-col" *matHeaderCellDef mat-sort-header>Subject </mat-header-cell>
+                    <mat-cell class="sub-col" *matCellDef="let element"> {{element.subjectName}} ({{element.shortName}}) </mat-cell>
+                  </ng-container>
+    
+                  <ng-container matColumnDef="name">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>Instructor </mat-header-cell>
+                    <mat-cell *matCellDef="let element" > <span *ngIf="element.name">{{element.position}}  {{element.name}} <b>(P No {{element.pno}})</b></span> </mat-cell>
+                  </ng-container>
+    
+                  <!-- <ng-container matColumnDef="actions">
+                    <mat-header-cell ngClass="custom-action local" *matHeaderCellDef class="pr-0">Subject</mat-header-cell>
+                    <mat-cell ngClass="custom-action local" *matCellDef="let row; let i=index;" class="pr-0">
+                      
+                      <button mat-icon-button class="btn-tbl-nomination" title="Subject Instructor List" [routerLink]="['/admin/dashboard/view-subjectinstructors',row.baseSchoolNameId ,row.courseDurationId, row.courseNameId]">
+                        <mat-icon aria-label="Edit" class="col-white">wc</mat-icon>
+                      </button>
+                      <button mat-icon-button color="accent" title="Course Routine List" class="btn-tbl-view" 
+                        [routerLink]="['/admin/dashboard/routinebycourse-list', row.baseSchoolNameId, row.courseNameId, row.courseDurationId]">
+                        <mat-icon aria-label="Edit" class="col-white">book</mat-icon>
+                      </button>
+                      <button mat-icon-button class="btn-tbl-nomination" title="Nomination" [routerLink]="['/admin/dashboard/traineenomination-list', row.courseDurationId]">
+                        <mat-icon aria-label="Edit" class="col-white">supervisor_account</mat-icon>
+                      </button>
+    
+                      <button mat-icon-button color="accent" title="Course Subject List" class="btn-tbl-view" 
+                      [routerLink]="['/admin/dashboard/view-subjectbymodule', row.baseSchoolNameId, row.courseNameId, row.courseModuleId]">
+                        <mat-icon aria-label="Edit" class="col-white">book</mat-icon>
+                      </button>
+                    </mat-cell>
+                  </ng-container> -->
+        
+                  <mat-header-row *matHeaderRowDef="displayedRoutineColumns"></mat-header-row>
+                  <mat-row *matRowDef="let row; columns: displayedRoutineColumns;"></mat-row>
+                </mat-table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  
+  
+  
+   
+

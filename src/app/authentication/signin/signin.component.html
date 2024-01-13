@@ -1,0 +1,158 @@
+<div class="bg-login">
+  <div class="row auth-container">
+    <div class="col-md-8 auth-form-section login-background widthc">
+   
+      <div class="login login-top-design left">
+        <div class="image logo">
+          <img src="assets/images/login/navy-logo.png" width="130" alt="" class="navy-logo" />
+        </div>
+        <div class="title login-left">
+          <h2>BN TRAINING MANAGEMENT SOFTWARE</h2>
+        </div>
+      </div>
+  
+    </div>
+  
+    <div class="col-md-4 widthd">
+      <div class="row auth-main">
+          <div class="form-section">
+    <div class="login-page">
+      <div class="auth-wrapper login">
+        <div class="login login-top-design">
+          <div class="image logo">
+            <img src="assets/images/login/navy-logo.png" width="100" alt="" class="navy-logo" />
+          </div>
+          <h3 class="directorate">DIRECTORATE OF NAVAL TRAINING</h3>
+        </div> 
+        <form class="validate-form" [formGroup]="authForm" (ngSubmit)="onSubmit()">
+          <div class="row">
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+              <mat-form-field class="example-full-width" appearance="outline">
+                <mat-label>Appoinment / P No</mat-label>
+                <input matInput formControlName="email" />
+                <mat-icon matSuffix>alternate_email</mat-icon>
+                <mat-error *ngIf="authForm.get('email').hasError('required')">
+                  Appoinment / P No is required
+                </mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xl-12col-lg-12 col-md-12 col-sm-12 mb-2">
+              <mat-form-field class="example-full-width" appearance="outline">
+                <mat-label>Password</mat-label>
+                <input matInput [type]="hide ? 'password' : 'text'" formControlName="password">
+                <a class="show-pwd-icon" href="#" onClick="return false;" matSuffix (click)="hide = !hide"
+                  [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                  <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                </a>
+                <mat-error *ngIf="authForm.get('password').hasError('required')">
+                  Password is required
+                </mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="d-flex justify-content-between align-items-center mb-2">
+            <div class="form-check">
+              <label class="form-check-label">
+                <input class="form-check-input" type="checkbox" value=""> Remember me
+                <span class="form-check-sign">
+                  <span class="check"></span>
+                </span>
+              </label>
+            </div>
+            <!-- <a class="txt1 forget-link" routerLink="/authentication/forgot-password">Forgot Password?</a> -->
+          </div>
+          <div class="container-auth-form-btn">
+            <div style="text-align:center">
+              <button mat-raised-button color="primary" [class.auth-spinner]="loading" [disabled]="loading"
+                class="auth-form-btn" [disabled]="!authForm.valid " type="submit">Log in</button>
+            </div>
+          </div>
+          <div class="container-update-info">
+            <div style="text-align:center">
+              <p>Last Update on  {{lastPublishDate | date:'mediumDate'}}</p>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+            
+          </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+<!-- <div class="auth-container">
+  <div class="row auth-main">
+ 
+    <div class="col-sm-12 auth-form-section login-background">
+      
+      <div class="form-section">
+
+        <div class="auth-wrapper login">
+          <div class="login login-top-design">
+            <div class="image logo">
+              <img src="assets/images/login/navy-logo.png" width="100" alt="" class="navy-logo" />
+            </div>
+            <div class="title">
+              <h3>BN TRAINING MANAGEMENT SYSTEM</h3>
+            </div>           
+          </div>
+          
+          <form class="validate-form" [formGroup]="authForm" (ngSubmit)="onSubmit()">
+            <div class="row">
+              <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+                <mat-form-field class="example-full-width" appearance="outline">
+                  <mat-label>Appoinment / P No</mat-label>
+                  <input matInput formControlName="email" />
+                  <mat-icon matSuffix>alternate_email</mat-icon>
+                  <mat-error *ngIf="authForm.get('email').hasError('required')">
+                    Appoinment / P No is required
+                  </mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-xl-12col-lg-12 col-md-12 col-sm-12 mb-2">
+                <mat-form-field class="example-full-width" appearance="outline">
+                  <mat-label>Password</mat-label>
+                  <input matInput [type]="hide ? 'password' : 'text'" formControlName="password">
+                  <a class="show-pwd-icon" href="#" onClick="return false;" matSuffix (click)="hide = !hide"
+                    [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                    <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                  </a>
+                  <mat-error *ngIf="authForm.get('password').hasError('required')">
+                    Password is required
+                  </mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="d-flex justify-content-between align-items-center mb-2">
+              <div class="form-check">
+                <label class="form-check-label">
+                  <input class="form-check-input" type="checkbox" value=""> Remember me
+                  <span class="form-check-sign">
+                    <span class="check"></span>
+                  </span>
+                </label>
+              </div>
+              <a class="txt1 forget-link" routerLink="/authentication/forgot-password">Forgot Password?</a>
+            </div>
+            <div class="container-auth-form-btn">
+              <div style="text-align:center">
+                <button mat-raised-button color="primary" [class.auth-spinner]="loading" [disabled]="loading"
+                  class="auth-form-btn" [disabled]="!authForm.valid " type="submit">Log in</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div> -->

@@ -1,0 +1,104 @@
+<section class="content">
+  <div class="container-fluid">
+    <div class="block-header">
+      <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <ul class="breadcrumb breadcrumb-style ">
+            <li class="breadcrumb-item">
+              <h4 class="page-title">{{pageTitle}}</h4>
+            </li>
+            <li class="breadcrumb-item bcrumb-1">
+              <a routerLink="/admin/dashboard/main"><i class="fas fa-home"></i></a>
+            </li>
+            <li class="breadcrumb-item bcrumb-2">
+              <a href="#" onClick="return false;">Course Section</a>
+            </li>
+            <li class="breadcrumb-item active">{{destination}}</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="row clearfix">
+      <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+        <div class="card">
+          <div class="header">
+          </div>
+          <div class="body">
+            <form class="m-4" [formGroup]="AttendanceForm" (ngSubmit)="onSubmit()">
+              <div class="row">
+                </div>
+                   <!-- Basic Table -->
+                   <div class="row clearfix">
+                    <!-- <h3 class="text-center table-title">Trainee List</h3> -->
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 p-0 ex-mrk-entry-li">
+                      <div class="card">
+                        
+                        <div class="body table-responsive">
+                          <table class="table ex-mrk-entry">
+                            <thead>
+                              <tr>
+                                <th class="cl-srl"><h5>Ser</h5></th>
+                                <th class="cl-nm-rnk"><h5>PNo/ONo</h5></th>
+                                <th class="cl-nm-rnk"><h5>Name </h5></th>
+                                <th class="cl-nm-rnk"><h5>Rank</h5></th>
+                                <th class="cl-mrk"><h5>Course Section</h5></th>
+                                <th class="cl-mrk"><h5>Certificate Serial No</h5></th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr *ngFor="let unit of AttendanceForm.get('traineeListForm')['controls']; let i = index" [formGroup]="unit">
+                                <th class="cl-srl" scope="row">{{i+1}}</th>
+  
+                                <!-- <td  class="cl-nm-rnk"> 
+                                  {{getControlLabel(i,'saylorRank')}}{{getControlLabel(i,'rankPosition')}} - {{getControlLabel(i,'traineeName')}} -  <span class="t-n-pno-d">(P No {{getControlLabel(i,'traineePNo')}})</span>
+                                </td> -->
+                                <td  class="cl-nm-rnk"> 
+                                 {{getControlLabel(i,'traineePNo')}}
+                                </td>
+                                <td  class="cl-nm-rnk"> 
+                                 {{getControlLabel(i,'traineeName')}} 
+                                </td>
+                                <td  class="cl-nm-rnk"> 
+                                  {{getControlLabel(i,'saylorRank')}}{{getControlLabel(i,'rankPosition')}} 
+                                </td>
+                                
+                                <td class="cl-mrk">
+                                  <mat-form-field class="example-full-width mb-3" appearance="outline">
+                                    <mat-select formControlName="courseSectionId">
+                                      <mat-option  value="">--Select--</mat-option >
+                                      <mat-option *ngFor="let dropdown of courseSectionList" [value]="dropdown.value">
+                                        {{dropdown.text}} 
+                                      </mat-option>                          
+                                    </mat-select>
+                                  </mat-form-field>
+                                </td>
+                                <td class="cl-mrk">
+                                  <mat-form-field class="example-full-width mb-3" appearance="outline">
+                                    <input matInput formControlName="certificateSerialNo" >                                              
+                                  </mat-form-field>
+                                </td>
+                                
+                              </tr>
+                              
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- #END# Basic Table -->
+
+                  <div class="row mt-2">
+                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+                      <button class="btn-space" [class.auth-spinner]="loading" [disabled]="loading" [disabled]="!AttendanceForm.valid " mat-raised-button
+                          color="primary">{{buttonText}}</button>
+                      <!-- <button type="button" mat-button routerLink="/exam-management/bnaexammark-list">Cancel</button> -->
+                    </div>
+                  </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

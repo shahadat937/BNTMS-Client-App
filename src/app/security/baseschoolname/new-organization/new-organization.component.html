@@ -1,0 +1,175 @@
+<section class="content">
+    <div class="container-fluid">
+      <div class="block-header">
+        <div class="row">
+          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <ul class="breadcrumb breadcrumb-style ">
+              <li class="breadcrumb-item">
+                <h4 class="page-title">{{pageTitle}}</h4>
+              </li>
+              <li class="breadcrumb-item bcrumb-1">
+                <a routerLink="/admin/dashboard/main"><i class="fas fa-home"></i></a>
+              </li>
+              <li class="breadcrumb-item bcrumb-2">
+                <a href="#" onClick="return false;">Organization</a>
+              </li>
+              <li class="breadcrumb-item active">{{destination}}</li>
+            </ul>
+          </div> 
+        </div>
+      </div>
+      <div class="row clearfix">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+          <div class="card">
+            <!--<div class="header">
+              <h2>{{destination}} Blood Group</h2>
+  
+            </div>-->
+            <div class="body">
+              <form class="m-4" [formGroup]="OrganizationForm" (ngSubmit)="onSubmit()">
+                <div class="row">
+                  
+                  <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                      <mat-label>Organization Name</mat-label>
+                      <input matInput formControlName="schoolName" required>
+                      <mat-error *ngIf="OrganizationForm.get('schoolName').hasError('required')">
+                        Organization Name is required
+                      </mat-error>
+                    </mat-form-field>
+                  </div>
+                  <div class="col-xl-3 col-lg-3 col-md-6  col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                      <mat-label>Organization Shortname</mat-label>
+                      <input matInput formControlName="shortName" required>
+                      <mat-error *ngIf="OrganizationForm.get('shortName').hasError('required')">
+                        Organization Shortname is required
+                      </mat-error>
+                    </mat-form-field>
+                  </div>
+
+                  <div class="col-xl-3 col-lg-3 col-md-6  col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                      <mat-label>Contact Person</mat-label>
+                      <input matInput formControlName="contactPerson">                      
+                    </mat-form-field>
+                  </div>
+
+                  <div class="col-xl-3 col-lg-3 col-md-6  col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                      <mat-label>Address</mat-label>
+                      <input matInput formControlName="address">                      
+                    </mat-form-field>
+                  </div>
+
+                  <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12 mb-2">
+                    <div class="custom-file">
+                      <input type="file" class="custom-file-input" id="customFile"
+                             (change)="onFileChanged($event)" accept=".jpg,.png,.gif">
+                    </div>
+                  </div>
+                 
+
+                  <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                      <mat-label>Telephone</mat-label>
+                      <input matInput formControlName="telephone">                      
+                    </mat-form-field>
+                  </div>
+
+                  <div class="col-xl-3 col-lg-3 col-md-6  col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                      <mat-label>Cellphone</mat-label>
+                      <input matInput formControlName="cellphone">                      
+                    </mat-form-field>
+                  </div>
+
+                  
+
+                  <div class="col-xl-3 col-lg-3 col-md-6  col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                      <mat-label>Email</mat-label>
+                      <input matInput formControlName="email">                      
+                    </mat-form-field>
+                  </div>
+
+                  <div class="col-xl-3 col-lg-3 col-md-6  col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                      <mat-label>Fax</mat-label>
+                      <input matInput formControlName="fax">                      
+                    </mat-form-field>
+                  </div>
+                  
+                </div>
+            
+            
+               
+                <div class="row">
+                  <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+                    <button class="btn-space" [class.auth-spinner]="loading" [disabled]="loading" [disabled]="!OrganizationForm.valid " mat-raised-button
+                      color="primary">{{btnText}}</button>
+                    <!-- <button type="button" mat-button routerLink="/basic-setup/baseschoolname-list">Cancel</button> -->
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+          <div class="card m-t-10">
+            <div class="row">
+              <div class="col-xl-12 col-lg-12 col-md-12 list-title">
+                <h3 class="align-center m-0">Organization List</h3>
+              </div>
+            </div>
+            <div class="body">
+              <mat-table #table [dataSource]="organizationList" matSort class="mat-cell">
+                <ng-container matColumnDef="ser">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header> Ser. </mat-header-cell>
+                  <mat-cell *matCellDef="let element; let i = index;"> {{ ((paging.pageIndex-1) *  paging.pageSize) + i+1}} </mat-cell>
+                </ng-container>       
+                
+               
+                <ng-container matColumnDef="schoolName">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header> Organization Name </mat-header-cell>
+                  <mat-cell *matCellDef="let element"> {{element.schoolName}} </mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="shortName">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header> Short Name </mat-header-cell>
+                  <mat-cell *matCellDef="let element"> {{element.shortName}} </mat-cell>
+                </ng-container>
+                
+                <ng-container matColumnDef="schoolLogo">
+                  <mat-header-cell mat-header-cell *matHeaderCellDef [ngClass]="'tbl-col-width-per-6'"> Logo
+                  </mat-header-cell>
+                  <mat-cell mat-cell *matCellDef="let element" class="table-img tbl-col-width-per-6 img-on-hover"> 
+                    <img  [src]="element.schoolLogo" />
+                    <div class="pop-on-hover">
+                      <img [src]="element.schoolLogo" />
+                    </div>
+                  </mat-cell>
+                </ng-container>
+               
+                <ng-container matColumnDef="actions">
+                  <mat-header-cell *matHeaderCellDef class="pr-0">Actions</mat-header-cell>
+                  <mat-cell *matCellDef="let row; let i=index;" class="pr-0">
+                    <button mat-icon-button color="accent" class="btn-tbl-edit" 
+                    [routerLink]="['/security/update-organization', row.baseSchoolNameId]">
+                      <mat-icon aria-label="Edit" class="col-white">edit</mat-icon>
+                    </button>
+                    <button mat-icon-button color="accent" class="btn-tbl-delete" (click)="$event.stopPropagation()"
+                      (click)="deleteItem(row)">
+                      <mat-icon aria-label="Delete" class="col-white">delete</mat-icon> 
+                    </button>
+                  </mat-cell>
+                </ng-container>
+              
+              
+                <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+              </mat-table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  

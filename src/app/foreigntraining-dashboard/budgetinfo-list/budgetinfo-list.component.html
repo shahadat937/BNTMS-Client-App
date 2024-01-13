@@ -1,0 +1,127 @@
+<section class="content">
+    <div class="container-fluid">
+      <div class="block-header">
+        <div class="row">
+          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <ul class="breadcrumb breadcrumb-style ">
+              <li class="breadcrumb-item">
+                <h4 class="page-title">{{pageTitle}}</h4>
+              </li>
+              <li class="breadcrumb-item bcrumb-1">
+                <a routerLink="/admin/dashboard/main"><i class="fas fa-home"></i></a>
+              </li>
+              <li class="breadcrumb-item bcrumb-2">
+                <a href="#" onClick="return false;">Budget Information List</a>
+              </li>
+              <li class="breadcrumb-item active">{{destination}}</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="row clearfix">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+          <div class="card">
+            <div class="header">
+            </div>
+            <div class="body">
+                <div class="row">
+                  
+                  <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+                    <div class="row right-row">
+                      <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+                        <div class="row">
+                          <div  class="container col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2 mt-2 sticky-table ex-mrk-li">
+                            <div class="materialTableHeader"> 
+                              <div class="row">
+                                <div class="col-8">
+                                  <ul class="header-buttons-left ml-0">
+                                    <li class="dropdown">
+                                    </li>
+                                    <!-- <li class="dropdown">
+                                      <input placeholder="Search" type="text" [(ngModel)]="searchText"  #filter class="browser-default search-field"
+                                      aria-label="Search box">
+                                    </li>
+                                    <li> 
+                                      <div class="icon-button-demo m-l-10">
+                                        <button mat-mini-fab color="accent" (click)="applyFilter(searchText)">
+                                          <mat-icon class="col-white">search</mat-icon>
+                                        </button>
+                                      </div>
+                                      
+                                      
+                                    </li> -->
+                                  </ul>
+                                </div>
+                                <div class="col-4">
+                                  <ul class="header-buttons">
+                                    <li>
+                                      <div class="icon-button-demo"> 
+                                        <button *ngIf="role == userRole.Director" class="btn-space"  mat-raised-button
+                                          color="warn" [routerLink]="['/admin/dashboard/main']"> 
+                                          <mat-icon class="col-white">keyboard_backspace</mat-icon> Back
+                                        </button>                           
+                                        <button *ngIf="role === 'Foreign Training'" class="btn-space"  mat-raised-button
+                                          color="warn" [routerLink]="['/admin/dashboard/foreigntraining-dashboard']"> 
+                                          <mat-icon class="col-white">keyboard_backspace</mat-icon> Back
+                                        </button>
+                                        <button *ngIf="role === 'Master Admin'" class="btn-space"  mat-raised-button
+                                          color="warn" [routerLink]="['/admin/dashboard/main']"> 
+                                          <mat-icon class="col-white">keyboard_backspace</mat-icon> Back
+                                        </button>
+                            
+                                        <button *ngIf="role == (userRole.InterSeeviceCourse || userRole.InterSeeviceDesk)" class="btn-space"  mat-raised-button
+                                          color="warn" routerLink="/admin/dashboard/interservice-dashboard"> 
+                                          <mat-icon class="col-white">keyboard_backspace</mat-icon> Back
+                                        </button>
+                                        
+                                      </div>
+                                    </li>
+                                   
+                                  </ul>
+                                </div>
+                              </div>
+                            </div>
+                            <mat-table  #table [dataSource]="budgetCodes" matSort class="mat-cell ex-mrk-lft-tbl tbl-bgt-info">  
+                              
+                              <ng-container matColumnDef="sl">
+                                <mat-header-cell *matHeaderCellDef mat-sort-header> Ser. </mat-header-cell>
+                                <mat-cell *matCellDef="let element; let i = index;"> {{ ((paging.pageIndex-1) *  paging.pageSize) + i+1}} </mat-cell>
+                              </ng-container>
+
+                              <ng-container matColumnDef="budgetCodes">
+                                <mat-header-cell *matHeaderCellDef mat-sort-header>Budget Code & Name</mat-header-cell>
+                                <mat-cell *matCellDef="let element">{{element.budgetCodes}} - {{element.name}} 
+                              </mat-cell>
+                              </ng-container>
+                              
+
+
+                              <ng-container matColumnDef="availableAmount">
+                                <mat-header-cell class="col-amount" *matHeaderCellDef mat-sort-header>Available Amount</mat-header-cell>
+                                <mat-cell class="col-amount" *matCellDef="let element">{{element.availableAmount}}
+                              </mat-cell>
+                              </ng-container>
+
+                              <ng-container matColumnDef="targetAmount">
+                                <mat-header-cell class="col-tamount" *matHeaderCellDef mat-sort-header>Installment/Due Remittance Date</mat-header-cell>
+                                <mat-cell style="text-align: center;" class="col-tamount" *matCellDef="let element">{{element.targetAmount}}
+                                </mat-cell>
+                              </ng-container>
+
+                              <mat-header-row *matHeaderRowDef="displayedColumnsBudgetCode"></mat-header-row>
+                              <mat-row *matRowDef="let row; columns: displayedColumnsBudgetCode;"></mat-row>
+                            </mat-table>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>            
+                </div> 
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+

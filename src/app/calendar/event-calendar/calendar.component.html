@@ -1,0 +1,74 @@
+<section class="content">
+  <div class="container-fluid">
+    <div class="block-header">
+      <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <ul class="breadcrumb breadcrumb-style ">
+            <li class="breadcrumb-item">
+              <h4 class="page-title">Calendar</h4>
+            </li>
+            <li class="breadcrumb-item bcrumb-1">
+              <a href="#" onClick="return false;">
+                <i class="fas fa-home"></i> </a>
+            </li>
+            <li class="breadcrumb-item active">Calendar</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12 col-sm-12">
+        <div class="card">
+          <div class="card-body">
+            <div class="row event-calendar">
+              <div class="col-xl-2 col-md-2 col-sm-12 p-l-30">
+                <div class="m-b-25">
+                  <button *ngIf="role === 'Master Admin'" class="btn-space"  mat-raised-button
+                    color="warn" [routerLink]="['/admin/dashboard/main']"> 
+                    <mat-icon class="col-white">keyboard_backspace</mat-icon> Back
+                  </button>
+                  <button *ngIf="role === 'Inter Seevice Course'" class="btn-space"  mat-raised-button
+                    color="warn" [routerLink]="['/admin/dashboard/interservice-dashboard']"> 
+                    <mat-icon class="col-white">keyboard_backspace</mat-icon> Back
+                  </button>
+                  <button *ngIf="role === 'Foreign Training'" class="btn-space"  mat-raised-button
+                    color="warn" [routerLink]="['/admin/dashboard/foreigntraining-dashboard']"> 
+                    <mat-icon class="col-white">keyboard_backspace</mat-icon> Back
+                  </button>
+                </div>
+                <!-- <p>My Calendars</p>
+                <div class="filter-container">
+                  <ul>
+                    <li *ngFor="let filter of filters">
+                      <mat-checkbox [checked]="filter.checked" [value]="filter.value" color="primary"
+                        (change)="changeCategory($event, filter)">
+                        {{filter.value}}
+                      </mat-checkbox>
+                    </li>
+                  </ul>
+                </div> -->
+              </div>
+              <div class="col-xl-10 col-md-10 col-sm-12 p-l-30">
+                <div class="m-b-25">
+                  <span class="right-float">
+                    <span  class="fc-event-color color1 spn">Local</span>
+                    <span  class="fc-event-color color2 spn">Foreign</span>
+                    <span  class="fc-event-color color3 spn">Inter Service</span>
+                    <span  class="fc-event-color color4 spn">Central Exam</span>
+                    <span  class="fc-event-color color5 spn">MIST</span>
+                  </span>
+                </div>
+              </div>
+              <div class="col-xl-12 col-md-12 col-sm-12 ">
+                <div class="panel-body">
+                  <full-calendar [options]='calendarOptions'>
+                  </full-calendar> 
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

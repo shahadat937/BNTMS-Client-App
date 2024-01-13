@@ -1,0 +1,208 @@
+<section class="content">
+    <div class="container-fluid">
+      <div class="block-header">
+        <div class="row">
+          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <ul class="breadcrumb breadcrumb-style ">
+              <li class="breadcrumb-item">
+                <h4 class="page-title">{{pageTitle}}</h4>
+              </li>
+              <li class="breadcrumb-item bcrumb-1">
+                <a routerLink="/admin/dashboard/main"><i class="fas fa-home"></i></a>
+              </li>
+              <li class="breadcrumb-item bcrumb-2">
+                <a href="#" onClick="return false;"> Exam Instructor Assign</a>
+              </li>
+              <li class="breadcrumb-item active">{{destination}}</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="row clearfix">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+          <div class="card">
+            <div class="header">
+            </div>
+            <div class="body">
+              <form class="form-border-design" [formGroup]="BNAExamInstructorAssignForm" (ngSubmit)="onSubmit()">
+                <div class="row">
+                  
+
+                  <div *ngIf="role != 'Super Admin'" class="col-xl-3 col-lg-3 col-md-3 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                        <mat-label>School</mat-label>
+                        <mat-select formControlName="baseSchoolNameId" required (selectionChange)="getselectedcoursedurationbyschoolname()">
+                          <mat-option  value="0">--Select--</mat-option >
+                            <mat-option *ngFor="let school of selectedschool" [value]="school.value">
+                                {{school.text}} 
+                              </mat-option>                          
+                        </mat-select>
+                        <mat-error *ngIf="BNAExamInstructorAssignForm.get('baseSchoolNameId').hasError('required')">
+                            Select Any School
+                        </mat-error>
+                    </mat-form-field>
+                  </div>
+
+                   <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                        <mat-label>Course Title</mat-label>                        
+                        <mat-select formControlName="courseName">
+                          <mat-option  value="0">--Select--</mat-option >
+                            <mat-option *ngFor="let dropdown of selectedcoursedurationbyschoolname" [value]="dropdown" (onSelectionChange)="onBaseNameSelectionChangeGetModule(dropdown)">
+                                {{dropdown.text}}  
+                              </mat-option>                          
+                        </mat-select>
+                        <mat-error *ngIf="BNAExamInstructorAssignForm.get('courseName').hasError('required')">
+                          Course Title is Required!
+                        </mat-error>
+                    </mat-form-field>
+                  </div>
+                  
+
+                  <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                        <mat-label>Module </mat-label>
+                        <mat-select formControlName="courseModuleId" required (selectionChange)="getselectedbnasubjectname()">
+                          <mat-option  value="0">--Select--</mat-option >
+                            <mat-option *ngFor="let semester of selectedCourseModuleByBaseSchoolAndCourseNameId" [value]="semester.value">
+                                {{semester.text}} 
+                              </mat-option>                          
+                        </mat-select>
+                        <mat-error *ngIf="BNAExamInstructorAssignForm.get('courseModuleId').hasError('required')">
+                            Select Any  Module / Semester
+                        </mat-error>
+                    </mat-form-field>
+                   </div>
+
+                   
+
+                 
+                  <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                        <mat-label> Subject Name</mat-label>    
+                        <mat-select formControlName="bnaSubjectNameId" (selectionChange)="getselectedclassroutine()">
+                          <mat-option  [value]="0">--Select--</mat-option >
+                            <mat-option  *ngFor="let dropdown of selectedsubjectname" [value]="dropdown.value">
+                                {{dropdown.text}} 
+                              </mat-option>                          
+                        </mat-select>
+                    </mat-form-field>
+                  </div>                  
+
+                  <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                        <mat-label> Routine</mat-label>    
+                        <mat-select formControlName="classRoutineId">
+                          <mat-option  [value]="0">--Select--</mat-option >
+                            <mat-option *ngFor="let dropdown of selectedclassroutine" [value]="dropdown.value">
+                                {{dropdown.text | date:'mediumDate'}} 
+                              </mat-option>                          
+                        </mat-select>
+                    </mat-form-field>
+                  </div>
+
+
+                  <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                        <mat-label> Examiner Type</mat-label>    
+                        <mat-select formControlName="bnaInstructorTypeId">
+                          <mat-option  [value]="0">--Select--</mat-option >
+                            <mat-option *ngFor="let dropdown of selectedinstructor" [value]="dropdown.value">
+                                {{dropdown.text}} 
+                              </mat-option>                          
+                        </mat-select>
+                    </mat-form-field>
+                  </div>
+
+                  <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                      <mat-label>Examiner</mat-label>                        
+                      <input formControlName="traineeName" matInput type="text" [matAutocomplete]="auto" required/>
+                      <mat-autocomplete #auto="matAutocomplete" >
+                        <mat-option *ngFor="let item of filteredOptions" [value]="item" (onSelectionChange)="onTraineeSelectionChanged(item)">
+                          {{item.text}}
+                        </mat-option>
+                      </mat-autocomplete>
+                      <mat-error *ngIf="BNAExamInstructorAssignForm.get('traineeName').hasError('required')">
+                        Select Examiner
+                    </mat-error>
+                    </mat-form-field>
+                  </div>
+
+                  <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                        <mat-label>Exam Location</mat-label>    
+                        <input matInput formControlName="examLocation">
+                    </mat-form-field>
+                  </div>
+                  
+                </div> 
+
+               
+                <div class="row">
+                  <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+                    <button class="btn-space" [class.auth-spinner]="loading" [disabled]="loading" [disabled]="!BNAExamInstructorAssignForm.valid " mat-raised-button
+                        color="primary">{{buttonText}}</button>
+                  </div>
+                </div>
+              </form>
+
+              <div  *ngIf="isShown"  class="row create-table ex-i-asgn">
+                  <h3 class="text-center table-title">EXAMINER LIST</h3>
+                  
+                  <div class="container">
+                    <mat-table #table [dataSource]="selectedInstructorList" matSort class="mat-cell db-tbl">               
+                      <ng-container matColumnDef="ser">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header> Ser: </mat-header-cell>
+                        <mat-cell *matCellDef="let element; let i = index;"> {{ ((paging.pageIndex-1) *  paging.pageSize) + i+1}} </mat-cell>
+                        </ng-container>    
+                         
+                      
+                        <ng-container matColumnDef="classRoutine">
+                          <mat-header-cell class="ex-date" *matHeaderCellDef mat-sort-header>Exam Date</mat-header-cell>
+                          <mat-cell class="ex-date"  *matCellDef="let element"> {{element.classRoutine | date:'mediumDate'}} </mat-cell>
+                        </ng-container>
+        
+                        <ng-container matColumnDef="bnaInstructorType">
+                          <mat-header-cell class="ex-type" *matHeaderCellDef mat-sort-header>Examiner Type</mat-header-cell>
+                          <mat-cell class="ex-type" *matCellDef="let element"> {{element.bnaInstructorType}} </mat-cell>
+                        </ng-container>
+        
+                        <ng-container matColumnDef="trainee">
+                          <mat-header-cell class="ex-name" *matHeaderCellDef mat-sort-header>Examiner</mat-header-cell>
+                          
+                          <mat-cell class="ex-name" *matCellDef="let element"> {{element.traineeRank}} {{element.trainee}}  <span class="t-n-pno-d">(P No {{element.traineePno}})</span> </mat-cell>
+                        </ng-container>
+        
+                        <ng-container matColumnDef="examLocation">
+                          <mat-header-cell *matHeaderCellDef mat-sort-header>Exam Location</mat-header-cell>
+                          <mat-cell *matCellDef="let element"> {{element.examLocation}} </mat-cell>
+                        </ng-container>
+                      
+                      <ng-container matColumnDef="actions">
+                        <mat-header-cell *matHeaderCellDef class="pr-0">Actions</mat-header-cell>
+                        <mat-cell *matCellDef="let row; let i=index;" class="pr-0">
+                          <button mat-icon-button color="accent" class="btn-tbl-edit" 
+                            [routerLink]="['/exam-management/update-bnaexaminstructorassign', row.bnaExamInstructorAssignId]">
+                            <mat-icon aria-label="Edit" class="col-white">edit</mat-icon>
+                          </button>
+                          <button mat-icon-button color="accent" class="btn-tbl-delete" (click)="$event.stopPropagation()"
+                            (click)="deleteItem(row)">
+                            <mat-icon aria-label="Delete" class="col-white">delete</mat-icon> 
+                          </button>
+                        </mat-cell>
+                      </ng-container>
+    
+                      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+                    </mat-table>
+                  </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+

@@ -1,0 +1,106 @@
+<section class="content">
+    <div class="container-fluid">
+      <div class="block-header">
+        <div class="row">
+          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <ul class="breadcrumb breadcrumb-style ">
+              <li class="breadcrumb-item">
+                <h4 class="page-title">{{pageTitle}}</h4>
+              </li>
+              <li class="breadcrumb-item bcrumb-1">
+                <a routerLink="/admin/dashboard/main">
+                  <i class="fas fa-home"></i> </a>
+              </li>
+              <li class="breadcrumb-item bcrumb-2">
+                <a href="#" onClick="return false;">Document</a>
+              </li>
+              <li class="breadcrumb-item active">{{destination}}</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="row clearfix">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+          <div class="card">
+            
+            <div class="body">
+              <form class="m-4" [formGroup]="DocumentForm" (ngSubmit)="onSubmit()">
+                <div class="row">
+                  <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2 family-info">
+                    <div class="row ">
+
+                      <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12 mb-2">
+                        <mat-form-field class="example-full-width mb-3" appearance="outline">
+                            <mat-label>Course Name</mat-label>                        
+                            <mat-select formControlName="courseDurations"  required >
+                              <mat-option value="0">--Select--</mat-option>
+                                <mat-option (onSelectionChange)="onCourseSelectionChangeGetCourseModule($event)" *ngFor="let dropdown of selectedCourseName" [value]="dropdown.value">
+                                    {{dropdown.text}} 
+                                  </mat-option>                          
+                            </mat-select>
+                            <mat-error *ngIf="DocumentForm.get('courseDurations').hasError('required')">
+                              Course Name is Required!
+                            </mat-error>
+                        </mat-form-field>
+                      </div>  
+
+                      <!-- <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12 mb-2">
+                        <mat-form-field class="example-full-width mb-3" appearance="outline">
+                            <mat-label>Trainee</mat-label>                        
+                            <mat-select formControlName="traineeId" required>
+                              <mat-option  value="0">--Select--</mat-option >
+                                <mat-option (onSelectionChange)="onTraineeSelectionChangeGetList($event)"  *ngFor="let dropdown of selectedTrainee" [value]="dropdown.value">
+                                    {{dropdown.text}} 
+                                  </mat-option>                          
+                            </mat-select>
+                        </mat-form-field>
+                      </div> -->
+
+                      <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12 mb-2">
+                        <mat-form-field class="example-full-width mb-3" appearance="outline">
+                            <mat-label>Doc Type</mat-label>                        
+                            <mat-select formControlName="interServiceCourseDocTypeId" >
+                              <mat-option  value="0">--Select--</mat-option >
+                                <mat-option  *ngFor="let dropdown of selectedDocType" [value]="dropdown.value">
+                                    {{dropdown.text}} 
+                                  </mat-option>                          
+                            </mat-select>
+                        </mat-form-field>
+                      </div>
+                      <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12 mb-2">
+                        <mat-form-field class="example-full-width mb-3" appearance="outline">
+                            <mat-label>File Upload(Browse)</mat-label> 
+                            <ngx-mat-file-input (change)="onFileChanged($event)" accept=".txt,.pdf,.xls,.xlsx,.doc,.docx,.ppt,.pptx">
+                            </ngx-mat-file-input>
+                            <mat-icon matSuffix>attachment</mat-icon>
+                        </mat-form-field>
+                      </div> 
+
+                      <!-- <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 mb-2">
+                        <mat-form-field class="example-full-width mb-3" appearance="outline">
+                          <mat-label>Doc Type</mat-label>
+                          <input matInput formControlName="foreignCourseDocTypeId" required>
+                          <mat-error *ngIf="ForeignCourseOtherDocumentForm.get('foreignCourseDocTypeId').hasError('required')">
+                            Doc Type is required
+                          </mat-error>
+                        </mat-form-field>
+                      </div> -->
+                </div>
+              </div>
+                  
+                </div>
+                <div class="row">
+                  <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+                    <button class="btn-space" [class.auth-spinner]="loading" [disabled]="loading" [disabled]="!DocumentForm.valid " mat-raised-button
+                      color="primary">{{buttonText}}</button>
+                    <button type="button" mat-button routerLink="/inter-service/document-list">Cancel</button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  

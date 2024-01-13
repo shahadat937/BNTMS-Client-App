@@ -1,0 +1,187 @@
+<section class="content">
+    <div class="container-fluid">
+      <div class="block-header">
+        <div class="row">
+          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <ul class="breadcrumb breadcrumb-style ">
+              <li class="breadcrumb-item">
+                <h4 class="page-title">{{pageTitle}}</h4>
+              </li>
+              <li class="breadcrumb-item bcrumb-1">
+                <a routerLink="/admin/dashboard/main"><i class="fas fa-home"></i></a>
+              </li>
+              <li class="breadcrumb-item bcrumb-2">
+                <a href="#" onClick="return false;">Subject Mark</a>
+              </li>
+              <li class="breadcrumb-item active">{{destination}}</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="row clearfix">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+          <div class="card">
+            <!--<div class="header">
+              <h2>{{destination}} Blood Group</h2>
+  
+            </div>-->
+            <div class="body">
+              <form class="m-t-10 m-l-10 m-r-10 m-b-0" [formGroup]="SubjectMarkForm" (ngSubmit)="onSubmit()">
+                <div class="row">
+                  
+                  <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2 multi-box first-box">
+                    <div class="row">
+                      <div *ngIf="role != 'Super Admin'"  class="col-xl-3 col-lg-3 col-md-6 col-sm-6 mb-2">
+                        <mat-form-field class="example-full-width mb-3" appearance="outline">
+                          <mat-label>School</mat-label>
+                          <mat-select formControlName="baseSchoolNameId" required>
+                            <mat-option  value="0">--Select--</mat-option >
+                            <mat-option *ngFor="let school of selectedSchoolName" [value]="school.value">
+                              {{school.text}} 
+                            </mat-option>                          
+                          </mat-select>
+                          <mat-error *ngIf="SubjectMarkForm.get('baseSchoolNameId').hasError('required')">
+                            Select Any School
+                          </mat-error>
+                        </mat-form-field>
+                      </div>
+                      <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 mb-2">
+                        <mat-form-field class="example-full-width mb-3" appearance="outline">
+                          <mat-label>Course</mat-label>                        
+                          <input formControlName="course" matInput type="text" [matAutocomplete]="auto" required />
+                          <mat-autocomplete #auto="matAutocomplete" >
+                            <mat-option  value="0">--Select--</mat-option >
+                            <mat-option *ngFor="let item of filteredOptions" [value]="item" (onSelectionChange)="onCourseSelectionChanged(item)">
+                              {{item.text}}
+                            </mat-option>
+                          </mat-autocomplete>
+                          <mat-error *ngIf="SubjectMarkForm.get('course').hasError('required')">
+                            Select Any Course
+                          </mat-error>
+                      </mat-form-field>
+                      </div>
+                      <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6 mb-2">
+                        <mat-form-field class="example-full-width mb-3" appearance="outline">
+                          <mat-label>Semester</mat-label>
+                          <mat-select formControlName="courseModuleId" required (selectionChange)="getselectedbnasubjectname()">
+                            <mat-option  value="0">--Select--</mat-option >
+                              <mat-option *ngFor="let semester of selectedCourseModuleByBaseSchoolAndCourseNameId" [value]="semester.value">
+                                  {{semester.text}} 
+                                </mat-option>                          
+                          </mat-select>
+                          <mat-error *ngIf="SubjectMarkForm.get('courseModuleId').hasError('required')">
+                              Select Any Semester
+                          </mat-error>
+                      </mat-form-field>
+                      </div>
+                      <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6 mb-2">
+                        <mat-form-field class="example-full-width mb-3" appearance="outline">
+                          <mat-label> Subject Name</mat-label>    
+                          <mat-select formControlName="bnaSubjectNameId" (selectionChange)="onsubjectSelectionChangeGetsubjectMarkList()">
+                            <mat-option  value="0">--Select--</mat-option >
+                              <mat-option *ngFor="let dropdown of selectedsubjectname" [value]="dropdown.value">
+                                  {{dropdown.text}} 
+                                </mat-option>                          
+                          </mat-select>
+                        </mat-form-field>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2 multi-box">
+                    <div class="row">
+                      <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6 mb-2">
+                        <mat-form-field class="example-full-width mb-3" appearance="outline">
+                            <mat-label>Mark Type</mat-label>
+                            <mat-select formControlName="markTypeId" required>
+                              <mat-option  value="0">--Select--</mat-option > 
+                              <mat-option *ngFor="let marktype of selectedmarktype" [value]="marktype.value">
+                                    {{marktype.text}} 
+                                  </mat-option>                          
+                            </mat-select>
+                            <mat-error *ngIf="SubjectMarkForm.get('markTypeId').hasError('required')">
+                                Select Any Mark Type
+                            </mat-error>
+                        </mat-form-field>
+                      </div>
+                      <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6 mb-2">
+                        <mat-form-field class="example-full-width mb-3" appearance="outline">
+                          <mat-label>Total Mark</mat-label>
+                          <input matInput formControlName="mark">
+                        </mat-form-field>
+                      </div>
+                      <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6 mb-2">
+                        <mat-form-field class="example-full-width mb-3" appearance="outline">
+                          <mat-label>Pass Mark</mat-label>
+                          <input matInput formControlName="passMark">
+                        </mat-form-field>
+                      </div>
+                      
+                      <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6 mb-2 p-t-10 p-l-10">
+                        <button class="btn-space "  mat-raised-button
+                      color="primary">Add New</button>
+                      </div>
+                    </div>
+                  </div>
+                  
+                </div>
+            
+            
+               
+                <div class="row">
+                  <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+                    <button class="btn-space" [class.auth-spinner]="loading" [disabled]="loading" [disabled]="!SubjectMarkForm.valid " mat-raised-button
+                      color="primary">{{btnText}}</button>
+                    <!-- <button type="button" mat-button routerLink="/bna-subject-management/subjectmark-list">Cancel</button> -->
+                  </div>
+                </div>
+              </form>
+              <div  *ngIf="isShown"  class="row create-table">
+                <!-- <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 div-class div-left"> -->
+                  <h3 class="text-center table-title">SUBJECT LIST</h3>
+                  <!-- </div> -->
+                  <div class="container">
+                    <mat-table #table [dataSource]="selectedSubjectMark" matSort class="mat-cell">               
+                      <ng-container matColumnDef="ser">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header> Ser. </mat-header-cell>
+                        <mat-cell *matCellDef="let element; let i = index;"> {{ ((paging.pageIndex-1) *  paging.pageSize) + i+1}} </mat-cell>
+                      </ng-container>
+                      <ng-container matColumnDef="markType">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header> Mark Type </mat-header-cell>
+                        <mat-cell *matCellDef="let element"> {{element.markType}} </mat-cell>
+                      </ng-container>
+                      <ng-container matColumnDef="passMark">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header> Pass Mark </mat-header-cell>
+                        <mat-cell *matCellDef="let element"> {{element.passMark}} </mat-cell>
+                      </ng-container>
+                      <ng-container matColumnDef="mark">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header> Total Mark </mat-header-cell>
+                        <mat-cell *matCellDef="let element"> {{element.mark}} </mat-cell>
+                      </ng-container>
+
+                      <ng-container matColumnDef="actions">
+                        <mat-header-cell *matHeaderCellDef class="pr-0">Actions</mat-header-cell>
+                        <mat-cell *matCellDef="let row; let i=index;" class="pr-0">
+                          <button mat-icon-button color="accent" class="btn-tbl-edit" 
+                          [routerLink]="['/bna-subject-management/update-subjectmark', row.subjectMarkId]">
+                            <mat-icon aria-label="Edit" class="col-white">edit</mat-icon>
+                          </button>
+                          <button mat-icon-button color="accent" class="btn-tbl-delete" (click)="$event.stopPropagation()"
+                            (click)="deleteItem(row)">
+                            <mat-icon aria-label="Delete" class="col-white">delete</mat-icon> 
+                          </button>
+                        </mat-cell>
+                      </ng-container>
+    
+                      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+                    </mat-table>
+                  </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  

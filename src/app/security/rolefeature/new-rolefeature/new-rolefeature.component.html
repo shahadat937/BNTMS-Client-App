@@ -1,0 +1,126 @@
+<section class="content">
+  <div class="container-fluid">
+    <div class="block-header">
+      <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <ul class="breadcrumb breadcrumb-style ">
+            <li class="breadcrumb-item">
+              <h4 class="page-title">{{pageTitle}}</h4>
+            </li>
+            <li class="breadcrumb-item bcrumb-1">
+              <a routerLink="/admin/dashboard/main"><i class="fas fa-home"></i></a>
+            </li>
+            <li class="breadcrumb-item bcrumb-2">
+              <a href="#" onClick="return false;">RoleRoleFeature</a>
+            </li>
+            <li class="breadcrumb-item active">{{destination}}</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="row clearfix">
+      <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+        <div class="card">
+          <div class="header">
+            <!--
+            <h2>{{destination}} RoleRoleFeature</h2>
+            -->
+
+          </div>
+          <div class="body">
+            <form class="m-4" [formGroup]="RoleFeatureForm" (ngSubmit)="onSubmit()">
+              <div class="row">
+                <!-- <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2"> 
+                  <mat-form-field class="example-full-width mb-3" appearance="outline">
+                    <mat-label>RoleId</mat-label>
+                    <input matInput formControlName="roleId" required>
+                    <mat-error *ngIf="RoleFeatureForm.get('roleId').hasError('required')">
+                      roleId is required
+                    </mat-error>
+                  </mat-form-field>
+                </div> -->
+                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 mb-2">
+                  <mat-form-field class="example-full-width mb-3" appearance="outline">
+                      <mat-label>Role</mat-label>                        
+                      <mat-select formControlName="roleId" required>
+                        <mat-option  value="0">--Select--</mat-option >
+                          <mat-option *ngFor="let school of selectedrole" [value]="school.value">
+                              {{school.text}}  
+                            </mat-option>                          
+                      </mat-select>
+                      <mat-error *ngIf="RoleFeatureForm.get('roleId').hasError('required')">
+                        Role is Required!
+                      </mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 mb-2">
+                  <mat-form-field class="example-full-width mb-3" appearance="outline">
+                      <mat-label>feature</mat-label>                        
+                      <mat-select formControlName="featureId" required>
+                        <mat-option  value="0">--Select--</mat-option >
+                          <mat-option *ngFor="let school of selectedfeature" [value]="school.value">
+                              {{school.text}}  
+                            </mat-option>                          
+                      </mat-select>
+                      <mat-error *ngIf="RoleFeatureForm.get('featureId').hasError('required')">
+                        feature is Required!
+                      </mat-error>
+                  </mat-form-field>
+                </div>
+                <!-- <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2"> 
+                  <mat-form-field class="example-full-width mb-3" appearance="outline">
+                    <mat-label>featureId</mat-label>
+                    <input matInput formControlName="featureId" required>
+                    <mat-error *ngIf="RoleFeatureForm.get('featureId').hasError('required')">
+                      featureId is required
+                    </mat-error>
+                  </mat-form-field>
+                </div> -->
+                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2"> 
+                  <mat-form-field class="example-full-width mb-3" appearance="outline">
+                    <mat-label>add</mat-label>
+                    <input matInput formControlName="add" >
+                  </mat-form-field>
+                </div>
+                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2"> 
+                  <mat-form-field class="example-full-width mb-3" appearance="outline">
+                    <mat-label>update</mat-label>
+                    <input matInput formControlName="update" >
+                  </mat-form-field>
+                </div>
+                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2"> 
+                  <mat-form-field class="example-full-width mb-3" appearance="outline">
+                    <mat-label>delete</mat-label>
+                    <input matInput formControlName="delete" >
+                  </mat-form-field>
+                </div>
+                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2"> 
+                  <mat-form-field class="example-full-width mb-3" appearance="outline">
+                    <mat-label>report</mat-label>
+                    <input matInput formControlName="report" >
+                  </mat-form-field>
+                </div>
+                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2"> 
+                  <mat-form-field class="example-full-width mb-3" appearance="outline">
+                    <mat-label>isActive</mat-label>
+                    <input matInput formControlName="isActive" >
+                  </mat-form-field>
+                </div>
+              </div>
+          
+          
+             
+              <div class="row">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+                  <button class="btn-space" [class.auth-spinner]="loading" [disabled]="loading" [disabled]="!RoleFeatureForm.valid " mat-raised-button
+                    color="primary">{{buttonText}}</button>
+                  <button type="button" mat-button routerLink="/security/rolefeature-list">Cancel</button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

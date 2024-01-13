@@ -1,0 +1,129 @@
+<section class="content">
+    <div class="container-fluid">
+      <div class="block-header">
+        <div class="row">
+          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <ul class="breadcrumb breadcrumb-style ">
+              <li class="breadcrumb-item">
+                <h4 class="page-title">{{title}} List</h4>
+              </li>
+              <li class="breadcrumb-item bcrumb-1"> 
+                <a routerLink="/admin/dashboard/main"><i class="fas fa-home"></i></a>
+              </li>
+              <li class="breadcrumb-item bcrumb-2">
+                <a href="#" onClick="return false;">Course Mark Sheet List</a>
+              </li>
+              <li class="breadcrumb-item active">All</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="row dynamic-mrk-sheet">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+          <div class="card">
+            <div class="body">
+              <div class="responsive_table">
+                <div class="materialTableHeader auto-height"> 
+                  <div class="row">
+                    <div class="col-8">
+                      <div class="align-center">
+                        <p>School: - {{schoolName}} </p>
+                        <p>Name of the Course: - {{course}} </p>
+                      </div>
+                      <ul class="header-buttons-left ml-0">
+                        <li class="dropdown">
+                        </li>
+                        <li class="dropdown">
+                          
+                          
+                        </li>
+                        <li> 
+                          <div class="icon-button-demo m-l-10">
+                            
+                          </div>
+                        </li>
+                      </ul>
+                    </div>
+
+                    <div class="col-4">
+                      <ul class="header-buttons">
+                        <li>
+                          <div class="icon-button-demo">
+                            <button *ngIf="dbType === 1" class="btn-space"  mat-raised-button
+                              color="warn" routerLink="/admin/dashboard/school-dashboard"> 
+                              <mat-icon class="col-white">keyboard_backspace</mat-icon> Back
+                            </button>
+                            <button *ngIf="courseNameId == masterData.courseName.QExam && mainDb != 1" class="btn-space"  mat-raised-button
+                              color="warn" routerLink="/central-exam/add-centralexam"> 
+                              <mat-icon class="col-white">keyboard_backspace</mat-icon> Back
+                            </button>
+                            <button *ngIf="courseNameId == masterData.courseName.StaffCollage && mainDb != 1" class="btn-space"  mat-raised-button
+                              color="warn" routerLink="/staff-collage/add-staffcollagecourse"> 
+                              <mat-icon class="col-white">keyboard_backspace</mat-icon> Back
+                            </button>
+                            <button *ngIf="courseNameId == masterData.courseName.StaffCollage && mainDb == 1" class="btn-space"  mat-raised-button
+                              color="warn" [routerLink]="['/admin/dashboard/view-centralexamcourse',courseNameId]"> 
+                              <mat-icon class="col-white">keyboard_backspace</mat-icon> Back
+                            </button>
+                            <button *ngIf="courseNameId == masterData.courseName.JCOsTraining && mainDb == 1" class="btn-space"  mat-raised-button
+                              color="warn" [routerLink]="['/admin/dashboard/Jcoexamlistindashboard-list']"> 
+                              <mat-icon class="col-white">keyboard_backspace</mat-icon> Back
+                            </button>
+                            <button *ngIf="courseNameId != masterData.courseName.QExam && courseNameId != masterData.courseName.StaffCollage && dbType === 0 && !dbType2 && mainDb != 1" class="btn-space"  mat-raised-button
+                              color="warn" routerLink="/course-management/localcourse-list"> 
+                              <mat-icon class="col-white">keyboard_backspace</mat-icon> Back
+                            </button>
+                            <button *ngIf="courseType != 0" class="btn-space"  mat-raised-button
+                              color="warn" [routerLink]="['/admin/dashboard/view-runningcourses',courseType]" > 
+                              <mat-icon class="col-white">keyboard_backspace</mat-icon> Back
+                            </button>
+                            <button *ngIf="dbType2" class="btn-space"  mat-raised-button
+                              color="warn" [routerLink]="['/admin/dashboard/runningcourses-list',20]"> 
+                              <mat-icon class="col-white">keyboard_backspace</mat-icon> Back
+                            </button>
+                          </div>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+                      
+               
+                <div id="print-routine">
+                  <table  mat-table [dataSource]="marklistbycourse" class="mat-elevation-z8 demo-table dynamic-tbl">
+                    <ng-container [matColumnDef]="col" *ngFor="let col of displayedColumns">
+                      <th class="rotate "  mat-header-cell *matHeaderCellDef>                          
+                        <div><span>{{col}}</span></div>
+                      </th>
+                      <td mat-cell *matCellDef="let element">
+                        {{element[col]}}
+                      </td>
+                    </ng-container>                  
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns" class="table-column"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                  </table>
+                </div>
+                <!-- <div >
+                  <table class="mat-elevation-z8 demo-table dynamic-tbl">
+                    <tr>
+                      <td><h3 class="align-center">Mark not inserted!</h3></td>
+                    </tr>
+                  </table>
+                  
+                </div> -->
+                <br>
+                <button class="btn-space"  mat-raised-button color="primary" (click)="printSingle()"> Print
+                  <mat-icon class="col-white">print</mat-icon>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  
+  
+  
+   
+

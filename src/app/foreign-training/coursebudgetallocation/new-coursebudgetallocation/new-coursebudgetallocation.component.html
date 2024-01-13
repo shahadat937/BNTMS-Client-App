@@ -1,0 +1,161 @@
+<section class="content">
+    <div class="container-fluid">
+      <div class="block-header">
+        <div class="row">
+          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <ul class="breadcrumb breadcrumb-style ">
+              <li class="breadcrumb-item">
+                <h4 class="page-title">{{pageTitle}}</h4>
+              </li>
+              <li class="breadcrumb-item bcrumb-1">
+                <a routerLink="/admin/dashboard/main"><i class="fas fa-home"></i></a>
+              </li>
+              <li class="breadcrumb-item bcrumb-2">
+                <a href="#" onClick="return false;">Course Budget Allocation</a>
+              </li>
+              <li class="breadcrumb-item active">{{destination}}</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="row clearfix">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+          <div class="card">
+            <div class="header">
+            </div>
+            <div class="body">
+              <form class="m-4" [formGroup]="CourseBudgetAllocationForm" (ngSubmit)="onSubmit()">
+                <div class="row">
+
+                  <!-- <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                        <mat-label>Course Type</mat-label>                        
+                        <mat-select formControlName="courseTypeId" required>
+                          <mat-option  value="0">--Select--</mat-option >
+                            <mat-option *ngFor="let dropdown of selectedBudgetCode" [value]="dropdown.value">
+                                {{dropdown.text}} 
+                              </mat-option>                          
+                        </mat-select>
+                        <mat-error *ngIf="CourseBudgetAllocationForm.get('courseTypeId').hasError('required')">
+                          Budget Code is Required!
+                        </mat-error>
+                    </mat-form-field>
+                  </div> -->
+
+                  <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                        <mat-label>Course Name</mat-label>                        
+                        <mat-select formControlName="courseNameId" required>
+                          <mat-option  value="0">--Select--</mat-option >
+                            <mat-option *ngFor="let dropdown of selectedcoursename" [value]="dropdown.value">
+                                {{dropdown.text}} 
+                              </mat-option>                          
+                        </mat-select>
+                        <mat-error *ngIf="CourseBudgetAllocationForm.get('courseNameId').hasError('required')">
+                          Budget Code is Required!
+                        </mat-error>
+                    </mat-form-field>
+                  </div>
+
+                  <!-- <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                      <mat-label>Trainee</mat-label>                        
+                      <input formControlName="trainee" matInput type="text" [matAutocomplete]="auto" required />
+                      <mat-autocomplete #auto="matAutocomplete" >
+                        <mat-option *ngFor="let item of filteredOptions" [value]="item" (onSelectionChange)="onCourseSelectionChanged(item)">
+                          {{item.text}}
+                        </mat-option>
+                      </mat-autocomplete>
+                      <mat-error *ngIf="CourseBudgetAllocationForm.get('traineeId').hasError('required')">
+                        Select Any Course
+                      </mat-error>
+                  </mat-form-field>
+                  </div> -->
+
+                  <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                      <mat-label>Trainee Id</mat-label>                        
+                      <input matInput formControlName="traineeId" required>
+                      <mat-error *ngIf="CourseBudgetAllocationForm.get('traineeId').hasError('required')">
+                        Budget Code Name is Required!
+                      </mat-error>
+                    </mat-form-field>
+                  </div>
+
+                  <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                        <mat-label>Budget Code</mat-label>                        
+                        <mat-select formControlName="budgetCodeId" required>
+                          <mat-option  value="0">--Select--</mat-option >
+                            <mat-option *ngFor="let dropdown of selectedBudgetCode" [value]="dropdown.value">
+                                {{dropdown.text}} 
+                              </mat-option>                          
+                        </mat-select>
+                        <mat-error *ngIf="CourseBudgetAllocationForm.get('budgetCodeId').hasError('required')">
+                          Budget Code is Required!
+                        </mat-error>
+                    </mat-form-field>
+                  </div>
+
+                  <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                        <mat-label>Payment Type</mat-label>                        
+                        <mat-select formControlName="paymentTypeId" required>
+                          <mat-option  value="0">--Select--</mat-option >
+                            <mat-option *ngFor="let dropdown of selectedPaymentType" [value]="dropdown.value">
+                                {{dropdown.text}} 
+                              </mat-option>                          
+                        </mat-select>
+                        <mat-error *ngIf="CourseBudgetAllocationForm.get('paymentTypeId').hasError('required')">
+                          Budget Code is Required!
+                        </mat-error>
+                    </mat-form-field>
+                  </div>
+
+                  <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                      <mat-label>Installment Amount</mat-label>                        
+                      <input matInput formControlName="installmentAmount" required>
+                      <mat-error *ngIf="CourseBudgetAllocationForm.get('installmentAmount').hasError('required')">
+                        Budget Code Name is Required!
+                      </mat-error>
+                    </mat-form-field>
+                  </div>
+
+                  <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                      <mat-label>Installment Date</mat-label>
+                        <input matInput [matDatepicker]="frompicker" formControlName="installmentDate" >
+                        <mat-datepicker-toggle matSuffix [for]="frompicker"></mat-datepicker-toggle>
+                       <mat-datepicker #frompicker></mat-datepicker>                                            
+                    </mat-form-field>
+                  </div> 
+
+
+                  <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                      <mat-label>Present Balance</mat-label>                        
+                      <input matInput formControlName="presentBalance" required>
+                      <mat-error *ngIf="CourseBudgetAllocationForm.get('presentBalance').hasError('required')">
+                        presentBalance is Required!
+                      </mat-error>
+                    </mat-form-field>
+                  </div>
+                </div> 
+               
+                <div class="row">
+                  <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+                    <button class="btn-space" [class.auth-spinner]="loading" [disabled]="loading" [disabled]="!CourseBudgetAllocationForm.valid " mat-raised-button
+                        color="primary">{{buttonText}}</button>
+                    <button type="button" mat-button routerLink="/foreign-training/coursebudgetallocation-list">Cancel</button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+

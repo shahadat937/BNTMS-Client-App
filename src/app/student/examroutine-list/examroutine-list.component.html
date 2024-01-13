@@ -1,0 +1,215 @@
+<section class="content">
+    <div class="container-fluid">
+      <div class="block-header">
+        <div class="row">
+          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <ul class="breadcrumb breadcrumb-style ">
+              <li class="breadcrumb-item">
+                <h4 class="page-title">Exam Routine List</h4>
+              </li>
+              <li class="breadcrumb-item bcrumb-1"> 
+                <a routerLink="/admin/dashboard/main"><i class="fas fa-home"></i></a>
+              </li>
+              <li class="breadcrumb-item bcrumb-2">
+                <a href="#" onClick="return false;"> Exam Routine List</a>
+              </li>
+              <li class="breadcrumb-item active">All</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+          <div class="card">
+            <div class="body">
+              <div class="responsive_table">
+                <div class="materialTableHeader"> 
+                  <div class="row">
+                    <div class="col-8">
+                      <ul class="header-buttons-left ml-0">
+                        <li class="dropdown">
+                        </li>
+                        <li class="dropdown">
+                          
+                        </li>
+                        <li> 
+                          <div class="icon-button-demo m-l-10">
+                            
+                          </div>
+                        </li>
+                      </ul>
+                    </div>
+
+                    <div class="col-4">
+                      <ul class="header-buttons">
+                        <li>
+                          <div class="icon-button-demo">
+                            <button class="btn-space"  mat-raised-button
+                            color="warn" routerLink="/admin/dashboard/trainee-dashboard"> 
+                            <mat-icon class="col-white">keyboard_backspace</mat-icon> Back
+                            </button>
+                          </div>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+
+              <!-- <mat-table #table [dataSource]="SelectedsubjectsBySchoolAndCourse" matSort class="mat-cell">
+                <ng-container matColumnDef="ser">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header> Ser: </mat-header-cell>
+                  <mat-cell *matCellDef="let element; let i = index;"> {{ ((paging.pageIndex-1) *  paging.pageSize) + i+1}} </mat-cell>
+                </ng-container>    
+                
+                <ng-container matColumnDef="subjectName">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header>Subject</mat-header-cell>
+                  <mat-cell *matCellDef="let element"> {{element.subjectName}} </mat-cell> 
+                </ng-container>
+
+                <ng-container matColumnDef="subjectTypeName">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header>Major/Minor</mat-header-cell>
+                  <mat-cell *matCellDef="let element"> {{element.subjectTypeName}} </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="totalPeriod">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header>Periods</mat-header-cell>
+                  <mat-cell *matCellDef="let element"> {{element.totalPeriod}} </mat-cell>
+                </ng-container>
+
+ 
+                <ng-container matColumnDef="totalMark">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header>Marks</mat-header-cell>
+                  <mat-cell *matCellDef="let element"> {{element.totalMark}} </mat-cell>
+                </ng-container>
+              
+                <ng-container matColumnDef="passMarkBNA">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header>Pass Mark</mat-header-cell>
+                  <mat-cell *matCellDef="let element"> {{element.passMarkBNA}} </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="actions">
+                  <mat-header-cell ngClass="custom-action local" *matHeaderCellDef class="pr-0">Class Instructore / Mark</mat-header-cell>
+                  <mat-cell ngClass="custom-action local" *matCellDef="let row; let i=index;" class="pr-0">
+                    <button mat-icon-button color="accent" title=" Course Instructor List" class="btn-tbl-nomination" 
+                    [routerLink]="['/admin/dashboard/view-courseinstructorbymodule', row.baseSchoolNameId, row.bnaSubjectNameId, row.courseModuleId, row.courseNameId]">
+                      <mat-icon aria-label="Edit" class="col-white">person</mat-icon>
+                    </button>
+                    <button mat-icon-button color="accent" title=" Subject Mark List" class="btn-tbl-view" 
+                    [routerLink]="['/admin/dashboard/view-subjectmarksbymodule', row.baseSchoolNameId, row.courseNameId, row.bnaSubjectNameId, row.courseModuleId]">
+                      <mat-icon aria-label="Edit" class="col-white">book</mat-icon>
+                    </button>
+                  </mat-cell>
+                </ng-container>
+ 
+                <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+              </mat-table> -->
+
+              <!-- <mat-table  #table [dataSource]="examrRoutineList" matSort class=" mat-cell db-tbl s-db-t-6 stu-db p-0">               
+                  
+                <ng-container matColumnDef="ser">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header> Ser: </mat-header-cell>
+                  <mat-cell *matCellDef="let element; let i = index;"> {{ ((paging.pageIndex-1) *  paging.pageSize) + i+1}} </mat-cell>
+                </ng-container> 
+
+                <ng-container matColumnDef="date">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header>Exam Date </mat-header-cell>
+                  <mat-cell *matCellDef="let element"> {{element.date | date:'mediumDate'}} </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="duration">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header>Exam Time </mat-header-cell>
+                  <mat-cell *matCellDef="let element"> {{element.periodName}} ({{element.durationForm}}-{{element.durationTo}}) </mat-cell>
+                </ng-container>
+      
+                <ng-container matColumnDef="subject">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header>Subject  </mat-header-cell>
+                  <mat-cell *matCellDef="let element"> {{element.subjectShortName}}-{{element.classCountPeriod}}/{{element.subjectCountPeriod}} - {{element.shortCode}} </mat-cell>
+                </ng-container>
+  
+      
+                <mat-header-row *matHeaderRowDef="displayedRoutineColumns"></mat-header-row>
+                <mat-row *matRowDef="let row; columns: displayedRoutineColumns;"></mat-row>
+              </mat-table> -->
+              <div id="print-routine">
+              <table class="table  tbl-by-group">
+                <thead>
+                  <tr>
+                    <!-- <th class="cl-srl"><h5>Ser</h5></th> -->
+                    <th class="cl-srl"><h5>Exam Date</h5></th>
+                    <th class="course-name-col"><h5>Exam Time</h5></th>
+                    <th class="cl-mrk"><h5>Subject</h5></th>
+                    <!-- <th class="cl-mrk-rmrk"><h5>Professional</h5></th>
+                      <th class="cl-mrk-rmrk"><h5>NBCD</h5></th>
+                    <th class="cl-mrk-rmrk"><h5>Date of Commencement</h5></th>
+                    <th class="cl-mrk-rmrk"><h5>Date of Completion</h5></th>
+                    <th class="cl-mrk-rmrk"><h5>Remarks</h5></th> -->
+                  </tr>
+                </thead>
+                <tbody>
+                  <ng-container *ngFor="let data of groupArrays;let i= index;">
+                    <tr>
+                      <td [attr.rowspan]="data.courses.length + 1">{{data.date}}</td>
+                    </tr>
+                    <tr *ngFor="let number of data.courses;">
+                      <td class="course-name-col"> {{number.periodName}} ({{number.durationForm}}-{{number.durationTo}}) </td>
+                      <td>
+                        {{number.subjectShortName}}-{{number.classCountPeriod}}/{{number.subjectCountPeriod}} - {{number.shortCode}}
+                      </td>
+                      <!-- <td>{{number.professional}}</td>
+                      <td>{{number.nbcd}}</td>
+                      <td>{{number.durationFrom | date:'mediumDate'}}</td>
+                      <td>{{number.durationTo | date:'mediumDate'}}</td> 
+                      <td>{{number.remark}}</td>  -->
+                      <!-- <td>
+                        <button mat-icon-button class="btn-tbl-view" title="Exam Instructor List" [routerLink]="['/admin/dashboard/runningcourse-details',number.courseDurationId,runningCourseType]">
+                          <mat-icon aria-label="Edit" class="col-white">visibility</mat-icon>
+                        </button>
+                        <button mat-icon-button color="accent" title="Trainee Mark List" class="btn-tbl-view" 
+                          [routerLink]="['/course-management/marklistbycourse-list', number.courseDurationId]">
+                          <mat-icon mat-icon aria-label="Edit" class="col-white">toc</mat-icon>
+                        </button>
+                        <button mat-icon-button color="accent" title="Course Routine List" class="btn-tbl-view" 
+                          [routerLink]="['/course-management/routinebycourse-list', number.baseSchoolNameId, number.courseNameId, number.courseDurationId]">
+                          <mat-icon aria-label="Edit" class="col-white">book</mat-icon>
+                        </button>
+                        <button mat-icon-button class="btn-tbl-nomination" title="Nomination" [routerLink]="['/course-management/traineenomination-list', number.courseDurationId]">
+                          <mat-icon aria-label="Edit" class="col-white">supervisor_account</mat-icon>
+                        </button>
+                        <button mat-icon-button color="accent" title="Course Subject List" class="btn-tbl-view" 
+                          [routerLink]="['/course-management/view-subjectbyschoolandcourse', number.baseSchoolNameId, number.courseNameId]">
+                          <mat-icon aria-label="Edit" class="col-white">book</mat-icon>
+                        </button>
+                          
+                        <button mat-icon-button color="accent" title="Edit" class="btn-custom btn-tbl-edit" 
+                          [routerLink]="['/course-management/update-localcourse', number.courseDurationId]">
+                          <mat-icon aria-label="Edit" class="col-white">edit</mat-icon>
+                        </button>
+
+                        <button mat-icon-button color="accent" title="Delete" class="btn-tbl-delete btn-custom" (click)="$event.stopPropagation()"
+                          (click)="deleteItem(row)">
+                          <mat-icon aria-label="Delete" class="col-white">delete</mat-icon> 
+                        </button>
+                      </td> -->
+                    </tr>
+                  </ng-container>
+                </tbody>
+              </table>
+            </div>
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 div-class div-left m-t-20">
+              <button class="btn-space"  mat-raised-button color="primary" (click)="printSingle()"> Print
+                <mat-icon class="col-white">print</mat-icon>
+              </button>
+            </div> 
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  
+  
+  
+   
+

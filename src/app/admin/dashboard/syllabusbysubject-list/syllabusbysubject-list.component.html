@@ -1,0 +1,130 @@
+<section class="content">
+    <div class="container-fluid">
+      <div class="block-header">
+        <div class="row">
+          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <ul class="breadcrumb breadcrumb-style ">
+              <li class="breadcrumb-item">
+                <h4 class="page-title">Syllabus By Subject</h4>
+              </li>
+              <li class="breadcrumb-item bcrumb-1"> 
+                <a routerLink="/admin/dashboard/main"><i class="fas fa-home"></i></a>
+              </li>
+              <li class="breadcrumb-item bcrumb-2">
+                <a href="#" onClick="return false;"> Syllabus By Subject</a>
+              </li>
+              <li class="breadcrumb-item active">All</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+          <div class="card">
+            <div class="body">
+              <div class="responsive_table">
+                <div class="materialTableHeader"> 
+                  <div class="row">
+                    <div class="col-8">
+                      <ul class="header-buttons-left ml-0">
+                        <li class="dropdown">
+                        </li>
+                        <li class="dropdown">
+                          
+                        </li>
+                        <li> 
+                          <div class="icon-button-demo m-l-10">
+                            
+                          </div>
+                        </li>
+                      </ul>
+                    </div>
+
+                    <div class="col-4">
+                      <ul class="header-buttons">
+                        <li>
+                          <div class="icon-button-demo">
+                            <button *ngIf="role != 'Instructor'" class="btn-space"  mat-raised-button
+                            color="warn" [routerLink]="['/admin/dashboard/view-syllabus',traineeId, baseSchoolNameId, courseNameId,courseDurationId, traineeDb]"> 
+                            <mat-icon class="col-white">keyboard_backspace</mat-icon> Back
+                            </button>
+                            <button *ngIf="role === 'Instructor'" class="btn-space"  mat-raised-button
+                            color="warn" [routerLink]="['/admin/dashboard/assignedsubject-list',traineeId]"> 
+                            <mat-icon class="col-white">keyboard_backspace</mat-icon> Back
+                            </button>
+                          </div>
+                      </ul>
+                    </div>
+                  </div>
+                </div>              
+              </div>
+            </div>
+            <div class="body">
+              <div class="row dash-cd-m-0">
+                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 div-class div-left">
+                  <h3>Syllabus by Subject</h3>
+                </div>
+                <!-- <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 div-class div-left">
+                  <h4 class="att-present">Attendance Percentange : (%) </h4>
+                </div>
+                <div class="col-xl-2 col-lg-2 col-md-6 col-sm-12 div-class div-left">
+                  <h4 class="att-absent">Absent List</h4>
+                </div> -->
+              </div>
+              <!-- <mat-table  #table [dataSource]="AttendanceByTraineeAndCourseDuration" matSort class="mat-cell db-tbl stu-db week-prog">               
+                   
+  
+  
+                <ng-container matColumnDef="attendanceStatus">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header>Attendance Status</mat-header-cell>
+                  <mat-cell *matCellDef="let element" >
+                    <div *ngIf="element.attendanceStatus === true;else rightName">
+                      <span class="att-present">Present</span>                       
+                    </div> 
+                    <ng-template #rightName><span  class="att-absent">Absent</span> </ng-template>
+                  </mat-cell>
+                </ng-container>
+  
+                <mat-header-row *matHeaderRowDef="displayedAttendanceColumns"></mat-header-row>
+                <mat-row *matRowDef="let row; columns: displayedAttendanceColumns;"></mat-row>
+              </mat-table> -->
+
+              <table class="table  tbl-by-group ">
+                <thead>
+                  <tr>
+                    <th class="cl-srl"><h5>Tasks</h5></th>
+                    <th class="cl-nm-rnk"><h5>Training Objective</h5></th>
+                    <th class="cl-mrk-rmrk"><h5>Syllabus</h5></th>
+                    <th class="cl-mrk-rmrk"><h5>T</h5></th>
+                    <th class="cl-mrk-rmrk"><h5>P</h5></th>
+                    <th class="cl-mrk-rmrk"><h5>M</h5></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <ng-container *ngFor="let data of groupArrays;let i= index;">
+                    <tr>
+                      <!-- <td [attr.rowspan]="data.attendance.length + 1">{{i+1}}</td> -->
+                      <td [attr.rowspan]="data.syllabus.length + 1">{{data.taskDetail}} </td>
+                    </tr>
+                    <tr *ngFor="let number of data.syllabus;">
+                      <td>{{number.trainingObjectDetail}}</td>
+                      <td>{{number.syllabusDetail}}</td> 
+                      <td>{{number.t}}</td> 
+                      <td>{{number.p}}</td> 
+                      <td>{{number.m}}</td> 
+                    </tr>
+                  </ng-container>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  
+  
+  
+   
+

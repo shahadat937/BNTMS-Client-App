@@ -1,0 +1,138 @@
+<section class="content">
+    <div class="container-fluid">
+      <div class="block-header">
+        <div class="row">
+          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <ul class="breadcrumb breadcrumb-style ">
+              <li class="breadcrumb-item"> 
+                <h4 class="page-title">Edit Central Exam Routine</h4>
+              </li>
+              <li class="breadcrumb-item bcrumb-1">
+                <a routerLink="/admin/dashboard/main"><i class="fas fa-home"></i></a>
+              </li>
+              <li class="breadcrumb-item bcrumb-2">
+                <a href="#" onClick="return false;">Edit Central Exam Routine</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="row clearfix">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12"> 
+          <div class="card">
+            <div class="header">
+            </div>
+            <div class="body">
+              <form class="m-4" [formGroup]="EditedClassRoutineForm" (ngSubmit)="onSubmit()">
+                <div class="row">
+                  <div class="align-center">
+                    <h3>Central Exam Routine</h3>
+                    <p>  Course:- {{CourseName}}_{{CourseTitle}}</p>
+                    <!-- <p>Week Name:- {{weekName}}</p> -->
+                  </div>                  
+                </div> 
+
+                <!-- Basic Table -->
+                <div  class="row clearfix">
+                  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 p-0 ex-mrk-entry-li edit-routine-list">
+                    <div class="card">
+                      
+                      <div class="body table-responsive">
+                        <table class="table ex-mrk-entry edit-cls-routine">
+                          <thead>
+                            <tr>
+                              <th class="cl-srl"><h5>Ser</h5></th>
+                              <th class="cl-date"><h5>Date</h5></th>
+                              <th class="cl-type"><h5>Type</h5></th>
+                              <th class="cl-prd"><h5>Branch</h5></th>
+                              <!-- <th class="cl-tol-prd"><h5>Total Period</h5></th> -->
+                              <th class="cl-sub"><h5>Subject</h5></th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr *ngFor="let unit of EditedClassRoutineForm.get('RoutineList')['controls']; let i = index" [formGroup]="unit">
+                              <th class="cl-srl" scope="row">{{i+1}}</th>
+
+                              <td  class="cl-date"> 
+                                {{getControlLabel(i,'date') | date:'mediumDate'}}
+                              </td>
+                              <td  class="cl-type"> 
+                                {{getControlLabel(i,'classType')}}
+                              </td>
+                              <!-- <td  class="cl-prd"> 
+                                {{getControlLabel(i,'branch')}}
+                              </td> -->
+                              <!-- <td  class="cl-tol-prd"> 
+                                {{getControlLabel(i,'classCountPeriod')}}/{{getControlLabel(i,'subjectCountPeriod')}}
+                              </td> -->
+                              <td  class="cl-branch"> 
+                                <!-- <mat-select formControlName="branchId" required (selectionChange)="onSelectedSubjectNameByBranchId($event.value)"><mat-select formControlName="branchId" required (selectionChange)="onSelectedSubjectNameByBranchId($event.value)"> -->
+                                <mat-select formControlName="branchId"  (selectionChange)="onSelectedSubjectNameByBranchId($event.value)">
+                                  <mat-option  value="0">--Select--</mat-option >
+                                  <mat-option *ngFor="let branch of selectedBranch" [value]="branch.value">
+                                    {{branch.text}}
+                                  </mat-option>
+                                </mat-select>
+                              </td>
+                              <td  class="cl-sub"> 
+                                <mat-select formControlName="bnaSubjectNameId">
+                                  <mat-option  value="0">--Select--</mat-option >
+                                    <mat-option *ngFor="let dropdown of selectedsubjectname" [value]="dropdown.value" >
+                                      {{dropdown.text}}  
+                                    </mat-option>                          
+                                </mat-select>
+                              </td>
+                            </tr>                            
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row mt-2">
+                  <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+                    <button class="btn-space" [class.auth-spinner]="loading" [disabled]="loading" [disabled]="!EditedClassRoutineForm.valid " mat-raised-button
+                        color="primary">Update</button>
+                    <button class="back-btn" type="button" mat-raised-button routerLink="/central-exam/add-qexamroutine">Back</button>
+                    <!-- <button class="view-btn float-right" type="button" mat-raised-button [routerLink]="['/routine-management/view-weeklyroutine', schoolId, courseId, weekId]" >View</button> -->
+                  </div>
+                </div>
+
+                <div class="row clearfix">
+                  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 p-0">
+                    <div class="card">
+                      
+                      <div class="body table-responsive">
+                      
+                        <table *ngIf="isShown" mat-table [dataSource]="qexamRoutineList" class="mat-elevation-z8 demo-table dynamic-tbl-forroutine qexam-routine">
+                          <!-- Position Column -->
+                          <ng-container [matColumnDef]="col" *ngFor="let col of displayedColumns">
+                            <th class="rotate" mat-header-cell *matHeaderCellDef>
+                              <!-- <div *ngif="col"><span>{{col}}</span></div> --> 
+                              <div><span>{{col}}</span></div>
+                            </th>
+                            <td class="td-cell" mat-cell *matCellDef="let element">
+                              {{element[col]}}
+                            </td>
+      
+                          </ng-container>
+                        
+                          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+

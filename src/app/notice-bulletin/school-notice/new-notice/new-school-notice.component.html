@@ -1,0 +1,165 @@
+<section class="content">
+    <div class="container-fluid">
+      <div class="block-header">
+        <div class="row">
+          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <ul class="breadcrumb breadcrumb-style ">
+              <li class="breadcrumb-item">
+                <h4 class="page-title">Online Interaction</h4>
+              </li>
+              <li class="breadcrumb-item bcrumb-1">
+                <a routerLink="/admin/dashboard/main"><i class="fas fa-home"></i></a>
+              </li>
+              <li class="breadcrumb-item bcrumb-2">
+                <a href="#" onClick="return false;">Online Interaction</a>
+              </li>
+              <li class="breadcrumb-item active">Chat</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="row clearfix">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+          <div class="card">
+            <div class="header">
+            </div> 
+            <div class="body">
+              <div class="row">
+                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 m-0 notification-fixed-height">
+                  <div class="inner-info left">
+                    <div class="table-scroller">
+                      <table *ngIf="(role != this.userRole.SuperAdmin || role != this.userRole.BNASchool || role != this.userRole.JSTISchool) && role != this.userRole.SchoolOIC" class="table  tbl-by-group running-c-base">
+                        <thead>
+                          <tr>
+                            <th class="cl-srl"><h5> Ser </h5></th>
+                            <th class="course-name-col"><h5> School </h5></th>                       
+                            <th ><h5> Action</h5></th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <ng-container *ngFor="let data of schoolByBaseList;let i= index;">
+                            <tr>
+                              <td class="cl-srl" >{{i+1}}</td>
+                              <td class="cl-srl" >{{data.schoolName}} <span class="notify-design" *ngIf="data.seenStatus">{{data.seenStatus}}</span></td>
+                              <td class="cl-srl" >
+                                <button mat-icon-button color="accent" class="btn-tbl-delete" (click)="schoolNoticeBox(data)">
+                                  <mat-icon aria-label="Delete" class="col-white">input</mat-icon> 
+                                </button>
+                              </td>
+                            </tr>
+                          </ng-container>
+                        </tbody>
+                      </table>
+                      <table *ngIf="role == this.userRole.SuperAdmin || role === this.userRole.BNASchool || role === this.userRole.JSTISchool || role == this.userRole.SchoolOIC" class="table  tbl-by-group running-c-base">
+                        <thead>
+                          <tr>
+                            <th class="cl-srl"><h5> Ser </h5></th>
+                            <th class="course-name-col"><h5> Replying To </h5></th>                       
+                            <th ><h5> Action</h5></th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <ng-container *ngFor="let data of NotificationResponseListBySchool;let i= index;">
+                            <tr>
+                              <td class="cl-srl" >{{i+1}}</td>
+                              <td class="cl-srl" ><span *ngIf="data.senderRole == this.userRole.MasterAdmin">DNT Office</span> <span *ngIf="data.senderRole != this.userRole.MasterAdmin">{{data.senderRole}}</span> <span class="notify-design" *ngIf="data.notifyNumber">{{data.notifyNumber}}</span></td>
+                              <td class="cl-srl" >
+                                <button mat-icon-button color="accent" class="btn-tbl-delete" (click)="replyingSpecificRole(data)">
+                                  <mat-icon aria-label="Delete" class="col-white">input</mat-icon> 
+                                </button>
+                              </td>
+                            </tr>
+                          </ng-container>
+                        </tbody>
+                      </table>
+                    </div>
+                    
+                  </div>
+                  
+                </div>
+                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 m-0 notification-fixed-height">
+                  <div *ngIf="isShown" class="inner-info scl-ntfsn">
+                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 scl-ntfsn-header">
+                      <h3>{{headerSchoolName}}</h3>
+                    </div>
+                    <div class="scl-ntfsn-dsply">
+                      <ul class="notification-list">
+                        <li class="notification-list-item" *ngFor="let data of NotificationListBySchool;">
+                          <!-- for school and school oic -->
+                          <div *ngIf="this.role == this.userRole.SuperAdmin || role === this.userRole.BNASchool || role === this.userRole.JSTISchool || this.role == this.userRole.SchoolOIC">
+
+                            <div *ngIf="data.senderRole == this.userRole.SuperAdmin || role === this.userRole.BNASchool || role === this.userRole.JSTISchool || data.senderRole == this.userRole.SchoolOIC" class="notification-list-item-identity box-left">
+                              <span class="role-txt"><b *ngIf="data.senderRole == this.userRole.SuperAdmin">{{headerSchoolName}}</b><b *ngIf="data.senderRole == this.userRole.MasterAdmin">DNT Office</b><b *ngIf="data.senderRole != this.userRole.SuperAdmin && data.senderRole != this.userRole.MasterAdmin">{{data.senderRole}}</b> - <span class="date-txt">{{data.dateCreated | date:'mediumDate'}}</span> </span>
+                              <hr class="m-0">
+                              {{data.notes}}
+                            </div>
+
+                            <div *ngIf="data.receiverRole == this.userRole.SuperAdmin && data.reciverSeenStatus==0" (click)="updateSeenStatus(data)" class="notification-list-item-identity unread box-right">
+                              <span class="role-txt"><b *ngIf="data.senderRole == this.userRole.SuperAdmin">{{headerSchoolName}}</b><b *ngIf="data.senderRole == this.userRole.MasterAdmin">DNT Office</b><b *ngIf="data.senderRole != this.userRole.SuperAdmin && data.senderRole != this.userRole.MasterAdmin">{{data.senderRole}}</b> - <span class="date-txt">{{data.dateCreated | date:'mediumDate'}}</span> <span class="blink_me">New Massage</span> </span>
+                              <hr class="m-0">
+                              <span class="txt-blur">{{data.notes}}</span>   
+                            </div>
+
+                            <div *ngIf="data.receiverRole == this.userRole.SuperAdmin && data.reciverSeenStatus==1"  class="notification-list-item-identity readed box-right">
+                              <span class="role-txt"><b *ngIf="data.senderRole == this.userRole.SuperAdmin">{{headerSchoolName}}</b><b *ngIf="data.senderRole == this.userRole.MasterAdmin">DNT Office</b><b *ngIf="data.senderRole != this.userRole.SuperAdmin && data.senderRole != this.userRole.MasterAdmin">{{data.senderRole}}</b> - <span class="date-txt">{{data.dateCreated | date:'mediumDate'}}</span> </span>
+                              <hr class="m-0">
+                              {{data.notes}}
+                            </div>
+                          </div>
+                          <!-- exclude school and school oic -->
+                          <div *ngIf="this.role != this.userRole.SuperAdmin && this.role != this.userRole.SchoolOIC">
+
+                            <div *ngIf="role == data.senderRole" class="notification-list-item-identity box-left">
+                              <span class="role-txt"><b *ngIf="data.senderRole == this.userRole.SuperAdmin">{{headerSchoolName}}</b><b *ngIf="data.senderRole == this.userRole.MasterAdmin">DNT Office</b><b *ngIf="data.senderRole != this.userRole.SuperAdmin && data.senderRole != this.userRole.MasterAdmin">{{data.senderRole}}</b> - <span class="date-txt">{{data.dateCreated | date:'mediumDate'}}</span> </span>
+                              <hr class="m-0">
+                              {{data.notes}}
+                            </div>
+
+                            <div *ngIf="role == data.receiverRole && data.reciverSeenStatus==0" (click)="updateSeenStatus(data)" class="notification-list-item-identity unread box-right">
+                              <span class="role-txt"><b *ngIf="data.senderRole == this.userRole.SuperAdmin">{{headerSchoolName}}</b><b *ngIf="data.senderRole == this.userRole.MasterAdmin">DNT Office</b><b *ngIf="data.senderRole != this.userRole.SuperAdmin && data.senderRole != this.userRole.MasterAdmin">{{data.senderRole}}</b> - <span class="date-txt">{{data.dateCreated | date:'mediumDate'}}</span> <span class="blink_me">New Massage</span> </span>
+                              <hr class="m-0">
+                              <span class="txt-blur">{{data.notes}}</span>                            
+                            </div>
+
+                            <div *ngIf="role == data.receiverRole && data.reciverSeenStatus==1" class="notification-list-item-identity readed box-right">
+                              <span class="role-txt"><b *ngIf="data.senderRole == this.userRole.SuperAdmin">{{headerSchoolName}}</b><b *ngIf="data.senderRole == this.userRole.MasterAdmin">DNT Office</b><b *ngIf="data.senderRole != this.userRole.SuperAdmin && data.senderRole != this.userRole.MasterAdmin">{{data.senderRole}}</b> - <span class="date-txt">{{data.dateCreated | date:'mediumDate'}}</span> </span>
+                              <hr class="m-0">
+                              {{data.notes}}
+                            </div>
+                          </div>
+                          
+                        </li>
+                      </ul>
+                    </div>
+                    <div class="scl-ntfsn-form">
+                      <form class="" [formGroup]="SchoolNoticeForm" (ngSubmit)="onSubmit()">
+                        <div class="row">                                                                    
+                          <div class="col-xl-9 col-lg-9 col-md-9 col-sm-9 m-0">                            
+                            <mat-form-field class="example-full-width m-0" appearance="outline">
+                              <mat-label>Notes</mat-label>                        
+                              <!-- <input matInput formControlName="status" >        -->
+                              <textarea  matInput formControlName="notes"></textarea>                 
+                            </mat-form-field>
+                          </div> 
+                          <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 m-0">
+                            <!-- <button class="btn-space" [class.auth-spinner]="loading" [disabled]="loading" [disabled]="!SchoolNoticeForm.valid " mat-raised-button
+                                color="primary">{{buttonText}}</button> -->
+                                <button class="btn-space" [disabled]="!SchoolNoticeForm.valid " mat-raised-button
+                                color="primary">{{buttonText}}</button>
+                          </div>
+                        </div>  
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+

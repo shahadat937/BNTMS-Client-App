@@ -1,0 +1,191 @@
+<section class="content">
+    <div class="container-fluid">
+      <div class="block-header">
+        <div class="row">
+          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <ul class="breadcrumb breadcrumb-style ">
+              <li class="breadcrumb-item">
+                <h4 class="page-title">Weekly Program List</h4>
+              </li>
+              <li class="breadcrumb-item bcrumb-1"> 
+                <a routerLink="/admin/dashboard/main"><i class="fas fa-home"></i></a>
+              </li>
+              <li class="breadcrumb-item bcrumb-2">
+                <a href="#" onClick="return false;"> Weekly Program List</a>
+              </li>
+              <li class="breadcrumb-item active">{{weekRoutine}}</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+          <div class="card">
+            <div class="body">
+              <div class="responsive_table">
+                <div class="materialTableHeader"> 
+                  <div class="row">
+                    <div class="col-8">
+                      <ul class="header-buttons-left ml-0">
+                        
+                        <li> 
+                          <div class="icon-button-demo">
+                            <button class="btn-space"  mat-raised-button
+                            color="primary" (click)="allItem()"> 
+                            <mat-icon class="col-white">all_out</mat-icon> All
+                            </button>
+                          </div>
+                        </li>
+                      </ul>
+                    </div>
+
+                    <div class="col-4">
+                      <ul class="header-buttons">
+                        <li>
+                          <div class="icon-button-demo">
+                            <button class="btn-space"  mat-raised-button
+                            color="warn" routerLink="/admin/dashboard/trainee-dashboard"> 
+                            <mat-icon class="col-white">keyboard_backspace</mat-icon> Back
+                            </button>
+                          </div>
+                      </ul>
+                    </div>
+                  </div>
+                </div>              
+                <div id="print-routine">              
+                  <table   mat-table [dataSource]="RoutineByCourseDuration" class="mat-elevation-z8 demo-table dynamic-tbl-forroutine first-col-hide">
+                    <ng-container [matColumnDef]="col" *ngFor="let col of displayedColumns">
+                      <th class="rotate" mat-header-cell *matHeaderCellDef>
+                        <div><span>{{col}}</span></div>
+                      </th>
+                      <td mat-cell *matCellDef="let element">                          
+                        <span style="color: blue;" *ngIf="element[col] !=null && element[col].includes('Exam')">{{element[col]}} </span>
+                        <span *ngIf="element[col] !=null && !element[col].includes('Exam')">{{element[col]}} </span>
+                      </td>
+                    </ng-container>
+                  
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                  </table>
+                </div>
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 div-class div-left m-t-20">
+                  <button class="btn-space"  mat-raised-button color="primary" (click)="printSingle()"> Print
+                    <mat-icon class="col-white">print</mat-icon>
+                  </button>
+                </div> 
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-6 col-sm-12 col-md-6 col-lg-6 mt-3 routine">
+          <div class="card">
+            <div class="header">
+            </div>
+            <div class="body">
+              <div class="row dash-cd-m-0">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 div-class div-left">
+                  <h3>Routine Note List</h3>
+                </div>
+              </div>
+              <div class="table-responsive">
+
+                <mat-table #table [dataSource]="routineNotesList" matSort class="table table-hover absent-list mat-cell db-tbl routine-note-trainee">
+                  <ng-container matColumnDef="ser">
+                    <mat-header-cell class="ser-col"  *matHeaderCellDef mat-sort-header> Ser. </mat-header-cell>
+                    <mat-cell class="ser-col" *matCellDef="let element; let i = index;"> {{ ((paging.pageIndex-1) *  paging.pageSize) + i+1}} </mat-cell>
+                  </ng-container>       
+                  <ng-container matColumnDef="routineName">
+                    <mat-header-cell class="sub-col" *matHeaderCellDef mat-sort-header> Subject Short Name </mat-header-cell>
+                    <mat-cell class="sub-col" *matCellDef="let element"> {{element.periodName}}</mat-cell>
+                  </ng-container>
+
+                  <ng-container matColumnDef="routineNote">
+                    <mat-header-cell class="note-col" *matHeaderCellDef mat-sort-header> Routine Note </mat-header-cell>
+                    <mat-cell class="note-col" *matCellDef="let element"> {{element.routineNotes}}</mat-cell>
+                  </ng-container>
+                  <mat-header-row *matHeaderRowDef="displayedRoutineNoteColumns"></mat-header-row>
+                  <mat-row *matRowDef="let row; columns: displayedRoutineNoteColumns;"></mat-row>
+                </mat-table>    
+              </div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="header">
+            </div>
+            <div class="body">
+              <div class="row dash-cd-m-0">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 div-class div-left">
+                  <h3>Period List</h3>
+                </div>
+              </div>
+              <div class="table-responsive">
+
+                <mat-table #table [dataSource]="periodListByBaseSchoolAndCourse" matSort class="table table-hover absent-list mat-cell db-tbl routine-detail-trainee">
+                  <ng-container matColumnDef="ser">
+                    <mat-header-cell  *matHeaderCellDef mat-sort-header> Ser. </mat-header-cell>
+                    <mat-cell *matCellDef="let element; let i = index;"> {{ ((paging.pageIndex-1) *  paging.pageSize) + i+1}} </mat-cell>
+                  </ng-container>       
+                  <ng-container matColumnDef="periodName">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header> Period </mat-header-cell>
+                    <mat-cell *matCellDef="let element"> {{element.periodName}}</mat-cell>
+                  </ng-container>
+
+                  <ng-container matColumnDef="duration">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header> Duration </mat-header-cell>
+                    <mat-cell *matCellDef="let element"> {{element.durationForm}} - {{element.durationTo}}</mat-cell>
+                  </ng-container>
+                  <mat-header-row *matHeaderRowDef="displayedPeriodListColumns"></mat-header-row>
+                  <mat-row *matRowDef="let row; columns: displayedPeriodListColumns;"></mat-row>
+                </mat-table>    
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-xs-6 col-sm-12 col-md-6 col-lg-6 mt-3 routine">
+          <div class="card">
+            <div class="header">
+            </div>
+            <div class="body">
+              <div class="row dash-cd-m-0">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 div-class div-left">
+                  <h3>Subject List</h3>
+                </div>
+              </div>
+              <div class="table-responsive">
+
+                <mat-table #table [dataSource]="subjectlistBySchoolAndCourse" matSort class="table table-hover absent-list mat-cell db-tbl routine-detail-trainee">
+                  <ng-container matColumnDef="ser">
+                    <mat-header-cell  *matHeaderCellDef mat-sort-header> Ser. </mat-header-cell>
+                    <mat-cell *matCellDef="let element; let i = index;"> {{ ((paging.pageIndex-1) *  paging.pageSize) + i+1}} </mat-cell>
+                  </ng-container>       
+                  <ng-container matColumnDef="subjectName">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header> Subject Name </mat-header-cell>
+                    <mat-cell *matCellDef="let element"> {{element.subjectName}}</mat-cell>
+                  </ng-container>
+
+                  <ng-container matColumnDef="subjectShortName">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header> Short Name </mat-header-cell>
+                    <mat-cell *matCellDef="let element"> {{element.subjectShortName}}</mat-cell>
+                  </ng-container>
+                  <ng-container matColumnDef="instructorShortCode">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header> Instructor Short Name </mat-header-cell>
+                    <mat-cell *matCellDef="let element"> {{element.shortCode}}</mat-cell>
+                  </ng-container>
+                  <mat-header-row *matHeaderRowDef="displayedSubjectListColumns"></mat-header-row>
+                  <mat-row *matRowDef="let row; columns: displayedSubjectListColumns;"></mat-row>
+                </mat-table>    
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  
+  
+  
+   
+

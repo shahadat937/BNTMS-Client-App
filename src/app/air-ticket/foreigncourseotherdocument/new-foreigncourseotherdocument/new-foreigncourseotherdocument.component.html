@@ -1,0 +1,171 @@
+<section class="content">
+    <div class="container-fluid">
+      <div class="block-header">
+        <div class="row">
+          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <ul class="breadcrumb breadcrumb-style ">
+              <li class="breadcrumb-item">
+                <h4 class="page-title">{{pageTitle}}</h4>
+              </li>
+              <li class="breadcrumb-item bcrumb-1">
+                <a routerLink="/admin/dashboard/main">
+                  <i class="fas fa-home"></i> </a>
+              </li>
+              <li class="breadcrumb-item bcrumb-2">
+                <a href="#" onClick="return false;">Foreign Course Other Doc</a>
+              </li>
+              <li class="breadcrumb-item active">{{destination}}</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="row clearfix">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+          <div class="card">
+            
+            <div class="body">
+              <form class="m-4" [formGroup]="ForeignCourseOtherDocumentForm" (ngSubmit)="onSubmit()">
+                <div class="row">
+                  <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2 family-info">
+                    <div class="row ">
+
+                      <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12 mb-2">
+                        <mat-form-field class="example-full-width mb-3" appearance="outline">
+                            <mat-label>Course Name</mat-label>                        
+                            <mat-select formControlName="courseDurationIds"  required >
+                              <mat-option value="0">--Select--</mat-option>
+                                <mat-option (onSelectionChange)="onCourseSelectionChangeGetCourseModule($event)" *ngFor="let dropdown of selectedCourseName" [value]="dropdown.value">
+                                    {{dropdown.text}} 
+                                  </mat-option>                          
+                            </mat-select>
+                            <mat-error *ngIf="ForeignCourseOtherDocumentForm.get('courseDurationIds').hasError('required')">
+                              Course Name is Required!
+                            </mat-error>
+                        </mat-form-field>
+                      </div>  
+
+                      <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12 mb-2">
+                        <mat-form-field class="example-full-width mb-3" appearance="outline">
+                            <mat-label>Trainee</mat-label>                        
+                            <mat-select formControlName="traineeId" required>
+                              <mat-option  value="0">--Select--</mat-option >
+                                <mat-option (onSelectionChange)="onTraineeSelectionChangeGetList($event)"  *ngFor="let dropdown of selectedTrainee" [value]="dropdown.value">
+                                    {{dropdown.text}} 
+                                  </mat-option>                          
+                            </mat-select>
+                        </mat-form-field>
+                      </div>
+
+                      <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12 mb-2">
+                        <mat-form-field class="example-full-width mb-3" appearance="outline">
+                            <mat-label>Doc Type</mat-label>                        
+                            <mat-select formControlName="foreignCourseDocTypeId" required>
+                              <mat-option  value="0">--Select--</mat-option >
+                                <mat-option  *ngFor="let dropdown of selectedDocType" [value]="dropdown.value">
+                                    {{dropdown.text}} 
+                                  </mat-option>                          
+                            </mat-select>
+                        </mat-form-field>
+                      </div>
+                      <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12 mb-2">
+                        <mat-form-field class="example-full-width mb-3" appearance="outline">
+                            <mat-label>File Upload(Browse)</mat-label> 
+                            <ngx-mat-file-input (change)="onFileChanged($event)" accept=".txt,.pdf,.xls,.xlsx,.doc,.docx,.ppt,.pptx">
+                            </ngx-mat-file-input>
+                            <mat-icon matSuffix>attachment</mat-icon>
+                        </mat-form-field>
+                      </div> 
+
+                      <!-- <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 mb-2">
+                        <mat-form-field class="example-full-width mb-3" appearance="outline">
+                          <mat-label>Doc Type</mat-label>
+                          <input matInput formControlName="foreignCourseDocTypeId" required>
+                          <mat-error *ngIf="ForeignCourseOtherDocumentForm.get('foreignCourseDocTypeId').hasError('required')">
+                            Doc Type is required
+                          </mat-error>
+                        </mat-form-field>
+                      </div> -->
+                </div>
+              </div>
+                  
+                </div>
+                <div class="row">
+                  <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+                    <button class="btn-space" [class.auth-spinner]="loading" [disabled]="loading" [disabled]="!ForeignCourseOtherDocumentForm.valid " mat-raised-button
+                      color="primary">{{buttonText}}</button>
+                    <button type="button" mat-button routerLink="/air-ticket/foreigncourseotherdocument-list">Cancel</button>
+                  </div>
+                </div>
+              </form>
+              <mat-table *ngIf="isShown" #table [dataSource]="dataSource" matSort class="mat-cell">
+                <ng-container matColumnDef="select">
+                  <mat-header-cell *matHeaderCellDef [ngClass]="'tbl-col-width-per-6'">
+                    <mat-checkbox (change)="$event ? masterToggle() : null"
+                      [checked]="selection.hasValue() && isAllSelected()"
+                      [indeterminate]="selection.hasValue() && !isAllSelected()" [ngClass]="'tbl-checkbox'">
+                    </mat-checkbox>
+                  </mat-header-cell>
+                  <mat-cell *matCellDef="let row" [ngClass]="'tbl-col-width-per-6'">
+                    <mat-checkbox (click)="$event.stopPropagation()" (change)="$event ? selection.toggle(row) : null"
+                      [checked]="selection.isSelected(row)" [ngClass]="'tbl-checkbox'">
+                    </mat-checkbox>
+                  </mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="sl">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header> Ser. </mat-header-cell>
+                  <mat-cell *matCellDef="let element; let i = index;"> {{ ((paging.pageIndex-1) *  paging.pageSize) + i+1}} </mat-cell>
+                </ng-container>
+
+                <!-- <ng-container matColumnDef="courseDurationId">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header> courseDurationId </mat-header-cell>
+                  <mat-cell *matCellDef="let element"> {{element.courseDurationId}} </mat-cell>
+                </ng-container>
+
+                 <ng-container matColumnDef="courseNameId">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header> courseNameId </mat-header-cell>
+                  <mat-cell *matCellDef="let element"> {{element.courseNameId}} </mat-cell>
+                </ng-container>            -->
+                
+                <ng-container matColumnDef="foreignCourseDocType">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header> Doc Type </mat-header-cell>
+                  <mat-cell *matCellDef="let element"> {{element.foreignCourseDocType}} </mat-cell>
+                </ng-container>
+                <!-- <ng-container matColumnDef="status">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header>status </mat-header-cell>
+                  <mat-cell *matCellDef="let element"> {{element.status}} </mat-cell>
+                </ng-container> -->
+                <ng-container matColumnDef="fileUpload">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header>File Upload(PDF)</mat-header-cell>
+                  <mat-cell class="icon-d" *matCellDef="let element"> <mat-lebel *ngIf="element.fileUpload"><a target="_blank" [href]="element.fileUpload"><mat-icon>picture_as_pdf</mat-icon></a></mat-lebel> </mat-cell>
+                </ng-container>
+
+                <!-- <ng-container matColumnDef="fileUpload">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header>fileUpload </mat-header-cell>
+                  <mat-cell *matCellDef="let element"> {{element.fileUpload}} </mat-cell>
+                </ng-container> -->
+
+                <ng-container matColumnDef="actions">
+                  <mat-header-cell *matHeaderCellDef class="pr-0">Actions</mat-header-cell>
+                  <mat-cell *matCellDef="let row; let i=index;" class="pr-0">
+                    <button mat-icon-button color="accent" class="btn-tbl-edit"
+                    [routerLink]="['/air-ticket/update-foreigncourseotherdocument', row.foreignCourseOthersDocumentId]">
+                      <mat-icon aria-label="Edit" class="col-white">edit</mat-icon>
+                    </button>
+                    <button mat-icon-button color="accent" class="btn-tbl-delete" (click)="$event.stopPropagation()"
+                      (click)="deleteItem(row)">
+                      <mat-icon aria-label="Delete" class="col-white">delete</mat-icon>
+                    </button>
+                  </mat-cell>
+                </ng-container>
+              
+                
+                <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                <mat-row *matRowDef="let row; columns: displayedColumns; "></mat-row>
+              </mat-table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  

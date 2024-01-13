@@ -1,0 +1,158 @@
+<section class="content">
+  <div class="container-fluid">
+    <div class="block-header">
+      <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <ul class="breadcrumb breadcrumb-style ">
+            <li class="breadcrumb-item">
+              <h4 class="page-title">{{pageTitle}}</h4>
+            </li>
+            <li class="breadcrumb-item bcrumb-1">
+              <a routerLink="/admin/dashboard/main">
+                <i class="fas fa-home"></i> </a>
+            </li>
+            <li class="breadcrumb-item bcrumb-2">
+              <a href="#" onClick="return false;">Course Section</a>
+            </li>
+            <li class="breadcrumb-item active">{{destination}}</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="row clearfix">
+      <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+        <div class="card">
+
+          <div class="body">
+            <form class="m-4" [formGroup]="CourseSectionForm" (ngSubmit)="onSubmit()">
+              <div class="row">
+
+                <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12 mb-2">
+                  <mat-form-field class="example-full-width mb-3" appearance="outline">
+                    <mat-label>School Name</mat-label>
+                    <mat-select formControlName="baseSchoolNameId" required>
+                      <mat-option *ngFor="let dropdown of selectedbaseschools" [value]="dropdown.value">
+                        {{dropdown.text}}
+                      </mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="CourseSectionForm.get('baseSchoolNameId').hasError('required')">
+                      School Name is Required!
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+
+
+                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mb-2">
+                  <mat-form-field class="example-full-width mb-3" appearance="outline">
+                    <mat-label>Course</mat-label>
+                    <input formControlName="course" matInput type="text" [matAutocomplete]="auto" />
+                    <mat-autocomplete #auto="matAutocomplete">
+                      <mat-option *ngFor="let item of filteredOptions" [value]="item"
+                        (onSelectionChange)="onTraineeSelectionChanged(item)">
+                        {{item.text}}
+                      </mat-option>
+                    </mat-autocomplete>
+                  </mat-form-field>
+                </div>
+
+
+                <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12 mb-2">
+                  <mat-form-field class="example-full-width mb-3" appearance="outline">
+                    <mat-label>Curriculam Type</mat-label>
+                    <mat-select formControlName="BnaCurriculumTypeId" >
+                      <mat-option *ngFor="let pp of selectedbnacurriculamtype" [value]="pp.value">
+                        {{pp.text}}
+                      </mat-option>
+                    </mat-select> 
+                  </mat-form-field>
+                </div>
+
+                <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12 mb-2">
+                  <mat-form-field class="example-full-width mb-3" appearance="outline">
+                    <mat-label>Section Name</mat-label>
+                    <input matInput formControlName="sectionName" required>
+                    <mat-error *ngIf="CourseSectionForm.get('sectionName').hasError('required')">
+                      Section Name is required
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+
+                <div class="col-xl-2 col-lg-2 col-md-2 col-sm-12 mb-2">
+                  <mat-form-field class="example-full-width mb-3" appearance="outline">
+                    <mat-label> Short Name</mat-label>
+                    <input matInput formControlName="sectionShortName">
+                  </mat-form-field>
+                </div>
+
+                <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12 mb-2">
+                  <mat-form-field class="example-full-width mb-3" appearance="outline">
+                    <mat-label>Menu Position</mat-label>
+                    <input matInput formControlName="menuPosition">
+                  </mat-form-field>
+                </div>
+
+
+              </div>
+              <div class="row">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+                  <button class="btn-space" [class.auth-spinner]="loading" [disabled]="loading" [disabled]="!CourseSectionForm.valid " mat-raised-button
+                    color="primary">{{buttonText}}</button>
+                  <!-- <button type="button" mat-button routerLink="/basic-setup/coursemodule-list">Cancel</button> -->
+                </div>
+              </div>
+            </form>
+
+            
+            <div *ngIf="isShown" class="container">
+              <h4 class="align-center">Data Display</h4>
+              <mat-table #table [dataSource]="this.sectionList" matSort class="mat-cell">
+
+                <ng-container matColumnDef="sl">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header> Ser. </mat-header-cell>
+                  <mat-cell *matCellDef="let element; let i = index;"> {{ ((paging.pageIndex-1) * paging.pageSize) +
+                    i+1}} </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="sectionName">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header> Section Name</mat-header-cell>
+                  <mat-cell *matCellDef="let element">{{element.sectionName}}
+                  </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="sectionShortName">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header> Short Name</mat-header-cell>
+                  <mat-cell *matCellDef="let element">{{element.sectionShortName}}
+                  </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="menuPosition">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header> Menu Position</mat-header-cell>
+                  <mat-cell *matCellDef="let element">{{element.menuPosition}}
+                  </mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="actions">
+                  <mat-header-cell *matHeaderCellDef class="pr-0">Actions</mat-header-cell>
+                  <mat-cell *matCellDef="let row; let i=index;" class="pr-0">
+                    <button mat-icon-button color="accent" class="btn-tbl-edit"
+                      [routerLink]="['/basic-setup/update-coursesection', row.courseSectionId]">
+                      <mat-icon aria-label="Edit" class="col-white">edit</mat-icon>
+                    </button>
+                    <button mat-icon-button color="accent" class="btn-tbl-delete" (click)="$event.stopPropagation()"
+                      (click)="deleteItem(row)">
+                      <mat-icon aria-label="Delete" class="col-white">delete</mat-icon>
+                    </button>
+                  </mat-cell>
+                </ng-container>
+
+                <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+              </mat-table>
+            </div>
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

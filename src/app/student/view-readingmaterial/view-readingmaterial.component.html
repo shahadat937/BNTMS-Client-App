@@ -1,0 +1,187 @@
+<section class="content">
+    <div class="container-fluid">
+      <div class="block-header">
+        <div class="row">
+          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <ul class="breadcrumb breadcrumb-style ">
+              <li class="breadcrumb-item">
+                <h4 class="page-title">Reading Material</h4>
+              </li>
+              <li class="breadcrumb-item bcrumb-1">
+                <a routerLink="/admin/dashboard/main"><i class="fas fa-home"></i></a>
+              </li>
+              <li class="breadcrumb-item bcrumb-2">
+                <a href="#" onClick="return false;">Reading Material</a>
+              </li>
+              <li class="breadcrumb-item active">All</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="row material-top-info">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+          <div class="card">
+            <div class="body">
+              <div class="row">
+                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 m-0">
+                  <div class="row info-inner yellowish">
+                    
+                    <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12 m-0 reading-top-info">
+                      <h4> {{countbooks}}</h4>
+                      <h4> Total Books</h4>
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 m-0 reading-top-icon">
+                      <mat-icon>library_books</mat-icon>
+                    </div>
+                  </div>
+                  
+                </div>
+
+                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 m-0">
+                  <div class="row info-inner marronish">
+                    
+                    <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12 m-0 reading-top-info">
+                      <h4> {{countvideos}}</h4>
+                      <h4> Total Videos</h4>
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 m-0 reading-top-icon">
+                      <mat-icon>ondemand_video</mat-icon>
+                    </div>
+                  </div>
+                  
+                </div>
+
+                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 m-0">
+                  <div class="row info-inner greenish">
+                    
+                    <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12 m-0 reading-top-info">
+                      <h4> {{countslides}}</h4>
+                      <h4> Total Slides</h4>
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 m-0 reading-top-icon">
+                      <mat-icon>present_to_all</mat-icon>
+                    </div>
+                  </div>
+                  
+                </div>
+
+                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 m-0">
+                  <div class="row info-inner blueish">
+                    
+                    <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12 m-0 reading-top-info">
+                      <h4>{{countmaterial}}</h4>
+                      <h4> Reading Materials</h4>
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 m-0 reading-top-icon">
+                      <mat-icon>collections_bookmark</mat-icon>
+                    </div>
+                  </div>
+                  
+                </div>
+                
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row material-bottom-info">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+          <div class="card">
+            <div class="body">
+              <div class="row">
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">                  
+                  <div class="row info-inner yellowish">
+                    <div class="col-lg-1 col-md-1 col-sm-3 col-xs-4 m-0 reading-icon">
+                      <mat-icon>library_books</mat-icon>
+                    </div>
+                    <div class="col-lg-11 col-md-11 col-sm-9 col-xs-8 m-0 reading-info">
+                      <h4> Total Books</h4>
+                    </div>  
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 m-0 reading-info-list">
+                      <ul >
+                        <li *ngFor="let item of bookList.slice(0, 6); let i = index">{{i+1}}. {{item.documentName}}</li>
+                      </ul>
+                      <button class="btn-space see-more-btn"  mat-raised-button color="warn" [routerLink]="['/admin/dashboard/view-readingmateriallist',masterData.readingMaterial.books]"> 
+                        See More <mat-icon>launch</mat-icon>
+                      </button>
+                      <br>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                  <div class="row info-inner marronish">
+                    <div class="col-lg-1 col-md-1 col-sm-3 col-xs-4 m-0 reading-icon">
+                      <mat-icon>ondemand_video</mat-icon>
+                    </div>
+                    <div class="col-lg-11 col-md-11 col-sm-9 col-xs-8 m-0 reading-info">
+                      <h4> Total Videos</h4>
+                    </div>  
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 m-0 reading-info-list">
+                      <!-- <ul >
+                        <li *ngFor="let item of videoList.slice(0, 3); let i = index">{{i+1}}. {{item.documentName}}</li>
+                      </ul> -->
+                      <div class="video" *ngFor="let item of videoList.slice(0, 1); let i = index">
+                        <video controls (click)="toggleVideo()" #videoPlayer>
+                            <source src="{{fileIUrl+item.documentLink}}" type="video/mp4" />
+                            Browser not supported
+                        </video>
+                        <p><b>{{item.documentName}}</b></p>
+                      </div>
+                      <button class="btn-space see-more-btn"  mat-raised-button color="warn" [routerLink]="['/admin/dashboard/view-readingmateriallist',masterData.readingMaterial.videos]"> 
+                        See More <mat-icon>launch</mat-icon>
+                      </button>
+                      <br>
+                    </div>                  
+                  </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                  <div class="row info-inner greenish">
+                    <div class="col-lg-1 col-md-1 col-sm-3 col-xs-4 m-0 reading-icon">
+                      <mat-icon>present_to_all</mat-icon>
+                    </div>
+                    <div class="col-lg-11 col-md-11 col-sm-9 col-xs-8 m-0 reading-info">
+                      <h4> Total Slides</h4>
+                    </div>
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 m-0 reading-info-list">
+                      <ul >
+                        <li *ngFor="let item of slideList.slice(0, 6); let i = index">{{i+1}}. {{item.documentName}}</li>
+                      </ul>
+                      <button class="btn-space see-more-btn"  mat-raised-button color="warn" [routerLink]="['/admin/dashboard/view-readingmateriallist',masterData.readingMaterial.slides]"> 
+                        See More <mat-icon>launch</mat-icon>
+                      </button>
+                      <br>
+                    </div>                    
+                  </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                  <div class="row info-inner blueish">
+                    <div class="col-lg-1 col-md-1 col-sm-3 col-xs-4 m-0 reading-icon">
+                      <mat-icon>collections_bookmark</mat-icon>
+                    </div>
+                    <div class="col-lg-11 col-md-11 col-sm-9 col-xs-8 m-0 reading-info">
+                      <h4> Total Reading Materials</h4>
+                    </div>  
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 m-0 reading-info-list">
+                      <ul >
+                        <li *ngFor="let item of materialList.slice(0, 6); let i = index">{{i+1}}. {{item.documentName}}</li>
+                      </ul>
+                      <button class="btn-space see-more-btn"  mat-raised-button color="warn" [routerLink]="['/admin/dashboard/view-readingmateriallist',masterData.readingMaterial.materials]"> 
+                        See More <mat-icon>launch</mat-icon>
+                      </button>
+                      <br>
+                    </div>                  
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  
+  
+  
+   
+

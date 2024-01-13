@@ -1,0 +1,212 @@
+
+              <div class="responsive_table">
+                <div class="materialTableHeader">
+                  <div class="row">
+                    <div class="col-8">
+                      <ul class="header-buttons-left ml-0">
+                        <li class="dropdown"> 
+                          <h4>Trainee BIOData Other</h4>
+                        </li>
+                        <!-- <li class="dropdown">
+                          <input placeholder="Search" type="text" [(ngModel)]="searchText"  #filter class="browser-default search-field"
+                          aria-label="Search box">
+                        </li>
+                        <li> 
+                          <div class="icon-button-demo m-l-10">
+                            <button mat-mini-fab color="accent" (click)="applyFilter(searchText)">
+                              <mat-icon class="col-white">search</mat-icon>
+                            </button>
+                          </div>
+                        </li> -->
+                      </ul> 
+                    </div>
+                    <div class="col-4">
+                      <ul class="header-buttons">
+                        <li>
+                          <div class="icon-button-demo">
+                            <button class="btn-space"  mat-raised-button
+                            color="warn" [routerLink]="['/trainee-biodata/trainee-biodata-tab/main-tab-layout/main-tab/trainee-biodata-other-details', this.traineeId]"> 
+                            <mat-icon class="col-white">keyboard_backspace</mat-icon> Back
+                            </button>
+                            <button class="btn-space"  mat-raised-button
+                            color="primary" [routerLink]="['/trainee-biodata/trainee-biodata-tab/main-tab-layout/main-tab/update-trainee-biodata-other-details', this.traineeId, this.traineeBIODataOtherId]"> Update
+                              <mat-icon class="col-white">update</mat-icon>
+                            </button>
+                          </div>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+
+                <table class="table table-bordered">
+                  <thead>
+                    
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <th scope="row">Trainee Id</th>
+                      <td>{{traineeId}}</td>
+                      <th scope="row">BNA Curriculam Type</th>
+                      <td>{{bnaCurriculumType}}</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">BNA Semester</th>
+                      <td>{{bnaSemester}}</td>
+                      <th scope="row">UT Officer Type</th>
+                      <td>{{utofficerType}}</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">UT Officer Category</th>
+                      <td>{{utofficerCategory}}</td>
+                      <th scope="row">BNA Service Type </th>
+                      <td>{{bnaServiceType}}</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">Complexion</th>
+                      <td>{{complexion}}</td>
+                      <th scope="row">Branch</th>
+                      <td>{{branch}}</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">Height</th>
+                      <td>{{height}}</td>
+                      <th scope="row">Weight</th>
+                      <td>{{weight}}</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">Color Of Eye</th>
+                      <td>{{colorOfEye}}</td>
+                      <th scope="row">Blood Group</th>
+                      <td>{{bloodGroup}}</td>
+                    </tr>
+
+                    <tr>
+                      <th scope="row">Religion</th>
+                      <td>{{religion}}</td>
+                      <th scope="row">Caste</th>
+                      <td>{{caste}}</td>
+                    </tr>
+
+                    <tr>
+                      <th scope="row">Country</th>
+                      <td>{{country}}</td>
+                      <th scope="row">Marital Status</th>
+                      <td>{{maritalStatus}}</td>
+                    </tr>
+
+                    <tr>
+                      <th scope="row">BNA Promotion Status</th>
+                      <td>{{bnaPromotionStatus}}</td>
+                      <th scope="row">BNA Class Section Selection</th>
+                      <td>{{bnaClassSectionSelection}}</td>
+                    </tr>
+
+                    <tr>
+                      <th scope="row">Course Name</th>
+                      <td>{{courseName}}</td>
+                      <th scope="row">School Names</th>
+                      <td>{{schoolName}}</td>
+                    </tr>
+
+                    <tr>
+                      <th scope="row">Failure Status</th>
+                      <td>{{failureStatus}}</td>
+                      <th scope="row">BNA Instructor Type</th>
+                      <td>{{bnaInstructorType}}</td>
+                    </tr>
+
+                    <tr>
+                      <th scope="row">Present Billet</th>
+                      <td>{{presentBillet}}</td>
+                      <th scope="row">Age</th>
+                      <td>{{age}}</td>
+                    </tr>
+
+                    <tr>
+                      <th scope="row">Commission Date</th>
+                      <td>{{commissionDate}}</td>
+                      <th scope="row">Post Code</th>
+                      <td>{{postCode}}</td>
+                    </tr>
+
+                    <tr>
+                      <th scope="row">Identification Mark</th>
+                      <td>{{identificationMark}}</td>
+                      <th scope="row">Present Address</th>
+                      <td>{{presentAddress}}</td>
+                    </tr>
+
+                    <tr>
+                      <th scope="row">Permanent Address</th>
+                      <td>{{permanentAddress}}</td>
+                      <th scope="row">Trainee Status</th>
+                      <td>{{traineeStatus}}</td>
+                    </tr>
+
+                    <tr>
+                      <th scope="row">Passport No</th>
+                      <td>{{passportNo}}</td>
+                      <th scope="row">Driving Liccense</th>
+                      <td>{{drivingLiccense}}</td>
+                    </tr>
+
+                    <tr>
+                      <th scope="row">Bank Account</th>
+                      <td>{{bankAccount}}</td>
+                      <th scope="row">Credit Card</th>
+                      <td>{{creditCard}}</td>
+                    </tr>
+
+                    <tr>
+                      <th scope="row">Date Of Marriage</th>
+                      <td>{{dateOfMarriage}}</td>
+                      <th scope="row">Remarks</th>
+                      <td>{{remarks}}</td>
+                    </tr>
+
+                    <tr>
+                      <th scope="row">Place Of Birth</th>
+                      <td>{{placeOfBirth}}</td>
+                      <th scope="row">Dual Nationality</th>
+                      <td>{{dualNationality}}</td>
+                    </tr>
+
+                    <tr>
+                      <th scope="row">Second Nationality</th>
+                      <td>{{sNationalityId}}</td>
+                      <th scope="row">Reason Of Migration</th>
+                      <td>{{reasonOfMigration}}</td>
+                    </tr>
+
+                    <tr>
+                      <th scope="row">Migration Date</th>
+                      <td>{{migrationDate}}</td>
+                      <th scope="row">Additional Information</th>
+                      <td>{{additionalInformation}}</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">Relegation Date</th>
+                      <td>{{relegationDate}}</td>
+                      <th scope="row">Relegation Remarks</th>
+                      <td>{{relegationRemarks}}</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">Relegation Document</th>
+                      <td>{{relegationDocument}}</td>
+                      <th scope="row">Short Code</th>
+                      <td>{{shortCode}}</td>
+                    </tr>
+                    
+                  </tbody>
+                </table>
+
+               
+              </div>
+  
+  
+  
+  
+   
+
+

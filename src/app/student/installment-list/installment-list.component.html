@@ -1,0 +1,113 @@
+<section class="content">
+    <div class="container-fluid">
+      <div class="block-header">
+        <div class="row">
+          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <ul class="breadcrumb breadcrumb-style ">
+              <li class="breadcrumb-item">
+                <h4 class="page-title">Installment List</h4>
+              </li>
+              <li class="breadcrumb-item bcrumb-1"> 
+                <a routerLink="/admin/dashboard/main"><i class="fas fa-home"></i></a>
+              </li>
+              <li class="breadcrumb-item bcrumb-2">
+                <a href="#" onClick="return false;"> Installment List</a>
+              </li>
+              <li class="breadcrumb-item active">All</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+          <div class="card">
+            <div class="body">
+              <div class="responsive_table">
+                <div class="materialTableHeader"> 
+                  <div class="row">
+                    <div class="col-8">
+                      <ul class="header-buttons-left ml-0">
+                        <li class="dropdown">
+                        </li>
+                        <li class="dropdown">
+                          
+                        </li>
+                        <li> 
+                          <div class="icon-button-demo m-l-10">
+                            
+                          </div>
+                        </li>
+                      </ul>
+                    </div>
+
+                    <div class="col-4">
+                      <ul class="header-buttons">
+                        <li>
+                          <div class="icon-button-demo">
+                            <button class="btn-space"  mat-raised-button
+                            color="warn" routerLink="/admin/dashboard/trainee-dashboard"> 
+                            <mat-icon class="col-white">keyboard_backspace</mat-icon> Back
+                            </button>
+                          </div>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+
+
+                <mat-table #table [dataSource]="traineeRemittanceNotification" matSort class="mat-cell">
+                  <ng-container matColumnDef="ser">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header> Ser. </mat-header-cell>
+                    <mat-cell *matCellDef="let element; let i = index;"> {{ ((paging.pageIndex-1) * paging.pageSize) +
+                      i+1}} </mat-cell>
+                  </ng-container>
+  
+                  <ng-container matColumnDef="installmentAmount">
+                    <mat-header-cell class="total-mark" *matHeaderCellDef mat-sort-header>Installment Amount</mat-header-cell>
+                    <mat-cell class="total-mark" *matCellDef="let element"> {{element.installmentAmount}} </mat-cell>
+                  </ng-container>
+  
+                  <ng-container matColumnDef="paymentType">
+                    <mat-header-cell class="pass-mark" *matHeaderCellDef mat-sort-header>Payment Type</mat-header-cell>
+                    <mat-cell class="pass-mark" *matCellDef="let element"> {{element.paymentTypeName}} </mat-cell>
+                  </ng-container>
+                  <ng-container matColumnDef="nextInstallmentDate">
+                    <mat-header-cell class="xm-time" *matHeaderCellDef mat-sort-header>Installment/Due Remittance Date</mat-header-cell>
+                    <mat-cell class="xm-time" *matCellDef="let element"> {{element.nextInstallmentDate | date:'mediumDate'}} </mat-cell>
+                  </ng-container>
+                  <ng-container matColumnDef="status">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>Status</mat-header-cell>
+                    <mat-cell *matCellDef="let element"> 
+                      <span style="color: green; font-weight: bold;" *ngIf="element.status === 1">Paid</span>
+                      <span style="color: red; font-weight: bold;" *ngIf="element.status != 1">Due</span> 
+                    </mat-cell>
+                  </ng-container>
+                  <ng-container matColumnDef="receivedStatus">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>Received Status</mat-header-cell>
+                    <mat-cell *matCellDef="let element"> 
+                      
+                      <span style="color: green; font-weight: bold;" *ngIf="element.status === 1">
+                        <button *ngIf="element.receivedStatus === 0" class="btnbudget" (click)="inActiveItem(element)"  (click)="$event.stopPropagation()">Accept</button>
+                      </span>
+                      <span style="color: green; font-weight: bold;" *ngIf="element.status === 1 && element.receivedStatus == 1">Accepted</span> 
+                    </mat-cell>
+                  </ng-container>
+                  
+   
+                  <mat-header-row *matHeaderRowDef="displayedForeignRemittanceColumns"></mat-header-row>
+                  <mat-row *matRowDef="let row; columns: displayedForeignRemittanceColumns;"></mat-row>
+                </mat-table> 
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  
+  
+  
+   
+

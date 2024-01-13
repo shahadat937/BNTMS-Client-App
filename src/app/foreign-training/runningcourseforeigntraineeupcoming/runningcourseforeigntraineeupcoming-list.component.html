@@ -1,0 +1,124 @@
+<section class="content">
+  <div class="container-fluid">
+    <div class="block-header">
+      <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <ul class="breadcrumb breadcrumb-style ">
+            <li class="breadcrumb-item">
+              <h4 class="page-title">Upcoming Course of TY</h4>
+            </li>
+            <li class="breadcrumb-item bcrumb-1">
+              <a routerLink="/admin/dashboard/main"><i class="fas fa-home"></i></a>
+            </li>
+            <li class="breadcrumb-item bcrumb-2">
+              <a href="#" onClick="return false;">Upcoming Course of TY</a>
+            </li>
+            <li class="breadcrumb-item active">All</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="card">
+          <div class="body">
+            <div class="responsive_table" style="overflow-x:auto;">
+              <div class="materialTableHeader"> 
+              
+                <div class="row">
+                 
+                  <div class="col-8">
+                    <ul class="header-buttons-left ml-0">
+                      <li class="dropdown fts">
+                        <h4 class="on-going">UPCOMING COURSE OF TY</h4>
+                      </li>
+                    </ul>
+                  </div>
+                  <div class="col-4">
+                    <ul class="header-buttons go-to-d">
+                      <li>
+                        
+                        <div class="col-xl-2 col-lg-2 col-md-4 col-sm-12 mb-2">                            
+                          <button *ngIf="role === 'Foreign Training'" class="btn-space"  mat-raised-button
+                            color="primary" [routerLink]="['/admin/dashboard/foreigntraining-dashboard']"> 
+                            <mat-icon class="col-white" >keyboard_backspace</mat-icon> Go to Dashboard
+                          </button>
+                          
+                          
+                        </div>
+                      </li>
+                      <li>
+                        <!-- <div class="col-xl-2 col-lg-2 col-md-4 col-sm-12 mb-2">
+                          <button class="btn-space"  mat-raised-button
+                          color="primary" routerLink="/foreign-training/runningcoursforeigntraineedetails-list"> OnGoing Details
+                          </button>
+                        </div> -->
+                        
+                      </li>
+                     
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              <div id="print-routine">
+              <table class="table  tbl-by-group db-li-s-in">
+                <thead>
+                  <tr>
+                    <th class="cl-srl-up"><h5>SL</h5></th>
+                    <th class="cl-mrk"><h5>Course Name</h5></th>
+                    <th class="cl-mrk"><h5>Country</h5></th>
+                    <th class="cl-mrk"><h5>Participant Name</h5></th>
+                    <th class="cl-mrk"><h5>From-To</h5></th>
+                    <th class="cl-mrk"><h5>Go Reg</h5></th>
+                    <th class="cl-mrk"><h5>Med</h5></th>
+                    <th class="cl-mrk"><h5>Go</h5></th>
+                    <th class="cl-mrk-pass"><h5>Passport</h5></th>
+                    <th class="cl-mrk"><h5>Visa</h5></th>
+                    <th class="cl-mrk"><h5>SY</h5></th>
+                    <th class="cl-mrk"><h5>Air Ticket</h5></th>
+                    <th class="cl-mrk-rmrk"><h5>Financial Sanction</h5></th>
+                    <th class="cl-mrk"><h5>Remarks</h5></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <ng-container *ngFor="let data of groupArrays;let i= index;">
+                    <tr>
+                      <td [attr.rowspan]="data.courses.length + 1">{{i+1}}</td>
+                      <td class="cl-mrk-upc" [attr.rowspan]="data.courses.length + 1">{{data.courseName}}</td>
+                    </tr>
+                    <tr *ngFor="let number of data.courses;">
+                      <!-- <td class="cl-srl-up">{{(paging.pageIndex - 1) * paging.pageSize + i + 1}}</td> -->
+                      <!-- <td class="cl-mrk">{{number.course}} </td> -->
+                      <td class="cl-mrk">{{number.countryName}}</td>
+                      <td class="cl-mrk-upc-pn">{{number.rankPosition}} {{number.traineeName}} {{number.sailorRank}}  {{number.pno}}</td>
+                      <td class="cl-mrk-d">{{number.durationFrom | date:'dd MMM yyyy'}} <br> {{number.durationTo | date:'dd MMM yyyy'}} </td>
+                      <td class="cl-mrk">{{number.goReg}} </td>
+                      <td class="cl-mrk">{{number.med}} </td>
+                      <td class="cl-mrk">{{number.going}} </td>
+                      <td class="cl-mrk-pass">{{number.passport}} </td>
+                      <td class="cl-mrk">{{number.visa}} </td>
+                      <td class="cl-mrk">{{number.sy}} </td>
+                      <td class="cl-mrk">{{number.ticket}} </td>
+                      <td class="cl-mrk">{{number.financialSanction}} </td>
+                      <td class="cl-mrk">{{number.remark}} </td>
+                    </tr>                    
+                  </ng-container>
+                </tbody>
+              </table>
+            </div>
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 div-class div-left m-t-20">
+              <button class="btn-space"  mat-raised-button color="primary" (click)="printSingle()"> Print
+                <mat-icon class="col-white">print</mat-icon>
+              </button>
+            </div>
+              <!-- <mat-paginator [length]="paging.length" [showFirstLastButtons]="masterData.paging.showFirstLastButtons"
+                [pageSize]="paging.pageSize" [pageSizeOptions]="masterData.paging.pageSizeOptions"
+                (page)="pageChanged($event)">
+              </mat-paginator> -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

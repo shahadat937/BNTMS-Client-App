@@ -1,0 +1,126 @@
+<section class="content">
+    <div class="container-fluid">
+      <div class="block-header">
+        <div class="row">
+          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <ul class="breadcrumb breadcrumb-style ">
+              <li class="breadcrumb-item">
+                <h4 class="page-title">{{pageTitle}}</h4>
+              </li>
+              <li class="breadcrumb-item bcrumb-1">
+                <a routerLink="/admin/dashboard/main"><i class="fas fa-home"></i></a>
+              </li>
+              <li class="breadcrumb-item bcrumb-2">
+                <a href="#" onClick="return false;">Schedule Installment List</a>
+              </li>
+              <li class="breadcrumb-item active">{{destination}}</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="row clearfix">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+          <div class="card">
+            <div class="header">
+            </div>
+            <div class="body">
+              <form class="m-4" [formGroup]="CourseBudgetAllocationForm" (ngSubmit)="onSubmit()">
+                <div class="row">
+                  <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                        <mat-label>Course Name</mat-label>                        
+                        <mat-select formControlName="courseNamesId">
+                          <mat-option  value="0">--Select--</mat-option >
+                            <mat-option  (onSelectionChange)="onCourseNameSelectionChange($event)"  *ngFor="let dropdown of selectedCourseDuration" [value]="dropdown.value">
+                                {{dropdown.text}} 
+                              </mat-option>                          
+                        </mat-select>
+                    </mat-form-field>
+                  </div>     
+                  <div class="col-xl-9 col-lg-9 col-md-9 col-sm-12 mb-2">
+                    <div class="row right-row">
+                      <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+                        <div class="row">
+                          <div  *ngIf="isShown" class="container col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2 mt-2 sticky-table ex-mrk-li">
+                            <mat-table *ngIf="isShown"  #table [dataSource]="this.budgetCodes" matSort class="mat-cell ex-mrk-lft-tbl">  
+                              
+                              <ng-container matColumnDef="sl">
+                                <mat-header-cell *matHeaderCellDef mat-sort-header> Ser. </mat-header-cell>
+                                <mat-cell *matCellDef="let element; let i = index;"> {{ ((paging.pageIndex-1) *  paging.pageSize) + i+1}} </mat-cell>
+                              </ng-container>
+
+                              <ng-container matColumnDef="budgetCodes">
+                                <mat-header-cell *matHeaderCellDef mat-sort-header>Budget Code</mat-header-cell>
+                                <mat-cell *matCellDef="let element">{{element.budgetCodes}}
+                              </mat-cell>
+                              </ng-container>
+                              
+                              <ng-container matColumnDef="name">
+                                <mat-header-cell *matHeaderCellDef mat-sort-header>Name</mat-header-cell>
+                                <mat-cell *matCellDef="let element">{{element.name}} 
+                              </mat-cell>
+                              </ng-container>
+
+
+                              <ng-container matColumnDef="availableAmount">
+                                <mat-header-cell *matHeaderCellDef mat-sort-header>Available Amount</mat-header-cell>
+                                <mat-cell *matCellDef="let element">{{element.availableAmount}}
+                              </mat-cell>
+                              </ng-container>
+
+                              <ng-container matColumnDef="targetAmount">
+                                <mat-header-cell *matHeaderCellDef mat-sort-header>Due Remittance</mat-header-cell>
+                                <mat-cell *matCellDef="let element">{{element.targetAmount}}
+                              </mat-cell>
+                              </ng-container>
+                              <mat-header-row *matHeaderRowDef="displayedColumnsBudgetCode"></mat-header-row>
+                              <mat-row *matRowDef="let row; columns: displayedColumnsBudgetCode;"></mat-row>
+                            </mat-table>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>            
+                </div> 
+              </form>
+
+
+              <table class="table  tbl-by-group">
+                <thead>
+                  <tr>
+                    <th class="cl-srl"><h5>Trainee Name</h5></th>
+                    <th class="course-name-col"><h5>Budget Code</h5></th>
+                    <!-- <th class="course-name-col"><h5>Payment Type</h5></th> -->
+                    <th class="cl-mrk"><h5>Installment Amount</h5></th>
+                    <th class="cl-mrk"><h5>Installment/Due Remittance Date</h5></th>
+                    <th class="cl-mrk-rmrk"><h5>Actions</h5></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <ng-container *ngFor="let data of groupArrays;let i= index;">
+                    <tr>
+                      <td class="cl-srl" [attr.rowspan]="data.courses.length + 1">{{data.baseSchoolName}}</td>
+                    </tr>
+                    <tr *ngFor="let number of data.courses;">
+                      <td>{{number.budgetCode}}</td>
+                      <td>{{number.installmentAmount}}</td>
+                      <td>{{number.nextInstallmentDate | date:'mediumDate'}}</td>
+                      <td>
+                        <button *ngIf="number.status === 0" class="btnbudget" (click)="inActiveItem(number)"  (click)="$event.stopPropagation()">Pending</button>
+                      </td>
+                    </tr>
+                  </ng-container>
+                </tbody>
+              </table>            
+               <mat-paginator [length]="paging.length" [showFirstLastButtons]="masterData.paging.showFirstLastButtons"
+              [pageSize]="paging.pageSize" [pageSizeOptions]="masterData.paging.pageSizeOptions"
+              (page)="pageChanged($event)">
+              </mat-paginator>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+

@@ -1,0 +1,130 @@
+<section class="content">
+    <div class="container-fluid">
+      <div class="block-header">
+        <div class="row">
+          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <ul class="breadcrumb breadcrumb-style ">
+              <li class="breadcrumb-item">
+                <h4 class="page-title">{{pageTitle}}</h4>
+              </li>
+              <li class="breadcrumb-item bcrumb-1">
+                <a routerLink="/admin/dashboard/main"><i class="fas fa-home"></i></a>
+              </li>
+              <li class="breadcrumb-item bcrumb-2">
+                <a href="#" onClick="return false;">Budget Information List</a>
+              </li>
+              <li class="breadcrumb-item active">{{destination}}</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="row clearfix">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+          <div class="card">
+            <div class="header">
+            </div>
+            <div class="body">
+                <div class="row">
+                  
+                  <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+                    <div class="row right-row">
+                      <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+                        <div class="row">
+                          <div  class="container col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2 mt-2 sticky-table ex-mrk-li">
+                            <div class="materialTableHeader"> 
+                              <div class="row">
+                                <div class="col-8">
+                                  <ul class="header-buttons-left ml-0">
+                                    <li class="dropdown">
+                                    </li>
+                                    <!-- <li class="dropdown">
+                                      <input placeholder="Search" type="text" [(ngModel)]="searchText"  #filter class="browser-default search-field"
+                                      aria-label="Search box">
+                                    </li>
+                                    <li> 
+                                      <div class="icon-button-demo m-l-10">
+                                        <button mat-mini-fab color="accent" (click)="applyFilter(searchText)">
+                                          <mat-icon class="col-white">search</mat-icon>
+                                        </button>
+                                      </div>
+                                      
+                                      
+                                    </li> -->
+                                  </ul>
+                                </div>
+                                <div class="col-4">
+                                  <ul class="header-buttons">
+                                    <li>
+                                      <div class="icon-button-demo">                            
+                                        <button *ngIf="role === 'Foreign Training' && dbType != masterData.dbType.foreignTrainingDb" class="btn-space"  mat-raised-button
+                                          color="warn" [routerLink]="['/admin/dashboard/view-foreigncourselist']"> 
+                                          <mat-icon class="col-white">keyboard_backspace</mat-icon> Back
+                                        </button>
+                                        
+                                        <button *ngIf="dbType == masterData.dbType.foreignTrainingDb" class="btn-space"  mat-raised-button
+                                          color="warn" [routerLink]="['/admin/dashboard/foreigntraining-dashboard']"> 
+                                          <mat-icon class="col-white">keyboard_backspace</mat-icon> Back
+                                        </button>
+                                        <!-- <button  class="btn-space"  mat-raised-button
+                                          color="warn" [routerLink]="['/admin/dashboard/foreigntraining-dashboard']"> 
+                                          <mat-icon class="col-white">keyboard_backspace</mat-icon> Back
+                                        </button> -->
+                                        
+                                      </div>
+                                    </li>
+                                   
+                                  </ul>
+                                </div>
+                              </div>
+                            </div>
+                            <table class="table  tbl-by-group">
+                              <thead>
+                                <tr>
+                                  <th class="cl-srl"><h5>Trainee Name</h5></th>
+                                  <th class="budget-col"><h5>Budget Code</h5></th>
+                                  <!-- <th class="course-name-col"><h5>Payment Type</h5></th> -->
+                                  <th class="cl-mrk"><h5>Installment Amount</h5></th>
+                                  <th class="cl-mrk"><h5>Installment/Due Remittance Date</h5></th>
+                                  <th class="cl-mrk"><h5>Status</h5></th>
+                                  <th class="cl-mrk"><h5>Trainee Recieve Status</h5></th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <ng-container *ngFor="let data of groupArrays;let i= index;">
+                                  <tr>
+                                    <td class="cl-srl" [attr.rowspan]="data.courses.length + 1">{{data.baseSchoolName}}</td>
+                                  </tr>
+                                  <tr *ngFor="let number of data.courses;">
+                                    <td>{{number.budgetCodes}}</td>
+                                    <td>{{number.installmentAmount}}</td>
+                                    <td>{{number.nextInstallmentDate | date:'mediumDate'}}</td>
+                                    
+                                    <td>
+                                      <span style="color: green; font-weight: bold;" class="doc-yes" *ngIf="number.status == 1"> Paid </span>
+                                      <span style="color: red; font-weight: bold;" class="doc-no"  *ngIf="number.status == 0"> Due </span>
+                                    </td>
+                                    <td>
+                                      <span style="color: green; font-weight: bold;" class="doc-yes" *ngIf="number.status == 1 && number.receivedStatus == 1"> Recieved </span>
+                                      <span style="color: red; font-weight: bold;" class="doc-no"  *ngIf="number.status == 1 && number.receivedStatus == 0"> Pending </span>
+                                      <span style="color: red; font-weight: bold;" class="doc-no"  *ngIf="number.status == 0 && number.receivedStatus == 0"> - </span>
+                                    </td>
+                                    
+                                    
+                                  </tr>
+                                </ng-container>
+                              </tbody>
+                            </table> 
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>            
+                </div> 
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+

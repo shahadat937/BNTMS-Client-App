@@ -1,0 +1,198 @@
+<section class="content">
+  <div class="container-fluid">
+    <div class="block-header">
+      <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <ul class="breadcrumb breadcrumb-style ">
+            <li class="breadcrumb-item">
+              <h4 class="page-title">{{pageTitle}}</h4>
+            </li>
+            <li class="breadcrumb-item bcrumb-1">
+              <a routerLink="/admin/dashboard/main"><i class="fas fa-home"></i></a>
+            </li>
+            <li class="breadcrumb-item bcrumb-2">
+              <a href="#" onClick="return false;">Create JCOs Exam</a>
+            </li>
+            <li class="breadcrumb-item active">{{destination}}</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="row clearfix">
+      <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+        <div class="card">
+          <div class="header">
+          </div>
+          <div class="body">
+            <form class="m-4" [formGroup]="CourseDurationForm" (ngSubmit)="onSubmit()">
+              <div class="row">
+
+                <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12 mb-2">
+                  <mat-form-field class="example-full-width mb-3" appearance="outline">
+                    <mat-label>Exam Title</mat-label>
+
+                    <input matInput formControlName="courseTitle" required>
+                    <mat-error *ngIf="CourseDurationForm.get('courseTitle').hasError('required')">
+                      Course Title is Required
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+
+                <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12 mb-2">
+                  <mat-form-field class="example-full-width mb-3" appearance="outline">
+                    <mat-label>Conduct Year</mat-label>
+                    <mat-select formControlName="fiscalYearId" required>
+                      <mat-option value="0">--Select--</mat-option>
+                      <mat-option *ngFor="let fiscalYear of selectedfiscalyear" [value]="fiscalYear.value">
+                        {{fiscalYear.text}}
+                      </mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="CourseDurationForm.get('fiscalYearId').hasError('required')">
+                      Conduct Year is Required!
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+
+                <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12 mb-2">
+                  <mat-form-field class="example-full-width mb-3" appearance="outline">
+                    <mat-label> From</mat-label>
+                    <input matInput [matDatepicker]="frompicker" formControlName="durationFrom">
+                    <mat-datepicker-toggle matSuffix [for]="frompicker"></mat-datepicker-toggle>
+                    <mat-datepicker #frompicker></mat-datepicker>
+                  </mat-form-field>
+                </div>
+
+                <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12 mb-2">
+                  <mat-form-field class="example-full-width mb-3" appearance="outline">
+                    <mat-label> To</mat-label>
+                    <input matInput [matDatepicker]="topicker" formControlName="durationTo">
+                    <mat-datepicker-toggle matSuffix [for]="topicker"></mat-datepicker-toggle>
+                    <mat-datepicker #topicker></mat-datepicker>
+                  </mat-form-field>
+                </div>
+
+
+              </div>
+
+              <div class="row">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+                  <button class="btn-space" [class.auth-spinner]="loading" [disabled]="loading" [disabled]="!CourseDurationForm.valid " mat-raised-button
+                    color="primary">{{buttonText}}</button>
+                  <!-- <button type="button" mat-button routerLink="/central-exam/centralexam-list">Cancel</button> -->
+                </div>
+              </div>
+            </form>
+
+            <div class="row">
+              <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="card">
+                  <div class="body">
+                    <div class="responsive_table">
+                      <div class="materialTableHeader">
+                        <div class="row">
+                          <div class="col-8">
+                            <ul class="header-buttons-left ml-0">
+                              <li class="dropdown">
+                              </li>
+                              <li class="dropdown">
+                                <input placeholder="Search" type="text" [(ngModel)]="searchText" #filter
+                                  class="browser-default search-field" aria-label="Search box">
+                              </li>
+                              <li>
+                                <div class="icon-button-demo m-l-10">
+                                  <button mat-mini-fab color="accent" (click)="applyFilter(searchText)">
+                                    <mat-icon class="col-white">search</mat-icon>
+                                  </button>
+                                </div>
+
+
+                              </li>
+                            </ul>
+                          </div>
+                          <div class="col-4">
+                            <ul class="header-buttons">
+                              <li>
+                                <div class="icon-button-demo">
+                                </div>
+                              </li>
+
+                            </ul>
+                          </div>
+                        </div>
+                      </div>
+                      <mat-table #table [dataSource]="dataSource" matSort class="mat-cell">
+                        <ng-container matColumnDef="ser">
+                          <mat-header-cell *matHeaderCellDef mat-sort-header> Ser: </mat-header-cell>
+                          <mat-cell *matCellDef="let element; let i = index;"> {{ ((paging.pageIndex-1) *
+                            paging.pageSize) + i+1}} </mat-cell>
+                        </ng-container>
+
+                        <ng-container matColumnDef="courseName">
+                          <mat-header-cell *matHeaderCellDef mat-sort-header>Exam Name </mat-header-cell>
+                          <mat-cell *matCellDef="let element"> {{element.courseName}} - {{element.courseTitle}}
+                          </mat-cell>
+                        </ng-container>
+                        <ng-container matColumnDef="durationFrom">
+                          <mat-header-cell *matHeaderCellDef mat-sort-header>  From</mat-header-cell>
+                          <mat-cell *matCellDef="let element"> {{element.durationFrom | date:'mediumDate'}} </mat-cell>
+                        </ng-container>
+
+                        <ng-container matColumnDef="durationTo">
+                          <mat-header-cell *matHeaderCellDef mat-sort-header> To </mat-header-cell>
+                          <mat-cell *matCellDef="let element"> {{element.durationTo | date:'mediumDate'}} </mat-cell>
+                        </ng-container>
+
+                        <ng-container matColumnDef="status">
+                          <mat-header-cell class="qexam-s" *matHeaderCellDef mat-sort-header>Status</mat-header-cell>
+                          <mat-cell class="qexam-s" *matCellDef="let element">
+                            <button mat-raised-button class="custom-btn courseplan-btn"
+                              (click)="stopCentralExam(element)" (click)="$event.stopPropagation()">{{
+                              element.isCompletedStatus == 0 ? 'Running' : 'Stop' }}
+                            </button>
+                          </mat-cell>
+                        </ng-container>
+
+
+
+                        <ng-container matColumnDef="actions">
+                          <mat-header-cell *matHeaderCellDef class="qexam-0">Actions</mat-header-cell>
+                          <mat-cell *matCellDef="let row; let i=index;" class="qexam-0">
+                            <button mat-icon-button class="btn-tbl-nomination" title="List Of Candidates"
+                              [routerLink]="['/jcos-training/add-traineenomination/', row.courseDurationId,row.courseNameId]">
+                              <mat-icon aria-label="Edit" class="col-white">supervisor_account</mat-icon>
+                            </button>
+                            <button mat-icon-button color="accent" title=" Subject List" class="btn-tbl-view"
+                              [routerLink]="['/jcos-training/view-viewsubjectbyjcos',row.courseDurationId]">
+                              <mat-icon aria-label="Edit" class="col-white">book</mat-icon>
+                            </button>
+                            <button mat-icon-button color="accent" class="btn-tbl-edit"
+                              [routerLink]="['/jcos-training/update-jcostraining', row.courseDurationId]">
+                              <mat-icon aria-label="Edit" class="col-white">edit</mat-icon>
+                            </button>
+                            <button mat-icon-button color="accent" class="btn-tbl-delete"
+                              (click)="$event.stopPropagation()" (click)="deleteItem(row)">
+                              <mat-icon aria-label="Delete" class="col-white">delete</mat-icon>
+                            </button>
+                          </mat-cell>
+                        </ng-container>
+
+                        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+                      </mat-table>
+
+                      <mat-paginator [length]="paging.length"
+                        [showFirstLastButtons]="masterData.paging.showFirstLastButtons" [pageSize]="paging.pageSize"
+                        [pageSizeOptions]="masterData.paging.pageSizeOptions" (page)="pageChanged($event)">
+                      </mat-paginator>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

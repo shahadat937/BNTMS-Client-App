@@ -1,0 +1,58 @@
+              <div class="responsive_table">
+                <div class="materialTableHeader">
+                  <div class="row"> 
+                    <div class="col-8">
+                      <ul class="header-buttons-left ml-0">
+                        <li class="dropdown">
+                          <h4>Social Media</h4>
+                        </li>
+                      </ul> 
+                    </div>
+                    <div class="col-4">
+                      <ul class="header-buttons">
+                        <li>
+                          <div class="icon-button-demo">
+                            <button class="btn-space"  mat-raised-button
+                            color="warn" [routerLink]="['/trainee-biodata/sailor-biodata-tab/main-tab-layout/main-tab/social-media-details', this.traineeId]"> 
+                              <mat-icon class="col-white">keyboard_backspace</mat-icon> Back
+                            </button>
+                            <button class="btn-space"  mat-raised-button
+                            color="primary" [routerLink]="['/trainee-biodata/sailor-biodata-tab/main-tab-layout/main-tab/update-social-media-details',this.traineeId, this.socialMediaId]"> Update
+                              <mat-icon class="col-white">update</mat-icon>
+                            </button>
+                          </div>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+
+                <table class="table table-bordered">
+                  <thead>
+                    
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <!-- <th scope="row">Trainee Id</th>
+                      <td>{{traineeId}}</td> -->
+                      <th scope="row">Social Media Type</th>
+                      <td>{{socialMediaTypeName}}</td>
+                      <th scope="row">Social Media Account Name</th>
+                      <td>{{socialMediaAccountName}}</td>
+                    </tr>
+                    <!-- <tr>
+                     
+                      <th scope="row">additionalInformation</th>
+                      <td colspan="3">{{additionalInformation}}</td>
+                    </tr> -->
+                  </tbody>
+                </table>          
+              </div>
+  
+  
+  
+  
+   
+
+
+

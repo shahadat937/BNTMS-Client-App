@@ -1,0 +1,158 @@
+<section class="content">
+    <div class="container-fluid">
+      <div class="block-header">
+        <div class="row">
+          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <ul class="breadcrumb breadcrumb-style ">
+              <li class="breadcrumb-item">
+                <h4 class="page-title">{{pageTitle}}</h4>
+              </li>
+              <li class="breadcrumb-item bcrumb-1">
+                <a routerLink="/admin/dashboard/main"><i class="fas fa-home"></i></a>
+              </li>
+              <li class="breadcrumb-item bcrumb-2">
+                <a href="#" onClick="return false;">Create Foreign Course</a>
+              </li>
+              <li class="breadcrumb-item active">{{destination}}</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="row clearfix">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+          <div class="card">
+            <div class="header">
+            </div>
+            <div class="body">
+              <form class="m-4" [formGroup]="CourseDurationForm" (ngSubmit)="onSubmit()">
+                <div class="row">
+                  <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                        <mat-label>Country</mat-label>                
+                        <mat-select formControlName="countryId" required (selectionChange)="getForeignCoursesByCountryId()" >
+                            <mat-option  *ngFor="let dropdown of selectedcountry" [value]="dropdown.value">
+                                {{dropdown.text}} 
+                              </mat-option>                          
+                        </mat-select>
+                        <mat-error *ngIf="CourseDurationForm.get('countryId').hasError('required')">
+                          Country Name is Required!
+                        </mat-error>
+                    </mat-form-field>
+                  </div>
+                  <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                        <mat-label>Course Name</mat-label>                        
+                        <mat-select formControlName="courseNameId" required>
+                            <mat-option *ngFor="let dropdown of selectedcourse" [value]="dropdown.value">
+                                {{dropdown.text}} 
+                              </mat-option>                          
+                        </mat-select>
+                        <mat-error *ngIf="CourseDurationForm.get('courseNameId').hasError('required')">
+                          Course Name is Required!
+                        </mat-error>
+                    </mat-form-field>
+                  </div>
+                  <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                        <mat-label>Attend Year</mat-label>                        
+                        <input matInput formControlName="courseTitle" required>
+                        <mat-error *ngIf="CourseDurationForm.get('courseTitle').hasError('required')">
+                          Attend Year is Required
+                        </mat-error>
+                    </mat-form-field>
+                  </div>
+                  
+
+
+                  <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                      <mat-label>Duration From</mat-label>
+                        <input matInput [matDatepicker]="frompicker" formControlName="durationFrom" >
+                        <mat-datepicker-toggle matSuffix [for]="frompicker"></mat-datepicker-toggle>
+                       <mat-datepicker #frompicker></mat-datepicker>                                            
+                    </mat-form-field>
+                  </div>
+
+                  <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                      <mat-label>Duration To</mat-label>
+                        <input matInput [matDatepicker]="topicker" (dateChange)="getDaysfromDate($event)" formControlName="durationTo" >
+                        <mat-datepicker-toggle matSuffix [for]="topicker"></mat-datepicker-toggle>
+                       <mat-datepicker #topicker></mat-datepicker>                                            
+                    </mat-form-field>
+                  </div>
+
+
+                  <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 mt-4">
+                    <p style="color: green;font-weight: bold;">{{dayCount}} Days</p>
+                  </div>
+                  
+                  <div class="col-xl-5 col-lg-5 col-md-5 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                        <mat-label>Remark</mat-label>                        
+                        <input matInput formControlName="remark">
+                    </mat-form-field>
+                  </div>  
+                  <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12 mb-2 m-t-10">
+                    <button class="btn-space" [class.auth-spinner]="loading" [disabled]="loading" [disabled]="!CourseDurationForm.valid " mat-raised-button
+                        color="primary">{{buttonText}}</button>
+                    <button type="button" mat-button routerLink="/foreign-training/foreigncourse-list">Cancel</button>
+                  </div>
+                  
+                </div>
+               
+                <div *ngIf="isShown" class="row">
+                  <div class="container">
+                    <table class="table  tbl-by-group">
+                      <thead>
+                        <tr>
+                          <!-- <th class="cl-srl"><h5>Ser</h5></th> -->
+                          <th class="cl-srl"><h5>Country</h5></th>
+                          <th class="cl-srl"><h5>Course Name</h5></th>
+                          <th class="cl-srl"><h5>Attend Year</h5></th>
+                          <th class="cl-mrk"><h5> Duration</h5></th>
+                          <th class="cl-mrk"><h5> Status</h5></th>
+                          <th class="cl-mrk-rmrk"><h5>Actions</h5></th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <ng-container *ngFor="let data of groupArrays;let i= index;">
+                          <tr>
+                            <td [attr.rowspan]="data.courses.length + 1">{{data.country}}</td>
+                          </tr>
+                          <tr *ngFor="let number of data.courses;">
+                            <td class="cl-srl">{{number.courseName}}</td>
+                            <td>{{number.courseTitle}}</td>
+                            <td>{{number.durationFrom | date:'mediumDate'}} - {{number.durationTo | date:'mediumDate'}}</td>
+                            <td class="cl-status"><button mat-raised-button class="custom-btn courseplan-btn btn-green-bordered"  (click)="inActiveItem(number)"  (click)="$event.stopPropagation()">{{ number.isCompletedStatus == 0 ? 'Running' : 'Completed' }}</button></td>
+                            <td>
+                              
+                              <button mat-icon-button class="btn-tbl-nomination" title="List Of Trainee"
+                                [routerLink]="['/foreign-training/foreigntraineenomination-list/', number.courseDurationId]">
+                                <mat-icon aria-label="Edit" class="col-white">supervisor_account</mat-icon>
+                              </button>
+                              <button mat-icon-button color="accent" class="btn-tbl-edit"
+                                [routerLink]="['/foreign-training/update-foreigncourse', number.courseDurationId]">
+                                <mat-icon aria-label="Edit" class="col-white">edit</mat-icon>
+                              </button>
+                              <button mat-icon-button color="accent" class="btn-tbl-delete" (click)="$event.stopPropagation()"
+                                (click)="deleteItem(number)">
+                                <mat-icon aria-label="Delete" class="col-white">delete</mat-icon>
+                              </button>
+                            </td>
+                          </tr>
+                        </ng-container>
+                      </tbody>
+                    </table>
+                  </div>
+                  
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+

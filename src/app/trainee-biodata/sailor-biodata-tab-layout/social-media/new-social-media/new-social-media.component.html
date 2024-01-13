@@ -1,0 +1,87 @@
+<div class="block-header">
+    <div class="row">
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <ul class="breadcrumb breadcrumb-style ">
+          <li class="breadcrumb-item">
+            <h4 class="page-title">{{pageTitle}}</h4>
+          </li>
+          <li class="breadcrumb-item bcrumb-1">
+            <a routerLink="/admin/dashboard/main"><i class="fas fa-home"></i> </a>
+          </li>
+          <li class="breadcrumb-item bcrumb-2">
+            <a href="#" onClick="return false;">Social Media</a>
+          </li>
+          <li class="breadcrumb-item active">{{destination}}</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="row clearfix">
+    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+      <div class="card">
+        <div class="header">
+        </div>
+        <div class="body">
+          <form class="m-4" [formGroup]="SocialMediaForm" (ngSubmit)="onSubmit()">
+            <div class="row">
+
+              <div hidden class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                <mat-form-field class="example-full-width mb-3" appearance="outline">
+                  <mat-label>Trainee Id</mat-label>
+                  <input matInput formControlName="traineeId" required>
+                  <mat-error *ngIf="SocialMediaForm.get('traineeId').hasError('required')">
+                    Trainee name is required
+                  </mat-error>
+                </mat-form-field>
+              </div>
+
+              <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                <mat-form-field class="example-full-width mb-3" appearance="outline">
+                  <mat-label>Social Media Type</mat-label>
+                  <mat-select formControlName="socialMediaTypeId" required>
+                    <mat-option *ngFor="let social of selectedSocialMedia" [value]="social.value">
+                        {{social.text}}
+                    </mat-option>                          
+                  </mat-select>
+                  <mat-error *ngIf="SocialMediaForm.get('socialMediaTypeId').hasError('required')">
+                    Social Media Type is required
+                  </mat-error>
+                </mat-form-field>
+              </div>
+
+              
+              <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                <mat-form-field class="example-full-width mb-3" appearance="outline">
+                  <mat-label>Social Media Account Name</mat-label>
+                  <input matInput formControlName="socialMediaAccountName" required>
+                  <mat-error *ngIf="SocialMediaForm.get('socialMediaAccountName').hasError('required')">
+                    Social Media Account Name is required
+                  </mat-error>
+                </mat-form-field>
+              </div>
+             
+              <!-- <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                <mat-form-field class="example-full-width mb-3" appearance="outline">
+                  <mat-label>Additional Information</mat-label>
+                  <input matInput formControlName="additionalInformation" required>
+                  <mat-error *ngIf="SocialMediaForm.get('additionalInformation').hasError('required')">
+                    Additional Information is required
+                  </mat-error>
+                </mat-form-field>
+              </div> -->
+            </div>
+            <div class="row">
+              <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+                <button class="btn-space" [class.auth-spinner]="loading" [disabled]="loading" [disabled]="!SocialMediaForm.valid " mat-raised-button
+                  color="primary">{{buttonText}}</button>
+                <button type="button" mat-button [routerLink]="['/trainee-biodata/sailor-biodata-tab/main-tab-layout/main-tab/social-media-details/',this.traineeId]">Cancel</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+

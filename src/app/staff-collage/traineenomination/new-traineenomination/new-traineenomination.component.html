@@ -1,0 +1,249 @@
+<section class="content">
+  <div class="container-fluid">
+    <div class="block-header">
+      <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <ul class="breadcrumb breadcrumb-style ">
+            <li class="breadcrumb-item">
+              <h4 class="page-title">{{pageTitle}}</h4>
+            </li>
+            <li class="breadcrumb-item bcrumb-1">
+              <a routerLink="/admin/dashboard/main"><i class="fas fa-home"></i></a>
+            </li>
+            <li class="breadcrumb-item bcrumb-2">
+              <a href="#" onClick="return false;">Trainee Nomination</a>
+            </li>
+            <li class="breadcrumb-item active">{{destination}}</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="row clearfix">
+      <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+        <div class="card">
+          <div class="header">
+          </div>
+          <div class="body">
+            <form class="m-4" [formGroup]="TraineeNominationForm" (ngSubmit)="onSubmit()">
+              <div class="row">
+
+                  <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                        <mat-label>Trainee</mat-label>                        
+                        <input formControlName="traineeName" matInput type="text" [matAutocomplete]="auto" />
+                        <mat-autocomplete #auto="matAutocomplete" >
+                          <mat-option *ngFor="let item of filteredOptions" [value]="item" (onSelectionChange)="onTraineeSelectionChanged(item)">
+                            {{item.text}}
+                          </mat-option>
+                        </mat-autocomplete>
+                    </mat-form-field>
+                  </div>
+                  <div class="col-xl-2 col-lg-2 col-md-2 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                        <mat-label>Exam Center</mat-label>                        
+                        <mat-select formControlName="examCenterId" required>
+                          <mat-option  value="0">--Select--</mat-option >
+                            <mat-option *ngFor="let examcenter of selectedExamCenter" [value]="examcenter.value">
+                                {{examcenter.text}} 
+                              </mat-option>                          
+                        </mat-select>
+                        <mat-error *ngIf="TraineeNominationForm.get('examCenterId').hasError('required')">
+                          exam center is Required!
+                        </mat-error>
+                    </mat-form-field>
+                  </div>
+                  <div class="col-xl-2 col-lg-2 col-md-2 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                        <mat-label>New Atempt</mat-label>                        
+                        <mat-select formControlName="newAtemptId" required>
+                          <mat-option  value="0">--Select--</mat-option >
+                            <mat-option *ngFor="let newatempt of selectedNewAtempt" [value]="newatempt.value">
+                                {{newatempt.text}} 
+                              </mat-option>                          
+                        </mat-select>
+                        <mat-error *ngIf="TraineeNominationForm.get('newAtemptId').hasError('required')">
+                          newa tempt is Required!
+                        </mat-error>
+                    </mat-form-field>
+                  </div>
+
+                  <div  class="col-xl-2 col-lg-2 col-md-2 col-sm-12 mb-2">
+                    <mat-form-field  class="example-full-width mb-3" appearance="outline">
+                      <mat-label>Present Billet</mat-label>
+                    <input  matInput  formControlName="presentBillet" value={{this.presentBilletName}} readonly="true">
+                  </mat-form-field>
+                  </div>
+
+
+                  <div  class="col-xl-2 col-lg-2 col-md-2 col-sm-12 mb-2">
+                    <mat-form-field  class="example-full-width mb-3" appearance="outline">
+                      <mat-label>Previews Attempt</mat-label>
+                    <input  matInput  formControlName="previousAttemp" value={{this.nominationCount}} readonly="true">
+                  </mat-form-field>
+                  </div>
+
+                  <!-- <div class="col-xl-2 col-lg-2 col-md-2 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                      <mat-label>Previews Attempt</mat-label>
+                      <input matInput formControlName="previousAttemp">
+                    </mat-form-field>
+                  </div> -->
+                  <!-- this.nominationCount -->
+              </div>
+             
+              <div class="row">
+                <div class="col-xl-5 col-lg-5 col-md-5 col-sm-12 mb-2">
+                  <button class="btn-space" [class.auth-spinner]="loading" [disabled]="loading" [disabled]="!TraineeNominationForm.valid " mat-raised-button
+                      color="primary">{{buttonText}}</button>
+                      <button class="btn-space"  mat-raised-button
+                      color="warn" routerLink="/staff-collage/add-staffcollagecourse"> 
+                      <mat-icon class="col-white">keyboard_backspace</mat-icon> Back
+                      </button>
+                </div>
+                <div *ngIf="isTrainee" class="col-xl-7 col-lg-7 col-md-7 col-sm-12 mb-2">
+                  <p>Age:- {{traineeAge}} | Commission Service:- {{traineeJoining}}</p>
+                </div>
+              </div>
+            </form>
+
+               <div class="row">
+      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="card">
+          <div class="body">
+            <div class="responsive_table">
+              <div class="materialTableHeader"> 
+                <div class="row">
+                  <div class="col-8">
+                    <ul class="header-buttons-left ml-0">
+                      <li class="dropdown">
+                      </li>
+                      <li class="dropdown">
+                        <input placeholder="Search" type="text" [(ngModel)]="searchText"  #filter class="browser-default search-field"
+                        aria-label="Search box">
+                      </li>
+                      <li> 
+                        <div class="icon-button-demo m-l-10">
+                          <button mat-mini-fab color="accent" (click)="applyFilter(searchText)">
+                            <mat-icon class="col-white">search</mat-icon>
+                          </button>
+                        </div>
+                        
+                        
+                      </li>
+                    </ul>
+                  </div>
+                  <div class="col-4">
+                    <ul class="header-buttons">
+                      <li>
+                        <div class="icon-button-demo">
+                          <button class="btn-space"  mat-raised-button color="primary" (click)="printSingle()"> Print
+                            <mat-icon class="col-white">print</mat-icon>
+                          </button>
+                        </div>
+                      </li>
+                     
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              
+              <div id="printNomineeList">
+                <table class="table nomination-custom-design staff-collage">
+                  <thead>
+                    <tr>
+                      <th rowspan="2" class="cl-srl">Ser</th>
+                      <th rowspan="2" class="cl-name">Rank and Name</th>
+                      <th rowspan="2" class="cl-pno">PNo</th>
+                      <th rowspan="2" class="cl-attempt">No of Attempt</th>
+                      <th colspan="3" class="cl-age">Age on 01 Jan {{yearNow}}</th>
+                      <th colspan="3" class="cl-service">Commission Service<br> on 01 Jan {{yearNow}}</th>
+                      <th rowspan="2" class="cl-billet">Billet</th>
+                      <th rowspan="2" class="cl-remark">Remarks</th>
+                      <th rowspan="2" class="cl-action">Action</th>
+                    </tr>
+                    <tr>
+                      <th class="cl-age-year">Year</th>
+                      <th class="cl-age-month">Month</th>
+                      <th class="cl-age-day">Day</th>
+                      <th class="cl-service-year">Year</th>
+                      <th class="cl-service-month">Month</th>
+                      <th class="cl-service-day">Day</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let unit of nominatedList; let i = index">
+                      <td class="cl-srl" scope="row">{{i+1}}</td>
+  
+                      <td  class="cl-name"> 
+                        {{unit.rankPosition}}  {{unit.traineeName}} 
+                      </td>
+                      <td  class="cl-pno"> 
+                        {{unit.traineePNo}} 
+                      </td>
+                      <td  class="cl-attempt"> 
+                        {{unit.newAtempt}} 
+                      </td>
+  
+                      <td  class="cl-age-year"> 
+                        {{getCalculateAge(unit.traineeDOB,1)}} 
+                      </td>
+                      <td  class="cl-age-month"> 
+                        {{getCalculateAge(unit.traineeDOB,2)}} 
+                      </td>
+                      <td  class="cl-age-day"> 
+                        {{getCalculateAge(unit.traineeDOB,3)}} 
+                      </td>
+                      
+                      <td  class="cl-service-year"> 
+                        {{getCalculateAge(unit.traineeJoiningDate,1)}} 
+                      </td>
+                      <td  class="cl-service-month"> 
+                        {{getCalculateAge(unit.traineeJoiningDate,2)}} 
+                      </td>
+                      <td  class="cl-service-day"> 
+                        {{getCalculateAge(unit.traineeJoiningDate,3)}} 
+                      </td>
+  
+                      <td  class="cl-billet"> 
+                        {{unit.presentBillet}} 
+                      </td>
+                      <td  class="cl-remark"> 
+                        {{unit.remark}} 
+                      </td>
+                      <td  class="cl-action"> 
+                        <!-- <button mat-icon-button color="accent" class="btn-tbl-edit" 
+                          [routerLink]="['/staff-collage/update-traineenomination', unit.traineeNominationId]">
+                          <mat-icon aria-label="Edit" class="col-white">edit</mat-icon>
+                        </button> -->
+                        <button mat-icon-button color="accent" class="btn-tbl-delete" (click)="$event.stopPropagation()"
+                          (click)="deleteItem(unit)">
+                          <mat-icon aria-label="Delete" class="col-white">delete</mat-icon> 
+                        </button>
+                      </td>
+                      
+                      
+                    </tr>
+                    
+                  </tbody>
+                </table>
+              </div>
+              
+          
+               <mat-paginator [length]="paging.length" [showFirstLastButtons]="masterData.paging.showFirstLastButtons"
+              [pageSize]="paging.pageSize" [pageSizeOptions]="masterData.paging.pageSizeOptions"
+              (page)="pageChanged($event)">
+              </mat-paginator>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+

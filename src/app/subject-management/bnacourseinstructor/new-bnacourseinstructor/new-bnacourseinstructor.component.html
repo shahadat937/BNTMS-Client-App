@@ -1,0 +1,292 @@
+<section class="content">
+    <div class="container-fluid">
+      <div class="block-header">
+        <div class="row">
+          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <ul class="breadcrumb breadcrumb-style ">
+              <li class="breadcrumb-item">
+                <h4 class="page-title">{{pageTitle}}</h4>
+              </li> 
+              <li class="breadcrumb-item bcrumb-1">
+                <a routerLink="/admin/dashboard/main"><i class="fas fa-home"></i></a>
+              </li>
+              <li class="breadcrumb-item bcrumb-2">
+                <a href="#" onClick="return false;">Course Instructor</a>
+              </li>
+              <li class="breadcrumb-item active">{{destination}}</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="row clearfix">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+          <div class="card">
+            <div class="header">
+            </div>
+            <div class="body">
+              <form class="form-border-design" [formGroup]="CourseInstructorForm" (ngSubmit)="onSubmit()">
+                <div class="row">
+                  <div *ngIf="role != userRole.SuperAdmin && role != userRole.BNASchool && role != userRole.JSTISchool" class="col-xl-3 col-lg-3 col-md-4 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                        <mat-label>School Name</mat-label>                
+                        <mat-select formControlName="baseSchoolNameId" required (selectionChange)="getselectedcoursedurationbyschoolname()">
+                          <mat-option  value="0">--Select--</mat-option >
+                            <mat-option *ngFor="let semester of selectedSchool" [value]="semester.value">
+                                {{semester.text}} 
+                              </mat-option>                          
+                        </mat-select>
+                        <mat-error *ngIf="CourseInstructorForm.get('baseSchoolNameId').hasError('required')">
+                          School Name is Required!
+                        </mat-error>
+                    </mat-form-field>
+                  </div>
+
+                  <!-- <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                        <mat-label>Course Title</mat-label>                        
+                        <mat-select formControlName="courseName">
+                          <mat-option  value="0">--Select--</mat-option>
+                            <mat-option (onSelectionChange)="onBaseNameSelectionChangeGetModule($event)"  *ngFor="let dropdown of selectedcoursedurationbyschoolname" [value]="dropdown.value">
+                                {{dropdown.text}}  
+                            </mat-option>                           
+                        </mat-select> 
+                        <mat-error *ngIf="CourseInstructorForm.get('courseName').hasError('required')"> 
+                          Course Title is Required!  
+                        </mat-error> 
+                    </mat-form-field> 
+                  </div> -->
+                  <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                        <mat-label>Course Title</mat-label>                        
+                        <mat-select formControlName="courseName">
+                          <mat-option  value="0">--Select--</mat-option>
+                            <mat-option (onSelectionChange)="onBaseNameSelectionChangeGetModule($event)" *ngFor="let dropdown of selectedcoursedurationbyschoolname" [value]="dropdown.value">
+                                {{dropdown.text}}  
+                            </mat-option>                           
+                        </mat-select> 
+                        <mat-error *ngIf="CourseInstructorForm.get('courseName').hasError('required')"> 
+                          Course Title is Required!  
+                        </mat-error> 
+                    </mat-form-field> 
+                  </div>
+
+                  <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                      <mat-label>Semester</mat-label>
+                      <mat-select formControlName="bnaSemesterId" required>
+                        <mat-option  value="0">--Select--</mat-option >
+                        <mat-option *ngFor="let subject of selectedSemester" [value]="subject.value">
+                          {{subject.text}} 
+                        </mat-option>                          
+                      </mat-select>
+                      <mat-error *ngIf="CourseInstructorForm.get('bnaSemesterId').hasError('required')">
+                        Semester is required!
+                      </mat-error>
+                    </mat-form-field>
+                  </div>
+                  <!-- <div class="col-xl-3 col-lg-3 col-md-4 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                        <mat-label>Module</mat-label>      
+                        <mat-select formControlName="courseModuleId" required (selectionChange)="getselectedbnasubjectname()">
+                          <mat-option  value="0">--Select--</mat-option >
+                            <mat-option *ngFor="let semester of selectedCourseModuleByBaseSchoolAndCourseNameId" [value]="semester.value">
+                                {{semester.text}} 
+                              </mat-option>                          
+                        </mat-select>
+                        <mat-error *ngIf="CourseInstructorForm.get('courseModuleId').hasError('required')">
+                          Module is Required!
+                        </mat-error>
+                    </mat-form-field>
+                  </div> -->
+              
+                  
+                  <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                      <mat-label>BNA Subject Curriculum</mat-label>
+                      <mat-select formControlName="bnaSubjectCurriculumId" (selectionChange)="getselectedbnasubjectname()">
+                        <mat-option  value="0">--Select--</mat-option >
+                        <mat-option (onSelectionChange)="onStatus($event)" *ngFor="let subject of selectedSubjectCurriculum" [value]="subject.value">
+                          {{subject.text}} 
+                        </mat-option>                          
+                      </mat-select>
+                    </mat-form-field>
+                  </div>
+                  <div *ngIf="department == 1019" class="col-xl-3 col-lg-3 col-md-2 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                      <mat-label>Department</mat-label>
+                      <mat-select formControlName="departmentId">
+                        <mat-option  value="0">--Select--</mat-option >
+                        <mat-option *ngFor="let subject of selectedDepartment" [value]="subject.value">
+                          {{subject.text}} 
+                        </mat-option>                          
+                      </mat-select>
+                    </mat-form-field>
+                  </div>
+                  <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                        <mat-label> Subject Name</mat-label>                        
+                        <mat-select formControlName="bnaSubjectNameId">
+                          <mat-option  value="0">--Select--</mat-option >
+                            <mat-option *ngFor="let dropdown of selectedsubjectname" [value]="dropdown.value">
+                                {{dropdown.text}} 
+                              </mat-option>                          
+                        </mat-select>
+                    </mat-form-field>
+                  </div>
+
+                  <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12 mb-2">                    
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                      <mat-label>Course Section</mat-label>                        
+                      <mat-select formControlName="courseSectionId" required (selectionChange)="onSectionChangeGetInstructorList()">
+                        <mat-option  value="0">--Select--</mat-option >
+                          <mat-option *ngFor="let dropdown of selectedCourseSection" [value]="dropdown.value">
+                              {{dropdown.text}} 
+                            </mat-option>                          
+                      </mat-select>
+                      <mat-error *ngIf="CourseInstructorForm.get('courseSectionId').hasError('required')">
+                        Course Section is Required!
+                      </mat-error>
+                    </mat-form-field>
+                  </div>
+
+                  <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                        <mat-label>Mark Type</mat-label>                        
+                        <mat-select formControlName="subjectMarkId" required (selectionChange)="onSubjectMarkSelectionGetMarkType()">
+                          <mat-option  value="0">--Select--</mat-option >
+                            <mat-option *ngFor="let dropdown of selectedmarktype" [value]="dropdown.value">
+                                {{dropdown.text}} 
+                              </mat-option>                          
+                        </mat-select>
+                        <mat-error *ngIf="CourseInstructorForm.get('subjectMarkId').hasError('required')">
+                          Mark Type is Required!
+                        </mat-error>
+                    </mat-form-field>
+                  </div>
+
+                  <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                      <mat-label>Instructor PNo</mat-label>                        
+                      <input formControlName="traineeName" matInput type="text" [matAutocomplete]="auto" />
+                      <mat-autocomplete #auto="matAutocomplete" >
+                        <mat-option *ngFor="let item of filteredOptions" [value]="item" (onSelectionChange)="onTraineeSelectionChanged(item)">
+                          {{item.text}}
+                        </mat-option>
+                      </mat-autocomplete>
+                    </mat-form-field>
+                  </div>  
+                  <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                        <mat-label>Exam Mark Entry</mat-label>                        
+                        <mat-select formControlName="examMarkEntry" required>
+                          <mat-option  value="1">Yes</mat-option>
+                          <mat-option  value="0">No</mat-option>
+                        </mat-select>
+                        <mat-error *ngIf="CourseInstructorForm.get('examMarkEntry').hasError('required')">
+                          Exam Mark Entry is Required!
+                        </mat-error>
+                    </mat-form-field>
+                  </div>
+                  <!-- <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mb-2">
+                    <input type="checkbox" formControlName="markEntryStatus">
+                  </div>   -->
+                  <div class="col-xl-1 col-lg-1 col-md-6 col-sm-12 mb-2 m-t-10">
+                    <button class="btn-space" [class.auth-spinner]="loading" [disabled]="loading" [disabled]="!CourseInstructorForm.valid " mat-raised-button
+                        color="primary">{{buttonText}}</button>
+                    <!-- <button type="button" mat-button routerLink="/course-management/courseinstructor-list">Cancel</button> -->
+                  </div>                                                   
+                </div>
+               
+                <div class="row">
+                  
+                </div>
+              </form>
+              <div  *ngIf="isShown"  class="row create-table mt-5">
+                <!-- <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 div-class div-left"> -->
+                  <h3 class="text-center table-title">INSTRUCTORS LIST</h3>
+                  <!-- </div> -->
+                  <div class="container">
+                    <mat-table #table [dataSource]="GetInstructorByParameters" matSort class="mat-cell assign-instructor-list">               
+                      <ng-container matColumnDef="ser">
+                        <mat-header-cell class="col-ser" *matHeaderCellDef mat-sort-header> Ser: </mat-header-cell>
+                        <mat-cell class="col-ser" *matCellDef="let element; let i = index;"> {{ ((paging.pageIndex-1) *  paging.pageSize) + i+1}} </mat-cell>
+                      </ng-container>    
+    
+                      
+                      <!-- <ng-container matColumnDef="courseName">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header>Course Name </mat-header-cell>
+                        <mat-cell *matCellDef="let element"> {{element.courseName}} - {{element.courseDuration}} </mat-cell>
+                      </ng-container>
+    
+                      <ng-container matColumnDef="baseSchoolName">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header>School Name </mat-header-cell>
+                        <mat-cell *matCellDef="let element"> {{element.baseSchoolName}} </mat-cell>
+                      </ng-container> -->
+    
+                      <ng-container matColumnDef="bnaSemester">
+                        <mat-header-cell class="col-module" *matHeaderCellDef mat-sort-header>Semester </mat-header-cell>
+                        <mat-cell class="col-module" *matCellDef="let element"> {{element.bnaSemester}} </mat-cell>
+                      </ng-container>
+    
+                      <ng-container matColumnDef="bnaSubjectName">
+                        <mat-header-cell class="col-sub" *matHeaderCellDef mat-sort-header> Subject Name </mat-header-cell>
+                        <mat-cell class="col-sub" *matCellDef="let element"> {{element.bnaSubjectName}} ({{element.markType}}) </mat-cell>
+                      </ng-container>
+    
+                      <ng-container matColumnDef="trainee">
+                        <mat-header-cell class="col-trainee" *matHeaderCellDef mat-sort-header>Instructor</mat-header-cell>
+                        <mat-cell class="col-trainee" *matCellDef="let element">
+                          <span *ngIf="element.traineeStatusId != masterData.TraineeStatus.sailor">{{element.traineeRank}} {{element.traineeName}}   <span class="t-n-pno-d"> (P No {{element.traineePno}})</span> </span>
+                          <span *ngIf="element.traineeStatusId == masterData.TraineeStatus.sailor"><span class="t-n-pno-d"> (O No {{element.traineePno}})</span> {{element.traineeName}}, {{element.saylorRank}}</span>
+                          
+                        </mat-cell>
+                      </ng-container>
+
+                      
+                      <ng-container matColumnDef="markentry">
+                        <mat-header-cell class="col-status" *matHeaderCellDef mat-sort-header>Mark Entry</mat-header-cell>
+                        <mat-cell class="col-status" *matCellDef="let element">
+                          <span *ngIf="element.examMarkEntry == 1"> Yes</span> 
+                          <span *ngIf="element.examMarkEntry == 0"> No</span> 
+                        </mat-cell>
+                      </ng-container>
+
+                      <ng-container matColumnDef="status">
+                        <mat-header-cell class="col-status" *matHeaderCellDef mat-sort-header>Status</mat-header-cell>
+                        <mat-cell class="col-status" *matCellDef="let element">
+                          <button *ngIf="element.status == 0" mat-raised-button class="custom-btn courseplan-btn"  (click)="stopCourseInstructor(element)"
+                            (click)="$event.stopPropagation()">Running
+                          </button>
+                          <button *ngIf="element.status == 1" mat-raised-button class="custom-btn courseplan-btn"  (click)="RunningCourseInstructor(element)"
+                            (click)="$event.stopPropagation()">Stopped
+                          </button>
+                        </mat-cell>
+                      </ng-container>
+                      
+                      <ng-container matColumnDef="actions">
+                        <mat-header-cell *matHeaderCellDef class="pr-0">Actions</mat-header-cell>
+                        <mat-cell *matCellDef="let row; let i=index;" class="pr-0">
+                          <!-- <button mat-icon-button color="accent" class="btn-tbl-edit" 
+                          [routerLink]="['/subject-management/update-subjectinstructor', row.courseInstructorId]">
+                            <mat-icon aria-label="Edit" class="col-white">edit</mat-icon>
+                          </button> -->
+                          <button mat-icon-button color="accent" class="btn-tbl-delete" (click)="$event.stopPropagation()"
+                            (click)="deleteItem(row)">
+                            <mat-icon aria-label="Delete" class="col-white">delete</mat-icon> 
+                          </button>
+                        </mat-cell>
+                      </ng-container>
+    
+                      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+                    </mat-table>
+                  </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+

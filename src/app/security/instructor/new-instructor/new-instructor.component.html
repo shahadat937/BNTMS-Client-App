@@ -1,0 +1,261 @@
+<section class="content">
+    <div class="container-fluid">
+      <div class="block-header">
+        <div class="row">
+          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <ul class="breadcrumb breadcrumb-style "> 
+              <li class="breadcrumb-item">
+                <h4 class="page-title">{{pageTitle}}</h4>
+              </li>
+              <li class="breadcrumb-item bcrumb-1">
+                <a routerLink="/admin/dashboard/main"><i class="fas fa-home"></i></a>
+              </li>
+              <li class="breadcrumb-item bcrumb-2">
+                <a href="#" onClick="return false;">Instructor</a>
+              </li>
+              <li class="breadcrumb-item active">{{destination}}</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="row clearfix">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+          <div class="card">
+            <div class="header">
+             
+  
+            </div>
+            <div class="body">
+              <form class="m-4" [formGroup]="InstructorForm" (ngSubmit)="onSubmit()">
+                <div class="row">
+                  <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                      <mat-label>Instructor</mat-label>                        
+                      <input formControlName="trainee" matInput type="text" [matAutocomplete]="auto" required />
+                      <mat-autocomplete #auto="matAutocomplete" >
+                        <mat-option *ngFor="let item of filteredOptions" [value]="item" (onSelectionChange)="onTraineeSelectionChanged(item)">
+                          {{item.text}}
+                        </mat-option>
+                      </mat-autocomplete>
+                      <mat-error *ngIf="InstructorForm.get('traineeId').hasError('required')">
+                        Trainee is Required
+                      </mat-error>
+                    </mat-form-field>
+                  </div>
+
+                  <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                      <mat-label>User name</mat-label>
+                      <input matInput formControlName="userName" required>
+                      <mat-error *ngIf="InstructorForm.get('userName').hasError('required')">
+                        User name is required
+                      </mat-error>
+                    </mat-form-field>
+                  </div>
+
+                  <!-- <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                      <mat-label>First Name</mat-label>
+                      <input matInput formControlName="firstName" >
+                      <mat-error *ngIf="InstructorForm.get('firstName').hasError('required')">
+                        First Name is required
+                      </mat-error>
+                    </mat-form-field>
+                  </div>
+                  <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                      <mat-label>Last Name</mat-label>
+                      <input matInput formControlName="lastName" >
+                      <mat-error *ngIf="InstructorForm.get('lastName').hasError('required')">
+                        Last Name is required
+                      </mat-error>
+                    </mat-form-field>
+                  </div> -->
+                  <!-- <div  class="col-xl-4 col-lg-4 col-md-6 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                      <mat-label>Password</mat-label>
+                      <input matInput [type]="hide1 ? 'password' : 'text'" formControlName="password">
+                      <a class="show-pwd-icon" href="#" onClick="return false;" matSuffix (click)="hide1 = !hide1"
+                        [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide1">
+                        <mat-icon>{{hide1 ? 'visibility_off' : 'visibility'}}</mat-icon>
+                      </a>
+                      <mat-error *ngIf="InstructorForm.get('password').hasError('pattern')">
+                        Password Required Non Alphanumeric, Lower And Upper Alphabet
+                      </mat-error>
+                      <mat-error *ngIf="InstructorForm.get('password').hasError('maxLength')">
+                        Password Maximum Lenth 20
+                      </mat-error>
+                      <mat-error *ngIf="InstructorForm.get('password').hasError('required')">
+                        Password is required
+                      </mat-error>
+                      
+                    </mat-form-field>
+                  </div>
+
+                  <div  class="col-xl-4 col-lg-4 col-md-6 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                      <mat-label>Confirm Password</mat-label>
+                      <input matInput [type]="hide2 ? 'password' : 'text'" formControlName="confirmPassword">
+                      <a class="show-pwd-icon" href="#" onClick="return false;" matSuffix (click)="hide2 = !hide2"
+                        [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide2">
+                        <mat-icon>{{hide2 ? 'visibility_off' : 'visibility'}}</mat-icon>
+                      </a>
+                      <mat-error *ngIf="InstructorForm.get('confirmPassword').hasError('required')">
+                        Confirm Password is required
+                      </mat-error>
+                    </mat-form-field>
+                  </div>  -->
+
+                  <!-- <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                      <mat-label>roleId</mat-label>
+                      <input matInput formControlName="roleId" required>
+                      <mat-error *ngIf="InstructorForm.get('roleId').hasError('required')">
+                        roleId is required
+                      </mat-error>
+                    </mat-form-field>
+                  </div> -->
+
+                  <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                      <mat-label>Role</mat-label>
+                        
+                      <mat-select formControlName="roleName" required>
+                        <mat-option *ngFor="let code of roleValues" [value]="code.value">
+                          {{code.text}}
+                        </mat-option>                          
+                      </mat-select>
+                      <mat-error *ngIf="InstructorForm.get('roleName').hasError('required')">
+                        Role name is required
+                      </mat-error>
+                    </mat-form-field> 
+                  </div>
+
+                  <!-- <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                      <mat-label>branchInfoId</mat-label>
+                      <input matInput formControlName="branchInfoId" required>
+                      <mat-error *ngIf="InstructorForm.get('branchInfoId').hasError('required')">
+                        branchInfoId is required
+                      </mat-error>
+                    </mat-form-field>
+                  </div> -->
+
+                  <!-- <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                      <mat-label>Branch Info</mat-label>
+                        
+                      <mat-select formControlName="branchId" required>
+                        <mat-option *ngFor="let code of branchValues" [value]="code.value">
+                          {{code.text}}
+                        </mat-option>                          
+                      </mat-select>
+                      <mat-error *ngIf="InstructorForm.get('branchId').hasError('required')">
+                        Branch Id is required
+                      </mat-error>
+                    </mat-form-field> 
+                  </div> -->
+
+                  <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                      <mat-label>Phone Number</mat-label>
+                      <input matInput formControlName="phoneNumber" required>
+                      <mat-error *ngIf="InstructorForm.get('phoneNumber').hasError('required')">
+                        Phone Number is required
+                      </mat-error>
+                    </mat-form-field>
+                  </div>
+
+                  <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                      <mat-label>Email</mat-label>
+                      <input matInput formControlName="email" required>
+                      <mat-error *ngIf="InstructorForm.get('email').hasError('required')">
+                        Email is required
+                      </mat-error>
+                    </mat-form-field>
+                  </div>   
+
+                  <!-- <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                        <mat-label>Organization</mat-label>                       
+                        <mat-select formControlName="firstLevel" required (selectionChange)="onOrganizationSelectionChangeGetCommendingArea()">
+                            <mat-option *ngFor="let code of selectedOrganization" [value]="code.value">
+                                {{code.text}}
+                              </mat-option>                          
+                        </mat-select>
+                        <mat-error *ngIf="InstructorForm.get('firstLevel').hasError('required')">
+                          Organization is required
+                        </mat-error>
+                    </mat-form-field>
+                  </div>
+                  <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                        <mat-label>Commending Area</mat-label>                       
+                        <mat-select formControlName="secondLevel" required (selectionChange)="onCommendingAreaSelectionChangeGetBaseName()">
+                            <mat-option *ngFor="let code of selectedCommendingArea" [value]="code.value">
+                                {{code.text}}
+                              </mat-option>                          
+                        </mat-select>
+                        <mat-error *ngIf="InstructorForm.get('secondLevel').hasError('required')">
+                          Organization is required
+                        </mat-error>
+                    </mat-form-field>
+                  </div>
+                  <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                        <mat-label>Base Name</mat-label>                       
+                        <mat-select formControlName="thirdLevel" required (selectionChange)="onBaseNameSelectionChangeGetBaseSchoolName()">
+                            <mat-option *ngFor="let code of selectedBaseName" [value]="code.value">
+                                {{code.text}}
+                              </mat-option>                          
+                        </mat-select>
+                        <mat-error *ngIf="InstructorForm.get('thirdLevel').hasError('required')">
+                          Base Name is required
+                        </mat-error>
+                    </mat-form-field>
+                  </div>
+
+                  <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                        <mat-label>School Name</mat-label>                       
+                        <mat-select formControlName="fourthLevel" required>
+                            <mat-option *ngFor="let code of selectedSchoolName" [value]="code.value">
+                                {{code.text}}
+                              </mat-option>                          
+                        </mat-select>
+                        <mat-error *ngIf="InstructorForm.get('fourthLevel').hasError('required')">
+                          School Name is required
+                        </mat-error>
+                    </mat-form-field>
+                  </div> -->
+
+                  
+
+                              
+
+
+             
+                </div>
+                <div class="row" *ngIf="validationErrors.length > 0">
+                  <ul class="text-danger">
+                      <li *ngFor="let error of validationErrors">
+                          {{error}}
+                      </li>
+                  </ul>
+              </div>
+                <div class="row">
+                  <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+                    <button class="btn-space" [class.auth-spinner]="loading" [disabled]="loading" [disabled]="!InstructorForm.valid " mat-raised-button
+                      color="primary">{{buttonText}}</button>
+                    <button type="button" mat-button routerLink="/security/instructor-list">Cancel</button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  

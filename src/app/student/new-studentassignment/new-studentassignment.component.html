@@ -1,0 +1,153 @@
+<section class="content">
+    <div class="container-fluid">
+      <div class="block-header">
+        <div class="row">
+          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <ul class="breadcrumb breadcrumb-style ">
+              <li class="breadcrumb-item">
+                <h4 class="page-title">{{pageTitle}}</h4>
+              </li>
+              <li class="breadcrumb-item bcrumb-1">
+                <a routerLink="/admin/dashboard/main"><i class="fas fa-home"></i></a>
+              </li>
+              <li class="breadcrumb-item bcrumb-2">
+                <a href="#" onClick="return false;">Submit Assignment</a>
+              </li>
+              <li class="breadcrumb-item active">{{destination}}</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="row clearfix">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+          <div class="card">
+            <!--<div class="header">
+              <h2>{{destination}} Blood Group</h2>
+  
+            </div>-->
+            <div class="body">
+              <form class="m-4" [formGroup]="InstructorAssignmentForm" (ngSubmit)="onSubmit()">
+                <div class="row">
+
+                  <!-- <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                      <mat-label>Start Date</mat-label>
+                        <input matInput [matDatepicker]="frompicker" formControlName="startDate" >
+                        <mat-datepicker-toggle matSuffix [for]="frompicker"></mat-datepicker-toggle>
+                       <mat-datepicker #frompicker></mat-datepicker>                                            
+                    </mat-form-field>
+                  </div> -->
+
+                  <!-- <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                      <mat-label>End Date</mat-label>
+                        <input matInput [matDatepicker]="topicker" formControlName="endDate" >
+                        <mat-datepicker-toggle matSuffix [for]="topicker"></mat-datepicker-toggle>
+                       <mat-datepicker #topicker></mat-datepicker>                                            
+                    </mat-form-field>
+                  </div> -->
+
+                  <!-- <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                      <mat-label>Assignment Topic</mat-label>
+                      <textarea matInput formControlName="assignmentTopic"></textarea>
+                      
+                    </mat-form-field>
+                  </div> -->
+                  <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                        <mat-label>Browse</mat-label>                        
+                        <!-- <input matInput formControlName="documentLink"> -->
+                        <ngx-mat-file-input (change)="onFileChanged($event)" accept=".txt,.pdf,.xls,.xlsx,.doc,.docx,.ppt,.pptx">
+                        </ngx-mat-file-input>
+                        <mat-icon matSuffix>attachment</mat-icon>
+                    </mat-form-field>
+                  </div> 
+                  <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                      <mat-label>Reamrks</mat-label>
+                      <textarea matInput formControlName="remarks"></textarea>
+                      <!-- <mat-error *ngIf="InstructorAssignmentForm.get('assignmentTopic').hasError('required')">
+                        InstructorAssignment name is required
+                      </mat-error> -->
+                    </mat-form-field>
+                  </div>
+                  
+                  <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 mb-2">
+                    <button class="btn-space" [class.auth-spinner]="loading" [disabled]="loading" [disabled]="!InstructorAssignmentForm.valid " mat-raised-button
+                      color="primary">Save</button>
+                      <button class="btn-space"  mat-raised-button color="warn" [routerLink]="['/admin/dashboard/studentassignment-list/',traineeId,baseSchoolNameId,courseNameId,courseDurationId]" >Back</button>
+                    <!-- <button type="button" mat-button routerLink="/basic-setup/board-list">Cancel</button> -->
+                  </div> 
+                  <!--<div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                      <mat-label>Menu position</mat-label>
+                      <input matInput formControlName="menuPosition">
+                    </mat-form-field>
+                  </div>-->
+                </div>
+            
+                
+
+               
+                <div class="row">
+                  
+                </div>
+              </form>
+
+
+              <div   class="row create-table">
+                <!-- <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 div-class div-left"> -->
+                  <h3 class="text-center table-title">Assignment List</h3>
+                  <!-- </div> -->
+                  <div class="container">
+                    <mat-table #table [dataSource]="traineeAssignmentList" matSort class="mat-cell">               
+                      <ng-container matColumnDef="ser">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header> Ser: </mat-header-cell>
+                        <mat-cell *matCellDef="let element; let i = index;">
+                          
+                          {{ ((paging.pageIndex-1) *  paging.pageSize) + i+1}} 
+                        </mat-cell>
+                      </ng-container>    
+    
+                      <ng-container matColumnDef="assignmentTopic">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header>Assignment Topic</mat-header-cell>
+                        <mat-cell *matCellDef="let element"> {{element.assignmentTopic}} </mat-cell>
+                      </ng-container>
+    
+                      <ng-container matColumnDef="imageUpload">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header>Doc</mat-header-cell>
+                        <mat-cell class="icon-d" *matCellDef="let element"> <mat-lebel *ngIf="element.imageUpload"><a target="_blank" [href]="element.imageUpload"><mat-icon>picture_as_pdf</mat-icon></a></mat-lebel> </mat-cell>
+                      </ng-container>
+
+                      <ng-container matColumnDef="remarks">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header> Remarks</mat-header-cell>
+                        <mat-cell *matCellDef="let element"> {{element.remarks}} </mat-cell>
+                      </ng-container>
+    
+                  <ng-container matColumnDef="actions">
+                    <mat-header-cell *matHeaderCellDef class="pr-0">Actions</mat-header-cell>
+                    <mat-cell *matCellDef="let row; let i=index;" class="pr-0">
+                      <!-- <button mat-icon-button color="accent" class="btn-tbl-edit" 
+                      [routerLink]="['/course-management/update-courseinstructor', row.courseInstructorId]">
+                        <mat-icon aria-label="Edit" class="col-white">edit</mat-icon>
+                      </button> -->
+                      <button mat-icon-button color="accent" class="btn-tbl-delete" (click)="$event.stopPropagation()"
+                        (click)="deleteItem(row)">
+                        <mat-icon aria-label="Delete" class="col-white">delete</mat-icon> 
+                      </button>
+                    </mat-cell>
+                  </ng-container>
+                      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+                    </mat-table>
+                  </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  

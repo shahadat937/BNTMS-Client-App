@@ -1,0 +1,106 @@
+<section class="content">
+    <div class="container-fluid">
+      <div class="block-header">
+        <div class="row">
+          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <ul class="breadcrumb breadcrumb-style ">
+              <li class="breadcrumb-item">
+                <h4 class="page-title">{{destination}} List</h4>
+              </li>
+              <li class="breadcrumb-item bcrumb-1">
+                <a routerLink="/admin/dashboard/main"><i class="fas fa-home"></i></a>
+              </li>
+              <li class="breadcrumb-item bcrumb-2">
+                <a href="#" onClick="return false;">{{destination}} List</a>
+              </li>
+              <li class="breadcrumb-item active">All</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+          <div class="card">
+            <div class="body">
+              <div class="responsive_table">
+                <div class="materialTableHeader"> 
+                  <div class="row">
+                    <div class="col-8">
+                      <ul class="header-buttons-left ml-0">
+                        <li class="dropdown">
+                        </li>
+                      </ul>
+                    </div>
+                    <div class="col-4">
+                      <ul class="header-buttons">
+                        <li>
+                          <div class="icon-button-demo">
+                            <button class="btn-space"  mat-raised-button
+                            color="warn" routerLink="/admin/dashboard/main"> 
+                            <mat-icon class="col-white">keyboard_backspace</mat-icon> Back
+                            </button>
+                          </div>
+                        </li>
+                       
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+                <mat-table  #table [dataSource]="examList" matSort class="table table-hover absent-list mat-cell db-tbl instructor-xm-lst">               
+                  <ng-container matColumnDef="ser">
+                    <mat-header-cell class="ser-col" *matHeaderCellDef mat-sort-header> Ser: </mat-header-cell>
+                    <mat-cell class="ser-col" *matCellDef="let element; let i = index;"> {{ ((paging.pageIndex-1) *  paging.pageSize) + i+1}} </mat-cell>
+                  </ng-container>          
+                  <ng-container matColumnDef="course">
+                    <mat-header-cell class="sub-col" *matHeaderCellDef mat-sort-header>Course </mat-header-cell>
+                    <mat-cell class="sub-col" *matCellDef="let element"> {{element.course}} - {{element.courseTitle}}</mat-cell>
+                  </ng-container>
+                  <ng-container matColumnDef="subject">
+                    <mat-header-cell class="sub-col" *matHeaderCellDef mat-sort-header>Subject </mat-header-cell>
+                    <mat-cell class="sub-col" *matCellDef="let element"> {{element.subjectName}} </mat-cell>
+                  </ng-container>          
+                  <ng-container matColumnDef="date">
+                    <mat-header-cell class="date-col" *matHeaderCellDef mat-sort-header>Exam Date </mat-header-cell>
+                    <mat-cell class="date-col" *matCellDef="let element"> {{element.date | date:'mediumDate'}} </mat-cell>
+                  </ng-container>          
+                  <ng-container matColumnDef="examStatus">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>Instructor Submission </mat-header-cell>
+                    <mat-cell *matCellDef="let element" >
+                      <span class="incomplete-status" *ngIf="element.resultSubmissionStatus === 0"> Pending </span>
+                      <span class="complete-status" *ngIf="element.resultSubmissionStatus === 1">  Submitted </span>
+                    </mat-cell>
+                  </ng-container>  
+                  <ng-container matColumnDef="markStatus">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>Result Submission </mat-header-cell>
+                    <mat-cell *matCellDef="let element" >
+                      <span class="mark-submit" *ngIf="element.resultSubmissionStatus === 1"> 
+                        <!-- <button [routerLink]="['/exam-management/add-bnaexammarkinstructor/',traineeId]" class="btnDetailsins" mat-flat-button color="primary">Syllabus</button> -->
+                        <!-- <button *ngIf="courseNameId == this.masterData.courseName.QExam" mat-raised-button class="custom-btn courseplan-btn"  [routerLink]="['/admin/dashboard/qexammarkentry-list/',traineeId,element.courseDurationId,element.courseNameId,this.masterData.coursetype.CentralExam,element.classRoutineId,element.branchId,element.bnaSubjectNameId]">
+                          Mark Submit
+                        </button>
+                        <button *ngIf="courseNameId == this.masterData.courseName.JCOsTraining" mat-raised-button class="custom-btn courseplan-btn"  [routerLink]="['/admin/dashboard/jcoexammarkentry-list/',traineeId,element.courseDurationId,element.courseNameId,this.masterData.coursetype.CentralExam,element.classRoutineId,element.bnaSubjectNameId]">
+                          Mark Submit
+                        </button> -->
+                        <button mat-raised-button class="custom-btn courseplan-btn"  [routerLink]="['/staff-collage/approve-staffcollegemark/',element.courseDurationId,element.courseNameId,this.masterData.coursetype.CentralExam,element.classRoutineId,element.bnaSubjectNameId]">
+                          Approve
+                        </button>
+                      </span>
+                      
+                    </mat-cell>
+                  </ng-container>                                
+                  <mat-header-row *matHeaderRowDef="displayedExamEvaluationColumns"></mat-header-row>
+                  <mat-row *matRowDef="let row; columns: displayedExamEvaluationColumns;"></mat-row>
+                </mat-table>  
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  
+  
+  
+   
+

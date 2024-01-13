@@ -1,0 +1,103 @@
+<section class="content">
+    <div class="container-fluid">
+      <div class="block-header">
+        <div class="row">
+          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <ul class="breadcrumb breadcrumb-style ">
+              <li class="breadcrumb-item">
+                <h4 class="page-title">Weekly Program List</h4>
+              </li>
+              <li class="breadcrumb-item bcrumb-1">
+                <a routerLink="/admin/dashboard/main"><i class="fas fa-home"></i></a>
+              </li>
+              <li class="breadcrumb-item bcrumb-2">
+                <a href="#" onClick="return false;">Weekly Program List</a>
+              </li>
+              <li class="breadcrumb-item active">All</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+          <div class="card">
+            <div class="body">
+              <div class="responsive_table">
+                <div class="materialTableHeader"> 
+                  <div class="row">
+                    <div class="col-8">
+                      <ul class="header-buttons-left ml-0">
+                        <li class="dropdown">
+                        </li>
+                      </ul>
+                    </div>
+                    <!-- [routerLink]="['/admin/dashboard/school-dashboard',schoolId]" -->
+                    <div class="col-4">
+                      <ul class="header-buttons">
+                        <li>
+                          <div class="icon-button-demo">
+                            <button class="btn-space"  mat-raised-button
+                            color="warn" [routerLink]="['/admin/dashboard/school-dashboard']"> 
+                            <mat-icon class="col-white">keyboard_backspace</mat-icon> Back
+                            </button>
+                          </div>
+                        </li>
+                       
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+                <mat-table #table [dataSource]="RoutineByCourse" matSort class="table table-hover absent-list mat-cell db-tbl">               
+                  <ng-container matColumnDef="ser">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header> Ser: </mat-header-cell>
+                    <mat-cell *matCellDef="let element; let i = index;"> {{ ((paging.pageIndex-1) *  paging.pageSize) + i+1}} </mat-cell>
+                  </ng-container>  
+
+                  <ng-container matColumnDef="course">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>Course </mat-header-cell>
+                    <mat-cell *matCellDef="let element"> {{element.course}} - {{element.courseTitle}} </mat-cell>
+                  </ng-container>
+
+                  <ng-container matColumnDef="courseDuration">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>Course Duration </mat-header-cell>
+                    <mat-cell *matCellDef="let element"> {{element.durationFrom | date:'mediumDate'}} - {{element.durationTo | date:'mediumDate'}} </mat-cell>
+                  </ng-container>
+
+                  <!-- <ng-container matColumnDef="moduleName">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header> Module</mat-header-cell>
+                    <mat-cell *matCellDef="let element"> {{element.moduleName}} </mat-cell>
+                  </ng-container>
+
+                  <ng-container matColumnDef="routineCount">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header> Routine</mat-header-cell>
+                    <mat-cell *matCellDef="let element"> {{element.routineCount}} </mat-cell>
+                  </ng-container> -->
+                  
+                  <ng-container matColumnDef="actions">
+                    <mat-header-cell ngClass="custom-action local" *matHeaderCellDef class="pr-0"></mat-header-cell>
+                    <mat-cell ngClass="custom-action local" *matCellDef="let row; let i=index;" class="pr-0">
+                      
+
+                      <button [routerLink]="['/admin/dashboard/view-routinebycourse',schoolId,row.courseNameId, row.courseDurationId]" mat-flat-button color="primary">Details</button>
+                    </mat-cell>
+                  </ng-container>
+
+                  
+                  
+
+                  <mat-header-row *matHeaderRowDef="displayedRoutineCountColumns"></mat-header-row>
+                  <mat-row *matRowDef="let row; columns: displayedRoutineCountColumns;"></mat-row>
+                </mat-table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  
+  
+  
+   
+

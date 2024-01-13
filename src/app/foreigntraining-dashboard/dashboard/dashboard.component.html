@@ -1,0 +1,252 @@
+<section class="content">
+  <div class="container-fluid">
+    <div class="block-header">
+      <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <ul class="breadcrumb breadcrumb-style ">
+            <li class="breadcrumb-item">
+              <h4 class="page-title">Foreign Trainig Dashboard</h4>
+            </li>
+            <li class="breadcrumb-item bcrumb-1">
+              <a routerLink="#">
+                <i class="fas fa-home"></i> </a>
+            </li>
+            <li class="breadcrumb-item active">Foreign Trainig Dashboard</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+
+
+    <!-- find instructor -->
+
+    <!-- <div class="row">
+      <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3">
+        <div class="card">
+          <div class="body">
+            <form [formGroup]="GetSchoolForm" (ngSubmit)="onSubmit()">
+              <div class="row">
+                
+                <div class="col-xl-8 col-lg-8 col-md-8 col-sm-12 mb-2">
+                  <mat-form-field class="example-full-width mb-3" appearance="outline">
+                      <mat-label>School Name</mat-label>                        
+                      <mat-select formControlName="schoolId" required>
+                          <mat-option *ngFor="let school of selectedschool" [value]="school.value">
+                              {{school.text}} 
+                            </mat-option>                          
+                      </mat-select>
+                      <mat-error *ngIf="GetSchoolForm.get('schoolId').hasError('required')">
+                        school Names Id is Required!
+                      </mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mb-2">
+                  <button class="btn-space" [class.auth-spinner]="loading" [disabled]="loading" [disabled]="!GetSchoolForm.valid " mat-raised-button
+                      color="primary">Find</button>
+                </div>
+              </div>
+              
+            </form>
+            
+            
+          </div>
+        </div>
+      </div>
+    </div> -->
+      <!-- *ngIf="isShown" -->
+
+      <div class="row">
+       <!-- Useful links -->
+     <div *ngIf="isShown"  class="col-xs-8 col-sm-8 col-md-8 col-lg-8 foreign-top-row">     
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <div class="card usefullink">
+          <div class="header">
+          </div>
+          <div class="body">
+            <div class="row dash-cd-m-0">
+              <!-- <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 div-class div-left align-center">
+                <h3>Useful Links</h3>
+              </div> -->
+            </div>
+            <div class="row">
+              <div class="col-lg-12 col-md-12 col-sm-12">
+
+              
+                <button [routerLink]="['/admin/dashboard/view-budgetinfolist']" class="col-lg-4 col-md-4 col-sm-4 btnDetails" mat-flat-button color="primary">Budget Information</button>
+                <button [routerLink]="['/admin/dashboard/view-foreigncourselist']" class="col-lg-4 col-md-4 col-sm-4 btnDetails" mat-flat-button color="primary">Payment Schedule</button>
+                <button [routerLink]="['/admin/dashboard/view-remittancenotification']" class="col-lg-4 col-md-4 col-sm-4 btnNotification" mat-flat-button color="primary">Remittance Notification</button>
+                <button [routerLink]="['/air-ticket/foreigntrainingcoursereport-list']" class="col-lg-4 col-md-4 col-sm-4 btnDetails" mat-flat-button color="primary">Course Report</button>
+                 <!-- <button [routerLink]="['/admin/dashboard/pendingexamevaluation-list']" class="col-lg-4 col-md-4 col-sm-4 btnDetails" mat-flat-button color="primary">Pending Exam Evaluation</button>
+                <button [routerLink]="['/admin/dashboard/readingmateriallist-dashboard']" class="col-lg-4 col-md-4 col-sm-4 btnDetails" mat-flat-button color="primary">Reading Material</button>
+                -->
+                <!-- <button class="btnDetails" mat-flat-button color="primary">Teacher Evaluation</button>
+                <button class="btnDetails" mat-flat-button color="primary">Syllabus</button> -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+        <div *ngIf="isShown"  class="col-xl-4 col-lg-4 col-md-12 col-sm-12 foreign-top-row">     
+          <div class="card">
+            <div class="body">
+              <table class="full-width col-12 count-tbl db-main">
+                <tr>
+                  <th>Total Trainee</th>
+                  <td>
+                    <a [routerLink]="['/admin/dashboard/view-foreigncourseraineelist',runningCourseType,0,dbType]">{{ForeignTraineeCount}}</a>
+                  </td>
+                </tr>
+                <!-- <tr>
+                  <th>Foreign Trainee</th>
+                  <td>
+                    <a [routerLink]="['/admin/dashboard/view-totalforeigntraineelistbyschool']">{{ForeignTraineeCount}}</a>
+                  </td>
+                </tr> -->
+                <tr>
+                  <th>Officers</th>
+                  <td>
+                    <a [routerLink]="['/admin/dashboard/view-foreigncourseraineelist',runningCourseType,this.masterData.TraineeStatus.officer,dbType]">{{ForeignOfficerCount}}</a>
+                  </td>
+                </tr>
+                <tr>
+                  <th>Sailors</th>
+                  <td>
+                    <a [routerLink]="['/admin/dashboard/view-foreigncourseraineelist',runningCourseType,this.masterData.TraineeStatus.sailor,dbType]">{{ForeignSailorCount}}</a>
+                  </td>
+                </tr>
+                <tr>
+                  <th>Civil</th>
+                  <td>
+                    <a [routerLink]="['/admin/dashboard/view-foreigncourseraineelist',runningCourseType,this.masterData.TraineeStatus.civil,dbType]">{{ForeignCivilCount}}</a>
+                  </td>
+                </tr>
+                <!-- <tr>
+                  <th>Total Local Courses (Running)</th>
+                  <td><span class="no-link"><a [routerLink]="['/admin/dashboard/runningcourses-list', schoolId]">{{localCourseCount}}</a></span></td>
+                </tr> -->
+                <tr>
+                  <th class="calendar-color">Upcoming Courses</th>
+                  <td><span class="no-link"><a [routerLink]="['/admin/dashboard/view-upcomingforeigncourselist',runningCourseType,dbType]">></a></span></td>
+                </tr>
+                <tr class="calendar-color">
+                  <th>Event Calendar</th>
+                  <td>
+                    <a [routerLink]="['/calendar']">></a>
+                  </td>
+                </tr>
+              </table>
+            </div>
+          </div>
+        </div>    
+      </div>
+
+      
+
+   
+    <!-- <div *ngIf="isShown" class="row clearfix">
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <div class="card">
+          <div class="header">
+          </div>
+          <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+              <div class="card">
+                <div class="body"> -->
+
+
+                    
+                  <div class="row dash-cd-m-0">
+                      <!-- <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 div-class div-left">
+                        <h3 class="rnc">Running Courses</h3>
+                     </div> -->
+                     <!-- <div class="col-lg-11 col-md-11 col-sm-12 col-xs-12 div-class div-left course-filter">
+                      <button class="running-course" (click)="getCoursesByViewType(1)">Running</button>
+                      <button class="passing-course" (click)="getCoursesByViewType(2)">Completed</button>
+                      <button class="upcoming-course" (click)="getSpUpcomingCourseDurationsByTypeForInterService()">Upcoming</button>
+                      
+                    </div> -->
+                    </div> 
+                     <!-- Running CourseList -->
+                   <!-- <mat-table #table [dataSource]="runningCourses" matSort class="mat-cell notice-list db-tbl foreign-db">               
+                      <ng-container matColumnDef="ser">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header> Ser: </mat-header-cell>
+                        <mat-cell *matCellDef="let element; let i = index;"> {{ ((paging.pageIndex-1) *  paging.pageSize) + i+1}} </mat-cell>
+                      </ng-container>    
+    
+                      <ng-container matColumnDef="course">
+                        <mat-header-cell class="course-col" *matHeaderCellDef mat-sort-header>Name of Course </mat-header-cell>
+                        <mat-cell class="course-col" *matCellDef="let element"> {{element.course}} - {{element.courseTitle}} </mat-cell>
+                      </ng-container>
+    
+    
+    
+                      <ng-container matColumnDef="duration">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header> Duration (Date) </mat-header-cell>
+                        <mat-cell *matCellDef="let element"> {{element.durationFrom | date:'mediumDate'}} - {{element.durationTo | date:'mediumDate'}} </mat-cell>
+                      </ng-container>
+    
+                      <ng-container matColumnDef="dayCount">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header>Duration (Days) </mat-header-cell>
+                        <mat-cell *matCellDef="let element"> {{getDaysfromDate(element.durationFrom | date:'mediumDate',element.durationTo | date:'mediumDate')}} Day(s) </mat-cell>
+                      </ng-container>
+
+                      <ng-container matColumnDef="country">
+                        <mat-header-cell class="cntry-col" *matHeaderCellDef mat-sort-header>Country </mat-header-cell>
+                        <mat-cell class="cntry-col" *matCellDef="let row">{{row.countryName}}</mat-cell>
+                      </ng-container>
+                      
+                      <ng-container matColumnDef="candidates">
+                        <mat-header-cell class="count-col" *matHeaderCellDef mat-sort-header>Candidates </mat-header-cell>
+                        <mat-cell class="count-col" *matCellDef="let row">
+                          <a [routerLink]="['/admin/dashboard/traineenomination-list', row.courseDurationId]" style="color: green;text-decoration: underline; font-weight: bold;">{{row.candidates}}</a>
+                        </mat-cell>
+                      </ng-container>
+
+                      <ng-container matColumnDef="goStatus">
+                        <mat-header-cell class="go-col" *matHeaderCellDef mat-sort-header> GO  </mat-header-cell>
+                        <mat-cell class="go-col" *matCellDef="let row">
+                          <span style="color: green; font-weight: bold;" *ngIf="row.foreignCourseGOInfoId">Yes || <a target="_blank" [href]="fileUrl+row.fileUpload"><mat-icon>picture_as_pdf</mat-icon></a></span>
+                          <span style="color: red; font-weight: bold;" *ngIf="!row.foreignCourseGOInfoId">No</span>
+                        </mat-cell>
+                      </ng-container>
+                      <ng-container matColumnDef="sanction">
+                        <mat-header-cell ngClass="custom-action local san-col" *matHeaderCellDef class="pr-0">Sanction</mat-header-cell>
+                        <mat-cell ngClass="custom-action local san-col" *matCellDef="let row; let i=index;" class="pr-0">                                                    
+                             
+                          <a [routerLink]="['/admin/dashboard/view-sanction', row.courseDurationId, dbType]" style="color: red; font-weight: bold; text-decoration: underline;">{{row.sanctionAmount}}</a>
+                        </mat-cell>
+                      </ng-container> 
+                      <ng-container matColumnDef="actions">
+                        <mat-header-cell ngClass="custom-action local act-col" *matHeaderCellDef class="pr-0"></mat-header-cell>
+                        <mat-cell ngClass="custom-action local act-col" *matCellDef="let row; let i=index;" class="pr-0">
+                          
+                          <button mat-icon-button class="btn-tbl-view" title="Course Details" [routerLink]="['/admin/dashboard/course-details',row.courseDurationId,schoolDb]">
+                            <mat-icon aria-label="Edit" class="col-white">visibility</mat-icon>
+                          </button>
+                          <button mat-icon-button color="accent" title="Relevent Work Status" class="btn-tbl-view" 
+                            [routerLink]="['/admin/dashboard/view-releventstatusinfolist', row.courseDurationId]">
+                            <mat-icon mat-icon aria-label="Edit" class="col-white">airplanemode_active</mat-icon>
+                          </button>
+                        </mat-cell>
+                      </ng-container>              
+                      
+    
+                      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+                    </mat-table> -->
+                <!-- </div>
+              </div>
+            </div>
+          </div>
+          
+        </div>
+      </div>
+    </div> -->
+
+      
+  </div>
+ 
+</section>

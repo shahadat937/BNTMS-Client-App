@@ -1,0 +1,136 @@
+<section class="content">
+    <div class="container-fluid">
+      <div class="block-header">
+        <div class="row">
+          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <ul class="breadcrumb breadcrumb-style ">
+              <li class="breadcrumb-item">
+                <h4 class="page-title">Course Week</h4>
+              </li>
+              <li class="breadcrumb-item bcrumb-1">
+                <a routerLink="/admin/dashboard/main"><i class="fas fa-home"></i></a>
+              </li>
+              <li class="breadcrumb-item bcrumb-2">
+                <a href="#" onClick="return false;">Course Week</a>
+              </li>
+              <li class="breadcrumb-item active">All</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+          <div class="card">
+            <div class="body">
+              <div class="responsive_table">
+                <div class="materialTableHeader"> 
+                  <div class="row">
+                    <div class="col-8">
+                      <ul class="header-buttons-left ml-0">
+                        <li class="dropdown">
+                        </li>
+                        <!-- <li class="dropdown">
+                          <input placeholder="Search" type="text" [(ngModel)]="searchText"  #filter class="browser-default search-field"
+                          aria-label="Search box">
+                        </li>
+                        <li> 
+                          <div class="icon-button-demo m-l-10">
+                            <button mat-mini-fab color="accent" (click)="applyFilter(searchText)">
+                              <mat-icon class="col-white">search</mat-icon>
+                            </button>
+                          </div>
+                          
+                          
+                        </li> -->
+                      </ul>
+                    </div>
+                    <div class="col-4">
+                      <ul class="header-buttons">
+                        <li>
+                          <div class="icon-button-demo">
+                            <!-- <button class="btn-space"  mat-raised-button
+                            color="warn" routerLink="/admin/dashboard/main"> 
+                            <mat-icon class="col-white">keyboard_backspace</mat-icon> Back
+                            </button> -->
+                            <button *ngIf="role === userRole.Student" class="btn-space"  mat-raised-button
+                              color="warn" [routerLink]="['/admin/dashboard/trainee-dashboard']"> 
+                              <mat-icon class="col-white">keyboard_backspace</mat-icon> Back
+                            </button>
+                            <button *ngIf="role === userRole.SuperAdmin || role === userRole.BNASchool || role === userRole.JSTISchool || role === userRole.CO || role === userRole.TC || role === userRole.AreaCommander" class="btn-space"  mat-raised-button
+                              color="warn" [routerLink]="['/admin/dashboard/school-dashboard']"> 
+                              <mat-icon class="col-white">keyboard_backspace</mat-icon> Back
+                            </button>
+                            <button *ngIf="role === userRole.MasterAdmin || role === userRole.InterSeeviceCourse || role === userRole.InterSeeviceDesk" class="btn-space"  mat-raised-button
+                              color="warn" [routerLink]="['/admin/dashboard/view-runningcourses',courseTypeId]"> 
+                              <mat-icon class="col-white">keyboard_backspace</mat-icon> Back
+                            </button>
+                            
+                          </div>
+                        </li>
+                       
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+                
+                <div id="print-routine">
+                <table  class="table  tbl-by-group">
+                  <thead>
+                    <tr>
+                      <!-- <th class="cl-srl"><h5>Ser</h5></th> -->
+                      <th class="cl-module"><h5>Weeks</h5></th>
+                      <th class="cl-srl"><h5> Start Date</h5></th>
+                      <th class="cl-srl"><h5>End Date</h5></th>
+                      <th class="cl-srl"><h5>Remarks</h5></th>
+                      <th class="cl-srl"><h5>Status</h5></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <ng-container *ngFor="let data of groupArrays;let i= index;">
+                      <tr>
+                        <td class="cl-module" [attr.rowspan]="data.courses.length + 1">{{data.courseModule}}</td>
+                      </tr>
+                      <tr *ngFor="let number of data.courses;">
+                        <td class="cl-srl">{{number.dateFrom | date:'mediumDate'}}</td>
+                        <td class="cl-srl">{{number.dateTo | date:'mediumDate'}}</td>
+                        <td class="cl-srl">{{number.remarks}}</td>
+                        <td class="cl-srl">
+                          {{getDateComparision(number)}}
+                          <span *ngIf="weekStatus === 1">
+                            <span class="incomplete-status" *ngIf="number.status == 0"> Passed Week </span>
+                            <span class="complete-status" *ngIf="number.status != 0"> Completed </span>                            
+                          </span>
+                          <span *ngIf="weekStatus === 2">
+                            <span class="complete-status" *ngIf="number.status == 0"> Running </span>
+                            <span class="complete-status" *ngIf="number.status != 0"> Completed </span> 
+                          </span>
+                          <span *ngIf="weekStatus === 3">
+                            <span class="wait-status" *ngIf="number.status == 0"> Upcoming </span>
+                            <span class="complete-status" *ngIf="number.status != 0"> Completed </span> 
+                            
+                          </span>
+                        </td>
+                        
+                      </tr>
+                    </ng-container>
+                  </tbody>
+                </table>
+                </div>
+            
+                 <!-- <mat-paginator [length]="paging.length" [showFirstLastButtons]="masterData.paging.showFirstLastButtons"
+                [pageSize]="paging.pageSize" [pageSizeOptions]="masterData.paging.pageSizeOptions"
+                (page)="pageChanged($event)">
+                </mat-paginator> -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  
+  
+  
+   
+

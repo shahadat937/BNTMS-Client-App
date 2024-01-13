@@ -1,0 +1,221 @@
+<section class="content">
+    <div class="container-fluid">
+      <div class="block-header">
+        <div class="row">
+          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <ul class="breadcrumb breadcrumb-style ">
+              <li class="breadcrumb-item">
+                <h4 class="page-title">Certificate</h4>
+              </li>
+              <li class="breadcrumb-item bcrumb-1"> 
+                <a routerLink="/admin/dashboard/main"><i class="fas fa-home"></i></a>
+              </li>
+              <li class="breadcrumb-item bcrumb-2">
+                <a href="#" onClick="return false;">Certificate</a>
+              </li>
+              <li class="breadcrumb-item active">All</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+          <div class="card">
+            <div class="body">
+              <div class="responsive_table">
+                <div class="materialTableHeader"> 
+                  <div class="row">
+                    <div class="col-8">
+                      <div class="heading">
+                        <!-- <p style="margin-bottom: 10px;">Trainee:- {{trainee}}</p>
+                        <p style="margin-bottom: 10px;">Course:- {{course}}</p>
+                        <p style="margin-bottom: 10px;">School:- {{schoolName}}</p> -->
+                        <!-- <p>dd</p> -->
+                      </div>
+                      <div  class="align-center">            
+                      </div>
+                      <ul class="header-buttons-left ml-0">
+                        <li class="dropdown">
+                        </li>
+                        <li class="dropdown">
+                        </li>
+                        <li> 
+                          <div class="icon-button-demo m-l-10">
+                          </div>
+                        </li>
+                      </ul>
+                    </div>
+
+                    <div class="col-4">
+                      <ul class="header-buttons">
+                        <li>
+                          <div class="icon-button-demo">
+                            <button class="btn-space"  mat-raised-button color="primary" (click)="printSingle()"> Print
+                              <mat-icon class="col-white">print</mat-icon>
+                            </button>
+
+                            <button *ngIf="role != 'Student' && courseType3 == 6" class="btn-space"  mat-raised-button
+                              color="warn" [routerLink]="['/admin/dashboard/upcomingcourses-list',baseSchoolNameId]"> 
+                              <mat-icon class="col-white">keyboard_backspace</mat-icon> Back
+                            </button>
+
+                            <button *ngIf="schoolDb !=5 && !courseListStatus && (role === userRole.SuperAdmin || role === userRole.BNASchool || role === userRole.JSTISchool || role === userRole.CO || role === userRole.SchoolOIC || role === userRole.TrainingOffice || role === userRole.TC || role === userRole.AreaCommander)" class="btn-space"  mat-raised-button
+                              color="warn" [routerLink]="['/admin/dashboard/traineenomination-list',courseDurationId,1,2,3,4]"> 
+                              <mat-icon class="col-white">keyboard_backspace</mat-icon> Back
+                            </button>
+                            <button *ngIf="schoolDb == 5 && (role === userRole.SuperAdmin || role === userRole.BNASchool || role === userRole.JSTISchool || role === userRole.BNASchool || role === userRole.JSTISchool || role === userRole.CO || role === userRole.TC || role === userRole.AreaCommander)" class="btn-space"  mat-raised-button
+                              color="warn" [routerLink]="['/admin/dashboard/upcomingcourses-list', branchId]"> 
+                              <mat-icon class="col-white">keyboard_backspace</mat-icon> Back
+                            </button>
+                            <button *ngIf="courseListStatus == 1 && role != 'Master Admin'" class="btn-space"  mat-raised-button
+                              color="warn" [routerLink]="['/admin/dashboard/view-courselistbyschool',baseSchoolNameId]"> 
+                              <mat-icon class="col-white">keyboard_backspace</mat-icon> Back
+                            </button>
+                            <button *ngIf="courseListStatus == 1 && role === 'Master Admin'" class="btn-space"  mat-raised-button
+                              color="warn" [routerLink]="['/admin/dashboard/view-courselistbyschool',0]"> 
+                              <mat-icon class="col-white">keyboard_backspace</mat-icon> Back
+                            </button>
+                            <button *ngIf="role === 'Master Admin'" class="btn-space"  mat-raised-button
+                              color="warn" [routerLink]="['/course-management/add-traineenomination',courseDurationId]"> 
+                              <mat-icon class="col-white">keyboard_backspace</mat-icon> Back
+                            </button>
+                            <button *ngIf="!courseListStatus && courseTypeId && role === 'Master Admin'" class="btn-space"  mat-raised-button
+                              color="warn" [routerLink]="['/admin/dashboard/view-runningcourses',courseTypeId]"> 
+                              <mat-icon class="col-white">keyboard_backspace</mat-icon> Back
+                            </button>
+                            <button *ngIf="role === 'Student'" class="btn-space"  mat-raised-button
+                              color="warn" [routerLink]="['/admin/dashboard/view-traineecourseprofile',traineeId]"> 
+                              <mat-icon class="col-white">keyboard_backspace</mat-icon> Back
+                            </button>
+
+                          </div>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+
+              
+
+                <div *ngIf="isShown" id="print-routine">
+                  
+                
+                  <div class="container-fluid pm-certificate-container">
+                    <img class="border-certificate" src="assets/images/bg/Certificate-border.png" />
+                    <div class="pm-certificate-border col-xs-12">
+                      <div class="row pm-certificate-header">
+                        <div class="pm-certificate-title cursive col-xs-12 text-center">
+                          <h2>BANGLADESH NAVY</h2>
+                        </div>
+                      </div>
+                
+                      
+                
+                      <div class="row pm-certificate-body">
+                        <div class="row top-logo-ser-section">
+                          <div class="col-md-4">
+                            <p class="ser-top-left">Ser No<span class="dotted-border ser-field">{{traineeCertificateDetails[0].certificateSerialNo}}</span></p>
+                          </div>
+                          <div class="col-md-4">
+                            <img class="school-logo" src={{schoolLogo}} alt="Logo" />
+                          </div>
+                          <div class="col-md-4">
+                            <!-- <p>Ser No<span></span></p> -->
+                          </div>
+                        </div>
+                        
+                        <div class="pm-certificate-block">
+                            <div class="col-xs-12">
+                              <div class="row">
+                                <div class="col-xs-2"><!-- LEAVE EMPTY --></div>
+                                <div class="pm-certificate-name school-name margin-0 col-xs-8 text-center">
+                                  <span class="pm-name-text scl-name">{{schoolName}}</span>
+                                  <!-- <span class="pm-name-text scl-name">Computer & IT School</span> -->
+                                </div>
+                                <div class="col-xs-2"><!-- LEAVE EMPTY --></div>
+                              </div>
+                            </div>          
+                
+                            <div class="col-xs-12">
+                              <div class="row">
+                                <div class="col-xs-2"><!-- LEAVE EMPTY --></div>
+                                <div class="pm-earned col-xs-8 text-center">
+                                  <!-- <span class="pm-earned-text padding-0 block cursive">has earned</span> -->
+                                  <span class="pm-credits-text block">This Certificate has been awarded to</span>
+                                </div>
+                                <div class="col-xs-2"><!-- LEAVE EMPTY --></div>
+                                <div class="col-xs-12"></div>
+                              </div>
+                            </div>
+                            <div class="background-monogram">
+                              <img class="watermark-certificate" src="assets/images/bg/watermark.png" />
+                            </div>
+                            <div class="col-xs-12">
+                              <div class="row">
+                                <!-- <div class="col-xs-2">LEAVE EMPTY</div> -->
+                                <div class="pm-course-title col-xs-12 text-justify p-0">
+                                  <span class="pm-earned-text block">P/ONo<span class="dotted-border pno-field"><b>{{traineeCertificateDetails[0].pno}}</b></span>Name<span class="dotted-border name-field"><b>{{traineeCertificateDetails[0].name}}</b></span>Rank<span class="dotted-border rank-field"><b>{{traineeCertificateDetails[0].traineeRank}}</b></span></span>
+                                  <span class="pm-earned-text block">who has qualified <span class="dotted-border course-field">{{traineeCertificateDetails[0].course}}</span> of <span class="dotted-border week-field">{{traineeCertificateDetails[0].weeks}}</span> weeks</span>
+                                  <span class="pm-earned-text block">duration held at this institution from <span class="dotted-border du-from-field">{{traineeCertificateDetails[0].durationFrom | date:'dd MMMM yyyy'}}</span> to <span class="dotted-border du-to-field">{{traineeCertificateDetails[0].durationTo | date:'dd MMMM yyyy'}}</span></span>
+                                  <span class="pm-earned-text block">and obtained<span class="dotted-border total-marks-field">{{traineeCertificateDetails[0].obtained | number:'0.2'}}</span> % marks securing 
+                                  <span class="dotted-border trainee-pos-field">
+                                   {{traineePosition}}<sup *ngIf="traineePosition == 1">st</sup><sup *ngIf="traineePosition == 2">nd</sup><sup *ngIf="traineePosition == 3">ed</sup><sup *ngIf="traineePosition != 1 && traineePosition != 2 && traineePosition != 3">th</sup>
+                                  </span>/<span class="dotted-border total-pos-field">{{traineeCertificateDetails[0].totalTrainee}}</span> position.</span>
+                                </div>
+                                <!-- <div class="col-xs-2">LEAVE EMPTY</div> -->
+                              </div>
+                            </div>
+                
+                            <!-- <div class="col-xs-12">
+                              <div class="row">
+                                <div class="col-xs-2">LEAVE EMPTY</div>
+                                <div class="pm-course-title underline col-xs-8 text-center">
+                                  <span class="pm-credits-text block bold sans">BPS PGS Initial PLO for Principals at Cluster Meetings</span>
+                                </div>
+                                <div class="col-xs-2">LEAVE EMPTY</div>
+                              </div>
+                            </div> -->
+                        </div>       
+                        
+                        <div class="col-xs-12">
+                          <div class="row">
+                            <div class="pm-certificate-footer">
+                                <div class="col-xs-4 pm-certified col-xs-4 text-center">
+                                  <span class="pm-credits-text block">Training Commander</span>
+                                  <!-- <span class="pm-empty-space block underline"></span> -->
+                                  <!-- <span class="bold block">Crystal Benton Instructional Specialist II, Staff Development</span> -->
+                                </div>
+                                <div class="col-xs-4">
+                                  <!-- LEAVE EMPTY -->
+                                </div>
+                                <div class="col-xs-4 pm-certified col-xs-4 text-center">
+                                  <span class="pm-credits-text block">Commanding Officer</span>
+                                  <!-- <span class="pm-empty-space block underline"></span> -->
+                                  <!-- <span class="bold block">DOB: </span> -->
+                                  <!-- <span class="bold block">Social Security # (last 4 digits)</span> -->
+                                </div>
+                            </div>
+                          </div>
+                        </div>
+                
+                      </div>
+                
+                    </div>
+                  </div>
+                
+                </div>
+
+                
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  
+  
+  
+   
+

@@ -1,0 +1,109 @@
+<section class="content">
+    <div class="container-fluid">
+      <div class="block-header">
+        <div class="row">
+          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <ul class="breadcrumb breadcrumb-style ">
+              <li class="breadcrumb-item">
+                <h4 class="page-title">{{pageTitle}}</h4>
+              </li>
+              <li class="breadcrumb-item bcrumb-1">
+                <a routerLink="/admin/dashboard/main"><i class="fas fa-home"></i></a>
+              </li>
+              <li class="breadcrumb-item bcrumb-2">
+                <a href="#" onClick="return false;">Payment Details</a>
+              </li>
+              <li class="breadcrumb-item active">{{destination}}</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="row clearfix">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+          <div class="card">
+            <div class="header">
+            </div>
+            <div class="body">
+              <form class="m-4" [formGroup]="PaymentDetailForm" (ngSubmit)="onSubmit()">
+                <div class="row">
+
+                  
+
+                  <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                      <mat-label>trainee Id</mat-label>                        
+                      <input matInput formControlName="traineeId" required>
+                      <mat-error *ngIf="PaymentDetailForm.get('traineeId').hasError('required')">
+                        traineeId is Required!
+                      </mat-error>
+                    </mat-form-field>
+                  </div>
+
+                  <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                      <mat-label>number Of Installment</mat-label>                        
+                      <input matInput formControlName="numberOfInstallment" required>
+                      <mat-error *ngIf="PaymentDetailForm.get('numberOfInstallment').hasError('required')">
+                        number Of Installment is Required!
+                      </mat-error>
+                    </mat-form-field>
+                  </div>
+
+                  <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                      <mat-label>usdRate</mat-label>                        
+                      <input matInput formControlName="usdRate" required>
+                      <mat-error *ngIf="PaymentDetailForm.get('usdRate').hasError('required')">
+                        usd Rate is Required!
+                      </mat-error>
+                    </mat-form-field>
+                  </div>
+                  <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                      <mat-label>total Usd</mat-label>                        
+                      <input matInput formControlName="totalUsd" required>
+                      <mat-error *ngIf="PaymentDetailForm.get('totalUsd').hasError('required')">
+                        total Usd is Required!
+                      </mat-error>
+                    </mat-form-field>
+                  </div>
+
+                  <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                      <mat-label>total Bdt</mat-label>                        
+                      <input matInput formControlName="totalBdt" required>
+                      <mat-error *ngIf="PaymentDetailForm.get('totalBdt').hasError('required')">
+                        totalBdt is Required!
+                      </mat-error>
+                    </mat-form-field>
+                  </div>
+
+                  <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                      <mat-label>remarks</mat-label>                        
+                      <input matInput formControlName="remarks" required>
+                      <mat-error *ngIf="PaymentDetailForm.get('remarks').hasError('required')">
+                        totalBdt is Required!
+                      </mat-error>
+                    </mat-form-field>
+                  </div>
+
+                  
+                </div> 
+               
+                <div class="row">
+                  <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+                    <button class="btn-space" [class.auth-spinner]="loading" [disabled]="loading" [disabled]="!PaymentDetailForm.valid " mat-raised-button
+                        color="primary">{{buttonText}}</button>
+                    <button type="button" mat-button routerLink="/foreign-training/paymentdetail-list">Cancel</button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+

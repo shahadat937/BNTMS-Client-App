@@ -1,0 +1,143 @@
+<section class="content">
+    <div class="container-fluid">
+      <div class="block-header">
+        <div class="row">
+          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <ul class="breadcrumb breadcrumb-style ">
+              <li class="breadcrumb-item">
+                <h4 class="page-title">School List</h4>
+              </li>
+              <li class="breadcrumb-item bcrumb-1">
+                <a routerLink="/admin/dashboard/main"><i class="fas fa-home"></i></a>
+              </li>
+              <li class="breadcrumb-item bcrumb-2">
+                <a href="#" onClick="return false;">School List</a>
+              </li>
+              <li class="breadcrumb-item active">All</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+          <div class="card">
+            <div class="body">
+              <div class="responsive_table">
+                <div class="materialTableHeader"> 
+                  <div class="row">
+                    <div class="col-8">
+                      <ul class="header-buttons-left ml-0">
+                        <li class="dropdown">
+                        </li>
+                        <!-- <li class="dropdown">
+                          <input placeholder="Search" type="text" [(ngModel)]="searchText"  #filter class="browser-default search-field"
+                          aria-label="Search box">
+                        </li>
+                        <li> 
+                          <div class="icon-button-demo m-l-10">
+                            <button mat-mini-fab color="accent" (click)="applyFilter(searchText)">
+                              <mat-icon class="col-white">search</mat-icon>
+                            </button>
+                          </div>
+                        </li> -->
+                      </ul>
+                    </div>
+                    <div class="col-4">
+                      <ul class="header-buttons">
+                        <li>
+                          <div class="icon-button-demo">
+                          
+                            <button *ngIf="role != (userRole.InterSeeviceCourse || userRole.InterSeeviceDesk)" class="btn-space"  mat-raised-button
+                              color="warn" [routerLink]="['/admin/dashboard/main']"> 
+                              <mat-icon class="col-white">keyboard_backspace</mat-icon> Back
+                            </button>
+
+                            <button *ngIf="role == (userRole.InterSeeviceCourse || userRole.InterSeeviceDesk)" class="btn-space"  mat-raised-button
+                              color="warn" routerLink="/admin/dashboard/interservice-dashboard"> 
+                              <mat-icon class="col-white">keyboard_backspace</mat-icon> Back
+                            </button>
+                          </div>
+                        </li>
+                        
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+                <!-- <mat-table #table [dataSource]="schoolList" matSort class="mat-cell">               
+                  <ng-container matColumnDef="ser">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header> Ser: </mat-header-cell>
+                    <mat-cell *matCellDef="let element; let i = index;"> {{ ((paging.pageIndex-1) *  paging.pageSize) + i+1}} </mat-cell>
+                  </ng-container> 
+
+                  <ng-container matColumnDef="schoolName">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>School Name</mat-header-cell>
+                    <mat-cell *matCellDef="let element"> {{element.schoolName}} </mat-cell>
+                  </ng-container>
+
+                  <ng-container matColumnDef="courseCount">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>Running Course</mat-header-cell>
+                    <mat-cell *matCellDef="let element"> 
+                      <a [routerLink]="['/admin/dashboard/coursebyschool-list',element.baseSchoolNameId]"><span class="text-danger"> {{element.courseCount}}</span></a> 
+                    </mat-cell>
+                  </ng-container>
+
+                  
+
+                  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                  <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+                 </mat-table> -->
+                 <div id="print-routine">
+                 <table class="table  tbl-by-group db-li-s-in">
+                  <thead>
+                    <tr>
+                      <!-- <th class="cl-srl"><h5>Ser</h5></th> -->
+                      <th class="cl-nm-rnk"><h5>Base/Institute/Ship</h5></th>
+                      <th class="cl-mrk"><h5>School</h5></th>
+                      <th class="cl-mrk-rmrk"><h5>Qty Course</h5></th>
+                      <th class="cl-mrk-rmrk"><h5>Officer's </h5></th>
+                      <th class="cl-mrk-rmrk"><h5>Mids </h5></th>
+                      <th class="cl-mrk-rmrk"><h5>Cadet </h5></th>
+                      <th class="cl-mrk-rmrk"><h5>Sailor's </h5></th>
+                      <th class="cl-mrk-rmrk"><h5>Civil </h5></th>
+                      <th class="cl-mrk-rmrk"><h5>Foreign </h5></th>
+                      <th class="cl-mrk-rmrk"><h5>Total </h5></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <ng-container *ngFor="let data of groupArrays;let i= index;">
+                      <tr>
+                        <td [attr.rowspan]="data.schools.length + 1">{{data.baseName}}</td>
+                      </tr>
+                      <tr *ngFor="let number of data.schools;">
+                        <td>{{number.schoolName}} </td>
+                        <td><a [routerLink]="['/admin/dashboard/coursebyschool-list',number.baseSchoolNameId]"><span class="text-danger"> {{number.courseCount}}</span></a> </td>
+                        <td>{{number.officerCount}} </td>
+                        <td>{{number.midCount}} </td>
+                        <td>{{number.cadetCount}} </td>
+                        <td>{{number.saylorCount}} </td>
+                        <td>{{number.civilCount}} </td>
+                        <td>{{number.foreignCount}} </td>
+                        <td>{{number.traineeCount}} </td>
+                      </tr>                    
+                    </ng-container>
+                  </tbody>
+                </table>
+                </div>
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 div-class div-left m-t-20">
+                  <button class="btn-space"  mat-raised-button color="primary" (click)="printSingle()"> Print
+                    <mat-icon class="col-white">print</mat-icon>
+                  </button>
+                </div> 
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  
+  
+  
+   
+

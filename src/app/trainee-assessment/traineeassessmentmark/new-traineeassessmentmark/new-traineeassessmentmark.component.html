@@ -1,0 +1,145 @@
+<section class="content">
+    <div class="container-fluid">
+      <div class="block-header">
+        <div class="row">
+          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <ul class="breadcrumb breadcrumb-style ">
+              <li class="breadcrumb-item">
+                <h4 class="page-title">{{pageTitle}}</h4>
+              </li>
+              <li class="breadcrumb-item bcrumb-1">
+                <a routerLink="/admin/dashboard/main"><i class="fas fa-home"></i></a>
+              </li>
+              <li class="breadcrumb-item bcrumb-2">
+                <a href="#" onClick="return false;">User Manual</a>
+              </li>
+              <li class="breadcrumb-item active">{{destination}}</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="row clearfix">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+          <div class="card">
+            <div class="header">
+            </div>
+            <div class="body">
+              <form class="m-4" [formGroup]="TraineeAssessmentMarkForm" (ngSubmit)="onSubmit()">
+                <div class="row">
+
+
+                  <!-- <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                        <mat-label>Role Name</mat-label>                        
+                        <input matInput formControlName="roleName" required>
+                        <mat-error *ngIf="TraineeAssessmentMarkForm.get('roleName').hasError('required')">
+                          Role Name is Required
+                        </mat-error>
+                    </mat-form-field>
+                  </div>      -->
+                  
+                  <!-- <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                        <mat-label>Role</mat-label>                        
+                        <mat-select formControlName="roleName" required>
+                          <mat-option *ngFor="let batch of selectedRoles" [value]="batch.value">
+                              {{batch.text}} 
+                            </mat-option>                          
+                      </mat-select>
+                      <mat-error *ngIf="TraineeAssessmentMarkForm.get('roleName').hasError('required')">
+                        bnaBatchId is Required!
+                      </mat-error>
+                    </mat-form-field>
+                  </div>
+
+                  <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                        <mat-label>Browse</mat-label>        
+                        <ngx-mat-file-input (change)="onFileChanged($event)" accept=".txt,.pdf,.xls,.xlsx,.doc,.docx,.ppt,.pptx">
+                        </ngx-mat-file-input>
+                        <mat-icon matSuffix>attachment</mat-icon>
+                    </mat-form-field>
+                  </div>   -->
+
+                  <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                      <mat-label>courseDurationId</mat-label>
+                      <input matInput formControlName="courseDurationId" >                      
+                    </mat-form-field>
+                  </div>
+
+                  <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                      <mat-label>baseSchoolNameId</mat-label>
+                      <input matInput formControlName="baseSchoolNameId" >                      
+                    </mat-form-field>
+                  </div>
+
+                  <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                      <mat-label>traineeNominationId</mat-label>
+                      <input matInput formControlName="traineeNominationId" >                      
+                    </mat-form-field>
+                  </div>
+
+                  <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                      <mat-label>traineeId</mat-label>
+                      <input matInput formControlName="traineeId" >                      
+                    </mat-form-field>
+                  </div>
+
+                  <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                      <mat-label>traineeAssessmentCreateId</mat-label>
+                      <input matInput formControlName="traineeAssessmentCreateId" >                      
+                    </mat-form-field>
+                  </div>
+
+                  <!-- <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                      <mat-label>Start Date</mat-label>
+                        <input matInput [matDatepicker]="startpicker" formControlName="startDate" >
+                        <mat-datepicker-toggle matSuffix [for]="startpicker"></mat-datepicker-toggle>
+                       <mat-datepicker #startpicker></mat-datepicker>                                            
+                    </mat-form-field>
+                  </div>
+ 
+                  <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                      <mat-label>End Date</mat-label>
+                        <input matInput [matDatepicker]="endpicker" formControlName="endDate" >
+                        <mat-datepicker-toggle matSuffix [for]="endpicker"></mat-datepicker-toggle>
+                       <mat-datepicker #endpicker></mat-datepicker>                                            
+                    </mat-form-field>
+                  </div> -->
+
+                  <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                      <mat-label>remarks</mat-label>
+                      <input matInput formControlName="remarks" >                      
+                    </mat-form-field>
+                  </div>
+
+                                
+                </div>
+
+               
+                <div class="row">
+                  <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+                    <button class="btn-space" [class.auth-spinner]="loading" [disabled]="loading" [disabled]="!TraineeAssessmentMarkForm.valid " mat-raised-button
+                        color="primary">{{buttonText}}</button>
+                    <button type="button" mat-button routerLink="/trainee-assessment/traineeassessmentmark-list">Cancel</button>
+                  </div>
+                </div>
+              </form>
+
+              
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+

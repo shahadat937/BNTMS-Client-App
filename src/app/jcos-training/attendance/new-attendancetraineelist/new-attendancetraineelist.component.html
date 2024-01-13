@@ -1,0 +1,105 @@
+<section class="content">
+  <div class="container-fluid">
+    <div class="block-header">
+      <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <ul class="breadcrumb breadcrumb-style ">
+            <li class="breadcrumb-item">
+              <h4 class="page-title">{{pageTitle}}</h4>
+            </li>
+            <li class="breadcrumb-item bcrumb-1">
+              <a routerLink="/admin/dashboard/main"><i class="fas fa-home"></i></a>
+            </li>
+            <li class="breadcrumb-item bcrumb-2">
+              <a href="#" onClick="return false;"> Attendance</a>
+            </li>
+            <li class="breadcrumb-item active">{{destination}}</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="row clearfix">
+      <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+        <div class="card">
+          <div class="header">
+          </div>
+          <div class="body">
+            <form class="m-4" [formGroup]="AttendanceForm" (ngSubmit)="onSubmit()">
+              
+
+
+
+          <!-- Basic Table -->
+          <div class="row clearfix">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 p-0 ex-mrk-entry-li">
+              <div class="card">
+                
+                <div class="body table-responsive">
+                  <table class="table ex-mrk-entry">
+                    <thead>
+                      <tr>
+                        <th class="cl-srl"><h5>Ser</h5></th>
+                        <th class="cl-nm-rnk"><h5>Name & Rank</h5></th>
+                        <!-- <th class="cl-nm-rnk"><h5>Class Leader Name</h5></th> -->
+                        <th class="cl-mrk"><h5>Attendance Status</h5></th>
+                        <th class="cl-mrk-rmrk"><h5>Attendance Remarks</h5></th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let unit of AttendanceForm.get('traineeListForm')['controls']; let i = index" [formGroup]="unit">
+                        <th class="cl-srl" scope="row">{{i+1}}</th>
+
+                        <td  class="cl-nm-rnk"> 
+                          {{getControlLabel(i,'rankPosition')}} - {{getControlLabel(i,'traineeName')}} -  <span class="t-n-pno-d">(P No {{getControlLabel(i,'traineePNo')}})</span>
+                        </td>
+
+                        <td class="cl-mrk">
+                          <mat-checkbox formControlName="attendanceStatus"   #checkBox   [ngClass]="'tbl-checkbox'">                      
+                          </mat-checkbox>
+                        </td>
+                        <!-- <td class="cl-mrk">
+                          <input type="checkbox" formControlName="attendanceStatus">
+                        </td> -->
+
+                        <td class="cl-mrk-rmrk">
+                          <mat-form-field class="example-full-width mb-3" appearance="outline">
+                            <mat-select formControlName="bnaAttendanceRemarksId">
+                              <mat-option  value="">--Select--</mat-option >
+                              <mat-option *ngFor="let dropdown of selectedbnaattendanceremark" [value]="dropdown.value">
+                                {{dropdown.text}} 
+                              </mat-option>                          
+                            </mat-select>
+                          </mat-form-field>    
+                        </td>
+                      </tr>
+                      
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+              <div class="row mt-2">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+                  <button class="btn-space" [class.auth-spinner]="loading" [disabled]="loading" [disabled]="!AttendanceForm.valid " mat-raised-button
+                    color="primary">{{buttonText}}</button>
+                    <button class="btn-space"  mat-raised-button
+                    color="warn" routerLink="/jcos-training/add-jcosattendance"> 
+                    <mat-icon class="col-white">keyboard_backspace</mat-icon> Back
+                    </button>
+                </div>
+              </div>
+
+            </form>
+
+            <div  class="row create-table db-tbl cls-rtn">
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

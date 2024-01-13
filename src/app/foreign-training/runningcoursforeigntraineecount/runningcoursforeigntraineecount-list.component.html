@@ -1,0 +1,133 @@
+<section class="content">
+  <div class="container-fluid">
+    <div class="block-header">
+      <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <ul class="breadcrumb breadcrumb-style ">
+            <li class="breadcrumb-item">
+              <h4 class="page-title">Foreign Course List</h4>
+            </li>
+            <li class="breadcrumb-item bcrumb-1">
+              <a routerLink="/admin/dashboard/main"><i class="fas fa-home"></i></a>
+            </li>
+            <li class="breadcrumb-item bcrumb-2">
+              <a href="#" onClick="return false;">Foreign Course</a>
+            </li>
+            <li class="breadcrumb-item active">All</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="card">
+          <div class="body">
+            <div class="responsive_table">
+              <div class="materialTableHeader"> 
+              
+                <div class="row">
+                 
+                  <div class="col-8">
+                    <ul class="header-buttons-left ml-0">
+                      <li class="dropdown fts">
+                        <h4 class="on-going">BREAKDOWN OF TRAINEES IN ABROAD (ONGOING)</h4>
+                      </li>
+                      
+                      <!-- <li class="dropdown fts">
+                        <h4 class="on-going">BREAKDOWN OF ONGOING TRAINEES IN ABROAD</h4>
+                        
+                      </li> -->
+                      <!-- <li> 
+                        <div class="icon-button-demo m-l-10">
+                          <button mat-mini-fab color="accent" (click)="applyFilter(searchText)">
+                            <mat-icon class="col-white">search</mat-icon>
+                          </button>
+                        </div>
+                        
+                        
+                      </li> -->
+                    </ul>
+                  </div>
+                  <div class="col-4">
+                    <ul class="header-buttons">
+                      <li>
+                        
+                        <div class="col-xl-2 col-lg-2 col-md-4 col-sm-12 mb-2">                            
+                          <button *ngIf="role === 'Foreign Training'" class="btn-space"  mat-raised-button
+                            color="primary" [routerLink]="['/admin/dashboard/foreigntraining-dashboard']"> 
+                            <mat-icon class="col-white">keyboard_backspace</mat-icon> Go to Dashboard
+                          </button>
+                          
+                          
+                        </div>
+                      </li>
+                      <li>
+                        <div class="col-xl-2 col-lg-2 col-md-4 col-sm-12 mb-2">
+                          <button class="btn-space"  mat-raised-button
+                          color="warn" routerLink="/admin/dashboard/runningcoursforeigntraineedetails-list"> Country Wise Details
+                            <!-- <mat-icon class="col-white"></mat-icon> -->
+                          </button>
+                        </div>
+                        
+                      </li>
+                     
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              <div id="print-routine">
+              <table class="table  tbl-by-group db-li-s-in">
+                <thead>
+                  <tr>
+                    <th class="cl-srl-fts"><h5>SL</h5></th>
+                    <th class="cl-mrk-fts"><h5 class="fts">COUNTRY</h5></th>
+                    <th class="cl-mrk-fts"><h5 class="fts">OFFICER</h5></th>
+                    <th class="cl-mrk-fts"><h5 class="fts">MID</h5></th>
+                    <th class="cl-mrk-fts"><h5 class="fts">OFFR CDT </h5></th>
+                    <th class="cl-mrk-fts"><h5 class="fts">SAILOR </h5></th>
+                    <th class="cl-mrk-fts"><h5 class="fts">CIVIL </h5></th>
+                    <th class="cl-mrk-fts"><h5 class="fts"> TOTAL </h5></th>
+                    <!-- <th class="cl-mrk-rmrk"><h5>remarks </h5></th> -->
+                  </tr>
+                </thead>
+                <tbody>
+                  <ng-container *ngFor="let data of runningCourses;let i= index;">
+                    <!-- <tr>*ngFor="let data of itemDetailByDepartmentId;let i = index"
+                      <td [attr.rowspan]="data.schools.length + 1">{{data.baseName}}</td>
+                    </tr> -->
+                    <tr>
+                      <td class="cl-srl-fts">
+                        {{
+                          (paging.pageIndex - 1) * paging.pageSize + i + 1
+                        }}
+                      </td>
+                      <!-- <td><a [routerLink]="['/admin/dashboard/coursebyschool-list',number.baseSchoolNameId]"><span class="text-danger"> {{number.courseCount}}</span></a> </td> -->
+                      <td>{{data.countryName}} </td>
+                      <td class="cl-mrk-fts">{{data.officer_count}} </td>
+                      <td class="cl-mrk-fts">{{data.officer_mid_count}} </td>
+                      <td class="cl-mrk-fts">{{data.officer_cdt_count}} </td>
+                      <td class="cl-mrk-fts">{{data.sailor_count}} </td>
+                      <td class="cl-mrk-fts">{{data.civil_count}} </td>
+                      <td class="cl-mrk-fts">{{data.total}} </td>
+                      <!-- <td>{{data.remarks}} </td> -->
+                    </tr>                    
+                  </ng-container>
+                </tbody>
+              </table>
+            </div>
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 div-class div-left m-t-20">
+              <button class="btn-space"  mat-raised-button color="primary" (click)="printSingle()"> Print
+                <mat-icon class="col-white">print</mat-icon>
+              </button>
+            </div>
+              <!-- <mat-paginator [length]="paging.length" [showFirstLastButtons]="masterData.paging.showFirstLastButtons"
+                [pageSize]="paging.pageSize" [pageSizeOptions]="masterData.paging.pageSizeOptions"
+                (page)="pageChanged($event)">
+              </mat-paginator> -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

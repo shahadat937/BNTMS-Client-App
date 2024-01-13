@@ -1,0 +1,164 @@
+<section class="content">
+    <div class="container-fluid">
+      <div class="block-header">
+        <div class="row">
+          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <ul class="breadcrumb breadcrumb-style ">
+              <li class="breadcrumb-item">
+                <h4 class="page-title">{{destination}} List</h4>
+              </li>
+              <li class="breadcrumb-item bcrumb-1">
+                <a routerLink="/admin/dashboard/main"><i class="fas fa-home"></i></a>
+              </li>
+              <li class="breadcrumb-item bcrumb-2">
+                <a href="#" onClick="return false;">{{destination}} List</a>
+              </li>
+              <li class="breadcrumb-item active">All</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+          <div class="card">
+            <div class="body">
+              <div class="responsive_table">
+                <div class="materialTableHeader"> 
+                  <div class="row">
+                    <div class="col-8">
+                      <ul class="header-buttons-left ml-0">
+                        <li class="dropdown">
+                        </li>
+                      </ul>
+                    </div>
+                    <div class="col-4">
+                      <ul class="header-buttons">
+                        <li>
+                          <div class="icon-button-demo">
+                            <button *ngIf="schoolId != 0" class="btn-space"  mat-raised-button
+                              color="warn" routerLink="/admin/dashboard/school-dashboard"> 
+                              <mat-icon class="col-white">keyboard_backspace</mat-icon> Back
+                            </button>
+                            <button *ngIf="schoolId == 0" class="btn-space"  mat-raised-button
+                              color="warn" routerLink="/admin/dashboard/main"> 
+                              <mat-icon class="col-white">keyboard_backspace</mat-icon> Back
+                            </button>
+                          </div>
+                        </li>
+                       
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+                
+                <div *ngIf="this.role == this.userRole.SuperAdmin || this.role === this.userRole.BNASchool || this.role === this.userRole.JSTISchool || this.role == this.userRole.SchoolOIC" id="print-routine">
+                  <table class="table  tbl-by-group">
+                    <thead>
+                      <tr>
+                        <!-- <th class="cl-srl"><h5>Ser</h5></th> -->
+                        <th class="cl-srl"><h5> Course </h5></th>
+                        <th class="course-col"><h5>O.No/P.No  </h5></th>
+                        <th class="course-col"><h5>Name   </h5></th>
+                        <th class="course-col"><h5>Rank  </h5></th>
+                        <th *ngIf="officerTypeId == masterData.OfficerType.Foreign" class="cl-mrk"><h5> Country </h5></th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <ng-container *ngFor="let data of groupArrays;let i= index;">
+                        <tr>
+                          <td class="cl-srl" [attr.rowspan]="data.courses.length + 1">{{data.courseName}}</td>
+                        </tr>
+                        <tr *ngFor="let number of data.courses;">
+                          <td class="course-col">{{number.pno}}</td>
+                          <td class="course-col">{{number.name}} </td>
+                          <td class="course-col">{{number.position}} </td>
+                          <!-- <td>{{number.durationFrom | date:'mediumDate'}} - {{number.durationTo | date:'mediumDate'}}</td> -->
+                          
+                          <td *ngIf="officerTypeId == masterData.OfficerType.Foreign">{{number.countryName}}</td>
+                          <!-- <td>{{number.nbcd}}</td>
+                          <td>{{number.durationFrom | date:'mediumDate'}}</td>
+                          <td>{{number.durationTo | date:'mediumDate'}}</td> -->
+                          
+                          <!-- <td>
+                            <button mat-icon-button color="accent" title="Edit" class="btn-custom btn-tbl-edit" 
+                              [routerLink]="['/course-management/update-courseweek', number.courseDurationId, number.courseTypeId]">
+                              <mat-icon aria-label="Edit" class="col-white">edit</mat-icon>
+                            </button>
+
+                            <button mat-icon-button color="accent" title="Delete" class="btn-tbl-delete btn-custom" (click)="$event.stopPropagation()"
+                              (click)="deleteItem(number)">
+                              <mat-icon aria-label="Delete" class="col-white">delete</mat-icon> 
+                            </button>
+                            
+                          </td> -->
+                        </tr>
+                      </ng-container>
+                    </tbody>
+                  </table>
+                </div>
+                
+                <div *ngIf="this.role == this.userRole.MasterAdmin ||this.role == this.userRole.CO || this.role == this.userRole.TrainingOffice || this.role == this.userRole.TC || this.role == this.userRole.TCO" id="print-routine">
+                  <table class="table  tbl-by-group">
+                    <thead>
+                      <tr>
+                        <!-- <th class="cl-srl"><h5>Ser</h5></th> -->
+                        <th class="cl-srl"><h5> School </h5></th>
+                        <th class="cl-srl"><h5> Course </h5></th>
+                        <th class="course-col"><h5>O.No/P.No </h5></th>
+                        <th class="course-col"><h5>name </h5></th>
+                        <th class="course-col"><h5>Rank  </h5></th>
+                        <th *ngIf="officerTypeId == masterData.OfficerType.Foreign" class="cl-mrk"><h5> Country </h5></th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <ng-container *ngFor="let data of groupCOArrays;let i= index;">
+                        <tr>
+                          <td class="cl-srl" [attr.rowspan]="data.courses.length + 1">{{data.schoolName}}</td>
+                        </tr>
+                        <tr *ngFor="let number of data.courses;">
+                          <td class="course-name-col">{{number.course}} - {{number.courseTitle}}</td>
+                          <td class="course-col">{{number.pno}}</td>
+                          <td class="course-col">{{number.name}} </td>
+                          <td class="course-col">{{number.position}}</td>
+                          <!-- <td>{{number.durationFrom | date:'mediumDate'}} - {{number.durationTo | date:'mediumDate'}}</td> -->
+                          
+                          <td *ngIf="officerTypeId == masterData.OfficerType.Foreign">{{number.countryName}}</td>
+                          <!-- <td>{{number.nbcd}}</td>
+                          <td>{{number.durationFrom | date:'mediumDate'}}</td>
+                          <td>{{number.durationTo | date:'mediumDate'}}</td> -->
+                          
+                          <!-- <td>
+                            <button mat-icon-button color="accent" title="Edit" class="btn-custom btn-tbl-edit" 
+                              [routerLink]="['/course-management/update-courseweek', number.courseDurationId, number.courseTypeId]">
+                              <mat-icon aria-label="Edit" class="col-white">edit</mat-icon>
+                            </button>
+
+                            <button mat-icon-button color="accent" title="Delete" class="btn-tbl-delete btn-custom" (click)="$event.stopPropagation()"
+                              (click)="deleteItem(number)">
+                              <mat-icon aria-label="Delete" class="col-white">delete</mat-icon> 
+                            </button>
+                            
+                          </td> -->
+                        </tr>
+                      </ng-container>
+                    </tbody>
+                  </table>
+                </div>
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 div-class div-left m-t-20">
+                  <button class="btn-space"  mat-raised-button color="primary" (click)="printSingle()"> Print
+                    <mat-icon class="col-white">print</mat-icon>
+                  </button>
+                </div> 
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  
+  
+  
+   
+

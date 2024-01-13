@@ -1,0 +1,175 @@
+<section class="content">
+    <div class="container-fluid">
+      <div class="block-header">
+        <div class="row">
+          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <ul class="breadcrumb breadcrumb-style ">
+              <li class="breadcrumb-item">
+                <h4 class="page-title">{{pageTitle}}</h4>
+              </li>
+              <li class="breadcrumb-item bcrumb-1">
+                <a routerLink="/admin/dashboard/main"><i class="fas fa-home"></i></a>
+              </li>
+              <li class="breadcrumb-item bcrumb-2">
+                <a href="#" onClick="return false;">BaseName</a>
+              </li>
+              <li class="breadcrumb-item active">{{destination}}</li>
+            </ul>
+          </div> 
+        </div>
+      </div>
+      <div class="row clearfix">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+          <div class="card">
+            <!--<div class="header">
+              <h2>{{destination}} Blood Group</h2>
+  
+            </div>-->
+            <div class="body">
+              <form class="m-4" [formGroup]="BaseNameForm" (ngSubmit)="onSubmit()">
+                <div class="row">
+                 
+
+  <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                        <mat-label>Force Type</mat-label>
+                        
+                        <mat-select formControlName="forceTypeId">
+                            <mat-option *ngFor="let code of selectedForceType" [value]="code.value">
+                                {{code.text}}
+                              </mat-option>                          
+                        </mat-select>
+                        <!-- <mat-error *ngIf="BaseNameForm.get('forceTypeId').hasError('required')">
+                          Force Type is required selectedDistrict
+                        </mat-error> -->
+                    </mat-form-field>
+                  </div>
+                  
+            
+                  
+                  <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                        <mat-label>Admin Authority</mat-label>
+                        
+                        <mat-select formControlName="adminAuthorityId" required>
+                            <mat-option *ngFor="let code of selectedAdminAuthority" [value]="code.value">
+                                {{code.text}}
+                              </mat-option>                          
+                        </mat-select>
+                        <mat-error *ngIf="BaseNameForm.get('adminAuthorityId').hasError('required')">
+                          Admin Authority is required
+                        </mat-error>
+                    </mat-form-field>
+                  </div>
+
+
+                  <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                        <mat-label>Division</mat-label>
+                        
+                        <mat-select formControlName="divisionId" required (selectionChange)="onDivisionSelectionChangeGetDistrict($event.value)"> 
+                          <mat-option  value="0">--Select--</mat-option >     
+                          <mat-option *ngFor="let code of selectedDivision" [value]="code.value">
+                                {{code.text}}
+                              </mat-option>                          
+                        </mat-select>
+                        <mat-error *ngIf="BaseNameForm.get('divisionId').hasError('required')">
+                          Division is required
+                        </mat-error>
+                    </mat-form-field>
+                  </div>
+
+
+                  <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                        <mat-label>District</mat-label>      
+                        <mat-select formControlName="districtId" required>
+                        <mat-option  value="0">--Select--</mat-option >                  
+                            <mat-option *ngFor="let district of districtByDivisionId" [value]="district.value">
+                                {{district.text}} 
+                              </mat-option>                          
+                        </mat-select> 
+                        <mat-error *ngIf="BaseNameForm.get('districtId').hasError('required')">
+                          District is Required!
+                        </mat-error>
+                    </mat-form-field>
+                  </div>
+
+                  <!-- <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                        <mat-label>District</mat-label>
+                        
+                        <mat-select formControlName="districtId" required>
+                            <mat-option *ngFor="let district of selectedDistrict" [value]="district.value">
+                                {{district.text}} 
+                              </mat-option>                          
+                        </mat-select> -->
+                        <!-- <mat-error *ngIf="BaseNameForm.get('districtId').hasError('required')">
+                          District is required 
+                        </mat-error> -->
+                    <!-- </mat-form-field>
+                  </div> -->
+
+                  <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                      <mat-label>Base Name</mat-label>
+                      <input matInput formControlName="baseNames" required>
+                      <mat-error *ngIf="BaseNameForm.get('baseNames').hasError('required')">
+                        Base Name is required
+                      </mat-error>
+                    </mat-form-field>
+                  </div>
+
+                  <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                      <mat-label>Short Name</mat-label>
+                      <input matInput formControlName="shortName" required>
+                      <mat-error *ngIf="BaseNameForm.get('shortName').hasError('required')">
+                        Short Name is required
+                      </mat-error>
+                    </mat-form-field>
+                  </div>
+
+                  <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                      <mat-label>base Logo</mat-label>
+                      <input matInput formControlName="baseLogo">
+                      <!-- <mat-error *ngIf="BaseNameForm.get('baseNames').hasError('required')">
+                        Base Name is required
+                      </mat-error> -->
+                    </mat-form-field>
+                  </div>
+                  <!-- <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                      <mat-label>Status</mat-label>
+                      <input matInput formControlName="status"> -->
+                      <!-- <mat-error *ngIf="BaseNameForm.get('baseNames').hasError('required')">
+                        Base Name is required
+                      </mat-error> -->
+                    <!-- </mat-form-field>
+                  </div> -->
+                  <!--<div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                      <mat-label>Menu position</mat-label>
+                      <input matInput formControlName="menuPosition">
+                    </mat-form-field>
+                  </div>-->
+                </div>
+            
+            
+               
+                <div class="row">
+                  <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+                    <button class="btn-space" [class.auth-spinner]="loading" [disabled]="loading" [disabled]="!BaseNameForm.valid " mat-raised-button
+                      color="primary">{{btnText}}</button>
+                    <button type="button" mat-button routerLink="/basic-setup/basename-list">Cancel</button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  

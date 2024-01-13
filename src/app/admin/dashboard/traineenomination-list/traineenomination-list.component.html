@@ -1,0 +1,312 @@
+<section class="content">
+    <div class="container-fluid">
+      <div class="block-header">
+        <div class="row">
+          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <ul class="breadcrumb breadcrumb-style ">
+              <li class="breadcrumb-item">
+                <h4 class="page-title">Trainee Nomination</h4>
+              </li>
+              <li class="breadcrumb-item bcrumb-1">
+                <a routerLink="/admin/dashboard/main"><i class="fas fa-home"></i></a>
+              </li>
+              <li class="breadcrumb-item bcrumb-2">
+                <a href="#" onClick="return false;">Trainee Nomination</a>
+              </li>
+              <li class="breadcrumb-item active">All</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+          <div class="card">
+            <div class="body">
+              <div class="responsive_table">
+                <div class="materialTableHeader"> 
+                  <div class="row">
+                    <div class="col-8">
+                      <ul class="header-buttons-left ml-0">
+                        <div class="align-center course-name">
+                          <p>Course:- {{getCourse}}</p>
+                        </div>
+                        <!-- <li class="dropdown">
+                          <input placeholder="Search" type="text" [(ngModel)]="searchText"  #filter class="browser-default search-field"
+                          aria-label="Search box">
+                        </li>
+                        <li> 
+                          <div class="icon-button-demo m-l-10">
+                            <button mat-mini-fab color="accent" (click)="applyFilter(searchText)">
+                              <mat-icon class="col-white">search</mat-icon>
+                            </button>
+                          </div>
+                          
+                          
+                        </li> -->
+                      </ul>
+                    </div>
+                    <div class="col-4">
+                      <ul class="header-buttons">
+                        <li>
+                          <div class="icon-button-demo">
+                            <!-- <button class="btn-space"  mat-raised-button
+                            color="warn" routerLink="/admin/dashboard/main"> 
+                            <mat-icon class="col-white">keyboard_backspace</mat-icon> Back
+                            </button> -->
+                            <!-- <button *ngIf="!courseTypeId && !dbType && courseTypeId!==0" class="btn-space"  mat-raised-button
+                            color="warn" [routerLink]="['/admin/dashboard/school-dashboard']"> 
+                            <mat-icon class="col-white">keyboard_backspace</mat-icon> Back
+                          </button> -->
+
+                            <button *ngIf="role === 'Inter Seevice Course'" class="btn-space"  mat-raised-button
+                              color="warn" [routerLink]="['/admin/dashboard/interservice-dashboard']"> 
+                              <mat-icon class="col-white">keyboard_backspace</mat-icon> Back
+                            </button>
+                            <button *ngIf="role === 'Foreign Training'" class="btn-space"  mat-raised-button
+                              color="warn" [routerLink]="['/admin/dashboard/foreigntraining-dashboard']"> 
+                              <mat-icon class="col-white">keyboard_backspace</mat-icon> Back
+                            </button>
+                            <button *ngIf="dbType1" class="btn-space"  mat-raised-button
+                            color="warn" [routerLink]="['/admin/dashboard/runningcourses-list',20]"> 
+                            <mat-icon class="col-white">keyboard_backspace</mat-icon> Back
+                            </button>
+                            
+                            <button *ngIf="dbType == this.masterData.dbType.foreignTrainingDb" class="btn-space"  mat-raised-button
+                            color="warn" [routerLink]="['/admin/dashboard/view-upcomingforeigncourselist',courseTypeId,dbType]"> 
+                            <mat-icon class="col-white">keyboard_backspace</mat-icon> Back
+                            </button>
+
+                            <button *ngIf="courseTypeId===5" class="btn-space"  mat-raised-button
+                            color="warn" [routerLink]="['/admin/dashboard/upcomingcourses-list',20]"> 
+                            <mat-icon class="col-white">keyboard_backspace</mat-icon> Back
+                          </button>
+
+                            <button *ngIf="role === userRole.TrainingOffice || role === userRole.SuperAdmin || role === userRole.BNASchool || role === userRole.JSTISchool || role === userRole.CO || role === userRole.SchoolOIC" class="btn-space"  mat-raised-button
+                            color="warn" [routerLink]="['/admin/dashboard/school-dashboard']"> 
+                            <mat-icon class="col-white">keyboard_backspace</mat-icon> Back
+                           </button>
+
+                            <button *ngIf="courseTypeId && courseTypeId !==5 && role != 'Inter Seevice Course' && dbType != this.masterData.dbType.foreignTrainingDb" class="btn-space"  mat-raised-button
+                              color="warn" [routerLink]="['/admin/dashboard/view-runningcourses',courseTypeId]"> 
+                              <mat-icon class="col-white">keyboard_backspace</mat-icon> Back
+                            </button>
+
+                           
+                          
+                            <button *ngIf="!dbType1 && courseTypeId === 0 && !courseType3 && role != 'Foreign Training'" class="btn-space"  mat-raised-button
+                              color="warn" [routerLink]="['/admin/dashboard/upcomingcourse-list']"> 
+                              <mat-icon class="col-white">keyboard_backspace</mat-icon> Back
+                            </button>
+
+                          
+                            <!--[routerLink]="['/course-management/traineenomination-list', row.courseDurationId]"-->
+                            <!-- <button class="btn-space"  mat-raised-button
+                            color="primary" [routerLink]="['/course-management/add-traineenomination', this.courseDurationId,this.courseNameId]"> Add
+                              <mat-icon class="col-white">add</mat-icon>
+                            </button> -->
+                          </div>
+                        </li>
+                       
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+                <div id="print-routine">
+                  <table *ngIf="role != 'Inter Seevice Course' || (role == 'Inter Seevice Course' && courseTypeId == 3)"  class="table tbl-by-group db-li-s-in">
+                    <thead>
+                      <tr>
+                        <th class="th-cell-ser">Ser:</th>
+                        <th class="th-cell-course">PNO / ONO</th>
+                        <th class="th-cell-course"> Name </th>
+                        <th class="th-cell-course">Rank </th>
+                        <th class="th-cell-durationform">Attandance (%)</th>
+                        <th *ngIf="role != userRole.TrainingOffice" class="cl-action"> Result</th>
+                        <th *ngIf="role != userRole.TrainingOffice" class="cl-action"> Certificate Backpage</th>
+                        <th *ngIf="role != userRole.TrainingOffice" class="cl-action"> Certificate</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <ng-container *ngFor="let data of nominatedPercentageList; let i = index" >
+                       
+                        <tr >
+                          <td class="td-cell">
+                            {{i+1}}
+                          </td>
+                          <!-- <td class="td-cell">
+                            {{data.position}} {{data.name}}  <span class="t-n-pno-d">(P No {{data.pno}})</span>
+                          </td> -->
+                          <td class="td-cell">
+                             
+                             <a [routerLink]="['/admin/dashboard/jstitrainee-details',data.traineeId]">{{data.pno}} </a>
+                          </td>
+                          <td class="td-cell">
+                            {{data.name}}  
+                          </td>
+                          <td class="td-cell">
+                            {{data.position}} 
+                          </td>
+                          <td class="td-cell">
+                            <a [routerLink]="['/admin/dashboard/view-traineeattendance/',data.traineeId,data.courseDurationId]">{{data.percentage}}% </a>
+                          </td>
+                         
+                          <td *ngIf="role != userRole.TrainingOffice" class="cl-action">
+                            <button mat-icon-button class="btn-tbl-view" title="Subject Mark" [routerLink]="['/admin/dashboard/viewobtainmark/',data.baseSchoolNameId,data.courseDurationId,data.traineeId]">
+                              <mat-icon aria-label="Edit" class="col-white">visibility</mat-icon>
+                            </button>
+                            
+                            <!-- <button mat-icon-button class="btn-tbl-view" title="Performance Details" [routerLink]="['/admin/dashboard/trainee-performancedetails/',data.baseSchoolNameId,data.courseDurationId,data.traineeId]">
+                              <mat-icon aria-label="Edit" class="col-white">toc</mat-icon>
+                            </button> -->
+                          </td>
+                          <td *ngIf="role != userRole.TrainingOffice" class="cl-action">
+                            <!-- <button mat-icon-button class="btn-tbl-view" title="Subject Mark" [routerLink]="['/admin/dashboard/viewobtainmark/',data.baseSchoolNameId,data.courseDurationId,data.traineeId]">
+                              <mat-icon aria-label="Edit" class="col-white">visibility</mat-icon>
+                            </button> -->
+                            
+                            <!-- <button mat-icon-button class="btn-tbl-view" title="Performance Details" [routerLink]="['/admin/dashboard/trainee-performancedetails/',data.baseSchoolNameId,data.courseDurationId,data.traineeId]">
+                              <mat-icon aria-label="Edit" class="col-white">toc</mat-icon>
+                              
+                            </button> -->
+                            <button mat-icon-button class="btn-tbl-nomination" title="Performance Details" [routerLink]="['/admin/dashboard/trainee-performancedetails/',data.baseSchoolNameId,data.courseDurationId,data.traineeId]">
+                              <!-- <mat-icon aria-label="Edit" class="col-white">wc</mat-icon> -->
+                              <img src="../../../assets/images/app-icon/marksheet.png" class="instructor-icon"/>
+                            </button>
+                          </td>
+                          <td *ngIf="role != userRole.TrainingOffice" class="cl-action">
+                            <!-- <button mat-icon-button class="btn-tbl-view" title="Subject Mark" [routerLink]="['/admin/dashboard/viewobtainmark/',data.baseSchoolNameId,data.courseDurationId,data.traineeId]">
+                              <mat-icon aria-label="Edit" class="col-white">visibility</mat-icon>
+                            </button>
+                            
+                            <button mat-icon-button class="btn-tbl-view" title="Performance Details" [routerLink]="['/admin/dashboard/trainee-performancedetails/',data.baseSchoolNameId,data.courseDurationId,data.traineeId]">
+                              <mat-icon aria-label="Edit" class="col-white">toc</mat-icon>
+                            </button> -->
+                            <button mat-icon-button class="btn-tbl-nomination" title="Certificate" [routerLink]="['/admin/dashboard/trainee-certificate/',data.baseSchoolNameId,data.courseDurationId,data.traineeId]">
+                              <!-- <mat-icon aria-label="Edit" class="col-white">wc</mat-icon> -->
+                              <img src="../../../assets/images/app-icon/certificate.png" class="instructor-icon"/>
+                            </button>
+                          </td>
+                        </tr>
+                      </ng-container>
+                    </tbody>
+                  </table>
+                </div>
+                <!-- <div id="print-routine">
+                <mat-table *ngIf="role != 'Inter Seevice Course' || (role == 'Inter Seevice Course' && courseTypeId == 3)"  #table [dataSource]="nominatedPercentageList" matSort class="mat-cell db-li-n nominated">               
+                  <ng-container matColumnDef="ser">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header> Ser: </mat-header-cell>
+                    <mat-cell *matCellDef="let element; let i = index;"> {{ ((paging.pageIndex-1) *  paging.pageSize) + i+1}} </mat-cell>
+                  </ng-container>    
+
+
+                  <ng-container matColumnDef="traineeName">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>Rank & Name </mat-header-cell>
+                    <mat-cell *matCellDef="let element"> {{element.position}} {{element.name}}  <span class="t-n-pno-d">(P No {{element.pno}})</span> </mat-cell>
+                  </ng-container>
+
+
+
+                  <ng-container matColumnDef="attandanceParcentage">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>Attandance Parcentage</mat-header-cell>
+                    <mat-cell *matCellDef="let element"> {{element.percentage}}% </mat-cell>
+                  </ng-container>
+
+
+
+
+                  <mat-header-row  *matHeaderRowDef="displayedColumns"></mat-header-row>
+                  <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+                 </mat-table>
+                </div> -->
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 div-class div-left m-t-20">
+                  <button class="btn-space"  mat-raised-button color="primary" (click)="printSingle()"> Print
+                    <mat-icon class="col-white">print</mat-icon>
+                  </button>
+                </div>
+                 <mat-table *ngIf="role === 'Inter Seevice Course' && courseTypeId == 19"  #table [dataSource]="TraineeReportSubmittedList" matSort class="mat-cell db-li-n nominated inter-service-report-submit">               
+                  <ng-container matColumnDef="ser">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header> Ser: </mat-header-cell>
+                    <mat-cell *matCellDef="let element; let i = index;"> {{ ((paging.pageIndex-1) *  paging.pageSize) + i+1}} </mat-cell>
+                  </ng-container>    
+
+
+                  <ng-container matColumnDef="traineeName">
+                    <mat-header-cell class="trainee-col" *matHeaderCellDef mat-sort-header>Rank & Name </mat-header-cell>
+                    <mat-cell class="trainee-col" *matCellDef="let element"> {{element.position}} {{element.name}}  <span class="t-n-pno-d">(P No {{element.pno}})</span> </mat-cell>
+                  </ng-container>
+                  
+                  <ng-container matColumnDef="remark">
+                    <mat-header-cell class="rmrk-col" *matHeaderCellDef mat-sort-header>Remarks </mat-header-cell>
+                    <mat-cell class="rmrk-col" *matCellDef="let element"> {{element.courseAttendStateRemark}} </mat-cell>
+                  </ng-container>
+
+
+                  <ng-container matColumnDef="status">
+                    <mat-header-cell class="sta-col" *matHeaderCellDef mat-sort-header>Course Report </mat-header-cell>
+                    <mat-cell class="sta-col" *matCellDef="let element"> 
+                      <span class="complete-status" *ngIf="element.submittedTrainee"> Submitted </span>
+                      <span class="incomplete-status" *ngIf="!element.submittedTrainee">  Not Submitted </span>
+                    </mat-cell>
+                  </ng-container>
+
+                  <ng-container matColumnDef="attendance">
+                    <mat-header-cell class="att-col" *matHeaderCellDef mat-sort-header> Participant's State </mat-header-cell>
+                    <mat-cell class="att-col" *matCellDef="let element"> 
+                      <span class="complete-status" *ngIf="element.courseAttendState == 0"> On Parade </span>
+                      <span class="incomplete-status" *ngIf="element.courseAttendState == 1">  Away </span>
+                    </mat-cell>
+                  </ng-container>
+
+
+                  <ng-container matColumnDef="doc">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>Doc </mat-header-cell>
+                    <mat-cell *matCellDef="let element"> 
+                      <a *ngIf="element.submittedTrainee" target="_blank" [href]="fileUrl + element.doc"><i class="far fa-file-pdf tbl-pdf"></i></a>   
+                    </mat-cell>
+                  </ng-container>
+
+
+
+
+
+
+                  <mat-header-row  *matHeaderRowDef="displayedInterServiceColumns"></mat-header-row>
+                  <mat-row *matRowDef="let row; columns: displayedInterServiceColumns;"></mat-row>
+                 </mat-table>
+
+                 <!-- <table class="table  tbl-by-group">
+                  <thead>
+                    <tr>
+                      <th class="cl-srl"><h5>Course Name</h5></th>
+                      <th class="course-name-col"><h5>Rank & Name</h5></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <ng-container *ngFor="let data of groupArrays;let i= index;">
+                      <tr>
+                        <td class="cl-srl" [attr.rowspan]="data.courses.length + 1">{{data.courseName}}</td>
+                      </tr>
+                      <tr *ngFor="let number of data.courses;">
+                        <td>{{number.rankPosition}} {{number.traineeName}}</td>
+                        
+                      </tr>
+                    </ng-container>
+                  </tbody>
+                </table> -->
+            
+                 <mat-paginator [length]="paging.length" [showFirstLastButtons]="masterData.paging.showFirstLastButtons"
+                [pageSize]="paging.pageSize" [pageSizeOptions]="masterData.paging.pageSizeOptions"
+                (page)="pageChanged($event)">
+                </mat-paginator>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  
+  
+  
+   
+

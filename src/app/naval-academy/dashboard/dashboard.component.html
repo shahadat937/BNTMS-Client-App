@@ -1,0 +1,221 @@
+<section class="content">
+  <div class="container-fluid">
+    <div class="block-header">
+      <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <ul class="breadcrumb breadcrumb-style ">
+            <li class="breadcrumb-item">
+              <h4 class="page-title">BNA Dashboard</h4>
+            </li>
+            <li class="breadcrumb-item bcrumb-1">
+              <a routerLink="/teacher/dashboard">
+                <i class="fas fa-home"></i> </a>
+            </li>
+            <li class="breadcrumb-item active">BNA Dashboard</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- find instructor -->
+
+    <div class="row">
+      <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
+        <div class="card">
+          <div class="body">
+            <!-- <form [formGroup]="GetInstructorForm" (ngSubmit)="onSubmit()">
+              <div class="row">
+                <div class="col-xl-8 col-lg-8 col-md-8 col-sm-12 mb-2">
+                  <mat-form-field class="example-full-width mb-3" appearance="outline">
+                    <mat-label>Trainee Id</mat-label>                        
+                    <input matInput formControlName="traineeId">
+                  </mat-form-field>
+                </div>
+                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mb-2">
+                  <button class="btn-space" [class.auth-spinner]="loading" [disabled]="loading" [disabled]="!GetInstructorForm.valid " mat-raised-button
+                      color="primary">Find</button>
+                </div>
+              </div>
+              
+            </form> -->
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+              <div class="row">
+                <div class="responsive_table">
+                  <table class="full-width col-12" *ngIf="isShown">
+                    <tr>
+                      <th>PNO, NAME & RANK</th>
+                      <td>{{pno}}, {{position}}  {{name}}</td>
+                    </tr>
+                    <tr>
+                      <th>SERVICE TYPE</th>
+                      <td>{{name1}}</td>
+                    </tr>
+                    <tr>
+                      <th>JOINING DATE</th>
+                      <td>{{joiningDate | date:'mediumDate'}}</td>
+                    </tr>
+                    <tr>
+                      <th>DESIGNATION</th>
+                      <td>Instructor</td>
+                    </tr>
+                    <tr>
+                      <th>SCHOOL NAME </th>
+                      <td>{{schoolName}}</td>
+                    </tr>
+                  </table>
+                  
+                </div>
+                
+              </div>
+            </div>
+            
+          </div>
+        </div>
+      </div>
+
+      <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 trainee-notice-board">
+        <div class="card">
+          
+          <div class="body">
+            <div class="row dash-cd-m-0">
+              <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 div-class div-left">
+                <h3>Notice Board</h3>
+              </div>
+            </div>
+            <div class="recent-comment" style="position: relative;min-height: 125px; max-height: 125px;">
+              <div *ngFor="let notice of NoticeForInstructor;" class="notice-board">
+                <!-- <div class="table-img">
+                  <img class="notice-object" src="assets/images/user/user6.jpg" alt="...">
+                </div> -->
+                <div class="notice-body">
+                  <h5 class="notice-heading col-green">{{notice.noticeHeading}}</h5>
+                  <div class="notification-sign">
+                    <span class="notification-flicker">{{notice.newStatus}}</span>
+                  </div> 
+                  <p>({{notice.course}} - {{notice.courseTitle}}) {{notice.noticeDetails}}</p>                  
+                </div>
+              </div>
+              
+            </div>
+          </div>
+        </div>
+        
+      </div>
+      
+   </div>
+    
+    <div  *ngIf="isShown" class="container-fluid  m-b-10 bulletin">
+      <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 bulletin-section">
+        <div class="row">
+          <div class="col-lg-1 col-md-1 ">
+            <div class="title">
+              <h4>Bulletin:</h4>
+            </div>
+            
+          </div>
+          <div class="col-lg-11 col-md-11">
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 scrollbar">
+              <ng-marquee [stopOnHover]="true" duration="25s" >
+                <mark class="bulletin-item" *ngFor="let data of bulletinList;">{{data.buletinDetails}}</mark>                
+              </ng-marquee>
+            </div>
+            
+            
+          </div>
+        </div>
+        
+      </div>
+    </div>
+
+<div class="row">
+ <!-- Useful links -->
+    <div *ngIf="isShown"  class="col-xs-12 col-sm-12 col-md-12 col-lg-12">     
+      <!-- <div> -->
+      <div class="card usefullink">
+        <div class="header">
+        </div>
+        <div class="body">
+          <div class="row dash-cd-m-0">
+            <!-- <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 div-class div-left">
+              <h3 class="align-center">Useful Links</h3>
+            </div> -->
+          </div>
+          <div class="btnGroup">
+            <button [routerLink]="['/attendance-management/attendance-instructor',traineeId]" class="btnDetailsins" mat-flat-button color="primary">Trainee Attendance</button>
+            <button [routerLink]="['/admin/dashboard/assignment-list',traineeId]" class="btnDetailsins" mat-flat-button color="primary">Assignment</button>
+            <!-- <button [routerLink]="['/exam-management/add-bnaexammarkinstructor',traineeId]" class="btnDetailsins" mat-flat-button color="primary">Result Submission</button> -->
+            <button [routerLink]="['#']" class="btnDetailsins" mat-flat-button color="primary">Attendance</button>
+            <button [routerLink]="['/admin/dashboard/weeklyroutineinstructor',traineeId]" class="btnDetailsins" mat-flat-button color="primary">Weekly Training Program</button>
+            <button [routerLink]="['/admin/dashboard/readingmateriallistinstructor',traineeId,schoolId]" class="btnDetailsins" mat-flat-button color="primary">Reading Material</button>
+            <button [routerLink]="['/admin/dashboard/assignedsubject-list',traineeId]" class="btnDetailsins" mat-flat-button color="primary">Subject Syllabus</button>
+            <button [routerLink]="['/admin/dashboard/instructorexam-list',traineeId]" class="btnDetailsins" mat-flat-button color="primary">Exam Notification</button>
+            <button [routerLink]="['#',traineeId]" class="btnDetailsins" mat-flat-button color="primary">Report</button>
+          </div>
+        </div>
+      </div>
+    <!-- </div> -->
+    </div>
+
+<!-- Upcoming Class List -->
+
+    <div  *ngIf="isShown">
+      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="card">
+          <div class="body">
+            <div class="row dash-cd-m-0">
+              <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 div-class div-left">
+                <h3 class="align-center">Upcoming Classes Notification</h3>
+              </div>
+            </div>
+            <div class="responsive_table">
+              <!-- <div class="materialTableHeaderupcomming"> 
+                <h4 class="upCourse">Upcoming Classes Notification</h4>
+                <div class="row">
+                  <div class="col-6">
+                    <ul class="header-buttons-left ml-0">
+                      <li class="dropdown">
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div> -->
+              <mat-table  #table [dataSource]="upcomingCoursesList" matSort class="mat-cell db-tbl ins-db week-rtn teacher">               
+                <ng-container matColumnDef="ser">
+                  <mat-header-cell class="ser-col" *matHeaderCellDef mat-sort-header> Ser: </mat-header-cell>
+                  <mat-cell class="ser-col" *matCellDef="let element; let i = index;"> {{ ((paging.pageIndex-1) *  paging.pageSize) + i+1}} </mat-cell>
+                </ng-container>    
+      
+                <ng-container matColumnDef="course">
+                  <mat-header-cell class="course-col" *matHeaderCellDef mat-sort-header>course </mat-header-cell>
+                  <mat-cell class="course-col" *matCellDef="let element"> {{element.course}} - {{element.courseTitle}} </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="durationForm">
+                  <mat-header-cell class="duration-col" *matHeaderCellDef mat-sort-header>Duration </mat-header-cell>
+                  <mat-cell class="duration-col" *matCellDef="let element"> {{element.periodName}} ({{element.durationForm}}-{{element.durationTo}}) </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="subjectName">
+                  <mat-header-cell class="course-col" *matHeaderCellDef mat-sort-header> Subject </mat-header-cell>
+                  <mat-cell class="course-col" *matCellDef="let element"> {{element.subjectName}} - {{element.classCountPeriod}}/{{element.subjectCountPeriod}} - {{element.shortCode}}</mat-cell>
+                </ng-container>
+
+                <!-- <ng-container matColumnDef="classLocation">
+                  <mat-header-cell class="date-col" *matHeaderCellDef mat-sort-header>Location </mat-header-cell>
+                  <mat-cell class="date-col" *matCellDef="let element"> {{element.classLocation}} </mat-cell>
+                </ng-container> -->
+                
+                <mat-header-row *matHeaderRowDef="displayedUpcommingColumns"></mat-header-row>
+                <mat-row *matRowDef="let row; columns: displayedUpcommingColumns;"></mat-row>
+              </mat-table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+</div>
+  
+
+  </div>
+</section>

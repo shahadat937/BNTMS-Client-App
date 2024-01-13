@@ -1,0 +1,34 @@
+import { Page404Component } from './../authentication/page404/page404.component';
+import { NgModule } from '@angular/core';
+import { Routes, RouterModule } from '@angular/router';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { RunningCoursForeignRraineecountListComponent } from '../foreign-training/runningcoursforeigntraineecount/runningcoursforeigntraineecount-list.component';
+const routes: Routes = [
+  {
+    path: '',
+    redirectTo: 'signin',
+    pathMatch: 'full'
+  },
+
+  { 
+    path: 'dashboard',
+    component: DashboardComponent,
+  },
+  
+  // {
+  //   path: 'runningcoursforeigntraineecount-list',
+  //   component: RunningCoursForeignRraineecountListComponent,
+  // },
+
+  // { 
+  //   path: '/dashboard/runningcourses-list/:baseSchoolNameId', 
+  //   component: RunningCoursesListComponent 
+  // },
+  { path: '**', component: Page404Component },
+];
+
+@NgModule({
+  imports: [RouterModule.forChild(routes)],
+  exports: [RouterModule],
+})
+export class ForeignTrainingDashboardRoutingModule {}

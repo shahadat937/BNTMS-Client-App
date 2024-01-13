@@ -1,0 +1,25 @@
+export interface CourseInstructor {
+      courseInstructorId: number;
+      courseDurationId: number,
+      courseTitle:string,
+      courseNameId:number,
+      courseName:string,
+      baseSchoolNameId:number,
+      baseSchoolName:string,
+      courseModuleId: number,
+      bnaSubjectNameId: number,
+      bnaSemesterId:number,
+      departmentId:number,
+      bnaSubjectCurriculumId:number,
+      courseSectionId: number,
+      courseDuration:string,
+      traineeId: number,
+      subjectMarkId: number,
+      markTypeId: number,
+      trainee: string,
+      traineePno: number,
+      status:number,
+      menuPosition:number,
+      isActive: boolean,
+      examMarkEntry:number
+}

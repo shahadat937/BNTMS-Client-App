@@ -1,0 +1,111 @@
+<section class="content">
+    <div class="container-fluid">
+      <div class="block-header">
+        <div class="row">
+          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <ul class="breadcrumb breadcrumb-style ">
+              <li class="breadcrumb-item">
+                <h4 class="page-title">Assignment List</h4>
+              </li>
+              <li class="breadcrumb-item bcrumb-1">
+                <a routerLink="/admin/dashboard/main"><i class="fas fa-home"></i></a>
+              </li>
+              <li class="breadcrumb-item bcrumb-2">
+                <a href="#" onClick="return false;">Assignment</a>
+              </li>
+              <li class="breadcrumb-item active">All</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+          <div class="card">
+            <div class="body">
+              <div class="responsive_table">
+                <div class="materialTableHeader"> 
+                  <div class="row">
+                    <div class="col-8">
+                      <ul class="header-buttons-left ml-0">
+                        <li class="dropdown">
+                        </li>
+                      </ul>
+                    </div>
+                    <div class="col-4">
+                      <ul class="header-buttons">
+                        <li>
+                          <div class="icon-button-demo">
+                            <button class="btn-space"  mat-raised-button
+                              color="warn" [routerLink]="['/admin/dashboard/trainee-dashboard']"> 
+                              <mat-icon class="col-white">keyboard_backspace</mat-icon> Back
+                            </button>
+                          </div>
+                        </li>
+                       
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+                <mat-table #table [dataSource]="NoticeForStudent" matSort class="mat-cell">               
+                  <ng-container matColumnDef="ser">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header> Ser: </mat-header-cell>
+                    <mat-cell *matCellDef="let element; let i = index;">
+                      <div class="assignment notification-sign">
+                        <span class="notification-flicker">{{element.newStatus}}</span>
+                      </div> 
+                      {{ ((paging.pageIndex-1) *  paging.pageSize) + i+1}} </mat-cell>
+                  </ng-container>    
+
+                  <ng-container matColumnDef="bnaSubjectName">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header> Subject Name </mat-header-cell>
+                    <mat-cell *matCellDef="let element"> {{element.subjectName}} </mat-cell>
+                  </ng-container>
+
+                  <ng-container matColumnDef="assignmentTopic">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header> Assignment Topic</mat-header-cell>
+                    <mat-cell ngClass="assignmentTopic" *matCellDef="let element"> {{element.assignmentTopic}} </mat-cell>
+                  </ng-container>
+                  
+                  <!-- <ng-container matColumnDef="startDate">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>Assignment Start Date</mat-header-cell>
+                    <mat-cell *matCellDef="let element"> {{element.startDate | date:'mediumDate'}} </mat-cell>
+                  </ng-container> -->
+                  
+                  <ng-container matColumnDef="endDate">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>Assignment Submission Last Date</mat-header-cell>
+                    <mat-cell *matCellDef="let element"> {{element.endDate | date:'mediumDate'}} </mat-cell>
+                  </ng-container>
+
+                  <ng-container matColumnDef="assignmentMark">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>Assignment Mark</mat-header-cell>
+                    <mat-cell *matCellDef="let element">{{element.assignmentMark}} </mat-cell>
+                  </ng-container>
+
+                  <ng-container matColumnDef="trainee">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>Instructor</mat-header-cell>
+                    <mat-cell *matCellDef="let element">{{element.position}} {{element.name}}   <span class="t-n-pno-d">(P No {{element.pno}})</span> </mat-cell>
+                  </ng-container>
+
+                  <ng-container matColumnDef="actions">
+                    <mat-header-cell ngClass="custom-action local" *matHeaderCellDef class="pr-0"></mat-header-cell>
+                    <mat-cell ngClass="custom-action local" *matCellDef="let row; let i=index;" class="pr-0">
+                      <button mat-raised-button class="custom-btn courseplan-btn big" [routerLink]="['/admin/dashboard/add-studentassignment',this.traineeId,row.instructorId,row.courseInstructorId,row.instructorAssignmentId,row.baseSchoolNameId,row.courseDurationId,row.courseNameId,row.bnaSubjectNameId]">Assignment Submission</button>
+                    </mat-cell>
+                  </ng-container>
+                  
+                  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                  <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+                </mat-table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  
+  
+  
+   
+

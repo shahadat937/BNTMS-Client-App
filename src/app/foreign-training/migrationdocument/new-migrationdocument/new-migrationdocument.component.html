@@ -1,0 +1,106 @@
+<section class="content">
+    <div class="container-fluid">
+      <div class="block-header">
+        <div class="row">
+          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <ul class="breadcrumb breadcrumb-style ">
+              <li class="breadcrumb-item">
+                <h4 class="page-title">{{pageTitle}}</h4>
+              </li>
+              <li class="breadcrumb-item bcrumb-1">
+                <a routerLink="/admin/dashboard/main"><i class="fas fa-home"></i></a>
+              </li>
+              <li class="breadcrumb-item bcrumb-2">
+                <a href="#" onClick="return false;">Migration Document</a>
+              </li>
+              <li class="breadcrumb-item active">{{destination}}</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="row clearfix">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+          <div class="card">
+            <div class="header">
+            </div>
+            <div class="body">
+              <form class="m-4" [formGroup]="MigrationDocumentForm" (ngSubmit)="onSubmit()">
+                <div class="row">
+
+                  
+
+                  <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                      <mat-label>trainee Id</mat-label>                        
+                      <input matInput formControlName="traineeId" required>
+                      <mat-error *ngIf="MigrationDocumentForm.get('traineeId').hasError('required')">
+                        traineeId is Required!
+                      </mat-error>
+                    </mat-form-field>
+                  </div>
+
+                  <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                      <mat-label>course Duration Id</mat-label>                        
+                      <input matInput formControlName="courseDurationId" >
+                      <mat-error *ngIf="MigrationDocumentForm.get('courseDurationId').hasError('required')">
+                        courseDurationId is Required!
+                      </mat-error>
+                    </mat-form-field>
+                  </div>
+
+                  <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                      <mat-label>traineeNominationId</mat-label>                        
+                      <input matInput formControlName="traineeNominationId" >
+                      <mat-error *ngIf="MigrationDocumentForm.get('traineeNominationId').hasError('required')">
+                        usd Rate is Required!
+                      </mat-error>
+                    </mat-form-field>
+                  </div>
+
+                  <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                        <mat-label>Relation Type</mat-label>                       
+                        <mat-select formControlName="relationTypeId" required> 
+                            <mat-option *ngFor="let  relationTypes of relationTypeValues" [value]="relationTypes.value">
+                                {{relationTypes.text}}   
+                              </mat-option>                          
+                        </mat-select>
+                        <mat-error *ngIf="MigrationDocumentForm.get('relationTypeId').hasError('required')">
+                          Relation Type is required
+                        </mat-error>
+                    </mat-form-field>
+                  </div>
+
+                  
+
+                  <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                      <mat-label>remarks</mat-label>                        
+                      <input matInput formControlName="remarks" >
+                      <mat-error *ngIf="MigrationDocumentForm.get('remarks').hasError('required')">
+                        totalBdt is Required!
+                      </mat-error>
+                    </mat-form-field>
+                  </div>
+
+                  
+                </div> 
+               
+                <div class="row">
+                  <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+                    <button class="btn-space" [class.auth-spinner]="loading" [disabled]="loading" [disabled]="!MigrationDocumentForm.valid " mat-raised-button
+                        color="primary">{{buttonText}}</button>
+                    <button type="button" mat-button routerLink="/foreign-training/migrationdocument-list">Cancel</button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+

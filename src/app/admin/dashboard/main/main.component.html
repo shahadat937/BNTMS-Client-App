@@ -1,0 +1,169 @@
+<section class="content db-main">
+  <div class="container-fluid">
+    <!-- <div class="block-header">
+      <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <ul class="breadcrumb breadcrumb-style ">
+            <li class="breadcrumb-item">
+              <h4 class="page-title">Dashboard</h4>
+            </li>
+            <li class="breadcrumb-item bcrumb-1">
+              <a routerLink="/admin/dashboard/main">
+                <i class="fas fa-home"></i> Home</a>
+            </li>
+            <li class="breadcrumb-item active">Dashboard</li>
+          </ul>
+        </div>
+      </div>
+    </div> -->
+
+    <!-- #END# Course -->
+    <div class="row p-t-15">      
+      <div class="col-xl-9 col-lg-9 col-md-12 col-sm-12 main-db">        
+        <div class="card">
+          <div class="header">
+            
+          </div>
+          <div class="body">
+            <div class="row">
+              <div class="col-lg-12 col-md-12 col-sm-12">
+    
+              
+                <button [routerLink]="['/admin/dashboard/view-runningcourses', masterData.coursetype.LocalCourse]" class="col-lg-3 col-md-3 col-sm-3 btnDetails" mat-flat-button color="primary">Local Courses</button>
+                <button [routerLink]="['/admin/dashboard/view-runningcourses', masterData.coursetype.ForeignCourse]" class="col-lg-3 col-md-3 col-sm-3 btnDetails" mat-flat-button color="primary">Foreign Courses</button>
+                <button [routerLink]="['/admin/dashboard/view-runningcourses', masterData.coursetype.InterService]" class="col-lg-3 col-md-3 col-sm-3 btnDetails" mat-flat-button color="primary">Inter Service Courses</button>
+                <button [routerLink]="['/admin/dashboard/view-centralexamcourse',masterData.courseName.QExam]" class="col-lg-3 col-md-3 col-sm-3 btnDetails" mat-flat-button color="primary">Q-Exam</button>
+                <button [routerLink]="['/admin/dashboard/Jcoexamlistindashboard-list']" class="col-lg-3 col-md-3 col-sm-3 btnDetails" mat-flat-button color="primary">JCO's Exam</button>
+                <button [routerLink]="['/admin/dashboard/view-centralexamcourse',masterData.courseName.StaffCollage]" class="col-lg-3 col-md-3 col-sm-3 btnDetails" mat-flat-button color="primary">Staff College Exam</button>
+                <button [routerLink]="['/admin/dashboard/view-budgetinfolist']" class="col-lg-3 col-md-3 col-sm-3 btnDetails" mat-flat-button color="primary">Budget </button>
+                <button [routerLink]="['/admin/dashboard/school-list']" class="col-lg-3 col-md-3 col-sm-3 btnDetails" mat-flat-button color="primary">School Details</button>
+                <button [routerLink]="['/admin/dashboard/view-readingmaterial']" class="col-lg-3 col-md-3 col-sm-3 btnDetails" mat-flat-button color="primary">Reading Materials</button>
+                <button [routerLink]="['/admin/dashboard/view-courselistbyschool',0]" class="col-lg-3 col-md-3 col-sm-3 btnDetails" mat-flat-button color="primary">Course Names </button>
+                <!-- <button [routerLink]="['/calendar']" class="col-lg-3 col-md-3 col-sm-3 btnDetails" mat-flat-button color="primary">Event Calendar </button> -->
+                <!-- <button class="btnDetails" mat-flat-button color="primary">Teacher Evaluation</button>
+                <button class="btnDetails" mat-flat-button color="primary">Syllabus</button> -->
+              </div>
+            </div>
+          </div>
+        
+        </div>
+      </div>
+      <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12">
+        <div class="card">
+          <div class="header">
+            
+          </div>
+          <!-- <div class="body">
+            <apx-chart [series]="barChartOptions.series" [chart]="barChartOptions.chart"
+              [dataLabels]="barChartOptions.dataLabels" [plotOptions]="barChartOptions.plotOptions"
+              [yaxis]="barChartOptions.yaxis" [xaxis]="barChartOptions.xaxis" [fill]="barChartOptions.fill"></apx-chart>
+          </div> -->
+          <div class="body db-left-info">
+            <table class="full-width col-12">
+              <tr>
+                <th>Total Trainee</th>
+                <td>
+                  <a [routerLink]="['/admin/dashboard/view-totaltraineelist']">{{nomineeCount}}</a>
+                </td>
+              </tr>
+              <tr>
+                <th>Officers</th>
+                <td>
+                  <a [routerLink]="['/admin/dashboard/view-officerlist', masterData.TraineeStatus.officer]">{{runningOfficerCount}}</a>
+                </td>
+              </tr>
+              <tr>
+                <th>Sailors</th>
+                <td>
+                  <a [routerLink]="['/admin/dashboard/view-officerlist', masterData.TraineeStatus.sailor]">{{runningSailorCount}}</a>
+                </td>
+              </tr>
+              <tr>
+                <th>Civil</th>
+                <td>
+                  <a [routerLink]="['/admin/dashboard/view-officerlist', masterData.TraineeStatus.civil]">{{runningCivilCount}}</a>
+                </td>
+              </tr>
+              <tr> 
+                <th>Foreign Trainee</th>
+                <td>
+                  <a [routerLink]="['/admin/dashboard/view-totalforeigntraineelistbyschool', 0, masterData.OfficerType.Foreign]">{{foreignNomineeCount}}</a>
+                </td>
+              </tr>
+              <tr>
+                <th class="">Online Interaction <span class="notify-design float-none">{{notificationCount}}</span> <span *ngIf="notificationCount" class="blink_me float-none">New Massage</span></th>
+                <td>
+                  <a [routerLink]="['/admin/dashboard/online-interaction']">>>></a>
+                </td>
+              </tr>
+              <tr class="calendar-color">
+                <th>Event Calendar </th>
+                <td>
+                  <a [routerLink]="['/calendar']">></a>
+                </td>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="row">
+      <div class="col-md-12 col-sm-12">
+        <div class="card">
+          <div class="card-body">
+            <div class="row event-calendar">
+              <div class="col-xl-2 col-md-2 col-sm-12 p-l-30">
+                <div class="m-b-15">
+                  <!-- <button *ngIf="role === 'Master Admin'" class="btn-space"  mat-raised-button
+                    color="warn" [routerLink]="['/admin/dashboard/main']"> 
+                    <mat-icon class="col-white">keyboard_backspace</mat-icon> Back
+                  </button>
+                  <button *ngIf="role === 'Inter Seevice Course'" class="btn-space"  mat-raised-button
+                    color="warn" [routerLink]="['/admin/dashboard/interservice-dashboard']"> 
+                    <mat-icon class="col-white">keyboard_backspace</mat-icon> Back
+                  </button>
+                  <button *ngIf="role === 'Foreign Training'" class="btn-space"  mat-raised-button
+                    color="warn" [routerLink]="['/admin/dashboard/foreigntraining-dashboard']"> 
+                    <mat-icon class="col-white">keyboard_backspace</mat-icon> Back
+                  </button> -->
+                </div>
+                <!-- <p>My Calendars</p>
+                <div class="filter-container">
+                  <ul>
+                    <li *ngFor="let filter of filters">
+                      <mat-checkbox [checked]="filter.checked" [value]="filter.value" color="primary"
+                        (change)="changeCategory($event, filter)">
+                        {{filter.value}}
+                      </mat-checkbox>
+                    </li>
+                  </ul>
+                </div> -->
+              </div>
+              <div class="col-xl-10 col-md-10 col-sm-12 p-l-30">
+                <div class="m-b-25">
+                  <span class="right-float">
+                    <span  class="fc-event-color color1 spn">Local</span>
+                    <span  class="fc-event-color color2 spn">Foreign</span>
+                    <span  class="fc-event-color color3 spn">Inter Service</span>
+                    <span  class="fc-event-color color4 spn">Central Exam</span>
+                    <span  class="fc-event-color color5 spn">MIST</span>
+                  </span>
+                </div>
+              </div>
+              <div class="col-xl-12 col-md-12 col-sm-12 ">
+                <div class="panel-body">
+                  <full-calendar [options]='calendarOptions'>
+                  </full-calendar> 
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+
+  </div>
+</section>

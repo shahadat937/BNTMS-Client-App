@@ -1,0 +1,152 @@
+<section class="content">
+    <div class="container-fluid">
+      <div class="block-header">
+        <div class="row">
+          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <ul class="breadcrumb breadcrumb-style ">
+              <li class="breadcrumb-item">
+                <h4 class="page-title">Course Subject List</h4>
+              </li>
+              <li class="breadcrumb-item bcrumb-1"> 
+                <a routerLink="/admin/dashboard/main"><i class="fas fa-home"></i></a>
+              </li>
+              <li class="breadcrumb-item bcrumb-2">
+                <a href="#" onClick="return false;">Course Subject List</a>
+              </li>
+              <li class="breadcrumb-item active">All</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+          <div class="card">
+            <div class="body">
+              <div class="responsive_table">
+                <div class="materialTableHeader"> 
+                  <div class="row">
+                    
+                    <div class="col-8">
+                      <ul class="header-buttons-left ml-0">
+                        <li class="dropdown">
+                        </li>
+                      </ul>
+                    </div>
+                    <div class="col-4">
+                      <ul class="header-buttons">
+                        <li>
+                          <div class="icon-button-demo">
+                            <!-- <button class="btn-space"  mat-raised-button
+                            color="warn" routerLink="/admin/dashboard/main"> 
+                            <mat-icon class="col-white">keyboard_backspace</mat-icon> Back
+                            </button>*ngIf="courseType3 === 6" -->
+                            <!-- <button *ngIf="role != 'Student' && courseType3 == 6" class="btn-space"  mat-raised-button
+                            color="warn" [routerLink]="['/admin/dashboard/upcomingcourses-list',20]"> 
+                            <mat-icon class="col-white">keyboard_backspace</mat-icon> Back
+                          </button> -->
+
+                            <button *ngIf="role === userRole.SuperAdmin || role === userRole.BNASchool || role === userRole.JSTISchool || role === userRole.SchoolOIC || role === userRole.TrainingOffice || role === userRole.CO || role === userRole.TC || role === userRole.AreaCommander" class="btn-space"  mat-raised-button
+                              color="warn" [routerLink]="['/admin/dashboard/school-dashboard']"> 
+                              <mat-icon class="col-white">keyboard_backspace</mat-icon> Back
+                            </button>
+                             <button *ngIf="role === 'Master Admin' && mainDb != 1" class="btn-space"  mat-raised-button
+                              color="warn" [routerLink]="['/course-management/localcourse-list']"> 
+                              <mat-icon class="col-white">keyboard_backspace</mat-icon> Back
+                            </button>
+                             <button *ngIf="mainDb == 1" class="btn-space"  mat-raised-button
+                              color="warn" [routerLink]="['/admin/dashboard/view-runningcourses',3]"> 
+                              <mat-icon class="col-white">keyboard_backspace</mat-icon> Back
+                            </button>
+                            <button *ngIf="role === userRole.InterSeeviceCourse || role === userRole.InterSeeviceDesk || role === userRole.DDNT" class="btn-space"  mat-raised-button
+                              color="warn" [routerLink]="['/admin/dashboard/Jcoexamlistindashboard-list']"> 
+                              <mat-icon class="col-white">keyboard_backspace</mat-icon> Back
+                            </button>
+                            <!--<button *ngIf="courseTypeId && role === 'Master Admin'" class="btn-space"  mat-raised-button
+                              color="warn" [routerLink]="['/admin/dashboard/view-runningcourses',courseTypeId]"> 
+                              <mat-icon class="col-white">keyboard_backspace</mat-icon> Back
+                            </button>
+                            <button *ngIf="role === 'Student'" class="btn-space"  mat-raised-button
+                              color="warn" [routerLink]="['/admin/dashboard/trainee-dashboard']"> 
+                              <mat-icon class="col-white">keyboard_backspace</mat-icon> Back
+                            </button> -->
+
+
+
+
+                            <!-- <button *ngIf="dbType1" class="btn-space"  mat-raised-button
+                            color="warn" [routerLink]="['/admin/dashboard/upcomingcourse-list']"> 
+                            <mat-icon class="col-white">keyboard_backspace</mat-icon> Back
+                          </button> -->
+
+                          </div>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+
+              
+                <div id="print-routine">
+              <table class="table  tbl-by-group db-li-s-in">
+                <thead>
+                  <tr>
+                    <!-- <th class="cl-srl"><h5>Ser</h5></th> -->
+                    <th *ngIf="courseTypeId == 3" class="cl-module"><h5>Module</h5></th>
+                    <th class="cl-mrk"><h5>Subject Name</h5></th>
+                    <th class="cl-mrk-xm-status"><h5>Exam Status</h5></th>
+                    <th class="cl-mrk-rmrk"><h5>Examiner Result Submit Status</h5></th>
+                    <th class="cl-mrk-rmrk"><h5>Admin Approve</h5></th>
+                    <th class="cl-xmnr"><h5>Examiner</h5></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <ng-container *ngFor="let data of groupArrays;let i= index;">
+                    <tr *ngIf="courseTypeId == 3">
+                      <td [attr.rowspan]="data.courses.length + 1">{{data.courseModule}}</td>
+                    </tr>
+                    <tr *ngFor="let number of data.courses;">
+                      <td>{{number.subjectName}} ( {{number.shortName}} ) </td>
+                      <td class="cl-mrk-xm-status">
+                        <span class="wait-status" *ngIf="number.attendanceComplete === 0"> Wait for Exam</span>
+                        <span class="complete-status" *ngIf="number.attendanceComplete === 1"> Exam Complete</span>
+                        <span class="incomplete-status" *ngIf="number.attendanceComplete != 0 && number.attendanceComplete != 1">  Unscheduled </span>
+                      </td>
+                      <!-- <td>
+                        <span class="incomplete-status" *ngIf="number.examMarkComplete === 0"> Pending</span>
+                        <span class="complete-status" *ngIf="number.examMarkComplete === 1"> Done</span>
+                        <span class="incomplete-status" *ngIf="number.examMarkComplete != 0 && number.examMarkComplete != 1">  - </span>
+                      </td> -->
+                      <td>
+                        <span class="incomplete-status" *ngIf="number.resultSubmissionStatus === 0"> Pending</span>
+                        <span class="complete-status" *ngIf="number.resultSubmissionStatus === 1"> Done</span>
+                        <span class="incomplete-status" *ngIf="number.resultSubmissionStatus != 0 && number.resultSubmissionStatus != 1">  - </span>
+                      </td>
+                      <td>
+                        <span class="incomplete-status" *ngIf="number.finalApproveStatus === 0"> Pending</span>
+                        <span class="complete-status" *ngIf="number.finalApproveStatus === 1"> Approved</span>
+                        <span class="incomplete-status" *ngIf="number.finalApproveStatus != 0 && number.finalApproveStatus != 1">  - </span>
+                      </td>
+                      <td class="cl-xmnr">{{number.position}} {{number.name}} -  <span *ngIf="number.pno" class="t-n-pno-d">(P No {{number.pno}})</span> </td>
+                    </tr>
+                  </ng-container>
+                </tbody>
+              </table>
+              </div>
+              <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 div-class div-left m-t-20">
+                <button class="btn-space"  mat-raised-button color="primary" (click)="printSingle()"> Print
+                  <mat-icon class="col-white">print</mat-icon>
+                </button>
+              </div>
+            
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  
+  
+  
+   
+

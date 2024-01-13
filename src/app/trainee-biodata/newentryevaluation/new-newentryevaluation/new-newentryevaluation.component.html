@@ -1,0 +1,209 @@
+<section class="content">
+  <div class="container-fluid">
+    <div class="block-header">
+      <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <ul class="breadcrumb breadcrumb-style ">
+            <li class="breadcrumb-item">
+              <h4 class="page-title">{{pageTitle}}</h4>
+            </li>
+            <li class="breadcrumb-item bcrumb-1">
+              <a routerLink="/admin/dashboard/main">
+                <i class="fas fa-home"></i> </a>
+            </li>
+            <li class="breadcrumb-item bcrumb-2">
+              <a href="#" onClick="return false;">New Entry Evaluation</a>
+            </li>
+            <li class="breadcrumb-item active">{{destination}}</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="row clearfix">
+      <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+        <div class="card">
+          <div class="body">
+            <form class="m-4" [formGroup]="NewEntryEvaluationForm" (ngSubmit)="onSubmit()">
+              <div class="row">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2 family-info">
+                  <div class="row ">
+
+
+                    <div *ngIf="role != 'Super Admin'" class="col-xl-3 col-lg-3 col-md-12 col-sm-12 mb-2">
+                      <mat-form-field class="example-full-width mb-3" appearance="outline">
+                        <mat-label>School Name</mat-label>
+                        <mat-select formControlName="baseSchoolNameId" required
+                          (selectionChange)="onSchoolSelectionChangeGetCourseName($event.value)">
+                          <mat-option value="0">--Select--</mat-option>
+                          <mat-option *ngFor="let code of schoolNameValues" [value]="code.value">
+                            {{code.text}}
+                          </mat-option>
+                        </mat-select>
+                        <mat-error *ngIf="NewEntryEvaluationForm.get('baseSchoolNameId').hasError('required')">
+                          School Name is required
+                        </mat-error>
+                      </mat-form-field>
+                    </div>
+                    <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 mb-2">
+                      <mat-form-field class="example-full-width mb-3" appearance="outline">
+                        <mat-label>Course Name</mat-label>
+                        <mat-select formControlName="courseName" >
+                          <mat-option value="0">--Select--</mat-option>
+                          <mat-option *ngFor="let code of courseNameValues" [value]="code.value" (onSelectionChange)="onCourseSelectionChangeGetCourseModule($event)">
+                            {{code.text}}
+                          </mat-option>
+                        </mat-select>
+                        <mat-error *ngIf="NewEntryEvaluationForm.get('courseNameId').hasError('required')">
+                          Course Name is required
+                        </mat-error>
+                      </mat-form-field>
+                    </div>
+                    <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 mb-2">
+                      <mat-form-field class="example-full-width mb-3" appearance="outline">
+                        <mat-label>Course Module</mat-label>
+                        <mat-select formControlName="courseModuleId" required>
+                          <mat-option value="0">--Select--</mat-option>
+                          <mat-option *ngFor="let code of courseModuleValues" [value]="code.value">
+                            {{code.text}}
+                          </mat-option>
+                        </mat-select>
+                        <mat-error *ngIf="NewEntryEvaluationForm.get('courseModuleId').hasError('required')">
+                          Course Module is required
+                        </mat-error>
+                      </mat-form-field>
+                    </div>
+                    <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 mb-2">
+                      <mat-form-field class="example-full-width mb-3" appearance="outline">
+                        <mat-label>Week Name</mat-label>
+                        <mat-select formControlName="courseWeekId" required
+                          (selectionChange)="onClassPeriodSelectionChangeGetCourseDuration()">
+                          <mat-option value="0">--Select--</mat-option>
+                          <mat-option *ngFor="let code of weekNameValues" [value]="code.value">
+                            {{code.text}}
+                          </mat-option>
+                        </mat-select>
+                        <mat-error *ngIf="NewEntryEvaluationForm.get('courseWeekId').hasError('required')">
+                          Week Name is required
+                        </mat-error>
+                      </mat-form-field>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- Basic Table -->
+              <div *ngIf="isShown" class="row clearfix">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 p-0 ex-mrk-entry-li">
+                  <div class="card">
+
+                    <div class="body table-responsive">
+                      <table class="table ex-mrk-entry">
+                        <thead>
+                          <tr>
+                            <th class="cl-nm-srl">
+                              <h5>Ser</h5>
+                            </th>
+                            <th class="cl-nm-rnk">
+                              <h5>Name & Rank</h5>
+                            </th>
+                            <th class="cl-mrk">
+                              <h5>নৈতিকতা</h5>
+                            </th>
+                            <th class="cl-mrk-rmrk">
+                              <h5>সহনশীলতা</h5>
+                            </th>
+                            <th class="cl-mrk">
+                              <h5>উৎসাহ</h5>
+                            </th>
+                            <th class="cl-mrk-rmrk">
+                              <h5>সময়ানুবর্তিতা</h5>
+                            </th>
+                            <th class="cl-mrk">
+                              <h5>মনোভাব</h5>
+                            </th>
+                            <th class="cl-mrk-rmrk">
+                              <h5>উদ্যম</h5>
+                            </th>
+                            <th class="cl-mrk">
+                              <h5>খাপ খাওয়ানো</h5>
+                            </th>
+                            <th class="cl-mrk-omrk">
+                              <h5>অন্যান্য</h5>
+                            </th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr
+                            *ngFor="let unit of NewEntryEvaluationForm.get('traineeListForm')['controls']; let i = index"
+                            [formGroup]="unit">
+                            <th class="cl-srl" scope="row">{{i+1}}</th>
+
+                            <td class="cl-nm-rnk">
+                              {{getControlLabel(i,'rankPosition')}} , {{getControlLabel(i,'traineeName')}} - <span
+                                class="t-n-pno-d">(P No {{getControlLabel(i,'traineePNo')}})</span>
+                            </td>
+
+                            <td class="cl-mrk">
+                              <mat-form-field class="example-full-width mb-3" appearance="outline">
+                                <input matInput type="text" formControlName="noitikota"  />
+                              </mat-form-field>
+                            </td>
+                            <td class="cl-mrk">
+                              <mat-form-field class="example-full-width mb-3" appearance="outline">
+                                <input matInput type="text" formControlName="sahonsheelota"  />
+                              </mat-form-field>
+                            </td>
+                            <td class="cl-mrk">
+                              <mat-form-field class="example-full-width mb-3" appearance="outline">
+                                <input matInput type="text" formControlName="utsaho"  />
+                              </mat-form-field>
+                            </td>
+                            <td class="cl-mrk">
+                              <mat-form-field class="example-full-width mb-3" appearance="outline">
+                                <input matInput type="text" formControlName="samayanubartita"  />
+                              </mat-form-field>
+                            </td>
+                            <td class="cl-mrk">
+                              <mat-form-field class="example-full-width mb-3" appearance="outline">
+                                <input matInput type="text" formControlName="manovhab"  />
+                              </mat-form-field>
+                            </td>
+                            <td class="cl-mrk">
+                              <mat-form-field class="example-full-width mb-3" appearance="outline">
+                                <input matInput type="text" formControlName="udyam"  />
+                              </mat-form-field>
+                            </td>
+                            <td class="cl-mrk">
+                              <mat-form-field class="example-full-width mb-3" appearance="outline">
+                                <input matInput type="text" formControlName="khapKhawano"  />
+                              </mat-form-field>
+                            </td>
+                            <td class="cl-mrk">
+                              <mat-form-field class="example-full-width mb-3" appearance="outline">
+                                <input matInput type="text" formControlName="onyano"  />
+                              </mat-form-field>
+                            </td>
+                          </tr>
+
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="row mt-2">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+                  <button class="btn-space" [class.auth-spinner]="loading" [disabled]="loading" [disabled]="!NewEntryEvaluationForm.valid " mat-raised-button
+                    color="primary">{{buttonText}}</button>
+                  <!-- <button type="button" mat-button routerLink="/attendance-management/attendance-list">Cancel</button> -->
+                </div>
+              </div>
+
+            </form>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

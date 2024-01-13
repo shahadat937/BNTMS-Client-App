@@ -1,0 +1,56 @@
+<nav #navbar class="navbar active footer-navbar">
+    <div class="container-fluid footer-fixed">
+      <!--<div class="navbar-footer">
+        <a href="#" onClick="return false;" class="navbar-toggle collapsed"
+           aria-expanded="false"></a>
+        <a href="#" onClick="return false;" class="bars" ></a>
+        <a class="navbar-brand">
+          <img src="assets/images/logo.png" alt="" class="main-logo" />
+          <span class="logo-name">DNT</span>
+        </a>
+      </div>-->
+      <div class="collapse navbar-collapse">
+        <ul class="float-start collapse-menu-icon">
+          <!--<li>
+            <button mat-icon-button class="sidemenu-collapse">
+              <mat-icon>menu</mat-icon>
+            </button>
+          </li>-->
+          <li>© Copyright 2022 Director of Naval Training</li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right ">
+          <!-- Full Screen Button -->
+          <li class="fullscreen">
+            Developed by: Infinity Technology International LTD.
+          </li>
+          <!-- #END# Full Screen Button 
+          <li class="nav-item" ngbDropdown>
+            <img src="assets/images/flags/bn.png" alt="" height="20" />
+            <a ngbDropdownToggle class="lang-dropdown">
+              <img *ngIf="flagvalue !== undefined" src="{{flagvalue}}" height="16">
+              <img *ngIf="flagvalue === undefined" src="{{defaultFlag}}" height="16">
+            </a>
+            <div ngbDropdownMenu class="dropdown-menu lang-item dropdown-menu-right pullDown">
+              <a href="javascript:void(0);" class="dropdown-item lang-item-list" *ngFor="let item of listLang"
+                (click)="setLanguage(item.text, item.lang, item.flag)"
+                [ngClass]="{'active': langStoreValue === item.lang}">
+                <img src="{{item.flag}}" class="flag-img" height="12"> <span class="align-middle">{{item.text}}</span>
+              </a>
+            </div>
+          </li>
+             #START# Notifications
+          <li class="nav-item" ngbDropdown>
+            <button mat-icon-button ngbDropdownToggle class="nav-notification-icons">
+              <mat-icon>notifications_none</mat-icon>
+              <span class="label-count bg-orange"></span>
+            </button>
+            
+          </li>
+           #END# Notifications
+          
+           #END# Tasks -->
+          
+        </ul>
+      </div>
+    </div>
+  </nav>

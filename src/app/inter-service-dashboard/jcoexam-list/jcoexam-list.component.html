@@ -1,0 +1,146 @@
+<section class="content">
+    <div class="container-fluid">
+      <div class="block-header">
+        <div class="row">
+          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <ul class="breadcrumb breadcrumb-style ">
+              <li class="breadcrumb-item">
+                <h4 class="page-title">{{titleText}} List</h4>
+              </li>
+              <li class="breadcrumb-item bcrumb-1">
+                <a routerLink="/admin/dashboard/main"><i class="fas fa-home"></i></a>
+              </li>
+              <li class="breadcrumb-item bcrumb-2">
+                <a href="#" onClick="return false;">{{titleText}} List</a>
+              </li>
+              <li class="breadcrumb-item active">All</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+          <div class="card">
+            <div class="body">
+              <div class="responsive_table">
+                <div class="materialTableHeader"> 
+                  <div class="row">
+                    <div class="col-8">
+                      <ul class="header-buttons-left ml-0">
+                        <li class="dropdown">
+                        </li>
+                        <!-- <li class="dropdown">
+                          <input placeholder="Search" type="text" [(ngModel)]="searchText"  #filter class="browser-default search-field"
+                          aria-label="Search box">
+                        </li>
+                        <li> 
+                          <div class="icon-button-demo m-l-10">
+                            <button mat-mini-fab color="accent" (click)="applyFilter(searchText)">
+                              <mat-icon class="col-white">search</mat-icon>
+                            </button>
+                          </div>
+                          
+                          
+                        </li> -->
+                      </ul>
+                    </div>
+                    <div class="col-4">
+                      <ul class="header-buttons">
+                        <li>
+                          <div class="icon-button-demo">   
+                            <button *ngIf="role === userRole.Director" class="btn-space"  mat-raised-button
+                            color="warn" [routerLink]="['/admin/dashboard/main']"> 
+                            <mat-icon class="col-white">keyboard_backspace</mat-icon> Back
+                          </button>                         
+                            <button *ngIf="role === userRole.InterSeeviceCourse || role === userRole.InterSeeviceDesk" class="btn-space"  mat-raised-button
+                              color="warn" [routerLink]="['/admin/dashboard/interservice-dashboard']"> 
+                              <mat-icon class="col-white">keyboard_backspace</mat-icon> Back
+                            </button>
+                            <button *ngIf="role === userRole.MasterAdmin || role === userRole.DDNT" class="btn-space"  mat-raised-button
+                              color="warn" [routerLink]="['/admin/dashboard/main']"> 
+                              <mat-icon class="col-white">keyboard_backspace</mat-icon> Back
+                            </button>
+                            <button *ngIf="dbType == masterData.dbType.foreignTrainingDb" class="btn-space"  mat-raised-button
+                              color="warn" [routerLink]="['/admin/dashboard/foreigntraining-dashboard']"> 
+                              <mat-icon class="col-white">keyboard_backspace</mat-icon> Back
+                            </button>
+                            
+                          </div>
+                        </li>
+                       
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+                <mat-table #table [dataSource]="jcoCourseList" matSort class="mat-cell db-li-n nominated">               
+                  <ng-container matColumnDef="ser">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header> Ser: </mat-header-cell>
+                    <mat-cell *matCellDef="let element; let i = index;"> {{ ((paging.pageIndex-1) *  paging.pageSize) + i+1}} </mat-cell>
+                  </ng-container>    
+
+
+                  <ng-container matColumnDef="name">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>Exam Name </mat-header-cell>
+                    <mat-cell *matCellDef="let element"> {{element.course}} - {{element.courseTitle}} </mat-cell>
+                  </ng-container>
+
+
+                  <ng-container matColumnDef="duration">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>Duration </mat-header-cell>
+                    <mat-cell *matCellDef="let element"> {{element.durationFrom | date:'mediumDate'}} -  {{element.durationTo | date:'mediumDate'}}</mat-cell>
+                  </ng-container>
+
+                  
+
+                  <ng-container matColumnDef="candidates">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>Candidates</mat-header-cell>
+                    <mat-cell *matCellDef="let element"> 
+                     
+                      <a [routerLink]="['/admin/dashboard/jcoexamnominated-list/', element.courseDurationId]"> {{element.candidates}} </a>
+                    </mat-cell>
+                  </ng-container>
+
+                  <ng-container matColumnDef="subject">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>Subject List</mat-header-cell>
+                    <mat-cell *matCellDef="let element"> 
+                      
+                      <button mat-icon-button color="accent" title=" Subject List" class="btn-tbl-view"
+                        [routerLink]="['/admin/dashboard/ViewSubjectListByJCOs', 1, element.courseDurationId]">
+                        <mat-icon aria-label="Edit" class="col-white">book</mat-icon>
+                      </button>
+                      
+                      <button mat-icon-button class="btn-tbl-nomination" title="Subject Examiner List" [routerLink]="['/admin/dashboard/view-jcosexamsubjectinstructors',element.courseDurationId,element.courseNameId,1]">
+                        <mat-icon aria-label="Edit" class="col-white">wc</mat-icon>
+                      </button>
+                      <button  mat-icon-button color="accent" class="btn-tbl-view" title="Subject Result List"
+                      [routerLink]="['/admin/dashboard/view-subjectresultjcos',element.courseDurationId]">
+                          <mat-icon aria-label="Edit" class="col-white">toc</mat-icon>
+                        </button> 
+                      <button mat-icon-button class="btn-tbl-nomination" title="Exam Status" [routerLink]="['/admin/dashboard/view-examstatusbysubjectlist', element.courseDurationId]">
+                        <mat-icon aria-label="Edit" class="col-white">assessment</mat-icon>
+                      </button>
+                    </mat-cell>
+                  </ng-container>
+
+
+                  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                  <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+                 </mat-table>
+            
+                 <!-- <mat-paginator [length]="paging.length" [showFirstLastButtons]="masterData.paging.showFirstLastButtons"
+                [pageSize]="paging.pageSize" [pageSizeOptions]="masterData.paging.pageSizeOptions"
+                (page)="pageChanged($event)">
+                </mat-paginator> -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  
+  
+  
+   
+

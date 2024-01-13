@@ -1,0 +1,310 @@
+<section class="content">
+    <div class="container-fluid">
+      <div class="block-header">
+        <div class="row">
+          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <ul class="breadcrumb breadcrumb-style ">
+              <li class="breadcrumb-item">
+                <h4 class="page-title">Course Subject List</h4>
+              </li>
+              <li class="breadcrumb-item bcrumb-1"> 
+                <a routerLink="/admin/dashboard/main"><i class="fas fa-home"></i></a>
+              </li>
+              <li class="breadcrumb-item bcrumb-2">
+                <a href="#" onClick="return false;">Course Subject List</a>
+              </li>
+              <li class="breadcrumb-item active">All</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+          <div class="card">
+            <div class="body">
+              <div class="responsive_table">
+                <div class="materialTableHeader syllabus"> 
+                  <div class="row">
+                    <div class="col-8">
+                      <div *ngIf="!courseListStatus" class="align-center">
+                        <p>School Name: - {{schoolName}}</p>
+                        <p>Name of the Course: - {{courseName}} - {{courseTitle}}</p>
+                        <p>Course Commence : - {{durationForm | date:'mediumDate'}}</p>
+                        <p>Course Complete : - {{durationTo | date:'mediumDate'}}</p>
+                      </div>
+                      <!-- <div  class="align-right">
+                       
+                      </div> -->
+                      <div *ngIf="courseListStatus" class="align-center">
+                        <p style="margin-bottom: 10px;">Name of the Course: - {{courseName}} </p>
+                        
+                      </div>
+                      <ul class="header-buttons-left ml-0">
+                        <li class="dropdown">
+                        </li>
+                        <li class="dropdown">
+                          
+                          
+                        </li>
+                        <li> 
+                          <div class="icon-button-demo m-l-10">
+                            
+                          </div>
+                        </li>
+                      </ul>
+                    </div>
+
+                    <div class="col-4">
+                      <ul class="header-buttons">
+                        <li>
+                          <div class="icon-button-demo">
+                            <!-- <button class="btn-space"  mat-raised-button
+                            color="warn" routerLink="/admin/dashboard/main"> 
+                            <mat-icon class="col-white">keyboard_backspace</mat-icon> Back
+                            </button>*ngIf="courseType3 === 6" baseSchoolNameId/:courseNameId/:courseType/:courseType1 -->
+                            <!-- <button *ngIf="role === userRole.Director" class="btn-space"  mat-raised-button
+                            color="warn" [routerLink]="['/admin/dashboard/upcomingcourse-list']"> 
+                            <mat-icon class="col-white">keyboard_backspace</mat-icon> Back -->
+                          <!-- </button> -->
+
+                            <button *ngIf="role != 'Student' && courseType3 == 6" class="btn-space"  mat-raised-button
+                            color="warn" [routerLink]="['/admin/dashboard/upcomingcourses-list',baseSchoolNameId]"> 
+                            <mat-icon class="col-white">keyboard_backspace</mat-icon> Back
+                          </button>
+
+                            <button *ngIf="schoolDb !=5 && !courseListStatus && (role === userRole.SuperAdmin || role === userRole.BNASchool || role === userRole.JSTISchool || role === userRole.CO || role === userRole.SchoolOIC || role === userRole.TrainingOffice || role === userRole.TC || role === userRole.AreaCommander)" class="btn-space"  mat-raised-button
+                              color="warn" [routerLink]="['/admin/dashboard/school-dashboard']"> 
+                              <mat-icon class="col-white">keyboard_backspace</mat-icon> Back
+                            </button>
+                            <button *ngIf="schoolDb == 5 && (role === userRole.SuperAdmin || role === userRole.BNASchool || role === userRole.JSTISchool || role === userRole.CO || role === userRole.TC || role === userRole.AreaCommander)" class="btn-space"  mat-raised-button
+                              color="warn" [routerLink]="['/admin/dashboard/upcomingcourses-list', branchId]"> 
+                              <mat-icon class="col-white">keyboard_backspace</mat-icon> Back
+                            </button>
+                            <button *ngIf="courseListStatus == 1 && role != 'Master Admin'" class="btn-space"  mat-raised-button
+                              color="warn" [routerLink]="['/admin/dashboard/view-courselistbyschool',baseSchoolNameId]"> 
+                              <mat-icon class="col-white">keyboard_backspace</mat-icon> Back
+                            </button>
+                            <button *ngIf="courseListStatus == 1 && role === 'Master Admin'" class="btn-space"  mat-raised-button
+                              color="warn" [routerLink]="['/admin/dashboard/view-courselistbyschool',0]"> 
+                              <mat-icon class="col-white">keyboard_backspace</mat-icon> Back
+                            </button>
+                            <button *ngIf="!courseListStatus && !courseTypeId && role === 'Master Admin'" class="btn-space"  mat-raised-button
+                              color="warn" [routerLink]="['/admin/dashboard/main']"> 
+                              <mat-icon class="col-white">keyboard_backspace</mat-icon> Back
+                            </button>
+                            <button *ngIf="!courseListStatus && courseTypeId && role === 'Master Admin'" class="btn-space"  mat-raised-button
+                              color="warn" [routerLink]="['/admin/dashboard/view-runningcourses',courseTypeId]"> 
+                              <mat-icon class="col-white">keyboard_backspace</mat-icon> Back
+                            </button>
+                            <button *ngIf="role === 'Student'" class="btn-space"  mat-raised-button
+                              color="warn" [routerLink]="['/admin/dashboard/trainee-dashboard']"> 
+                              <mat-icon class="col-white">keyboard_backspace</mat-icon> Back
+                            </button>
+
+                          </div>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+
+              
+                <div id="print-routine">
+                  
+              <table class="table  tbl-by-group db-li-s-in">
+                <thead>
+                  <tr>
+                    <!-- <th class="cl-srl"><h5>Ser</h5></th> -->
+                    <th class="cl-nm-rnk"><h5>Module</h5></th>
+                    <th class="cl-mrk"><h5>Subject Name</h5></th>
+                    <th class="cl-mrk-rmrk"><h5>Subject Type</h5></th>
+                    <th class="cl-mrk-rmrk"><h5>Total Period</h5></th>
+                    <th *ngIf="this.baseSchoolNameId != masterData.schoolName.JSTISchool || this.role != this.userRole.Student" class="cl-mrk-rmrk"><h5>Total Mark</h5></th>
+                    <th *ngIf="this.baseSchoolNameId != masterData.schoolName.JSTISchool || this.role != this.userRole.Student" class="cl-mrk-rmrk"><h5>Pass Mark</h5></th>
+                    <!--<th class="cl-mrk-rmrk"><h5>Remarks</h5></th> -->
+                    <th *ngIf="this.baseSchoolNameId != masterData.schoolName.JSTISchool || this.role != this.userRole.Student" class="btn-tbl-view"><h5>Actions</h5></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <ng-container *ngFor="let data of groupArrays;let i= index;">
+                    <tr>
+                      <td [attr.rowspan]="data.courses.length + 1">{{data.courseModule}}</td>
+                    </tr>
+                    <tr *ngFor="let number of data.courses;">
+                      <td>{{number.subjectName}} </td>
+                      <td>{{number.subjectType}}</td>
+                      <td>{{number.totalPeriod}}</td>
+                      <td *ngIf="number.baseSchoolNameId != masterData.schoolName.JSTISchool || this.role != this.userRole.Student">{{number.totalMark}}</td>
+                      <td *ngIf="number.baseSchoolNameId != masterData.schoolName.JSTISchool || this.role != this.userRole.Student">{{number.passMarkBna}}</td>
+                      <td *ngIf="number.baseSchoolNameId != masterData.schoolName.JSTISchool || this.role != this.userRole.Student"  class="btn-tbl-view">
+                        <!-- <button mat-icon-button color="accent" title=" Course Instructor List" class="btn-tbl-view" 
+                        [routerLink]="['/admin/dashboard/view-courseinstructors', number.baseSchoolNameId, number.bnaSubjectNameId, number.courseModuleId, number.courseNameId, courseDurationId]">
+                          <mat-icon aria-label="Edit" class="col-white">person</mat-icon>
+                        </button> -->
+                        <button *ngIf="!courseListStatus" mat-icon-button color="accent" title=" Subject Mark List" class="btn-tbl-view" 
+                        [routerLink]="['/admin/dashboard/view-subjectmarksbysubject', number.baseSchoolNameId, number.courseNameId, courseDurationId, number.bnaSubjectNameId]">
+                          <mat-icon aria-label="Edit" class="col-white">list</mat-icon>
+                        </button>
+                        <button *ngIf="courseListStatus == 1" mat-icon-button color="accent" title=" Subject Mark List" class="btn-tbl-view" 
+                        [routerLink]="['/admin/dashboard/view-subjectmarksbycourse', number.baseSchoolNameId, number.courseNameId, number.bnaSubjectNameId,1]">
+                          <mat-icon aria-label="Edit" class="col-white">list</mat-icon>
+                        </button>
+                        
+                      </td>
+                    </tr>                    
+                  </ng-container>
+                  <tr  class="total-row" *ngFor="let count of GetTotalSubjectCalculation">
+                    <td colspan="3">Total</td>
+                    <td>{{count.totalPeriod}}</td>
+                    <td *ngIf="this.baseSchoolNameId != masterData.schoolName.JSTISchool || this.role != this.userRole.Student">{{count.totalMark}}</td>
+                    <td *ngIf="this.baseSchoolNameId != masterData.schoolName.JSTISchool || this.role != this.userRole.Student">{{count.passMark}}</td>
+                    <td *ngIf="this.baseSchoolNameId != masterData.schoolName.JSTISchool || this.role != this.userRole.Student"></td>
+                  </tr>
+                </tbody>
+              </table>
+              <div *ngIf="!courseListStatus" class="body">
+                <div class="responsive_table">
+                  <div class="materialTableHeader"> 
+                    <div class="row">
+                      <div class="col-8">
+                        <ul class="header-buttons-left ml-0">
+                          <li class="dropdown">
+                            <h3>Instructor List</h3>
+                          </li>
+                          <!-- <li class="dropdown">
+                            <input placeholder="Search" type="text" [(ngModel)]="searchText"  #filter class="browser-default search-field"
+                            aria-label="Search box">
+                          </li>
+                          <li> 
+                            <div class="icon-button-demo m-l-10">
+                              <button mat-mini-fab color="accent" (click)="applyFilter(searchText)">
+                                <mat-icon class="col-white">search</mat-icon>
+                              </button>
+                            </div>
+                            
+                            
+                          </li> -->
+                        </ul>
+                      </div>
+                      <div class="col-4">
+                        <!-- <ul class="header-buttons">
+                          <li>
+                            <div class="icon-button-demo">
+                            </div>
+                          </li>
+                         
+                        </ul> -->
+                      </div>
+                    </div>
+                  </div>
+                  <!-- <mat-table  #table [dataSource]="GetInstructorByParameters" matSort class="mat-cell ins-list-scl-db">               
+                    <ng-container matColumnDef="ser">
+                      <mat-header-cell *matHeaderCellDef mat-sort-header> Ser: </mat-header-cell>
+                      <mat-cell *matCellDef="let element; let i = index;"> {{ ((paging.pageIndex-1) *  paging.pageSize) + i+1}} </mat-cell>
+                    </ng-container>  
+  
+                    <ng-container matColumnDef="bnaSubjectName">
+                      <mat-header-cell *matHeaderCellDef mat-sort-header> Subject Name </mat-header-cell>
+                      <mat-cell *matCellDef="let element"> {{element.subjectName}} ({{element.shortName}})</mat-cell>
+                    </ng-container>
+  
+                    <ng-container matColumnDef="trainee">
+                      <mat-header-cell *matHeaderCellDef mat-sort-header>Instructor</mat-header-cell>
+                      <mat-cell *matCellDef="let element">{{element.position}} {{element.name}}   <span class="t-n-pno-d">(P No {{element.pno}})</span> </mat-cell>
+                    </ng-container>
+  
+                    <ng-container matColumnDef="subjectShortName">
+                      <mat-header-cell class="subject-short-name" *matHeaderCellDef mat-sort-header> Subject Short Name </mat-header-cell>
+                      <mat-cell class="subject-short-name" *matCellDef="let element"> {{element.subjectShortName}} </mat-cell>
+                    </ng-container>
+                    <ng-container matColumnDef="shortCode">
+                      <mat-header-cell class="subject-short-name" *matHeaderCellDef mat-sort-header>Short Code </mat-header-cell>
+                      <mat-cell class="subject-short-name" *matCellDef="let element"> {{element.shortCode}} </mat-cell>
+                    </ng-container>
+                    
+                    <mat-header-row *matHeaderRowDef="displayedInstructorColumns"></mat-header-row>
+                    <mat-row *matRowDef="let row; columns: displayedInstructorColumns;"></mat-row>
+                  </mat-table> -->
+  
+                    <table  class="table tbl-by-group db-li-s-in">
+                      <thead>
+                        <tr>
+                          <th class="th-cell-ser">Ser:</th>
+                          <th class="th-cell-instructor"> Instructor </th>
+                          <th class="td-cell-shortcode">Short Code </th>
+                          <th class="th-cell-course">Subject Name</th>
+                          <th class="th-cell-course-subjectshort">Subject Short Name </th>
+                        
+                          <!-- <th class="cl-action">Individual Mark Sheet</th> -->
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <ng-container *ngFor="let data of GetInstructorByParameters; let i = index" >
+                         
+                          <tr >
+                            <td class="td-cell">
+                              {{i+1}}
+                            </td>
+                            <!-- <td class="td-cell">
+                              {{data.position}} {{data.name}}  <span class="t-n-pno-d">(P No {{data.pno}})</span>
+                            </td> -->
+                            <td class="td-cell-instructor">
+                              {{data.position}} {{data.name}}  <span class="t-n-pno-d">(P No {{data.pno}})</span>
+                            </td>  
+                            <td class="td-cell-shortcode">
+                              {{data.shortCode}}
+                            </td>
+                            <td class="td-cell">
+                              {{data.subjectName}} ({{data.shortName}})
+                            </td>
+                            <td class="th-cell-course-subjectshort">
+                              {{data.subjectShortName}}
+                            </td>
+                          
+                         
+                            <!-- <td class="td-cell">
+                              <a [routerLink]="['/admin/dashboard/view-traineeattendance/',data.traineeId,this.courseDuration]">{{data.percentage}}% </a>
+                            </td> -->
+                           
+                            <!-- <td class="cl-action">
+                              <button mat-icon-button class="btn-tbl-view" title="Subject Mark" [routerLink]="['/admin/dashboard/viewobtainmark/',this.branchId,this.courseDuration,data.traineeId]">
+                                <mat-icon aria-label="Edit" class="col-white">visibility</mat-icon>
+                              </button>
+                            </td> -->
+                          </tr>
+                        </ng-container>
+                      </tbody>
+                    </table>
+  
+              
+                   <!-- <mat-paginator [length]="paging.length" [showFirstLastButtons]="masterData.paging.showFirstLastButtons"
+                  [pageSize]="paging.pageSize" [pageSizeOptions]="masterData.paging.pageSizeOptions"
+                  (page)="pageChanged($event)">
+                  </mat-paginator> -->
+                </div>
+              </div>
+              </div>
+              <!-- <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 div-class div-left m-t-20">
+                <button class="btn-space"  mat-raised-button color="primary" (click)="printSingle()"> Print
+                  <mat-icon class="col-white">print</mat-icon>
+                </button>
+              </div> -->
+            
+              </div>
+            </div>
+     
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 div-class div-left m-t-20">
+              <button class="btn-space"  mat-raised-button color="primary" (click)="printSingle()"> Print
+                <mat-icon class="col-white">print</mat-icon>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  
+  
+  
+   
+

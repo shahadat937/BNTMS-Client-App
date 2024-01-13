@@ -1,0 +1,436 @@
+      <div class="block-header">
+        <div class="row">
+          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <ul class="breadcrumb breadcrumb-style ">
+              <li class="breadcrumb-item">
+                <h4 class="page-title">{{pageTitle}}</h4>
+              </li>
+              <li class="breadcrumb-item bcrumb-1">
+                <a routerLink="/admin/dashboard/main"><i class="fas fa-home"></i></a>
+              </li>
+              <li class="breadcrumb-item bcrumb-2">
+                <a href="#" onClick="return false;">Family Information</a>
+              </li>
+              <li class="breadcrumb-item active">{{destination}}</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="row clearfix">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+          <div class="card">
+            <div class="header">
+            </div>
+            <div class="body">
+              <form class="m-4" [formGroup]="ParentRelativeForm" (ngSubmit)="onSubmit()">
+                <div class="row">
+                  <div class="col-xl-12 col-lg-12 col-md-6 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3 important-type" appearance="outline">
+                        <mat-label>Relation Type</mat-label>
+                        
+                        <mat-select formControlName="relationTypeId" required>
+                            <mat-option *ngFor="let code of relationTypeValues" [value]="code.value">
+                                {{code.text}}
+                              </mat-option>                          
+                        </mat-select>
+                        <mat-error *ngIf="ParentRelativeForm.get('relationTypeId').hasError('required')">
+                          Relation Type is required
+                        </mat-error>
+                    </mat-form-field> 
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2" hidden>
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                      <mat-label>Trainee Id</mat-label>
+                      <input matInput formControlName="traineeId" required>
+                      <mat-error *ngIf="ParentRelativeForm.get('traineeId').hasError('required')">
+                        Trainee name is required
+                      </mat-error>
+                    </mat-form-field>
+                  </div>
+                  <!-- <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                        <mat-label>relation Type</mat-label>
+                        
+                        <mat-select formControlName="relationTypeId" required>
+                            <mat-option *ngFor="let code of relationTypeValues" [value]="code.value">
+                                {{code.text}}
+                              </mat-option>                          
+                        </mat-select>
+                        <mat-error *ngIf="ParentRelativeForm.get('relationTypeId').hasError('required')">
+                          relation Type is required
+                        </mat-error>
+                    </mat-form-field> 
+                  </div> -->
+                  <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                      <mat-label>Name In Full</mat-label>
+                      <input matInput formControlName="nameInFull" required>
+                      <mat-error *ngIf="ParentRelativeForm.get('nameInFull').hasError('required')">
+                        Name In Full is required
+                      </mat-error>
+                    </mat-form-field>
+                  </div>
+                  <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                      <mat-label>Date Of Birth</mat-label>
+                        <input matInput [matDatepicker]="birthpicker" formControlName="dateOfBirth" required>
+                        <mat-datepicker-toggle matSuffix [for]="birthpicker"></mat-datepicker-toggle>
+                        <mat-datepicker #birthpicker></mat-datepicker> 
+                        <mat-error *ngIf="ParentRelativeForm.get('dateOfBirth').hasError('required')">
+                          Date Of Birth is required
+                        </mat-error>                                           
+                    </mat-form-field>
+                  </div>
+                  <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                        <mat-label>Marital Status</mat-label>
+                        
+                        <mat-select formControlName="maritalStatusId" required >
+                            <mat-option *ngFor="let code of maritialStatusValues" [value]="code.value">
+                                {{code.text}}
+                            </mat-option>                          
+                        </mat-select>
+                        <mat-error *ngIf="ParentRelativeForm.get('maritalStatusId').hasError('required')">
+                          Marital Status is required
+                        </mat-error>
+                    </mat-form-field> 
+                  </div>
+                  <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                      <mat-label>Date Of Marriage</mat-label>
+                        <input matInput [matDatepicker]="marragepicker" formControlName="dateOfMarriage" >
+                        <mat-datepicker-toggle matSuffix [for]="marragepicker"></mat-datepicker-toggle>
+                        <mat-datepicker #marragepicker></mat-datepicker> 
+                                                                  
+                    </mat-form-field>
+                  </div>
+                  <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                      <mat-label>Age</mat-label>
+                      <input matInput formControlName="age" required>
+                      <mat-error *ngIf="ParentRelativeForm.get('age').hasError('required')">
+                        Age is required
+                      </mat-error>
+                    </mat-form-field>
+                  </div>
+                  <!-- <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                      <mat-label>deadStatus</mat-label>
+                      <input matInput formControlName="deadStatus" required>
+                      <mat-error *ngIf="ParentRelativeForm.get('deadStatus').hasError('required')">
+                        deadStatus is required
+                      </mat-error>
+                    </mat-form-field>
+                  </div> -->
+                  <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                        <mat-label>Dead Status</mat-label>                       
+                        <mat-select formControlName="deadStatus" required (selectionChange)="onDeadStatusSelectionChangeDivClass($event.value)"> 
+                            <mat-option *ngFor="let deadStatus of selectedDeadStatus" [value]="deadStatus.value">
+                                {{deadStatus.text}}   
+                              </mat-option>                          
+                        </mat-select>
+                        <mat-error *ngIf="ParentRelativeForm.get('deadStatus').hasError('required')">
+                          Dead Status is required
+                        </mat-error>
+                    </mat-form-field>
+                  </div>
+                  <div *ngIf=" ParentRelativeForm.get('deadStatus').value === 15 " class="col-xl-4 col-lg-4 col-md-12 col-sm-12 {{deadStatusToggle}} mb-2 viewable">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                      <mat-label>Date Of Expiry</mat-label>
+                        <input matInput [matDatepicker]="expirypicker" formControlName="dateOfExpiry" >
+                        <mat-datepicker-toggle matSuffix [for]="expirypicker"></mat-datepicker-toggle>
+                        <mat-datepicker #expirypicker></mat-datepicker> 
+                                                                 
+                    </mat-form-field>
+                  </div>
+                  <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                        <mat-label>Nationality</mat-label>
+                        
+                        <mat-select formControlName="nationalityId" required>
+                            <mat-option *ngFor="let code of nationalityValues" [value]="code.value">
+                                {{code.text}}
+                            </mat-option>                          
+                        </mat-select>
+                        <mat-error *ngIf="ParentRelativeForm.get('nationalityId').hasError('required')">
+                          Nationality is required
+                        </mat-error>
+                    </mat-form-field> 
+                  </div>
+                  <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                      <mat-label>Religion</mat-label>
+                      <mat-select formControlName="religionId" required (selectionChange)="onReligionSelectionChangeGetCastes($event.value)">
+                        <mat-option  value="0">--Select--</mat-option >
+                        <mat-option *ngFor="let code of religionValues" [value]="code.value">
+                            {{code.text}}
+                        </mat-option>                          
+                      </mat-select>
+                      <mat-error *ngIf="ParentRelativeForm.get('religionId').hasError('required')">
+                        Religion is required
+                      </mat-error>
+                    </mat-form-field>
+                  </div>
+                  <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                        <mat-label>Caste</mat-label>
+                        <mat-select formControlName="casteId" required>
+                          <mat-option  value="0">--Select--</mat-option >
+                          <mat-option *ngFor="let code of selectedCastes" [value]="code.value">
+                            {{code.text}}
+                          </mat-option>                          
+                        </mat-select>
+                        <mat-error *ngIf="ParentRelativeForm.get('casteId').hasError('required')">
+                          Caste is required
+                        </mat-error>
+                    </mat-form-field> 
+                  </div>
+                  <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                        <mat-label>Occupation</mat-label>
+                        
+                        <mat-select formControlName="occupationId" required>
+                            <mat-option *ngFor="let code of occupationValues" [value]="code.value">
+                                {{code.text}}
+                            </mat-option>                          
+                        </mat-select>
+                        <mat-error *ngIf="ParentRelativeForm.get('occupationId').hasError('required')">
+                          Occupation is required
+                        </mat-error>
+                    </mat-form-field> 
+                  </div>
+                  <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                      <mat-label>Occupation Detail</mat-label>
+                      <input matInput formControlName="occupationDetail">                      
+                    </mat-form-field>
+                  </div>
+                  <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                      <mat-label>Educational Qualification</mat-label>
+                      <input matInput formControlName="educationQualification">                      
+                    </mat-form-field>
+                  </div>
+                  <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                        <mat-label>Previous Occupation</mat-label>
+                        
+                        <mat-select formControlName="previousOccupationId">
+                            <mat-option *ngFor="let code of occupationValues" [value]="code.value">
+                                {{code.text}}
+                            </mat-option>                          
+                        </mat-select>
+                    </mat-form-field> 
+                  </div>
+                  <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                      <mat-label>Monthly Income</mat-label>
+                      <input matInput formControlName="monthlyIncome">                      
+                    </mat-form-field>
+                  </div>
+                  <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                      <mat-label>Division</mat-label>                
+                      <mat-select formControlName="divisionId" required (selectionChange)="onDivisionSelectionChangeGetDistrict($event.value)">
+                        <mat-option  value="0">--Select--</mat-option >
+                        <mat-option *ngFor="let division of divisionValues" [value]="division.value">
+                          {{division.text}}  
+                        </mat-option>                          
+                      </mat-select>
+                      <mat-error *ngIf="ParentRelativeForm.get('divisionId').hasError('required')">
+                        Division is required
+                      </mat-error>
+                    </mat-form-field> 
+                  </div>
+                  <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                      <mat-label>District</mat-label>                
+                      <mat-select formControlName="districtId" required (selectionChange)="onDistrictSelectionChangeGetThana($event.value)">
+                        <mat-option  value="0">--Select--</mat-option >
+                        <mat-option *ngFor="let district of selectedDistrict" [value]="district.value">
+                          {{district.text}}  
+                        </mat-option>                          
+                      </mat-select>
+                      <mat-error *ngIf="ParentRelativeForm.get('districtId').hasError('required')">
+                        District is required
+                      </mat-error>
+                    </mat-form-field>
+                  </div>
+                  <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                      <mat-label>Thana</mat-label>                        
+                      <mat-select formControlName="thanaId" required>
+                        <mat-option  value="0">--Select--</mat-option >
+                        <mat-option *ngFor="let thana of selectedThana" [value]="thana.value">
+                          {{thana.text}}  
+                        </mat-option>                          
+                      </mat-select>
+                      <mat-error *ngIf="ParentRelativeForm.get('thanaId').hasError('required')">
+                        Thana is required
+                      </mat-error>
+                    </mat-form-field>
+                  </div>
+                  <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                      <mat-label>Post Code</mat-label>
+                      <input matInput formControlName="postCode">                      
+                    </mat-form-field>
+                  </div>
+                  <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                      <mat-label>Present Address</mat-label>
+                      <input matInput formControlName="presentAddress">                      
+                    </mat-form-field>
+                  </div>
+                  <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                      <mat-label>Parmanent Address</mat-label>
+                      <input matInput formControlName="parmanentAddress">                      
+                    </mat-form-field>
+                  </div>
+                  <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                      <mat-label>Mobile</mat-label>
+                      <input matInput formControlName="mobile">                      
+                    </mat-form-field>
+                  </div>
+                  <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                      <mat-label>Email</mat-label>
+                      <input matInput formControlName="email">                      
+                    </mat-form-field>
+                  </div>
+                  <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                      <mat-label>Remarks</mat-label>
+                      <input matInput formControlName="remarks">                      
+                    </mat-form-field>
+                  </div>
+                  <!-- <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                      <mat-label>is Defence Job Experience</mat-label>
+                      <input matInput formControlName="isDefenceJobExperience">                      
+                    </mat-form-field>
+                  </div> -->
+                  <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2 radio-field">                    
+                    <div class="row">
+                      <mat-label>Defence Job Experience</mat-label>
+                    </div>
+                    <div class="radio-btn row">
+                      <mat-radio-group formControlName="isDefenceJobExperience">
+                        <mat-radio-button class="example-margin"  value="yes" (change)="changedefenseExperience($event)">Yes</mat-radio-button>
+                        <mat-radio-button class="example-margin" value="no"  (change)="changedefenseExperience($event)">No</mat-radio-button>
+                      </mat-radio-group>
+                    </div>
+                  </div>
+                  <div *ngIf=" ParentRelativeForm.get('isDefenceJobExperience').value === 'yes' " class="col-xl-4 col-lg-4 col-md-6 col-sm-12 mb-2 {{defenseToggle}} viewable">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                        <mat-label>Defense Type</mat-label>                        
+                        <mat-select formControlName="defenseTypeId">
+                            <mat-option *ngFor="let code of defenseTypeValues" [value]="code.value">
+                                {{code.text}}
+                            </mat-option>                          
+                        </mat-select>
+                    </mat-form-field> 
+                  </div>
+                  <div *ngIf=" ParentRelativeForm.get('isDefenceJobExperience').value === 'yes' " class="col-xl-4 col-lg-4 col-md-6 col-sm-12 mb-2 {{defenseToggle}} viewable">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                        <mat-label>Rank</mat-label>                        
+                        <mat-select formControlName="rankId">
+                            <mat-option *ngFor="let code of rankValues" [value]="code.value">
+                                {{code.text}}
+                            </mat-option>                          
+                        </mat-select>
+                    </mat-form-field> 
+                  </div>
+                  <div *ngIf=" ParentRelativeForm.get('isDefenceJobExperience').value === 'yes' " class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2 {{defenseToggle}} viewable">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                      <mat-label>Retired Date</mat-label>
+                        <input matInput [matDatepicker]="retiredpicker" formControlName="retiredDate" >
+                        <mat-datepicker-toggle matSuffix [for]="retiredpicker"></mat-datepicker-toggle>
+                        <mat-datepicker #retiredpicker></mat-datepicker> 
+                                                                 
+                    </mat-form-field>
+                  </div>
+                  <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                      <mat-label>Place Of Birth</mat-label>
+                      <input matInput formControlName="placeOfBirth">                      
+                    </mat-form-field>
+                  </div>
+                  <!-- <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                      <mat-label>Dual Nationality</mat-label>
+                      <input matInput formControlName="dualNationality">   
+                      <mat-radio-group formControlName="dualNationality">
+                        <mat-radio-button class="example-margin" value="after">After</mat-radio-button>
+                        <mat-radio-button class="example-margin" value="before">Before</mat-radio-button>
+                      </mat-radio-group>
+                    </mat-form-field>
+                  </div> -->
+                  <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2 radio-field">
+                    
+                    <div class="row">
+                      <mat-label>Dual Nationality</mat-label>
+                    </div>
+                    <div class="radio-btn row">
+                      <mat-radio-group formControlName="dualNationality">
+                        <mat-radio-button class="example-margin"  value="yes" (change)="changeNationality($event)">Yes</mat-radio-button>
+                        <mat-radio-button class="example-margin" value="no" (change)="changeNationality($event)">No</mat-radio-button>
+                      </mat-radio-group>
+                    </div>
+                  </div>
+                  <div *ngIf=" ParentRelativeForm.get('dualNationality').value === 'yes' " class="col-xl-4 col-lg-4 col-md-6 col-sm-12 mb-2 {{nationalityToggle}} viewable">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                        <mat-label>Second Nationality</mat-label>
+                        
+                        <mat-select formControlName="secondNationalityId">
+                            <mat-option *ngFor="let code of nationalityValues" [value]="code.value">
+                                {{code.text}}
+                            </mat-option>                          
+                        </mat-select>
+                    </mat-form-field> 
+                  </div>
+                  <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                      <mat-label>Reason Of Migration</mat-label>
+                      <input matInput formControlName="reasonOfMigration">                      
+                    </mat-form-field>
+                  </div>
+                  <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                      <mat-label>Migration Date</mat-label>
+                        <input matInput [matDatepicker]="migrationpicker" formControlName="migrationDate" >
+                        <mat-datepicker-toggle matSuffix [for]="migrationpicker"></mat-datepicker-toggle>
+                        <mat-datepicker #migrationpicker></mat-datepicker> 
+                                                                 
+                    </mat-form-field>
+                  </div>
+                  <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                      <mat-label>Additional Information</mat-label>
+                      <input matInput formControlName="additionalInformation">                      
+                    </mat-form-field>
+                  </div>
+                  
+               
+                  <div class="row">
+                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+                      <button class="btn-space" [class.auth-spinner]="loading" [disabled]="loading" [disabled]="!ParentRelativeForm.valid " mat-raised-button
+                        color="primary">{{buttonText}}</button>
+                      <button type="button" mat-button [routerLink]="['/trainee-biodata/trainee-biodata-tab/main-tab-layout/main-tab/family-info-details', this.traineeId]">Cancel</button>
+                      
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+  
+
+

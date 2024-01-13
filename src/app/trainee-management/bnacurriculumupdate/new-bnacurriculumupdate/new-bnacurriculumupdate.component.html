@@ -1,0 +1,158 @@
+<section class="content">
+    <div class="container-fluid">
+      <div class="block-header">
+        <div class="row">
+          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <ul class="breadcrumb breadcrumb-style ">
+              <li class="breadcrumb-item">
+                <h4 class="page-title">{{pageTitle}}</h4>
+              </li>
+              <li class="breadcrumb-item bcrumb-1">
+                <a routerLink="/admin/dashboard/main"><i class="fas fa-home"></i></a>
+              </li>
+              <li class="breadcrumb-item bcrumb-2">
+                <a href="#" onClick="return false;">Reading Material</a>
+              </li>
+              <li class="breadcrumb-item active">{{destination}}</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="row clearfix">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+          <div class="card">
+            <div class="header">
+            </div>
+            <div class="body">
+              <form class="m-4" [formGroup]="BnaCurriculumUpdateForm" (ngSubmit)="onSubmit()">
+                <div class="row">
+                  <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                        <mat-label>bna Batch Id</mat-label>                        
+                        <mat-select formControlName="bnaBatchId" required>
+                          <mat-option *ngFor="let batch of selectedBnaBatch" [value]="batch.value">
+                              {{batch.text}} 
+                            </mat-option>                          
+                      </mat-select>
+                      <mat-error *ngIf="BnaCurriculumUpdateForm.get('bnaBatchId').hasError('required')">
+                        bnaBatchId is Required!
+                      </mat-error>
+                    </mat-form-field>
+                  </div>
+                  
+                  <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                        <mat-label>bnaSemesterId</mat-label>                        
+                        <mat-select formControlName="bnaSemesterId" required>
+                            <mat-option *ngFor="let semester of selectedBnaSemester" [value]="semester.value">
+                                {{semester.text}} 
+                              </mat-option>                          
+                        </mat-select>
+                        <mat-error *ngIf="BnaCurriculumUpdateForm.get('bnaSemesterId').hasError('required')">
+                          bnaSemesterId is Required!
+                        </mat-error>
+                    </mat-form-field>
+                  </div>
+                  <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                        <mat-label>bnaSemesterDurationId</mat-label>                        
+                        <mat-select formControlName="bnaSemesterDurationId" required>
+                          <mat-option *ngFor="let duration of selectedBnaSemesterDurations" [value]="duration.value">
+                              {{duration.text}} 
+                          </mat-option>                          
+                        </mat-select>
+                        <mat-error *ngIf="BnaCurriculumUpdateForm.get('bnaSemesterDurationId').hasError('required')">
+                          BnaSemesterDurations Id is Required!
+                        </mat-error>
+                    </mat-form-field>
+                  </div>
+
+                  <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                        <mat-label>bnaCurriculumTypeId</mat-label>                        
+                        <mat-select formControlName="bnaCurriculumTypeId" required>
+                            <mat-option *ngFor="let curriculum of selectedbnacurriculamtype" [value]="curriculum.value">
+                                {{curriculum.text}} 
+                              </mat-option>                          
+                        </mat-select>
+                        <mat-error *ngIf="BnaCurriculumUpdateForm.get('bnaCurriculumTypeId').hasError('required')">
+                          bnaCurriculumTypeId Id is Required!
+                        </mat-error>
+                    </mat-form-field>
+                  </div>
+                  
+                  <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                        <mat-label>traineeId </mat-label>                        
+                        <input matInput formControlName="traineeId">
+                    </mat-form-field>
+                  </div>
+                  <!-- <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                        <mat-label>Document Link</mat-label>                        
+                        <input matInput formControlName="documentLink">
+                        
+                    </mat-form-field>
+                  </div>  
+                  
+                  <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                        <mat-label>Show Right </mat-label>                        
+                        <mat-select formControlName="showRightId" >
+                            <mat-option *ngFor="let semester of selectedright" [value]="semester.value">
+                                {{semester.text}} 
+                              </mat-option>                          
+                        </mat-select>
+                    </mat-form-field>
+                  </div>  
+                  
+                  <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                        <mat-label>Download Right</mat-label>                        
+                        <mat-select formControlName="downloadRightId" >
+                            <mat-option *ngFor="let semester of selecteddownload" [value]="semester.value">
+                                {{semester.text}} 
+                              </mat-option>                          
+                        </mat-select>
+                    </mat-form-field>
+                  </div>  
+                  <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                        <mat-label>IsApproved</mat-label>                        
+                        <input matInput formControlName="isApproved" >                        
+                    </mat-form-field>
+                  </div>                                                     
+                   
+                  <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                      <mat-label>Approved Date</mat-label>
+                        <input matInput [matDatepicker]="approvepicker" formControlName="approvedDate" >
+                        <mat-datepicker-toggle matSuffix [for]="approvepicker"></mat-datepicker-toggle>
+                       <mat-datepicker #approvepicker></mat-datepicker>                                            
+                    </mat-form-field>
+                  </div>
+                  <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                        <mat-label>Approved User</mat-label>                        
+                        <input matInput formControlName="approvedUser" >                        
+                    </mat-form-field>
+                  </div>--> 
+                </div> 
+
+               
+                <div class="row">
+                  <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+                    <button class="btn-space" [class.auth-spinner]="loading" [disabled]="loading" [disabled]="!BnaCurriculumUpdateForm.valid " mat-raised-button
+                        color="primary">{{buttonText}}</button>
+                    <button type="button" mat-button routerLink="/trainee-management/bnacurriculumupdate-list">Cancel</button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+

@@ -1,0 +1,112 @@
+<section class="content">
+    <div class="container-fluid">
+      <div class="block-header">
+        <div class="row">
+          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <ul class="breadcrumb breadcrumb-style ">
+              <li class="breadcrumb-item">
+                <h4 class="page-title">Assigned Subject Mark List</h4>
+              </li>
+              <li class="breadcrumb-item bcrumb-1">
+                <a routerLink="/admin/dashboard/main"><i class="fas fa-home"></i></a>
+              </li>
+              <li class="breadcrumb-item bcrumb-2">
+                <a href="#" onClick="return false;">Assigned Subject Mark List</a>
+              </li>
+              <li class="breadcrumb-item active">All</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+          <div class="card">
+            <div class="body">
+              <div class="responsive_table">
+                <div class="materialTableHeader"> 
+                  <div class="row">
+                    <div class="col-8">
+                      <ul class="header-buttons-left ml-0">
+                        <li class="dropdown">
+                        </li>
+                      </ul>
+                    </div>
+                    <div class="col-4">
+                      <ul class="header-buttons">
+                        <li>
+                          <div class="icon-button-demo">
+                            <button class="btn-space"  mat-raised-button
+                            color="warn" [routerLink]="['/admin/dashboard/assignedsubject-list',traineeId]"> 
+                            <mat-icon class="col-white">keyboard_backspace</mat-icon> Back
+                            </button>
+                          </div>
+                        </li>
+                       
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+                <mat-table  #table [dataSource]="courseList" matSort class=" mat-cell db-tbl s-db-t-6 ins-db">               
+                  <ng-container matColumnDef="ser">
+                    <mat-header-cell class="ser-col" *matHeaderCellDef mat-sort-header> Ser: </mat-header-cell>
+                    <mat-cell class="ser-col" *matCellDef="let element; let i = index;"> {{ ((paging.pageIndex-1) *  paging.pageSize) + i+1}} </mat-cell>
+                  </ng-container>    
+        
+                  <ng-container matColumnDef="Module">
+                    <mat-header-cell  *matHeaderCellDef mat-sort-header>Module </mat-header-cell>
+                    <mat-cell  *matCellDef="let element"> {{element.moduleName}} </mat-cell>
+                  </ng-container>
+        
+                  <ng-container matColumnDef="subjectName">
+                    <mat-header-cell  *matHeaderCellDef mat-sort-header>SubjectName  </mat-header-cell>
+                    <mat-cell  *matCellDef="let element"> {{element.subjectName}}</mat-cell>
+                  </ng-container>
+
+    
+                  <ng-container matColumnDef="subjectType">
+                    <mat-header-cell class="sub-col" *matHeaderCellDef mat-sort-header>Subject Type </mat-header-cell>
+                    <mat-cell class="sub-col" *matCellDef="let element"> {{element.subjectTypeName}} </mat-cell>
+                  </ng-container>
+
+                  <ng-container matColumnDef="period">
+                    <mat-header-cell class="sub-col" *matHeaderCellDef mat-sort-header>Total Period</mat-header-cell>
+                    <mat-cell class="sub-col" *matCellDef="let element"> {{element.totalPeriod}} </mat-cell>
+                  </ng-container>
+
+                  <ng-container matColumnDef="totalMark">
+                    <mat-header-cell class="sub-col" *matHeaderCellDef mat-sort-header>Total Mark </mat-header-cell>
+                    <mat-cell class="sub-col" *matCellDef="let element"> {{element.totalMark}} </mat-cell>
+                  </ng-container>
+
+                  <ng-container matColumnDef="passMark">
+                    <mat-header-cell class="sub-col" *matHeaderCellDef mat-sort-header>Pass Mark </mat-header-cell>
+                    <mat-cell class="sub-col" *matCellDef="let element"> {{element.passMarkBNA}} </mat-cell>
+                  </ng-container>
+    
+                  <ng-container matColumnDef="actions">
+                    <mat-header-cell ngClass="custom-action local" *matHeaderCellDef class="pr-0">Subject</mat-header-cell>
+                    <mat-cell ngClass="custom-action local" *matCellDef="let row; let i=index;" class="pr-0">
+                      
+                      <button mat-icon-button class="btn-tbl-nomination" title="Subject Mark Type List" [routerLink]="['/admin/dashboard/view-instructorsubjectmarks',traineeId, row.baseSchoolNameId, row.courseNameId, row.courseDurationId, row.bnaSubjectNameId]">
+                        <mat-icon aria-label="Edit" class="col-white">book</mat-icon>
+                      </button>
+                      
+                    </mat-cell>
+                  </ng-container>
+        
+                  <mat-header-row *matHeaderRowDef="displayedCourseColumns"></mat-header-row>
+                  <mat-row *matRowDef="let row; columns: displayedCourseColumns;"></mat-row>
+                </mat-table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  
+  
+  
+   
+

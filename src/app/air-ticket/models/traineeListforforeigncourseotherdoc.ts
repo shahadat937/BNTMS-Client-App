@@ -1,0 +1,15 @@
+export interface TraineeListForForeignCourseOtherDoc {    
+    foreignCourseOtherDocId: number,    
+    traineeId: number,
+    ticket:number,
+    visa:number,
+    passport:number,
+    covidTest:number,
+    dgfiBreafing: boolean,
+    dniBreafing: number,
+    embassiBreafing: number,
+    financialSanction: number,
+    exBdLeave: number,
+    familyGo: string,
+    medicalDocument: boolean,
+}

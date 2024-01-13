@@ -1,0 +1,94 @@
+<section class="content">
+    <div class="container-fluid">
+      <div class="block-header">
+        <div class="row">
+          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <ul class="breadcrumb breadcrumb-style ">
+              <li class="breadcrumb-item">
+                <h4 class="page-title">{{pageTitle}}</h4>
+              </li>
+              <li class="breadcrumb-item bcrumb-1">
+                <a routerLink="/admin/dashboard/main"><i class="fas fa-home"></i></a>
+              </li>
+              <li class="breadcrumb-item bcrumb-2">
+                <a href="#" onClick="return false;">Base School Name</a>
+              </li>
+              <li class="breadcrumb-item active">{{destination}}</li>
+            </ul>
+          </div> 
+        </div>
+      </div>
+      <div class="row clearfix">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+          <div class="card">
+            <!--<div class="header">
+              <h2>{{destination}} Blood Group</h2>
+  
+            </div>-->
+            <div class="body">
+              <form class="m-4" [formGroup]="BaseSchoolNameForm" (ngSubmit)="onSubmit()">
+                <div class="row">
+                  <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                        <mat-label>Base Name</mat-label>                       
+                        <mat-select formControlName="baseNameId" required>
+                            <mat-option *ngFor="let code of selectedBaseName" [value]="code.value">
+                                {{code.text}}
+                              </mat-option>                          
+                        </mat-select>
+                        <mat-error *ngIf="BaseSchoolNameForm.get('baseNameId').hasError('required')">
+                          BaseName is required
+                        </mat-error>
+                    </mat-form-field>
+                  </div>
+
+                  
+                  
+                  <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                      <mat-label>School Name</mat-label>
+                      <input matInput formControlName="schoolName" required>
+                      <mat-error *ngIf="BaseSchoolNameForm.get('schoolName').hasError('required')">
+                        School Name is required
+                      </mat-error>
+                    </mat-form-field>
+                  </div>
+                  <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                      <mat-label>Short Name</mat-label>
+                      <input matInput formControlName="shortName" required>
+                      <mat-error *ngIf="BaseSchoolNameForm.get('shortName').hasError('required')">
+                        Short Name is required
+                      </mat-error>
+                    </mat-form-field>
+                  </div>
+
+                  <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                      <mat-label>School Logo</mat-label>
+                      <input matInput formControlName="schoolLogo">
+                      <!-- <mat-error *ngIf="BaseSchoolNameForm.get('BaseSchoolNames').hasError('required')">
+                        Base Name is required
+                      </mat-error> -->
+                    </mat-form-field>
+                  </div>
+                  
+                </div>
+            
+            
+               
+                <div class="row">
+                  <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+                    <button class="btn-space" [class.auth-spinner]="loading" [disabled]="loading" [disabled]="!BaseSchoolNameForm.valid " mat-raised-button
+                      color="primary">{{btnText}}</button>
+                    <button type="button" mat-button routerLink="/basic-setup/baseschoolname-list">Cancel</button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  

@@ -1,0 +1,130 @@
+<section class="content">
+  <div class="container-fluid">
+    <div class="block-header">
+      <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <ul class="breadcrumb breadcrumb-style ">
+            <li class="breadcrumb-item">
+              <h4 class="page-title">{{pageTitle}}</h4>
+            </li>
+            <li class="breadcrumb-item bcrumb-1">
+              <a routerLink="/admin/dashboard/main"><i class="fas fa-home"></i></a>
+            </li>
+            <li class="breadcrumb-item bcrumb-2">
+              <a href="#" onClick="return false;">Trainee Religation</a>
+            </li>
+            <li class="breadcrumb-item active">{{destination}}</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="row clearfix">
+      <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+        <div class="card religation">
+          <div class="header">
+
+          </div>
+          <div class="body">
+            <div class="row">
+              <div class="col-8 reli">
+                <ul class="header-buttons-left ml-0">
+                  <li class="dropdown">
+                  </li>
+                </ul>
+              </div>
+              <!-- <div class="col-1">
+                <ul class="header-buttons">             
+                  <li>
+                    <div class="icon-button-demo">
+                      <button class="btn-space"  mat-raised-button
+                      color="warn" [routerLink]="['/course-management/traineereligation-list',this.courseDurationId]"> 
+                      <mat-icon class="col-white">keyboard_backspace</mat-icon> Back
+                      </button>
+                    </div>
+                  </li>
+                </ul>
+              </div> -->
+              <div class="col-1 print">
+                <!-- <ul class="header-buttons">             
+                  <li>
+                    <div class="col-1 icon-button-demo"> -->
+                      <!-- <button class="btn-space"  mat-raised-button
+                      color="warn" [routerLink]="['/course-management/traineereligation-list',this.courseDurationId]"> 
+                      <mat-icon class="col-white">keyboard_backspace</mat-icon> Back
+                      </button> -->
+                      <button class="btn-space-prnt"  mat-raised-button color="primary" (click)="printSingle()"> Print
+                        <mat-icon class="col-white">print</mat-icon>
+                      </button>
+              </div>
+              <div class="col-2 back">
+                <button class="btn-space"  mat-raised-button
+                color="warn" [routerLink]="['/course-management/religation-list']"> 
+                <mat-icon class="col-white">keyboard_backspace</mat-icon> Back
+                </button>
+              </div>
+                    <!-- <div class="col-1 icon-button-demo"> -->
+                     
+                    <!-- </div> -->
+                  <!-- </li>
+                </ul> -->
+              </div>
+            </div>
+            <form class="m-4" [formGroup]="AttendanceForm" (ngSubmit)="onSubmit()">
+
+              <div class="row">
+                </div>
+                   <!-- Basic Table -->
+                   <div class="row clearfix">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 p-0 ex-mrk-entry-li">
+                      <div class="card">
+                        <div id="print-routine">
+                        <div class="body table-responsive">
+                          <table class="table ex-mrk-entry">
+                            <thead>
+                              <tr>
+                                <th class="cl-srl"><h5>Ser</h5></th>
+                                <th class="cl-nm-rnk"><h5>PNo/ONo</h5></th>
+                                <th class="cl-nm-rnk"><h5>Name </h5></th>
+                                <th class="cl-nm-rnk"><h5>Rank</h5></th>
+                                <th class="cl-nm-rnk"><h5>Withdrawn Type</h5></th>
+                                <th class="cl-nm-rnk-btn"><h5></h5></th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr *ngFor="let unit of AttendanceForm.get('traineeListForms')['controls']; let i = index" [formGroup]="unit">
+                                <th class="cl-srl" scope="row">{{i+1}}</th>
+                                <td  class="cl-nm-rnk"> 
+                                 {{getControlLabel(i,'traineePNo')}}
+                                </td>
+                                <td  class="cl-nm-rnk"> 
+                                 {{getControlLabel(i,'traineeName')}} 
+                                </td>
+                                <td  class="cl-nm-rnk"> 
+                                  {{getControlLabel(i,'saylorRank')}}{{getControlLabel(i,'rankPosition')}} 
+                                </td>
+                                <td  class="cl-nm-rnk"> 
+                                  <span *ngIf="getControlLabel(i,'withdrawnTypeId') != null"> {{getControlLabel(i,'withdrawnType')}}</span>
+                                  <span class="withdrawn-regular" *ngIf="getControlLabel(i,'withdrawnTypeId') === null"> Regular</span>
+                                </td>
+                               
+                                
+                                <td  class="cl-nm-rnk-btn"> 
+                                  <button class="custom-btn courseplan-btn religation" [routerLink]="['/course-management/add-religation', getControlLabel(i,'traineeNominationId')]" [class.auth-spinner]="loading" [disabled]="loading" [disabled]="!AttendanceForm.valid " mat-raised-button
+                                  color="primary">Religation</button> 
+                                </td>
+                              </tr>
+                              
+                            </tbody>
+                          </table>
+                        </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  <!-- </div> -->
+</section>

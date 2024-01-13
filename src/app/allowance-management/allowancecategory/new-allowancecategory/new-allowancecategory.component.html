@@ -1,0 +1,197 @@
+<section class="content">
+    <div class="container-fluid">
+      <div class="block-header">
+        <div class="row">
+          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <ul class="breadcrumb breadcrumb-style ">
+              <li class="breadcrumb-item">
+                <h4 class="page-title">{{pageTitle}}</h4>
+              </li>
+              <li class="breadcrumb-item bcrumb-1">
+                <a routerLink="/admin/dashboard/main">
+                  <i class="fas fa-home"></i> </a>
+              </li>
+              <li class="breadcrumb-item bcrumb-2">
+                <a href="#" onClick="return false;">Allowance Category</a>
+              </li>
+              <li class="breadcrumb-item active">{{destination}}</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="row clearfix">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+          <div class="card">
+            
+            <div class="body">
+              <form class="m-4" [formGroup]="AllowanceCategoryForm" (ngSubmit)="onSubmit()">
+                <div class="row">
+
+                  <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                        <mat-label>From Rank</mat-label>                        
+                        <mat-select formControlName="fromRankId" required>
+                            <mat-option *ngFor="let dropdown of selectedRanks" [value]="dropdown.value">
+                                {{dropdown.text}} 
+                              </mat-option>                          
+                        </mat-select>
+                        <mat-error *ngIf="AllowanceCategoryForm.get('fromRankId').hasError('required')">
+                          From Rank  is Required!
+                        </mat-error>
+                    </mat-form-field>
+                  </div>
+                  <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                        <mat-label>To Rank</mat-label>                        
+                        <mat-select formControlName="toRankId" required>
+                            <mat-option *ngFor="let dropdown of selectedRanks" [value]="dropdown.value" (onSelectionChange)="onToRankSelectionChanged(dropdown)">
+                                {{dropdown.text}} 
+                              </mat-option>                          
+                        </mat-select>
+                        <mat-error *ngIf="AllowanceCategoryForm.get('toRankId').hasError('required')">
+                          To Rank  is Required!
+                        </mat-error>
+                    </mat-form-field>
+                  </div>
+
+                  <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                        <mat-label>Country Group</mat-label>                
+                        <mat-select formControlName="countryGroupId" required (selectionChange)="onCountryGroupSelectionChangeGetCountry($event.value)">
+                          <mat-option  value="0">--Select--</mat-option >
+                             <mat-option *ngFor="let country of selectedCountryGroup" [value]="country.value">
+                                {{country.text}}  
+                              </mat-option>                          
+                        </mat-select>
+                    </mat-form-field>
+                   </div>
+
+                   <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                        <mat-label>Country</mat-label>                        
+                        <mat-select formControlName="countryId" required (selectionChange)="onCountrySelectionChangeGetCurrency($event.value)">
+                          <mat-option  value="0">--Select--</mat-option >
+                            <mat-option *ngFor="let country of selectedCountryValue" [value]="country.value">
+                                {{country.text}}  
+                              </mat-option>                          
+                        </mat-select>
+                        <mat-error *ngIf="AllowanceCategoryForm.get('countryId').hasError('required')">
+                          Country is Required!
+                        </mat-error>
+                    </mat-form-field>
+                  </div>
+                  <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12 mb-2">
+                     <h5 class="m-t-20">Currency : <span class="c-color">{{getcurrencyname}}</span> </h5>
+                      
+                  </div>
+                  
+
+                  <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                        <mat-label>Allowance Percentage</mat-label>   
+                                          
+                        <mat-select formControlName="allowancePercentageId" required>
+                            <mat-option *ngFor="let dropdown of selectedAllowancePercentages" [value]="dropdown.value">
+                                {{dropdown.text}} 
+                              </mat-option>                          
+                        </mat-select>
+                        <mat-error *ngIf="AllowanceCategoryForm.get('allowancePercentageId').hasError('required')">
+                          allowance Percentage is Required!
+                        </mat-error>
+                    </mat-form-field>
+                  </div>
+
+                  <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                        <mat-label>Converted Currency</mat-label>                        
+                        <mat-select formControlName="currencyNameId" required>
+                            <mat-option *ngFor="let dropdown of selectedCurrencyName" [value]="dropdown.value">
+                                {{dropdown.text}} 
+                              </mat-option>                          
+                        </mat-select>
+                        <mat-error *ngIf="AllowanceCategoryForm.get('currencyNameId').hasError('required')">
+                          Currency Name is Required!
+                        </mat-error>
+                    </mat-form-field>
+                  </div>
+
+                  <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                      <mat-label>Daily Payment</mat-label>
+                      <input matInput formControlName="dailyPayment" required>
+                      <mat-error *ngIf="AllowanceCategoryForm.get('dailyPayment').hasError('required')">
+                        daily Payment is required 
+                      </mat-error>
+                    </mat-form-field>
+                  </div>
+                  
+                </div>
+                <div class="row">
+                  <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+                    <button class="btn-space" [class.auth-spinner]="loading" [disabled]="loading" [disabled]="!AllowanceCategoryForm.valid " mat-raised-button
+                      color="primary">{{buttonText}}</button>
+                    <button type="button" mat-button routerLink="/allowance-management/allowancecategory-list">Cancel</button>
+                  </div>
+                </div>
+              </form>
+              <div *ngIf="isShown" class="row create-table db-tbl cls-rtn">
+                <h3 class="text-center table-title">Allowance Category List</h3>
+                <div class="container">
+                  <div *ngIf="isNoDataFound">
+                  <h3>No Data Found</h3>
+                 </div>
+                  <mat-table #table [dataSource]="allowanceCategoryList" matSort class="mat-cell">               
+                  
+
+                  <ng-container matColumnDef="countryGroup">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header> Group</mat-header-cell>
+                    <mat-cell *matCellDef="let element"> {{element.countryGroup }} </mat-cell>
+                  </ng-container>
+
+                  <ng-container matColumnDef="country">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>Country</mat-header-cell>
+                    <mat-cell *matCellDef="let element"> {{element.country}} </mat-cell>
+                  </ng-container>
+
+                  <ng-container matColumnDef="currencyName">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>Currency </mat-header-cell>
+                    <mat-cell *matCellDef="let element"> {{element.currencyName}} </mat-cell>
+                  </ng-container>
+
+                  <ng-container matColumnDef="allowancePercentage">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header> Allowance (%)</mat-header-cell>
+                    <mat-cell *matCellDef="let element">{{element.allowancePercentage}}
+                  </mat-cell>
+                  </ng-container>
+
+                  <ng-container matColumnDef="dailyPayment">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header> Daily Payment</mat-header-cell>
+                    <mat-cell *matCellDef="let element">{{element.dailyPayment}}
+                  </mat-cell>
+                  </ng-container>
+                  <ng-container matColumnDef="actions">
+                    <mat-header-cell *matHeaderCellDef class="pr-0">Actions</mat-header-cell>
+                    <mat-cell *matCellDef="let row; let i=index;" class="pr-0">
+                      <button mat-icon-button color="accent" class="btn-tbl-edit" 
+                      [routerLink]="['/allowance-management/update-allowancecategory', row.allowanceCategoryId]">
+                        <mat-icon aria-label="Edit" class="col-white">edit</mat-icon>
+                      </button>
+                      <button mat-icon-button color="accent" class="btn-tbl-delete" (click)="$event.stopPropagation()"
+                        (click)="deleteItem(row)">
+                        <mat-icon aria-label="Delete" class="col-white">delete</mat-icon> 
+                      </button>
+                    </mat-cell>
+                  </ng-container>
+
+                  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                  <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+                   </mat-table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  

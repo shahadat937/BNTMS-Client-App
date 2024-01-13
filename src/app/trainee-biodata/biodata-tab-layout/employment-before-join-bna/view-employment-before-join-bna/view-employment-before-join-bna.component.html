@@ -1,0 +1,70 @@
+             <div class="responsive_table">
+                <div class="materialTableHeader">
+                  <div class="row">
+                    <div class="col-8">
+                      <ul class="header-buttons-left ml-0">
+                        <li class="dropdown">
+                          <h4>Employment Before Join BNA</h4>
+                        </li>
+                        
+                      </ul> 
+                    </div>
+                    <div class="col-4">
+                      <ul class="header-buttons">
+                        <li>
+                          <div class="icon-button-demo">
+                            <button class="btn-space"  mat-raised-button
+                            color="warn" [routerLink]="['/trainee-biodata/trainee-biodata-tab/main-tab-layout/main-tab/employment-before-join-bna-details', this.traineeId]"> 
+                            <mat-icon class="col-white">keyboard_backspace</mat-icon> Back
+                            </button>
+                            <button class="btn-space"  mat-raised-button
+                            color="primary" [routerLink]="['/trainee-biodata/trainee-biodata-tab/main-tab-layout/main-tab/update-employment-before-join-bna-details', this.traineeId, this.employmentBeforeJoinBnaId]"> Update
+                            
+                              <mat-icon class="col-white">update</mat-icon>
+                            </button>
+                          </div>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+
+                <table class="table table-bordered">
+                  <thead>
+                    
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <!-- <th scope="row">Trainee Id</th>
+                      <td>{{traineeId}}</td> -->
+                      <th scope="row">Name</th>
+                      <td>{{name}}</td>
+                      <th scope="row">Appointment</th>
+                      <td>{{appointment}}</td>
+                    </tr>
+                    <tr>
+                      
+                      <th scope="row">Duration From</th>
+                      <td>{{durationFrom}}</td>
+                      <th scope="row">Duration To</th>
+                      <td>{{durationTo}}</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">Remarks</th>
+                      <td >{{remarks}}</td>
+                      <th scope="row">Additional Information</th>
+                      <td colspan="3">{{additionalInformation}}</td>
+                    </tr>
+                    
+                  </tbody>
+                </table>
+
+                
+              </div>
+  
+  
+  
+  
+   
+
+

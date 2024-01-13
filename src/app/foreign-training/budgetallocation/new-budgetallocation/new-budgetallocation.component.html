@@ -1,0 +1,154 @@
+<section class="content">
+    <div class="container-fluid">
+      <div class="block-header">
+        <div class="row">
+          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <ul class="breadcrumb breadcrumb-style ">
+              <li class="breadcrumb-item">
+                <h4 class="page-title">{{pageTitle}}</h4>
+              </li>
+              <li class="breadcrumb-item bcrumb-1">
+                <a routerLink="/admin/dashboard/main"><i class="fas fa-home"></i></a>
+              </li>
+              <li class="breadcrumb-item bcrumb-2">
+                <a href="#" onClick="return false;">Budget Allocation</a>
+              </li>
+              <li class="breadcrumb-item active">{{destination}}</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="row clearfix">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+          <div class="card">
+            <div class="header">
+            </div>
+            <div class="body">
+              <form class="m-4" [formGroup]="BudgetAllocationForm" (ngSubmit)="onSubmit()">
+                <div class="row">
+
+                  <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                        <mat-label>Budget Code</mat-label>                        
+                        <mat-select formControlName="budgetCodeId" required>
+                          <mat-option  value="0">--Select--</mat-option >
+                            <mat-option *ngFor="let dropdown of selectedBudgetCode" [value]="dropdown.value">
+                                {{dropdown.text}} 
+                              </mat-option>                          
+                        </mat-select>
+                        <mat-error *ngIf="BudgetAllocationForm.get('budgetCodeId').hasError('required')">
+                          Budget Code is Required!
+                        </mat-error>
+                    </mat-form-field>
+                  </div>
+
+                  <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                        <mat-label>Budget Type</mat-label>                        
+                        <mat-select formControlName="budgetTypeId" required>
+                          <mat-option  value="0">--Select--</mat-option >
+                            <mat-option *ngFor="let dropdown of selectedBudgetType" [value]="dropdown.value">
+                                {{dropdown.text}} 
+                              </mat-option>                          
+                        </mat-select>
+                        <mat-error *ngIf="BudgetAllocationForm.get('budgetTypeId').hasError('required')">
+                          Budget Code is Required!
+                        </mat-error>
+                    </mat-form-field>
+                  </div>
+
+
+                  <!-- <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                      <mat-label>budgetTypeId</mat-label>                        
+                      <input matInput formControlName="budgetTypeId" required>
+                      <mat-error *ngIf="BudgetAllocationForm.get('budgetTypeId').hasError('required')">
+                        budgetTypeId is Required!
+                      </mat-error>
+                    </mat-form-field>
+                  </div> -->
+
+                  <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                        <mat-label>Fiscal Year</mat-label>                        
+                        <mat-select formControlName="fiscalYearId" required>
+                          <mat-option  value="0">--Select--</mat-option >
+                            <mat-option *ngFor="let dropdown of selectedFiscalYear" [value]="dropdown.value">
+                                {{dropdown.text}} 
+                              </mat-option>                          
+                        </mat-select>
+                        <mat-error *ngIf="BudgetAllocationForm.get('fiscalYearId').hasError('required')">
+                          Budget Code is Required!
+                        </mat-error>
+                    </mat-form-field>
+                  </div>
+
+                  <!-- <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                      <mat-label>fiscalYearId</mat-label>                        
+                      <input matInput formControlName="fiscalYearId" required>
+                      <mat-error *ngIf="BudgetAllocationForm.get('fiscalYearId').hasError('required')">
+                        usd Rate is Required!
+                      </mat-error>
+                    </mat-form-field>
+                  </div> -->
+
+                  <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                      <mat-label>Budget Code Name</mat-label>                        
+                      <input matInput formControlName="budgetCodeName" required>
+                      <mat-error *ngIf="BudgetAllocationForm.get('budgetCodeName').hasError('required')">
+                        Budget Code Name is Required!
+                      </mat-error>
+                    </mat-form-field>
+                  </div>
+
+                  <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                      <mat-label>Percentage</mat-label>                        
+                      <input matInput formControlName="percentage" required>
+                      <mat-error *ngIf="BudgetAllocationForm.get('percentage').hasError('required')">
+                        Percentage is Required!
+                      </mat-error>
+                    </mat-form-field>
+                  </div>
+
+                  <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                      <mat-label>Amount</mat-label>                        
+                      <input matInput formControlName="amount" required>
+                      <mat-error *ngIf="BudgetAllocationForm.get('amount').hasError('required')">
+                        Amount is Required!
+                      </mat-error>
+                    </mat-form-field>
+                  </div>
+
+                  <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                      <mat-label>Remarks</mat-label>                        
+                      <input matInput formControlName="remarks" required>
+                      <mat-error *ngIf="BudgetAllocationForm.get('remarks').hasError('required')">
+                        Remarks is Required!
+                      </mat-error>
+                    </mat-form-field>
+                  </div>
+
+                  
+                </div> 
+               
+                <div class="row">
+                  <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+                    <button class="btn-space" [class.auth-spinner]="loading" [disabled]="loading" [disabled]="!BudgetAllocationForm.valid " mat-raised-button
+                        color="primary">{{buttonText}}</button>
+                    <button type="button" mat-button routerLink="/foreign-training/budgetallocation-list">Cancel</button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+

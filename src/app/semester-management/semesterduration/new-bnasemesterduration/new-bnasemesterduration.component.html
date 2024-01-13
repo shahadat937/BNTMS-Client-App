@@ -1,0 +1,147 @@
+<section class="content">
+    <div class="container-fluid">
+      <div class="block-header">
+        <div class="row">
+          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <ul class="breadcrumb breadcrumb-style ">
+              <li class="breadcrumb-item">
+                <h4 class="page-title">{{pageTitle}}</h4>
+              </li>
+              <li class="breadcrumb-item bcrumb-1">
+                <a routerLink="/admin/dashboard/main"><i class="fas fa-home"></i></a>
+              </li>
+              <li class="breadcrumb-item bcrumb-2">
+                <a href="#" onClick="return false;">Semester Duration</a>
+              </li>
+              <li class="breadcrumb-item active">{{destination}}</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="row clearfix">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+          <div class="card">
+            <div class="header">
+            </div>
+            <div class="body">
+              <form class="m-4" [formGroup]="BNASemesterDurationForm" (ngSubmit)="onSubmit()">
+                <div class="row">
+                  
+                  <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                        <mat-label>Course</mat-label>
+                        <mat-select formControlName="courseDurationId" required>
+                          <mat-option  value="0">--Select--</mat-option >
+                            <mat-option *ngFor="let semester of selectedCourseDuration" [value]="semester.value">
+                                {{semester.text}} 
+                              </mat-option>                          
+                        </mat-select>
+                        <mat-error *ngIf="BNASemesterDurationForm.get('courseDurationId').hasError('required')">
+                          Course Is Required!
+                        </mat-error>
+                    </mat-form-field>
+                   </div>
+                  <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                        <mat-label>Semester</mat-label>
+                        <mat-select formControlName="bnaSemesterId" required>
+                          <mat-option  value="0">--Select--</mat-option >
+                            <mat-option *ngFor="let semester of selectedSemester" [value]="semester.value">
+                                {{semester.text}} 
+                              </mat-option>                          
+                        </mat-select>
+                        <mat-error *ngIf="BNASemesterDurationForm.get('bnaSemesterId').hasError('required')">
+                         Semester Is Required!
+                        </mat-error>
+                    </mat-form-field>
+                   </div>
+                  
+                  <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                        <mat-label>Batch Name</mat-label>
+                        <mat-select formControlName="bnaBatchId" required> 
+                          <mat-option  value="0">--Select--</mat-option >
+                            <mat-option *ngFor="let batch of selectedBatch" [value]="batch.value">
+                                {{batch.text}}  
+                              </mat-option>                          
+                        </mat-select>
+                        <mat-error *ngIf="BNASemesterDurationForm.get('bnaBatchId').hasError('required')">
+                             Batch Is Required!
+                        </mat-error>
+                    </mat-form-field>
+                   </div>
+               
+                   <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                      <mat-label>Start Date</mat-label>
+                        <input matInput [matDatepicker]="frompicker1" formControlName="startDate" >
+                        <mat-datepicker-toggle matSuffix [for]="frompicker1"></mat-datepicker-toggle>
+                       <mat-datepicker #frompicker1></mat-datepicker>                                            
+                    </mat-form-field>
+                  </div>
+ 
+                  <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                      <mat-label>End Date</mat-label>
+                        <input matInput [matDatepicker]="frompicker2" formControlName="endDate" >
+                        <mat-datepicker-toggle matSuffix [for]="frompicker2"></mat-datepicker-toggle>
+                       <mat-datepicker #frompicker2></mat-datepicker>                                            
+                    </mat-form-field>
+                  </div>
+
+                  <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                        <mat-label>Location Type</mat-label>                       
+                        <mat-select formControlName="semesterLocationType"> 
+                            <mat-option *ngFor="let location of selectedLocationType" [value]="location.value">
+                                {{location.text}}   
+                              </mat-option>                          
+                        </mat-select>
+                    </mat-form-field>
+                   </div>
+                  
+                  
+ 
+                  <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                      <mat-label>Location</mat-label>
+                      <input matInput formControlName="location" required>
+                      <mat-error *ngIf="BNASemesterDurationForm.get('location').hasError('required')">
+                        Location Is Required
+                      </mat-error>
+                    </mat-form-field>
+                  </div>
+
+                  <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                        <mat-label>Promoted To</mat-label>
+                        <mat-select formControlName="rankId" required> 
+                          <mat-option  value="0">--Select--</mat-option >
+                            <mat-option *ngFor="let rank of selectedRank" [value]="rank.value">
+                                {{rank.text}}   
+                              </mat-option>                          
+                        </mat-select>
+                        <mat-error *ngIf="BNASemesterDurationForm.get('rankId').hasError('required')">
+                            Select Any Rank
+                        </mat-error>
+                    </mat-form-field>
+                   </div>
+                 
+                </div>
+               
+                <div class="row">
+                  <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+                    <button class="btn-space" [class.auth-spinner]="loading" [disabled]="loading" [disabled]="!BNASemesterDurationForm.valid " mat-raised-button
+                      color="primary">{{buttonText}}</button>
+                    <button type="button" mat-button routerLink="/semester-management/bnasemesterduration-list">Cancel</button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+

@@ -1,0 +1,453 @@
+<link rel="stylesheet" href="/src/assets/css/jsti_trainee_biodata.css" type="text/css" />
+<section class="content">
+    <div class="container-fluid">
+      <div class="block-header">
+        <div class="row">
+          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <ul class="breadcrumb breadcrumb-style ">
+              <li class="breadcrumb-item">
+                <h4 class="page-title">Trainee Biodata</h4>
+              </li>
+              <li class="breadcrumb-item bcrumb-1"> 
+                <a routerLink="/admin/dashboard/main"><i class="fas fa-home"></i></a>
+              </li>
+              <li class="breadcrumb-item bcrumb-2">
+                <a href="#" onClick="return false;">Trainee Biodata</a>
+              </li>
+              <li class="breadcrumb-item active">All</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+          <div class="card">
+            <div class="body">
+              <div class="responsive_table">
+                <div class="materialTableHeader biodata-jsti"> 
+                  <div class="row">
+                    <div class="col-8">
+                      <h3>Trainee Biodata</h3>                      
+                    </div>
+
+                    <div class="col-4">
+                      <ul class="header-buttons">
+                        <li>
+                          <div class="icon-button-demo">                            
+                            <button class="btn-space"  mat-raised-button color="warn" (click)="backButton()"> 
+                              <mat-icon class="col-white">keyboard_backspace</mat-icon> Back
+                            </button>
+                          </div>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+                <div id="print-routine">
+                  <div class="row  biodata-bg">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mt-5 bg-margin">
+                      <div class="row bio-title">
+                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12"></div>
+                        <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                          <div class="biodata-title">
+                            <h3>BN JUNIOR STAFF COURSE</h3>
+                            <h3>BIO-DATA OF STUDENT OFFICER</h3>
+                          </div>
+                        </div>
+                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                          <div class="img-box">
+                            <img src='/Content/{{jstiTraineeDetails[0].bnaPhotoUrl}}' alt="Trainee Image" />
+                            <!-- <span class="img-txt">Photo</span> -->
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row personal-info">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                          <div class="personal">
+                            <div class="row">
+                              <div class="counting"><span class="txt">1.</span></div>
+                              <div class="inner-txt">
+                                <span class="txt">P NO</span> <span class="pno-space solid-border">{{jstiTraineeDetails[0].pno}}</span><span class="txt"> RANK </span> <span class="rank-space solid-border">{{jstiTraineeDetails[0].rankPosition}}</span><span class="txt"> SENIORITY </span> <span class="seniority-space solid-border">{{jstiTraineeDetails[0].seniority}}</span>
+                              </div>
+                            </div>
+                            <div class="row">
+                              <div class="counting"><span class="txt">2.</span></div>
+                              <div class="inner-txt">
+                                <span class="txt">FULL NAME</span> <span class="name-space solid-border">{{jstiTraineeDetails[0].name}}</span>
+                              </div>
+                            </div>
+                            <div class="row m-2 full-width-txt">
+                              <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 align-center">
+                                <span class="align-center">(Under line as you are known)</span>
+
+                              </div>
+                            </div>
+                            <div class="row">
+                              <div class="counting"><span class="txt">3.</span></div>
+                              <div class="inner-txt">
+                                <span class="txt">DATE OF COMMISSION</span> <span class="commission-date-space solid-border">{{jstiTraineeDetails[0].dateOfCommission | date:'mediumDate'}}</span><span class="txt"> BRANCH </span> <span class="  branch-space solid-border">{{jstiTraineeDetails[0].branchName}}</span>
+                              </div>
+                            </div>
+                            <div class="row">
+                              <div class="counting"><span class="txt">4.</span></div>
+                              <div class="inner-txt">
+                                <span class="txt">DATE OF BIRTH</span> <span class="birth-date-space solid-border">{{jstiTraineeDetails[0].dateOfBirth | date:'mediumDate'}}</span><span class="txt"> PLACE </span> <span class="place-space solid-border">{{jstiTraineeDetails[0].birthPlace}}</span>
+                              </div>
+                            </div>
+                            <br class="only-for-print">
+                            <div class="row">
+                              <div class="counting"><span class="txt">5.</span></div>
+                              <div class="inner-txt">
+                                <span class="txt"><u>PHYSICAL DESCRIPTION</u></span>
+                                <!-- <span class="txt">DATE OF BIRTH</span> <span class="birth-date-space solid-border">.</span><span class="txt"> PLACE </span> <span class="place-space solid-border">.</span> -->
+                                <div class="row">
+                                  <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 mb-0">
+                                    <div class="counting"><span class="txt">a.</span></div>
+                                    <div class="inner-txt">
+                                      <span class="txt">HEIGHT</span> <span class="heignt-space solid-border">{{jstiTraineeDetails[0].heightName}}</span>
+                                    </div>
+                                  </div>
+                                  <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 mb-0">
+                                    <div class="counting"><span class="txt">b.</span></div>
+                                    <div class="inner-txt">
+                                      <span class="txt">WEIGHT</span> <span class="weight-space solid-border">{{jstiTraineeDetails[0].weightName}}</span>
+                                    </div>
+                                  </div>
+                                  <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 mb-0">
+                                    <div class="counting"><span class="txt">c.</span></div>
+                                    <div class="inner-txt">
+                                      <span class="txt">BLOOD GROUP</span> <span class="blood-grp-space solid-border">{{jstiTraineeDetails[0].bloodGroupName}}</span>
+                                    </div>
+                                  </div>
+                                  <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 mb-0">
+                                    <div class="counting"><span class="txt">d.</span></div>
+                                    <div class="inner-txt">
+                                      <span class="txt">MEDICAL CATEGORY</span> <span class="medical-cat-space solid-border">{{jstiTraineeDetails[0].medicalCategory}}</span>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="row mt-3">
+                              <div class="counting"><span class="txt">6.</span></div>
+                              <div class="inner-txt">
+                                <span class="txt">RELIGION</span> <span class="religion-space solid-border">{{jstiTraineeDetails[0].religionName}}</span>
+                              </div>
+                            </div>
+                            <br class="only-for-print">
+                            <div class="row">
+                              <div class="counting"><span class="txt">7.</span></div>
+                              <div class="inner-txt">
+                                <span class="txt">MARITIAL STATUS(Married/Single)</span> <span class="maritial-status-space solid-border">{{jstiTraineeDetails[0].maritalStatusName}}</span><span class="txt"> DATE </span> <span class="maritial-date-space solid-border">{{jstiTraineeDetails[0].marriedDate | date:'mediumDate'}}</span>
+                                <div class="row">
+                                  <div class="counting"><span class="txt">a.</span></div>
+                                  <div class="inner-txt">
+                                    <span class="txt">FAMILY LOCATION</span> <span class="family-location-space solid-border">{{jstiTraineeDetails[0].familyLocation}}</span>
+                                  </div>
+                                  <div class="counting"><span class="txt">b.</span></div>
+                                  <div class="inner-txt">
+                                    <span class="txt">NAME OF WIFE</span> <span class="wife-name-space solid-border">{{jstiTraineeDetails[0].wifeName}}</span>
+                                  </div>
+                                  <div class="counting"><span class="txt">c.</span></div>
+                                  <div class="inner-txt children">
+                                    <span class="txt"><u>CHILDREN</u></span>
+                                    <!-- <span class="txt">NAME OF WIFE</span> <span class="wife-name-space solid-border">.</span> -->
+                                    <div class="row">
+                                      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mb-0">
+                                        <div class="row">
+                                          <div class="child-sno left-float">
+                                            <P><u>S NO</u></P>
+                                          </div>
+                                          <div class="child-name left-float">
+                                            <P><u>NAME</u></P>
+                                          </div>
+                                          <div class="child-sex left-float">
+                                            <P><u>SEX(M/F)</u></P>
+                                          </div>
+                                          <div class="child-age left-float">
+                                            <P><u>AGE</u></P>
+                                          </div>
+                                        </div>
+                                        <div *ngIf="jstiChildrenData">
+                                          <div  *ngFor="let data of jstiTraineeChildrenDetails;let i= index;" class="row">
+                                            <div class="child-sno left-float">
+                                              <span class="txt">({{i+1}})</span>
+                                            </div>
+                                            <div class="child-name left-float">
+                                              <span class="child-name-space solid-border">{{data.nameInFull}}</span>
+                                            </div>
+                                            <div class="child-sex left-float">
+                                              <span class="child-sex-space solid-border">{{data.gender}}</span>
+                                            </div>
+                                            <div class="child-age left-float">
+                                              <span class="child-age-space solid-border">{{data.age}}</span>
+                                            </div>
+                                          </div>
+                                        </div>
+                                        
+                                      </div>
+                                    </div>
+                                  </div>
+                                  
+                                </div>
+                              </div>
+                            </div>
+                            <br class="only-for-print">
+                            <div class="row">
+                              <div class="counting"><span class="txt">8.</span></div>
+                              <div class="inner-txt">
+                                <span class="txt">FATHER</span> <span class="father-space solid-border">{{jstiTraineeDetails[0].fatherName}}</span>
+                              </div>
+                            </div>
+                            <div class="row">
+                              <div class="counting"><span class="txt">9.</span></div>
+                              <div class="inner-txt">
+                                <span class="txt">OCCUPATION</span> <span class="occupation-space solid-border">{{jstiTraineeDetails[0].fatherOccupation}}</span>
+                              </div>
+                            </div>
+                            <div class="row">
+                              <div class="counting"><span class="txt">10.</span></div>
+                              <div class="inner-txt">
+                                <span class="txt">MOTHER</span> <span class="mother-space solid-border">{{jstiTraineeDetails[0].motherName}}</span>
+                              </div>
+                            </div>
+                            <div class="row">
+                              <div class="counting"><span class="txt">11.</span></div>
+                              <div class="inner-txt">
+                                <span class="txt">PRESENT ADDRESS (WITH TEL)</span> <span class="prsnt-add-line-1-space solid-border">{{jstiTraineeDetails[0].presentAddress}}</span>
+                              </div>
+                              <!-- <span class="prsnt-add-line-2-space solid-border">.</span> -->
+                            </div>
+                            <div class="row">
+                              <div class="counting"><span class="txt">12.</span></div>
+                              <div class="inner-txt">
+                                <span class="txt">PERMANENT ADDRESS (WITH TEL)</span> <span class="prament-add-line-1-space solid-border">{{jstiTraineeDetails[0].permanentAddress}}</span>
+                              </div>
+                              <!-- <span class="prament-add-line-2-space solid-border">.</span> -->
+                            </div>
+                            <div class="row">
+                              <div class="counting"><span class="txt">13.</span></div>
+                              <div class="inner-txt">
+                                <span class="txt">TRUST BANK ACCOUNT NUMBER WITH NAME AND BRANCH (FOR DEPOSITING IRP BILL)</span> <span class="trast-acc-line-1-space solid-border not-print">{{jstiTraineeDetails[0].bankAccount}}</span>
+                              </div>
+                              <span class="trast-acc-line-2-space solid-border only-for-print">{{jstiTraineeDetails[0].bankAccount}}</span>
+                              <!-- <span class="trast-acc-line-2-space solid-border">.</span> -->
+                            </div>
+                            <div class="row">
+                              <div class="counting"><span class="txt">14.</span></div>
+                              <div class="inner-txt">
+                                <span class="txt">PERSON TO BE COMMUNICATED IN EMERGENCY WITH ADDRESS</span> <span class="emrgncy-line-1-space solid-border">{{jstiTraineeDetails[0].emergencyCommunicatePerson}}</span>
+                              </div>
+                              <!-- <span class="emrgncy-line-2-space solid-border">.</span> -->
+                            </div>
+                            <br class="only-for-print">
+                            <div class="row">
+                              <div class="counting"><span class="txt">15.</span></div>
+                              <div class="inner-txt">
+                                <span class="txt"><u>BROTHERS/SISTERS (with occupation)</u></span>
+                                <!-- <span class="txt">DATE OF BIRTH</span> <span class="birth-date-space solid-border">.</span><span class="txt"> PLACE </span> <span class="place-space solid-border">.</span> -->
+                                <div *ngIf="jstiSiblingData">
+                                  <div *ngFor="let data of jstiTraineeSiblingDetails;let i= index;" class="row bro-sis-info mt-2">
+                                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 mb-2">
+                                      <div class="counting"><span class="txt">{{getNextChar(i)}}.</span></div>
+                                      <div class="inner-txt">
+                                        <span class="bor-sis-name-space solid-border">{{data.nameInFull}}</span>
+                                      </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 mb-2">
+                                      <div class="counting"><span class="txt color-transparent"> .</span></div>
+                                      <div class="inner-txt">
+                                        <span class="bor-sis-occu-space solid-border">{{data.occupation}}</span>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <br class="only-for-print">
+                            <br class="only-for-print">
+                            <div class="row mt-5">
+                              <div class="counting"><span class="txt">16.</span></div>
+                              <div class="inner-txt">
+                                <span class="txt"><u>MILITARY TRAINING</u></span>                              
+                              </div>
+                              <div class="row pr-0 mt-2">
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                  <div class="inner-table pr-0">
+                                    <table>
+                                      <thead>
+                                        <tr>
+                                          <th>Date Attended</th>                                        
+                                          <th class="name-table-th">Name of Location of Trg Establishment / Institution</th>
+                                          <th>Setails of Course</th>
+                                          <th>Remarks</th>
+                                        </tr>
+                                      </thead>
+                                      <tbody>
+                                        <tr *ngFor="let data of jstiTraineeMilitaryTrainig;let i= index;">
+                                          <td>{{data.dateAttended | date:'mediumDate'}}</td>
+                                          <td>{{data.locationOfTrg}}</td>
+                                          <td>{{data.detailsOfCourse}}</td>
+                                          <td>{{data.remarks}}</td>
+                                        </tr>
+                                      </tbody>
+                                    </table>
+                                    
+                                  </div>
+                                </div>
+                                
+                              </div>
+                            </div>
+                            <br class="only-for-print">
+                            <br class="only-for-print">
+                            <br class="only-for-print">
+                            <br class="only-for-print">
+                            <br class="only-for-print">
+                            <br class="only-for-print">
+                            <div class="row mt-5">
+                              <div class="counting"><span class="txt">17.</span></div>
+                              <div class="inner-txt">
+                                <span class="txt"><u>EDUCATIONAL QUALIFICATION (CIVIL)</u></span>                              
+                              </div>
+                              <div class="row pr-0 mt-2">
+                                <div class="inner-table pr-0">
+                                  <table>
+                                    <thead>
+                                      <tr>
+                                        <th colspan="2"><u>Date Attended</u></th>                                        
+                                        <th class="name-table-th" rowspan="2">Name of School / College / University</th>
+                                        <th rowspan="2">Examination Passed</th>
+                                        <th rowspan="2">Division/Class Obtained</th>
+                                        <th rowspan="2">Year of Remarks Passing Exam</th>
+                                      </tr>
+                                      <tr>
+                                        <th class="date-from-table-th">From</th>
+                                        <th class="date-to-table-th">To</th>
+                                      </tr>
+                                    </thead>
+                                    <tbody>
+                                      <tr *ngFor="let data of jstiTraineeEducations;let i= index;">
+                                        <td>{{data.dateAttendedFrom | date:'mediumDate'}}</td>
+                                        <td>{{data.dateAttendedTo | date:'mediumDate'}}</td>
+                                        <td>{{data.instituteName}}</td>
+                                        <td>{{data.examType}}</td>
+                                        <td>{{data.result}} Out Of {{data.outOfResult}}</td>
+                                        <td>{{data.passingYear}}</td>
+                                      </tr>
+                                    </tbody>
+                                  </table>
+                                </div>
+                              </div>
+                            </div>
+                            <br class="only-for-print">
+                            <br class="only-for-print">
+                            <div class="row mt-5">
+                              <div class="counting"><span class="txt">18.</span></div>
+                              <div class="inner-txt">
+                                <span class="txt"><u>RECORD OF SERVICE IN CHRONOLOGICAL ORDER</u></span>                              
+                              </div>
+                              <div class="row pr-0 mt-2">
+                                <div class="inner-table pr-0">
+                                  
+                                  <table>
+                                    <thead>
+                                      <tr>
+                                        <th colspan="2"><u>Date</u></th>                                        
+                                        <th class="name-table-th" rowspan="2">Ship / Establishment</th>
+                                        <th rowspan="2">Appointment</th>
+                                        <th rowspan="2">Remarks</th>
+                                      </tr>
+                                      <tr>
+                                        <th class="date-from-table-th">From</th>
+                                        <th class="date-to-table-th">To</th>
+                                      </tr>
+                                    </thead>
+                                    <tbody>
+                                      <tr *ngFor="let data of jstiTraineeRecordOfService;let i= index;">
+                                        <td>{{data.dateFrom | date:'mediumDate'}}</td>
+                                        <td>{{data.dateTo | date:'mediumDate'}}</td>
+                                        <td>{{data.shipEstablishment}}</td>
+                                        <td>{{data.appointment}}</td>
+                                        <td>{{data.remarks}}</td>
+                                      </tr>
+                                    </tbody>
+                                  </table>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="row">
+                              <div class="counting"><span class="txt">19.</span></div>
+                              <div class="inner-txt">
+                                <span class="txt">SPORTS</span> <span class="sports-space solid-border">{{jstiTraineeDetails[0].sports}}</span>
+                              </div>
+                            </div>
+                            <div class="row">
+                              <div class="counting"><span class="txt">20.</span></div>
+                              <div class="inner-txt">
+                                <span class="txt">HOBBIES</span> <span class="hobbies-space solid-border">{{jstiTraineeDetails[0].hobbies}}</span>
+                              </div>
+                            </div>
+                            <div class="row">
+                              <div class="counting"><span class="txt">21.</span></div>
+                              <div class="inner-txt">
+                                <span class="txt">LIKENESS</span> <span class="likeness-space solid-border">{{jstiTraineeDetails[0].likeness}}</span>
+                              </div>
+                            </div>
+                            <div class="row">
+                              <div class="counting"><span class="txt">22.</span></div>
+                              <div class="inner-txt">
+                                <span class="txt">DISLIKENESS</span> <span class="dislikeness-space solid-border">{{jstiTraineeDetails[0].dislikeness}}</span>
+                              </div>
+                            </div>
+                            <div class="row">
+                              <div class="counting"><span class="txt">23.</span></div>
+                              <div class="inner-txt">
+                                <span class="txt">COUNTRY VISITED</span> <span class="visited-country-line-1-space solid-border">{{jstiTraineeDetails[0].countryVisited}}</span>
+                              </div>
+                              <!-- <span class="visited-country-line-2-space solid-border">.</span> -->
+                            </div>
+                            <br class="only-for-print">
+                            <div class="row mt-5 mb-5">
+                              <p>NOTE : SUBMIT TO TCO JSTI ON THE FIRST DAY OF THE COURSE</p>
+                            </div>
+                            <br class="only-for-print">
+                            <br class="only-for-print">
+                            <br class="only-for-print">
+                            <br class="only-for-print">
+                            <div class="row mt-5">
+                              <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+
+                              </div>
+                              <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+
+                              </div>
+                              <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                                <p class="mb-0"><span class="officer-signature">SIGNATURE OF OFFICER</span></p>
+                                <span>DATE</span> <span class="officer-signature-date-space solid-border color-transparent">.</span>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+            
+              </div>
+            </div>
+     
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 div-class div-left m-t-20">
+              <button class="btn-space"  mat-raised-button color="primary" (click)="printSingle()"> Print
+                <mat-icon class="col-white">print</mat-icon>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  
+  
+  
+   
+

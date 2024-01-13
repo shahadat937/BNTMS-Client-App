@@ -1,0 +1,72 @@
+
+              <div class="responsive_table">
+                <div class="materialTableHeader">
+                  <div class="row">
+                    <div class="col-8">
+                      <ul class="header-buttons-left ml-0">
+                        <li class="dropdown">
+                          <h4>Educational Qualification</h4>
+                        </li>
+                        
+                      </ul> 
+                    </div>
+                    <div class="col-4">
+                      <ul class="header-buttons">
+                        <li>
+                          <div class="icon-button-demo">
+                            <button class="btn-space"  mat-raised-button
+                            color="warn" [routerLink]="['/trainee-biodata/sailor-biodata-tab/main-tab-layout/main-tab/educational-qualification-details', this.traineeId]"> 
+                              <mat-icon class="col-white">keyboard_backspace</mat-icon> Back
+                            </button>
+                            <button class="btn-space"  mat-raised-button
+                            color="primary" [routerLink]="['/trainee-biodata/sailor-biodata-tab/main-tab-layout/main-tab/update-educational-qualification-details', this.traineeId, this.educationalQualificationId]"> Update
+                              <mat-icon class="col-white">update</mat-icon>
+                            </button>
+                          </div>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+
+                <table class="table table-bordered">
+                  <thead>
+                    
+                  </thead>
+                  <tbody>
+                    <tr>
+                      
+                      <th scope="row">Exam Type</th>
+                      <td>{{examType}}</td>
+                      <th scope="row">Board</th>
+                      <td>{{board}}</td>
+                    </tr>
+                    
+                    
+                    <tr>
+                      
+                      <th scope="row">Passing Year</th>
+                      <td>{{passingYear}}</td>
+                      <th scope="row">Result</th>
+                      <td>{{result}}</td>
+                    </tr>
+
+                    <tr>
+                      
+                      <th colspan="2" scope="row">Group</th>
+                      <td colspan="2">{{group}}</td>
+                    </tr>
+                    
+                    
+                  </tbody>
+                </table>
+
+                
+              </div>
+  
+  
+  
+  
+   
+
+

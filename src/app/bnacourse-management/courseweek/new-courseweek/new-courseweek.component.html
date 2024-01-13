@@ -1,0 +1,208 @@
+<section class="content">
+    <div class="container-fluid">
+      <div class="block-header">
+        <div class="row">
+          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <ul class="breadcrumb breadcrumb-style ">
+              <li class="breadcrumb-item">
+                <h4 class="page-title">{{pageTitle}}</h4>
+              </li>
+              <li class="breadcrumb-item bcrumb-1">
+                <a routerLink="/admin/dashboard/main"><i class="fas fa-home"></i></a>
+              </li>
+              <li class="breadcrumb-item bcrumb-2">
+                <a href="#" onClick="return false;">Course Week</a>
+              </li>
+              <li class="breadcrumb-item active">{{destination}}</li>
+            </ul> 
+          </div>
+        </div>
+      </div>
+      <div class="row clearfix">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+          <div class="card">
+            <div class="header">
+            </div>
+            <div class="body">
+              <form class="m-4" [formGroup]="CourseWeekForm" (ngSubmit)="onSubmit()">
+                <div class="row">
+                    <!-- <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 mb-2">
+                        <mat-form-field class="example-full-width mb-3" appearance="outline">
+                            <mat-label>Course Duration</mat-label>                        
+                            <mat-select formControlName="courseDurationId" required>
+                                <mat-option *ngFor="let course of selectedcourseduration" [value]="course.value">
+                                    {{course.text}} 
+                                  </mat-option>                          
+                            </mat-select>
+                             <mat-error *ngIf="CourseWeekForm.get('courseDurationId').hasError('required')">
+                              Course Duration is Required!
+                            </mat-error>
+                        </mat-form-field>
+                      </div> -->                      
+                    
+                      <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 mb-2">
+                        <mat-form-field class="example-full-width mb-3" appearance="outline">
+                            <mat-label>School</mat-label>
+                            <mat-select formControlName="baseSchoolNameId" required (selectionChange)="getselectedcoursedurationbyschoolname()">
+                              <mat-option  value="0">--Select--</mat-option >
+                                <mat-option *ngFor="let school of selectedbaseschool" [value]="school.value">
+                                    {{school.text}} 
+                                  </mat-option>                          
+                            </mat-select>
+                            <mat-error *ngIf="CourseWeekForm.get('baseSchoolNameId').hasError('required')">
+                                Select Any School
+                            </mat-error>
+                        </mat-form-field>
+                      </div>
+    
+                      <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 mb-2">
+                        <mat-form-field class="example-full-width mb-3" appearance="outline">
+                            <mat-label>Course Title</mat-label>                        
+                            <mat-select formControlName="courseName">
+                              <mat-option  value="0">--Select--</mat-option >
+                                <mat-option *ngFor="let dropdown of selectedcoursedurationbyschoolname" [value]="dropdown" (onSelectionChange)="getselectedbnasubjectname(dropdown)">
+                                    {{dropdown.text}}  
+                                  </mat-option>                          
+                            </mat-select>
+                            <mat-error *ngIf="CourseWeekForm.get('courseName').hasError('required')">
+                              Course Title is Required!
+                            </mat-error>
+                        </mat-form-field>
+                      </div>
+                    
+                    
+                    <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 mb-2">
+                        <mat-form-field class="example-full-width mb-3" appearance="outline">
+                            <mat-label>Course Week Name</mat-label>                        
+                            <input matInput formControlName="weekName" required>
+                            <mat-error *ngIf="CourseWeekForm.get('weekName').hasError('required')">
+                              Course Week Name is Required 
+                            </mat-error>
+                        </mat-form-field>
+                    </div> 
+                    <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 mb-2">
+                      <mat-form-field class="example-full-width mb-3" appearance="outline">
+                        <mat-label>Date From</mat-label>
+                          <input matInput [matDatepicker]="frompicker" formControlName="dateFrom" >
+                          <mat-datepicker-toggle matSuffix [for]="frompicker"></mat-datepicker-toggle>
+                         <mat-datepicker #frompicker></mat-datepicker>                                            
+                      </mat-form-field>
+                    </div> 
+
+                    <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 mb-2">
+                      <mat-form-field class="example-full-width mb-3" appearance="outline">
+                        <mat-label>Date To</mat-label>
+                          <input matInput [matDatepicker]="topicker" formControlName="dateTo" >
+                          <mat-datepicker-toggle matSuffix [for]="topicker"></mat-datepicker-toggle>
+                         <mat-datepicker #topicker></mat-datepicker>                                            
+                      </mat-form-field>
+                    </div> 
+                    <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 mb-2">
+                        <mat-form-field class="example-full-width mb-3" appearance="outline">
+                            <mat-label>Remarks</mat-label>                        
+                            <input matInput formControlName="remarks">
+                            
+                        </mat-form-field>
+                    </div>  
+
+               <!-- <div class="container" formArrayName="courseplanlist" *ngFor="let item of CourseWeeks().controls; let i = index;">
+                   <div [formGroupName]="i">
+                    <mat-table #table [dataSource]="traineeNominationListForAttendance" matSort class="mat-cell">               
+                      <ng-container matColumnDef="ser">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header> Ser: </mat-header-cell>
+                        <mat-cell *matCellDef="let element; let i = index;"> {{ ((paging.pageIndex-1) *  paging.pageSize) + i+1}} </mat-cell>
+                      </ng-container>    
+    
+                    
+    
+                      <ng-container matColumnDef="traineePNo">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header>Trainee PNO</mat-header-cell>
+                        <mat-cell *matCellDef="let element">{{element.traineePNo}}                      
+                      </mat-cell>
+                      </ng-container>
+
+                      <ng-container matColumnDef="traineeName">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header>Name</mat-header-cell>
+                        <mat-cell *matCellDef="let element">{{element.traineeName}}                      
+                      </mat-cell>
+                      </ng-container>
+  
+                      <ng-container matColumnDef="bnaAttendanceRemarksId">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header>Attendance Remarks</mat-header-cell>
+                        <mat-cell *matCellDef="let element">
+                          <mat-form-field class="example-full-width mb-3" appearance="outline">
+                            <mat-select formControlName="bnaAttendanceRemarksId">
+                                <mat-option *ngFor="let dropdown of selectedbnaattendanceremark" [value]="dropdown.value">
+                                    {{dropdown.text}} 
+                                  </mat-option>                          
+                            </mat-select>
+                        </mat-form-field>                    
+                      </mat-cell>
+                      </ng-container>
+
+                      <ng-container matColumnDef="attendanceStatus">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header>Attendance</mat-header-cell>
+                        <mat-cell *matCellDef="let element">
+                          <mat-checkbox formControlName="attendanceStatus" #checkBox  (change)="onCheckboxChange($event)" [ngClass]="'tbl-checkbox'">
+                          
+                          </mat-checkbox>
+                      </mat-cell>
+                      </ng-container>
+
+                      <ng-container matColumnDef="actions">
+                        <mat-header-cell *matHeaderCellDef class="pr-0">Actions</mat-header-cell>
+                        <mat-cell *matCellDef="let row; let i=index;" class="pr-0">
+                          <button mat-icon-button color="accent" class="btn-tbl-edit" 
+                          [routerLink]="['/attendance-management/update-attendance', row.attendanceId]">
+                            <mat-icon aria-label="Edit" class="col-white">edit</mat-icon>
+                          </button>
+                          <button mat-icon-button color="accent" class="btn-tbl-delete" (click)="$event.stopPropagation()"
+                            (click)="deleteItem(row)">
+                            <mat-icon aria-label="Delete" class="col-white">delete</mat-icon> 
+                          </button>
+                        </mat-cell>
+                      </ng-container>
+    
+                      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+                     </mat-table>
+                    </div>
+                  </div>              -->
+
+                    <!-- <table class="table table-bordered" formArrayName="courseplanlist">  
+                      <tr>  
+                        <th colspan="2">Add Multiple Course Plan:</th>  
+                        <th width="150px"><button type="button" (click)="addCoursePlan()" class="btn btn-primary">Add More</button></th>  
+                      </tr>  
+                      <tr *ngFor="let quantity of CourseWeeks().controls; let i=index" [formGroupName]="i">  
+                        <td>  
+                          Course Plan Name :  
+                            <input type="text" formControlName="coursePlanName" class="form-control">  
+                        </td>  
+                        <td>  
+                            Value :  
+                            <input type="text" formControlName="value" class="form-control">  
+                        </td>  
+                        <td>  
+                            <button (click)="removeCoursePlan(i)" class="btn btn-danger">Remove</button>  
+                        </td>  
+                      </tr>  
+                    </table>   -->
+                  
+                    <div class="row">
+                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+                        <button class="btn-space" [class.auth-spinner]="loading" [disabled]="loading" [disabled]="!CourseWeekForm.valid " mat-raised-button
+                            color="primary">{{buttonText}}</button>
+                        <button type="button" mat-button routerLink="/course-management/courseweek-list">Cancel</button>
+                    </div>
+                    </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+

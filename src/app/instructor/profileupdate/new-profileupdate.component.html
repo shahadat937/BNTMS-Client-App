@@ -1,0 +1,395 @@
+<section class="content">
+    <div class="container-fluid">
+      <div class="block-header">
+        <div class="row">
+          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <ul class="breadcrumb breadcrumb-style ">
+              <li class="breadcrumb-item">
+                <h4 class="page-title">{{pageTitle}}</h4>
+              </li>
+              <li class="breadcrumb-item bcrumb-1">
+                <a routerLink="/admin/dashboard/main"><i class="fas fa-home"></i></a>
+              </li>
+              <li class="breadcrumb-item bcrumb-2">
+                <a href="#" onClick="return false;">Officer BIO Data</a>
+              </li>
+              <li class="breadcrumb-item active">{{destination}}</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="row clearfix">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+          <div class="card">
+            
+            <div class="body">
+              <form class="m-4" [formGroup]="BIODataGeneralInfoForm" (ngSubmit)="onSubmit()">
+                <div class="row">
+                  
+                  
+                  <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                      <mat-label>P No</mat-label>
+                      <input readonly="true" matInput formControlName="pno" disabled>
+                    </mat-form-field>
+                  </div>
+                  <div  class="col-xl-3 col-lg-3 col-md-6 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                      <mat-label>BNA No</mat-label>
+                      <input  readonly="true" matInput formControlName="bnaNo">
+                    </mat-form-field>
+                  </div>
+                  <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                      <mat-label>Name in Full (English)</mat-label>
+                      <input  matInput formControlName="name">
+                    </mat-form-field>
+                  </div>
+                  <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                      <mat-label>Name in Full (Bangla)</mat-label>
+                      <input matInput formControlName="nameBangla" >
+                      
+                    </mat-form-field>
+                  </div>
+                  <!-- <div hidden class="col-xl-2 col-lg-2 col-md-6 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                      <mat-label>Date Of Birth</mat-label>
+                        <input readonly="true"  matInput [matDatepicker]="birthpicker" formControlName="dateOfBirth">
+                        <mat-datepicker-toggle matSuffix [for]="birthpicker"></mat-datepicker-toggle>
+                       <mat-datepicker #birthpicker></mat-datepicker>                                                                   
+                    </mat-form-field>
+                  </div>
+                  <div hidden class="col-xl-2 col-lg-2 col-md-6 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                      <mat-label>Height</mat-label>
+                      <mat-select  readonly="true" formControlName="heightId">
+                        <mat-option  value="0">--Select--</mat-option >
+                        <mat-option *ngFor="let code of heightValues" [value]="code.value">
+                            {{code.text}}
+                        </mat-option>                          
+                      </mat-select>
+                    </mat-form-field>
+                  </div>
+                  <div hidden class="col-xl-2 col-lg-2 col-md-6 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                      <mat-label>Weight</mat-label>
+                      <mat-select formControlName="weightId">
+                        <mat-option  value="0">--Select--</mat-option >
+                        <mat-option *ngFor="let code of weightValues" [value]="code.value">
+                            {{code.text}}
+                        </mat-option>                          
+                      </mat-select>
+                    </mat-form-field>
+                  </div>
+                  <div hidden class="col-xl-2 col-lg-2 col-md-6 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                      <mat-label>Color Of Eye</mat-label>
+                      <mat-select formControlName="colorOfEyeId">
+                        <mat-option  value="0">--Select--</mat-option >
+                        <mat-option *ngFor="let code of colorOfEyeValues" [value]="code.value">
+                            {{code.text}}
+                        </mat-option>                          
+                      </mat-select>
+                    </mat-form-field>
+                  </div>
+                  <div hidden class="col-xl-2 col-lg-2 col-md-6 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                      <mat-label>Hair Color</mat-label>
+                      <mat-select formControlName="hairColorId">
+                        <mat-option  value="0">--Select--</mat-option >
+                        <mat-option *ngFor="let code of hairColorValues" [value]="code.value">
+                            {{code.text}}
+                        </mat-option>                          
+                      </mat-select>
+                    </mat-form-field>
+                  </div>
+                  <div hidden class="col-xl-2 col-lg-2 col-md-6 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                      <mat-label>Officer Type</mat-label>
+                      <mat-select readonly="true"  formControlName="officerTypeId">
+                        <mat-option  [value]="1">Bangladesh</mat-option >
+                        <mat-option  [value]="2">Foreign</mat-option >
+                      </mat-select>
+                    </mat-form-field>
+                  </div>
+                  <div hidden class="col-xl-2 col-lg-2 col-md-6 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                      <mat-label>Blood Group</mat-label>
+                      <mat-select formControlName="bloodGroupId">
+                        <mat-option  value="0">--Select--</mat-option >
+                        <mat-option *ngFor="let code of bloodValues" [value]="code.value">
+                            {{code.text}}
+                        </mat-option>                          
+                      </mat-select>
+                    </mat-form-field>
+                  </div>
+                  
+                  <div hidden class="col-xl-2 col-lg-2 col-md-6 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                      <mat-label>Religion</mat-label>
+                      <mat-select formControlName="religionId" (selectionChange)="onReligionSelectionChangeGetCastes($event.value)">
+                        <mat-option  value="0">--Select--</mat-option >
+                        <mat-option *ngFor="let code of religionValues" [value]="code.value">
+                            {{code.text}}
+                        </mat-option>                          
+                      </mat-select>
+                    </mat-form-field>
+                  </div>
+                  <div hidden class="col-xl-2 col-lg-2 col-md-6 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                      <mat-label>Caste</mat-label>
+                      <mat-select formControlName="casteId">
+                        <mat-option  value="0">--Select--</mat-option >
+                        <mat-option *ngFor="let code of selectedCastes" [value]="code.value">
+                            {{code.text}}
+                        </mat-option>                          
+                      </mat-select>
+                    </mat-form-field>
+                  </div>
+                  <div hidden class="col-xl-2 col-lg-2 col-md-6 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                      <mat-label>Joining Date</mat-label>
+                        <input  matInput [matDatepicker]="joiningpicker" formControlName="joiningDate">
+                        <mat-datepicker-toggle   matSuffix [for]="joiningpicker"></mat-datepicker-toggle>
+                       <mat-datepicker #joiningpicker></mat-datepicker>   
+                    </mat-form-field>
+                  </div> -->
+                  
+                  <!-- <div *ngIf="rankId" class="col-xl-3 col-lg-3 col-md-3 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                      <mat-label>Rank</mat-label>
+                      <mat-select  formControlName="rankId">
+                        <mat-option  value="0">--Select--</mat-option >
+                        <mat-option   *ngFor="let code of rankValues" [value]="code.value">
+                            {{code.text}}
+                        </mat-option>                          
+                      </mat-select>
+                    </mat-form-field>
+                  </div>
+                  <div *ngIf="saylorRankId" class="col-xl-3 col-lg-3 col-md-3 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                      <mat-label>Rank</mat-label>
+                      <mat-select  formControlName="saylorRankId">
+                        <mat-option  value="0">--Select--</mat-option >
+                        <mat-option   *ngFor="let code of selectedSaylorRank" [value]="code.value">
+                            {{code.text}}
+                        </mat-option>                          
+                      </mat-select>
+                    </mat-form-field>
+                  </div> -->
+                  <!-- <div *ngIf="saylorRankId" class="col-xl-3 col-lg-3 col-md-12 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                      <mat-label>Sailor Branch</mat-label>
+                      <mat-select formControlName="saylorBranchId" (selectionChange)="onBranchSelectionChangegetSubBranch($event.value)">
+                        <mat-option  value="0">--Select--</mat-option >
+                        <mat-option *ngFor="let code of selectedSaylorBranch" [value]="code.value">
+                            {{code.text}}
+                        </mat-option>                          
+                      </mat-select>
+                    </mat-form-field>
+                  </div>
+                 
+                  <div *ngIf="saylorRankId" class="col-xl-3 col-lg-3 col-md-12 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                      <mat-label>Sailor Sub Branch</mat-label>
+                      <mat-select formControlName="saylorSubBranchId">
+                        <mat-option  value="0">--Select--</mat-option >
+                        <mat-option *ngFor="let code of selectedSaylorSubBranch" [value]="code.value">
+                            {{code.text}}
+                        </mat-option>                          
+                      </mat-select>
+                    </mat-form-field>
+                  </div> -->
+                  <!-- <div hidden class="col-xl-2 col-lg-2 col-md-6 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                      <mat-label>Branch</mat-label>
+                      <mat-select disabled="true"  formControlName="branchId">
+                        <mat-option  value="0">--Select--</mat-option >
+                        <mat-option *ngFor="let code of branchValues" [value]="code.value">
+                            {{code.text}}
+                        </mat-option>                          
+                      </mat-select>
+                    </mat-form-field>
+                  </div>
+                  <div hidden class="col-xl-2 col-lg-2 col-md-6 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                      <mat-label>BNA Batch</mat-label>
+                      <mat-select disabled="true"  formControlName="bnaBatchId">
+                        <mat-option  value="0">--Select--</mat-option >
+                        <mat-option *ngFor="let code of batchValues" [value]="code.value">
+                            {{code.text}}
+                        </mat-option>                          
+                      </mat-select>
+                    </mat-form-field>
+                  </div>
+                  
+                  <div hidden class="col-xl-2 col-lg-2 col-md-6 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                      <mat-label>Gender</mat-label>
+                      <mat-select formControlName="genderId">
+                        <mat-option  value="0">--Select--</mat-option >
+                        <mat-option *ngFor="let code of genderValues" [value]="code.value">
+                            {{code.text}}
+                        </mat-option>                          
+                      </mat-select>
+                    </mat-form-field>
+                  </div>
+
+                  <div hidden class="col-xl-2 col-lg-2 col-md-6 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                      <mat-label>Division</mat-label>                
+                      <mat-select formControlName="divisionId" (selectionChange)="onDivisionSelectionChangeGetDistrict($event.value)">
+                        <mat-option  value="0">--Select--</mat-option >
+                        <mat-option *ngFor="let division of divisionValues" [value]="division.value">
+                          {{division.text}}  
+                        </mat-option>                          
+                      </mat-select>
+                    </mat-form-field>
+                  </div>
+                  
+
+                  <div hidden class="col-xl-2 col-lg-2 col-md-6 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                      <mat-label>District</mat-label>                
+                      <mat-select formControlName="districtId"  (selectionChange)="onDistrictSelectionChangeGetThana($event.value)">
+                        <mat-option  value="0">--Select--</mat-option >
+                        <mat-option *ngFor="let district of selectedDistrict" [value]="district.value">
+                          {{district.text}}  
+                        </mat-option>                          
+                      </mat-select>
+                    </mat-form-field>
+                  </div>
+                  
+
+                  <div hidden class="col-xl-2 col-lg-2 col-md-6 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                      <mat-label>Thana</mat-label>                        
+                      <mat-select formControlName="thanaId" >
+                        <mat-option  value="0">--Select--</mat-option >
+                        <mat-option *ngFor="let thana of selectedThana" [value]="thana.value">
+                          {{thana.text}}  
+                        </mat-option>                          
+                      </mat-select>
+                    </mat-form-field>
+                  </div>
+                  <div hidden class="col-xl-2 col-lg-2 col-md-6 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                      <mat-label>Nationality</mat-label>
+                      <mat-select formControlName="nationalityId">
+                        <mat-option  value="0">--Select--</mat-option >
+                        <mat-option *ngFor="let code of nationalityValues" [value]="code.value">
+                            {{code.text}}
+                        </mat-option>                          
+                      </mat-select>
+                    </mat-form-field>
+                  </div>
+                  <div hidden class="col-xl-3 col-lg-3 col-md-6 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                      <mat-label>Identification Mark</mat-label>
+                      <input matInput formControlName="identificationMark" >
+                      
+                    </mat-form-field>
+                  </div> -->
+                  <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                      <mat-label>NID</mat-label>
+                      <input matInput formControlName="nid">
+                    </mat-form-field>
+                  </div>
+
+                  <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                      <mat-label>Mobile</mat-label>
+                      <input matInput formControlName="mobile" >
+                      
+                    </mat-form-field>
+                  </div>
+
+                  <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                      <mat-label>Email</mat-label>
+                      <input matInput formControlName="email" >
+                      
+                    </mat-form-field>
+                  </div>
+
+                  <!-- <div hidden class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                      <mat-label>Maritial Status</mat-label>
+                      <mat-select  formControlName="maritalStatusId">
+                        <mat-option *ngFor="let code of maritialStatusValues" [value]="code.value">
+                            {{code.text}}
+                        </mat-option>                          
+                      </mat-select>
+                    </mat-form-field>
+                  </div> -->
+
+                  <div hidden class="col-xl-3 col-lg-3 col-md-6 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                      <mat-label>Remark</mat-label>
+                      <input matInput formControlName="remarks" >
+                      
+                    </mat-form-field>
+                  </div>
+                  <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                      <mat-label>Short Code</mat-label>
+                      <input matInput formControlName="shortCode" >
+                      
+                    </mat-form-field>
+                  </div>
+                  <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                      <mat-label>Present Billet</mat-label>
+                      <input matInput formControlName="presentBillet" >
+                      
+                    </mat-form-field>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                      <mat-label>Present Address</mat-label>
+                      <textarea matInput formControlName="presentAddress" ></textarea>
+                      
+                    </mat-form-field>
+                  </div>
+
+                  <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                      <mat-label>Permanent Address</mat-label>
+                      <textarea matInput formControlName="permanentAddress" ></textarea>
+                      
+                    </mat-form-field>
+                  </div>
+
+                  
+                 
+                  
+                </div>
+            
+                <div class="row">
+                  <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+                      <div class="custom-file">
+                        <input type="file" class="custom-file-input" id="customFile"
+                               (change)="onFileChanged($event)" accept=".jpg,.png,.gif,.jpeg">
+                      </div>
+                  </div>
+                </div>
+               
+                <div class="row">
+                  <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+                    <button class="btn-space" [class.auth-spinner]="loading" [disabled]="loading" [disabled]="!BIODataGeneralInfoForm.valid " mat-raised-button
+                      color="primary">{{buttonText}}</button>
+                    <!-- <button type="button" mat-button routerLink="/trainee-biodata/trainee-biodata-tab/biodata-general-Info-list">Cancel</button> -->
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  

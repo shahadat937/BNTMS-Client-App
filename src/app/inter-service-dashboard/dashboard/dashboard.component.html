@@ -1,0 +1,260 @@
+<section class="content db-main">
+  <div class="container-fluid">
+    
+    <div class="row p-t-15">      
+      <div class="col-xl-9 col-lg-9 col-md-12 col-sm-12 db-event-calendar">        
+        
+        <div class="card">
+          <div class="header">
+            
+          </div>
+          <div class="body">
+            <div class="row">
+              <div class="col-lg-12 col-md-12 col-sm-12">
+    
+              
+                <button [routerLink]="['/admin/dashboard/view-runningcourses', masterData.coursetype.LocalCourse]" class="col-lg-4 col-md-4 col-sm-4 btnDetails" mat-flat-button color="primary">Local Courses</button>
+                <!-- <button [routerLink]="['/admin/dashboard/view-runningcourses', masterData.coursetype.ForeignCourse]" class="col-lg-3 col-md-3 col-sm-3 btnDetails" mat-flat-button color="primary">Foreign Courses</button>
+                <button [routerLink]="['/admin/dashboard/view-runningcourses', masterData.coursetype.InterService]" class="col-lg-3 col-md-3 col-sm-3 btnDetails" mat-flat-button color="primary">Inter Service Courses</button>
+                <button [routerLink]="['/admin/dashboard/courseinstructorlist']" class="col-lg-3 col-md-3 col-sm-3 btnDetails" mat-flat-button color="primary">Q-Exam</button>
+                <button [routerLink]="['/admin/dashboard/Jcoexamlistindashboard-list']" class="col-lg-3 col-md-3 col-sm-3 btnDetails" mat-flat-button color="primary">JCO's</button>
+                <button [routerLink]="['/admin/dashboard/readingmateriallist-dashboard']" class="col-lg-3 col-md-3 col-sm-3 btnDetails" mat-flat-button color="primary">Staff College</button> -->
+                <button [routerLink]="['/admin/dashboard/view-budgetinfolist']" class="col-lg-4 col-md-4 col-sm-4 btnDetails" mat-flat-button color="primary">Budget </button>
+                <button [routerLink]="['/admin/dashboard/school-list']" class="col-lg-4 col-md-4 col-sm-4 btnDetails" mat-flat-button color="primary">School Details</button>
+                <button [routerLink]="['/admin/dashboard/view-readingmaterial']" class="col-lg-4 col-md-4 col-sm-4 btnDetails" mat-flat-button color="primary">Reading Materials</button>
+                <!-- <button class="btnDetails" mat-flat-button color="primary">Teacher Evaluation</button>
+                <button class="btnDetails" mat-flat-button color="primary">Syllabus</button> -->
+                  
+    <div *ngIf="isJcosOpen > 0 && role == userRole.InterSeeviceCourse" class="row p-b-15 trainee-db-useful-row">
+      <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
+        <div class="card">
+          <div class="body">
+            <div class="row dash-cd-m-0">
+            </div>
+            <div class="row ins-dash-menu">
+              
+              <div class="col-xl-12 col-lg-12 col-md-12 ins-dash-menu-item">
+                <a [routerLink]="['/admin/dashboard/Jcoexamlistindashboard-list']">JCO's Promotion Exam</a>
+              </div>
+
+              
+              
+            </div>
+            
+          </div>
+        </div>
+      </div>
+      
+    </div>
+              </div>
+            </div>
+          </div>
+        
+        </div>
+        
+      </div>
+      <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12">
+        <div class="card">
+          <div class="header">
+            
+          </div>
+          <!-- <div class="body">
+            <apx-chart [series]="barChartOptions.series" [chart]="barChartOptions.chart"
+              [dataLabels]="barChartOptions.dataLabels" [plotOptions]="barChartOptions.plotOptions"
+              [yaxis]="barChartOptions.yaxis" [xaxis]="barChartOptions.xaxis" [fill]="barChartOptions.fill"></apx-chart>
+          </div> -->
+          <div class="body">
+            <table class="full-width inter-service col-12">
+              <tr>
+                <th>Total Trainee</th>
+                <td>
+                  <a [routerLink]="['/admin/dashboard/view-interservicetraineelist',runningCourseType,0]">{{interServiceTraineeCount}}</a>
+                </td>
+              </tr>
+              <tr>
+                <th>Officers</th>
+                <td>
+                  <a [routerLink]="['/admin/dashboard/view-interservicetraineelist',runningCourseType,this.masterData.TraineeStatus.officer]">{{interServiceOfficerCount}}</a>
+                </td>
+              </tr>
+              <tr>
+                <th>Sailors</th>
+                <td>
+                  <a [routerLink]="['/admin/dashboard/view-interservicetraineelist',runningCourseType,this.masterData.TraineeStatus.sailor]">{{interServiceSailorCount}}</a>
+                </td>
+              </tr>
+              <tr>
+                <th>Civil</th>
+                <td>
+                  <a [routerLink]="['/admin/dashboard/view-interservicetraineelist',runningCourseType,this.masterData.TraineeStatus.civil]">{{interServiceCivilCount}}</a>
+                </td>
+              </tr>
+              <!-- <tr>
+                <th>Total Inter Service Courses</th>
+                <td>
+                  <a [routerLink]="['/admin/dashboard/view-runningcourses']">1</a>
+                </td>
+              </tr> -->
+              <tr>
+                <th class="upcoming-color">Upcoming Courses</th>
+                <td>
+                  <a [routerLink]="['/admin/dashboard/view-upcominginterservicecourselist',19]">></a>
+                </td>
+              </tr>
+              <tr class="calendar-color">
+                <th>Event Calendar</th>
+                <td>
+                  <a [routerLink]="['/calendar']">></a>
+                </td>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    
+    <div class="row p-t-5">      
+      <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">        
+        <!-- interservice course -->
+        
+        <div class="card">
+
+          <div class="body">
+            <div class="row dash-cd-m-0">
+              <!-- <div class="col-lg-11 col-md-11 col-sm-11 col-xs-11 div-class div-left">
+                <h3 class="rnc">Running Courses</h3>
+             </div> -->
+             <div class="col-lg-11 col-md-11 col-sm-12 col-xs-12 div-class div-left course-filter">
+              <button class="running-course" (click)="getCoursesByViewType(1)">Running</button>
+              <button class="passing-course" (click)="getCoursesByViewType(2)">Passing Out</button>
+              <button class="upcoming-course" (click)="getSpUpcomingCourseDurationsByTypeForInterService()">Upcoming</button>
+              
+            </div>
+            
+             <div class="col-lg-1 col-md-1 col-sm-1">
+              <button class="btn-space" mat-raised-button color="primary" (click)="printSingle()">
+                <mat-icon class="col-white">print</mat-icon>
+              </button>
+           </div>
+            </div> 
+
+            <div id="print-routine">
+              <!-- <mat-table  #table [dataSource]="runningCourses" matSort class="mat-cell notice-list db-tbl scl-db">               
+
+                <ng-container matColumnDef="ser">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header> Ser: </mat-header-cell>
+                  <mat-cell *matCellDef="let element; let i = index;"> {{ ((paging.pageIndex-1) *  paging.pageSize) + i+1}} </mat-cell>
+                </ng-container>    
+
+                <ng-container matColumnDef="course">
+                  <mat-header-cell class="course-col" *matHeaderCellDef mat-sort-header>Name of Course </mat-header-cell>
+                  <mat-cell class="course-col" *matCellDef="let element">
+                    {{getDateComparision(element)}} {{element.course}} - {{element.courseTitle}} 
+                    <span *ngIf="passOutStatus === 1" style="color:red;font-weight:bold;width: 45%;"> (Passing Out)</span>
+                  </mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="durationFrom">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header> Date of Commencement</mat-header-cell>
+                  <mat-cell *matCellDef="let element"> {{element.durationFrom | date:'mediumDate'}} </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="durationTo">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header>Date of Completion</mat-header-cell>
+                  <mat-cell *matCellDef="let element"> {{element.durationTo | date:'mediumDate'}} </mat-cell>
+                </ng-container>
+
+                <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+            </mat-table> -->
+              <table class="tblinterserviceList">
+                <thead>
+                  <tr>
+                    <th class="th-cell-ser">Ser:</th>
+                    <th class="th-cell-course">Course Name</th>
+                    <th class="th-cell-organiztion">Organization Name</th>
+                    <th class="th-cell-durationform">From</th>
+                    <th class="th-cell-durationform">To</th>
+                    <th class="th-cell-status">Duration</th>
+                    <th class="th-cell-action">Candidates/ Submitted </th>
+                  </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let number of this.interServiceCourses; let i = index">
+                      <td class="td-cell" scope="row"> {{i+1}}</td>   
+                      <td class="td-cell">
+                        {{number.course}}
+                      </td>
+                      <td class="td-cell">
+                        {{number.orgName}}
+                      </td>
+                      <td class="td-cell">
+                        {{number.durationFrom | date:'mediumDate'}} 
+                      </td>
+                      <td class="td-cell">
+                        {{number.durationTo | date:'mediumDate'}}
+                      </td>
+                      <td class="td-cell">
+                        {{getCalculateAge(number.durationFrom | date:'mediumDate',number.durationTo | date:'mediumDate', 0)}} 
+                      </td>
+                      <td class="td-cell">
+                        <a [routerLink]="['/admin/dashboard/traineenomination-list', number.courseDurationId,runningCourseType]" style="color: green;text-decoration: underline; font-weight: bold;">{{number.candidates}}/{{number.submittedReport}}
+                        </a>
+                    
+                      </td>
+                    </tr>
+                </tbody>
+              </table>
+          
+               <!-- <mat-paginator [length]="paging.length" [showFirstLastButtons]="masterData.paging.showFirstLastButtons"
+              [pageSize]="paging.pageSize" [pageSizeOptions]="masterData.paging.pageSizeOptions"
+              (page)="pageChanged($event)">
+              </mat-paginator> -->
+      </div>
+            <!-- <mat-table #table [dataSource]="interServiceCourses" matSort class="mat-cell interservice-db">               
+              <ng-container matColumnDef="ser">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Ser: </mat-header-cell>
+                <mat-cell *matCellDef="let element; let i = index;"> {{ ((paging.pageIndex-1) *  paging.pageSize) + i+1}} </mat-cell>
+              </ng-container>    
+    
+              <ng-container matColumnDef="courseName">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>Course Name </mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{element.course}} </mat-cell>
+              </ng-container>
+    
+              <ng-container matColumnDef="orgName">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>Organization </mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{element.orgName}} </mat-cell>
+              </ng-container>
+              <ng-container matColumnDef="durationFrom">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> From</mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{element.durationFrom | date:'mediumDate'}} </mat-cell>
+              </ng-container>
+    
+              <ng-container matColumnDef="durationTo">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> To </mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{element.durationTo | date:'mediumDate'}} </mat-cell>
+              </ng-container>
+
+              <ng-container matColumnDef="dayCount">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>Duration </mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{getCalculateAge(element.durationFrom | date:'mediumDate',element.durationTo | date:'mediumDate', 0)}}  </mat-cell>
+              </ng-container>
+
+              <ng-container matColumnDef="candidates">
+                <mat-header-cell class="count-col" *matHeaderCellDef mat-sort-header>Candidates/ Submitted </mat-header-cell>
+                <mat-cell class="count-col" *matCellDef="let row">
+                  <a [routerLink]="['/admin/dashboard/traineenomination-list', row.courseDurationId,runningCourseType]" style="color: green;text-decoration: underline; font-weight: bold;">{{row.candidates}}/{{row.submittedReport}}</a>
+                </mat-cell>
+              </ng-container>
+              <mat-header-row *matHeaderRowDef="displayedUpcomingInterServiceColumns"></mat-header-row>
+              <mat-row *matRowDef="let row; columns: displayedUpcomingInterServiceColumns;"></mat-row>
+            </mat-table> -->
+          </div>
+        </div>
+        
+      </div>
+    </div>
+
+  </div>
+</section>

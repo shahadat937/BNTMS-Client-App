@@ -1,0 +1,25 @@
+{
+  "MENUITEMS": {
+    "MAIN": {
+      "TEXT": "-- Main"
+    },
+    "HOME": {
+      "TEXT": "Zuhause",
+      "LIST": {
+        "DASHBOARD1": "Dashboard 1"
+      }
+    },
+    "TEACHER": {    
+      "TEXT": "Lehrerin",
+      "LIST": {
+        "DASHBOARD": "Dashboard"
+      }
+    },
+    "STUDENT": {    
+      "TEXT": "Studentin",
+      "LIST": {
+        "DASHBOARD": "Dashboard"
+      }
+    }
+  }
+}

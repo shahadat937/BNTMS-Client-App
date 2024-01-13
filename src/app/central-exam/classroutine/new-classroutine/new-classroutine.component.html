@@ -1,0 +1,184 @@
+<section class="content routine-entry">
+    <div class="container-fluid">
+      <div class="block-header">
+        <div class="row">
+          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <ul class="breadcrumb breadcrumb-style ">
+              <li class="breadcrumb-item">
+                <h4 class="page-title">{{pageTitle}}</h4>
+              </li>
+              <li class="breadcrumb-item bcrumb-1">
+                <a routerLink="/admin/dashboard/main"><i class="fas fa-home"></i></a>
+              </li>
+              <li class="breadcrumb-item bcrumb-2">
+                <a href="#" onClick="return false;">Q-Exam Routine</a>
+              </li>
+              <li class="breadcrumb-item active">{{destination}}</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="row clearfix">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+          <div class="card">
+            <div class="header">
+            </div>
+            <div class="body">
+              <form class="form-border-design" [formGroup]="ClassRoutineForm" (ngSubmit)="onSubmit()">
+                <div class="row">
+
+                  <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                        <mat-label>Course Title</mat-label>                        
+                        <mat-select formControlName="courseName">
+                          <mat-option  value="0">--Select--</mat-option >
+                            <mat-option *ngFor="let dropdown of selectedCourseDurationByCourseTypeAndCourseName" [value]="dropdown.value" (onSelectionChange)="onCourseNameSelectionChangeGetSubjectList($event)">
+                                {{dropdown.text}}  
+                              </mat-option>                          
+                        </mat-select>
+                        <mat-error *ngIf="ClassRoutineForm.get('courseName').hasError('required')">
+                          Course Title is Required!
+                        </mat-error>
+                    </mat-form-field>
+                  </div>
+
+                  <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                      <mat-label>Branch</mat-label>
+                      <mat-select formControlName="branchId" required (selectionChange)="onSelectedSubjectNameByBranchId($event.value)">
+                        <mat-option  value="0">--Select--</mat-option >
+                        <mat-option *ngFor="let branch of selectedBranch" [value]="branch.value">
+                          {{branch.text}}
+                        </mat-option>
+                      </mat-select>
+                      <mat-error *ngIf="ClassRoutineForm.get('branchId').hasError('required')">
+                        Select Any Branch
+                      </mat-error>
+                    </mat-form-field>
+                  </div>
+
+                  <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                        <mat-label>Subject Name</mat-label>                        
+                        <mat-select formControlName="subjectName">
+                          <mat-option  value="0">--Select--</mat-option >
+                            <mat-option *ngFor="let dropdown of selectedSubjectValue" [value]="dropdown" (onSelectionChange)="onSubjectNameSelectionChangeGet($event)">
+                                {{dropdown.text}}  
+                              </mat-option>                          
+                        </mat-select>
+                        <mat-error *ngIf="ClassRoutineForm.get('subjectName').hasError('required')">
+                          Subject Name is Required!
+                        </mat-error>
+                    </mat-form-field>
+                  </div>
+                  
+                  <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                      <mat-label>Date</mat-label>
+                        <input matInput [matDatepicker]="datepicker" formControlName="date" >
+                        <mat-datepicker-toggle matSuffix [for]="datepicker"></mat-datepicker-toggle>
+                       <mat-datepicker #datepicker></mat-datepicker>                                            
+                    </mat-form-field>
+                  </div>
+
+                  <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                      <mat-label>Time Duration</mat-label>
+                      <input matInput formControlName="timeDuration" >
+                      
+                    </mat-form-field>
+                  </div>
+
+                  <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                      <mat-label>Remarks</mat-label>
+                      <input matInput formControlName="remarks" >
+                      
+                    </mat-form-field>
+                  </div>
+
+                <div class="col-xl-2 col-lg-2 col-md-2 col-sm-12 mb-2  m-t-10">
+                  <button class="btn-space" [class.auth-spinner]="loading" [disabled]="loading" [disabled]="!ClassRoutineForm.valid " mat-raised-button
+                      color="primary">{{buttonText}}</button>
+                </div>
+              </div> 
+              </form>
+
+              <div  class="row create-table db-tbl cls-rtn">
+
+                <h3 class="text-center table-title">Q-Exam Routine Table</h3>
+
+                <div class="container">
+                  <!-- <div *ngIf="isNoDataFound">
+                    <h3>No Data Found</h3>
+                  </div> -->
+
+                  <table mat-table [dataSource]="qexamRoutineList" class="mat-elevation-z8 demo-table dynamic-tbl-forroutine qexam-routine">
+                    <!-- Position Column -->
+                    <ng-container [matColumnDef]="col" *ngFor="let col of displayedColumns">
+                      <th class="rotate" mat-header-cell *matHeaderCellDef>
+                        <!-- <div *ngif="col"><span>{{col}}</span></div> --> 
+                        <div><span>{{col}}</span></div>
+                      </th>
+                      <td class="td-cell" mat-cell *matCellDef="let element">
+                        {{element[col]}}
+                      </td>
+
+                    </ng-container>
+                  
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                  </table>
+                  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 div-class div-left m-t-20">
+                    <button class="btn-space"  mat-raised-button
+                      color="primary" [routerLink]="['/central-exam/update-qexamroutine', durationId,courseId]"> Edit
+                      <mat-icon class="col-white">edit</mat-icon>
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <div  *ngIf="isShown"  class="row load-routine create-table db-tbl cls-rtn">
+                  <table mat-table [dataSource]="selectedRoutineByParametersAndDate" class="mat-elevation-z8 demo-table dynamic-tbl-forroutine">
+                    <!-- Position Column -->
+                    <ng-container [matColumnDef]="col" *ngFor="let col of displayedColumns">
+                      <th class="rotate" mat-header-cell *matHeaderCellDef>
+                        <!-- <div *ngif="col"><span>{{col}}</span></div> --> 
+                        <div><span>{{col}}</span></div>
+                      </th>
+                      <td mat-cell *matCellDef="let element">
+                        {{element[col]}}
+                      </td>
+                    </ng-container>
+                  
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                  </table>
+                  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 div-class div-left m-t-20">
+                    <button class="btn-space"  mat-raised-button
+                            color="primary" [routerLink]="['/routine-management/edit-weeklyroutine', schoolId,durationId,courseId,weekId]"> Edit
+                              <mat-icon class="col-white">edit</mat-icon>
+                            </button>
+                  </div>
+                 
+                  <div *ngIf="isShown" class="col-xs-6 col-sm-12 col-md-6 col-lg-6 mt-3 routine">
+                    <div class="card">
+                      <div class="header">
+                      </div>
+                      <div class="body">
+                        <div class="row dash-cd-m-0">
+                          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 div-class div-left">
+                            <h3>Instructor List</h3>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+

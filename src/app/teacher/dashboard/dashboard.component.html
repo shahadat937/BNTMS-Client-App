@@ -1,0 +1,200 @@
+<section class="content">
+  <div class="container-fluid">
+    <div class="block-header">
+      <div class="row">
+        <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
+          <ul class="breadcrumb breadcrumb-style ">
+            <li class="breadcrumb-item">
+              <h4 class="page-title">Instructor Dashboard</h4>
+            </li>
+            <li class="breadcrumb-item bcrumb-1">
+              <a routerLink="/teacher/dashboard">
+                <i class="fas fa-home"></i> </a>
+            </li>
+            <li class="breadcrumb-item active">Instructor Dashboard</li>
+          </ul>
+        </div>
+        <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+          <h4 class="user-manual manual-btn">
+            <a [href]='this.fileUrl+userManual' target='_blank'>User Manual (Download)</a>
+          </h4>            
+        </div>
+      </div>
+    </div>
+
+    <!-- find instructor -->
+
+    <div class="row">
+      <div class="col-xl-5 col-lg-5 col-md-12 col-sm-12">
+        <div class="card">
+          <div class="body">
+            <!-- <form [formGroup]="GetInstructorForm" (ngSubmit)="onSubmit()">
+              <div class="row">
+                <div class="col-xl-8 col-lg-8 col-md-8 col-sm-12 mb-2">
+                  <mat-form-field class="example-full-width mb-3" appearance="outline">
+                    <mat-label>Trainee Id</mat-label>                        
+                    <input matInput formControlName="traineeId">
+                  </mat-form-field>
+                </div>
+                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mb-2">
+                  <button class="btn-space" [class.auth-spinner]="loading" [disabled]="loading" [disabled]="!GetInstructorForm.valid " mat-raised-button
+                      color="primary">Find</button>
+                </div>
+              </div>
+              
+            </form> -->
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+              <div class="row">
+                <div class="responsive_table">
+                  <table class="full-width col-12">
+                    <tr>
+                      <th>PNO, NAME & RANK</th>
+                      <td>{{pno}}, {{position}}  {{name}}</td>
+                    </tr>
+                    <tr>
+                      <th>SERVICE TYPE</th>
+                      <td>{{name1}}</td>
+                    </tr>
+                    <tr>
+                      <th>JOINING DATE</th>
+                      <td>{{joiningDate | date:'mediumDate'}}</td>
+                    </tr>
+                    <tr>
+                      <th>DESIGNATION</th>
+                      <td>Instructor</td>
+                    </tr>
+                    <tr>
+                      <th>SCHOOL NAME </th>
+                      <td>{{schoolName}}</td>
+                    </tr>
+                  </table>
+                  <div class="row central-exam-btn">
+                    <div *ngIf="qexamCount == 1" class="col-xl-4 col-lg-4 col-md-4 col-sm-12">
+                      <button [routerLink]="['/admin/dashboard/centralexammarkentry-list',traineeId,this.masterData.coursetype.CentralExam,this.masterData.courseName.QExam]" class="qexam-btn" mat-flat-button color="primary">Q-Exam Mark</button>
+                    </div>
+                    <div *ngIf="jcoxmCount == 1" class="col-xl-4 col-lg-4 col-md-4 col-sm-12">
+                      <button [routerLink]="['/admin/dashboard/centralexammarkentry-list',traineeId,this.masterData.coursetype.CentralExam,this.masterData.courseName.JCOsTraining]" class="jcoexam-btn" mat-flat-button color="primary">JCO Exam Mark</button>
+                    </div>
+                    <div *ngIf="stuffxmCount == 1" class="col-xl-4 col-lg-4 col-md-4 col-sm-12">
+                      <button [routerLink]="['/admin/dashboard/centralexammarkentry-list',traineeId,this.masterData.coursetype.CentralExam,this.masterData.courseName.StaffCollage]" class="stuffexam-btn" mat-flat-button color="primary">Stuff Exam Mark</button>
+                    </div>
+                  </div>
+                 
+                </div>
+                
+              </div>
+            </div>
+            
+          </div>
+        </div>
+      </div>
+
+      <div class="col-xl-2 col-lg-2 col-md-12 col-sm-12 info-block">
+        <div class="card">
+          
+          <div class="body">
+            <div class="row">
+              <div class="trainee-img">
+                <img class="trainee" [src]='fileUrl+traineeImg' alt="upload image">
+              </div>
+              <div class="universal-btn">
+                <div class="col-12 ins-dash-menu-item">
+                  <a title="E-Library" [routerLink]="['/admin/dashboard/view-readingmateriallist', schoolId]"><mat-icon>library_books</mat-icon> E-Library</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>        
+      </div>
+
+      <div *ngIf="isShown" class="col-xl-5 col-lg-5 col-md-12 col-sm-12 trainee-notice-board">
+        <div class="card">
+          
+          <div class="body">
+            <div class="row dash-cd-m-0">
+              <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 div-class div-left">
+                <h3>Notice Board</h3>
+              </div>
+            </div>
+            <div class="recent-comment" style="position: relative;min-height: 125px; max-height: 125px;" [perfectScrollbar]>
+              <div *ngFor="let notice of NoticeForInstructor;" class="notice-board">
+                <!-- <div class="table-img">
+                  <img class="notice-object" src="assets/images/user/user6.jpg" alt="...">
+                </div> -->
+                <div class="notice-body">
+                  <h5 class="notice-heading col-green">{{notice.noticeHeading}}</h5>
+                  <div class="notification-sign">
+                    <span class="notification-flicker">{{notice.newStatus}}</span>
+                  </div> 
+                  <p>({{notice.course}} - {{notice.courseTitle}}) {{notice.noticeDetails}}</p>                  
+                </div>
+              </div>
+              
+            </div>
+          </div>
+        </div>
+        
+      </div>
+      
+   </div>
+    
+    <div  *ngIf="isShown" class="container-fluid  m-b-10 bulletin">
+      <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 bulletin-section">
+        <div class="row">
+          <div class="col-lg-1 col-md-1 ">
+            <div class="title">
+              <h4>Bulletin:</h4>
+            </div>
+            
+          </div>
+          <div class="col-lg-11 col-md-11">
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 scrollbar">
+              <ng-marquee [stopOnHover]="true" duration="25s" >
+                <mark class="bulletin-item" *ngFor="let data of bulletinList;">{{data.details}}</mark>                
+              </ng-marquee>
+            </div>
+            
+            
+          </div>
+        </div>
+        
+      </div>
+    </div>
+
+<div class="row">
+ <!-- Useful links -->
+    <div *ngIf="isShown"  class="col-xs-12 col-sm-12 col-md-12 col-lg-12">     
+      <!-- <div> -->
+      <div class="card usefullink">
+        <div class="header">
+        </div>
+        <div class="body">
+          <div class="row dash-cd-m-0">
+            <!-- <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 div-class div-left">
+              <h3 class="align-center">Useful Links</h3>
+            </div> -->
+          </div>
+          <div class="btnGroup">
+            <button [routerLink]="['/attendance-management/attendance-instructor',traineeId]" class="btnDetailsins" mat-flat-button color="primary">Trainee Attendance</button>
+            <button [routerLink]="['/admin/dashboard/assignment-list',traineeId]" class="btnDetailsins" mat-flat-button color="primary">Assignment</button>
+            <!-- <button [routerLink]="['/exam-management/add-bnaexammarkinstructor',traineeId]" class="btnDetailsins" mat-flat-button color="primary">Result Submission</button> -->
+            <button [routerLink]="['/admin/dashboard/view-readingmaterial']" class="btnDetailsins" mat-flat-button color="primary">Pre-Course Material</button>
+            <button [routerLink]="['/admin/dashboard/weeklyroutineinstructor',traineeId]" class="btnDetailsins" mat-flat-button color="primary">Weekly Training Program</button>
+            <button [routerLink]="['/admin/dashboard/readingmateriallistinstructor',traineeId,schoolId]" class="btnDetailsins" mat-flat-button color="primary">Reading Material</button>
+            <button [routerLink]="['/admin/dashboard/assignedsubject-list',traineeId]" class="btnDetailsins" mat-flat-button color="primary">Assigned Subject</button>
+            <button [routerLink]="['/admin/dashboard/instructorexam-list',traineeId,courseDurationId]" class="btnDetailsins" mat-flat-button color="primary">Exam/Result</button>
+            <button [routerLink]="['/admin/dashboard/instructorcourselistforroutine',traineeId]" class="btnDetailsins" mat-flat-button color="primary">Daily Class Schedule</button>
+          </div>
+        </div>
+      </div>
+    <!-- </div> -->
+    </div>
+
+<!-- Upcoming Class List -->
+
+
+</div>
+  
+
+  </div>
+</section>

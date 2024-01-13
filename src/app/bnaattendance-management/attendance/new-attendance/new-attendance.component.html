@@ -1,0 +1,194 @@
+<section class="content">
+  <div class="container-fluid">
+    <div class="block-header">
+      <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <ul class="breadcrumb breadcrumb-style ">
+            <li class="breadcrumb-item">
+              <h4 class="page-title">{{pageTitle}}</h4>
+            </li>
+            <li class="breadcrumb-item bcrumb-1">
+              <a routerLink="/admin/dashboard/main"><i class="fas fa-home"></i></a>
+            </li>
+            <li class="breadcrumb-item bcrumb-2">
+              <a href="#" onClick="return false;">Bna Attendance</a>
+            </li>
+            <li class="breadcrumb-item active">{{destination}}</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="row clearfix">
+      <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+        <div class="card">
+          <div class="header">
+          </div>
+          <div class="body">
+            <form class="m-4" [formGroup]="AttendanceForm" (ngSubmit)="onSubmit()">
+              <div class="row">
+                <div class="form-border-design col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+                  <div class="row">
+                    <div *ngIf="role != 'Super Admin'" class="col-xl-3 col-lg-3 col-md-3 col-sm-12 mb-2">
+                      <mat-form-field class="example-full-width mb-3" appearance="outline">
+                        <mat-label>School Name</mat-label>
+                        <mat-select formControlName="baseSchoolNameId"
+                          (selectionChange)="onBaseSchoolNameSelectionChangeGetCourse($event.value)">
+                          <mat-option value="0">--Select--</mat-option>
+                          <mat-option *ngFor="let dropdown of selectedbaseschools" [value]="dropdown.value">
+                            {{dropdown.text}}
+                          </mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                    </div>
+
+                    <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12 mb-2">
+                      <mat-form-field class="example-full-width mb-3" appearance="outline">
+                        <mat-label>Course Name</mat-label>
+                        <mat-select formControlName="courseNameId">
+                          <mat-option value="0">--Select--</mat-option>
+                          <mat-option *ngFor="let dropdown of selectedCourse" [value]="dropdown.value">
+                            {{dropdown.text}}
+                          </mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                    </div>
+
+
+                    <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12 mb-2">
+                      <mat-form-field class="example-full-width mb-3" appearance="outline">
+                        <mat-label>Attendance Date</mat-label>
+                        <input matInput [matDatepicker]="atpicker" formControlName="attendanceDate"
+                          (dateChange)="onDateSelectionChange($event)">
+                        <mat-datepicker-toggle matSuffix [for]="atpicker"></mat-datepicker-toggle>
+                        <mat-datepicker #atpicker></mat-datepicker>
+                      </mat-form-field>
+                    </div>
+
+
+                    <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12 mb-2">
+                      <mat-form-field class="example-full-width mb-3" appearance="outline">
+                        <mat-label>Class Period</mat-label>
+                        <mat-select formControlName="classPeriodId"
+                          (selectionChange)="onClassPeriodSelectionChangeGetCourseDuration()">
+                          <mat-option value="0">--Select--</mat-option>
+                          <mat-option *ngFor="let dropdown of selectedClassPeriodByBaseSchoolNameIdAndCourseNameId"
+                            [value]="dropdown.value">
+                            {{dropdown.text}}
+                          </mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                    </div>
+               
+
+                    <div *ngIf="isShowSubjectName" class="col-xl-6 col-lg-6 col-md-6 col-sm-12 mb-2">
+                      <h5  *ngFor="let dropdown of subjectNamefromClassRoutine" class="cls-header">Subject Name :
+                        <span>{{dropdown.text}}</span>
+                      </h5>
+                    </div>
+                  </div>
+
+                </div>
+
+                <div *ngIf="isShown" class="container mt-2 att-tbl">
+                  <h4 class="text-center">Trainee List</h4>
+                  <mat-table #table [dataSource]="traineeNominationListForAttendance" matSort class="mat-cell db-li-n">
+                    <ng-container matColumnDef="ser">
+                      <mat-header-cell *matHeaderCellDef mat-sort-header> Ser: </mat-header-cell>
+                      <mat-cell *matCellDef="let element; let i = index;"> {{ ((paging.pageIndex-1) * paging.pageSize) +
+                        i+1}} </mat-cell>
+                    </ng-container>
+
+                    <ng-container matColumnDef="traineePNo">
+                      <mat-header-cell class="t-nm-cl" *matHeaderCellDef mat-sort-header>Rank & Name</mat-header-cell>
+                      <mat-cell class="t-nm-cl" *matCellDef="let element">{{element.rankPosition}}
+                        {{element.traineeName}} <span class="t-n-pno-d"> - ( P No {{element.traineePNo}})</span>
+                      </mat-cell>
+                    </ng-container>
+
+                    <ng-container matColumnDef="bnaAttendanceRemarksId">
+                      <mat-header-cell *matHeaderCellDef mat-sort-header>Attendance Remarks</mat-header-cell>
+                      <mat-cell *matCellDef="let element; let i = index;">
+                        <mat-form-field class="example-full-width mb-3" appearance="outline">
+                          <mat-select (selectionChange)="onOptionsSelected(i,$event.value)">
+                            <mat-option value="0">--Select--</mat-option>
+                            <mat-option *ngFor="let dropdown of selectedbnaattendanceremark" [value]="dropdown.value">
+                              {{dropdown.text}}
+                            </mat-option>
+                          </mat-select>
+                        </mat-form-field>
+                      </mat-cell>
+                    </ng-container>
+
+                    <ng-container matColumnDef="attendanceStatus">
+                      <mat-header-cell *matHeaderCellDef mat-sort-header>Attendance</mat-header-cell>
+                      <mat-cell *matCellDef="let element; let i = index;">
+                        <mat-checkbox #checkBox [checked]="element.attendanceStatus"
+                          (change)="onCheckboxChange(i,$event)" [ngClass]="'tbl-checkbox'">
+
+                        </mat-checkbox>
+                      </mat-cell>
+                    </ng-container>
+                    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+                    </mat-table>
+                  </div>
+                </div>
+
+                <div *ngIf="isShownForTraineeList" class="container mt-2 att-tbl">
+                  <h4 class="text-center">Trainee List</h4>
+                  <mat-table #table [dataSource]="traineeNominationListForAttendance" matSort class="mat-cell db-li-n">
+                    <ng-container matColumnDef="ser">
+                      <mat-header-cell *matHeaderCellDef mat-sort-header> Ser: </mat-header-cell>
+                      <mat-cell *matCellDef="let element; let i = index;"> {{ ((paging.pageIndex-1) * paging.pageSize) +
+                        i+1}} </mat-cell>
+                    </ng-container>
+
+                    <ng-container matColumnDef="traineePNo">
+                      <mat-header-cell class="t-nm-cl" *matHeaderCellDef mat-sort-header>Rank & Name</mat-header-cell>
+                      <mat-cell class="t-nm-cl" *matCellDef="let element">{{element.rankPosition}}
+                        {{element.traineeName}} <span class="t-n-pno-d"> - ( P No {{element.traineePNo}})</span>
+                      </mat-cell>
+                    </ng-container>
+
+                    <ng-container matColumnDef="bnaAttendanceRemarksId">
+                      <mat-header-cell *matHeaderCellDef mat-sort-header>Attendance Remarks</mat-header-cell>
+                      <mat-cell *matCellDef="let element; let i = index;">
+                        <mat-form-field class="example-full-width mb-3" appearance="outline">
+                          <mat-select (selectionChange)="onOptionsSelected(i,$event.value)">
+                            <mat-option value="0">--Select--</mat-option>
+                            <mat-option *ngFor="let dropdown of selectedbnaattendanceremark" [value]="dropdown.value">
+                              {{dropdown.text}}
+                            </mat-option>
+                          </mat-select>
+                        </mat-form-field>
+                      </mat-cell>
+                    </ng-container>
+
+                    <ng-container matColumnDef="attendanceStatus">
+                      <mat-header-cell *matHeaderCellDef mat-sort-header>Attendance</mat-header-cell>
+                      <mat-cell *matCellDef="let element; let i = index;">
+                        <mat-checkbox #checkBox [checked]="element.attendanceStatus"
+                          (change)="onCheckboxChange(i,$event)" [ngClass]="'tbl-checkbox'">
+
+                        </mat-checkbox>
+                      </mat-cell>
+                    </ng-container>
+                    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+                    </mat-table>
+                </div>
+                
+
+              <div class="row mt-2">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+                  <button class="btn-space" [class.auth-spinner]="loading" [disabled]="loading" [disabled]="!AttendanceForm.valid " mat-raised-button
+                    color="primary">{{buttonText}}</button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

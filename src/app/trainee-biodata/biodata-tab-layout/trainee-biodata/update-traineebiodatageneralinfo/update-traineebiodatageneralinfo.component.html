@@ -1,0 +1,390 @@
+
+    <div class="block-header">
+      <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <ul class="breadcrumb breadcrumb-style ">
+            <li class="breadcrumb-item">
+              <h4 class="page-title">{{pageTitle}}</h4>
+            </li>
+            <li class="breadcrumb-item bcrumb-1">
+              <a routerLink="/admin/dashboard/main"><i class="fas fa-home"></i> </a>
+            </li>
+            <li class="breadcrumb-item bcrumb-2">
+              <a href="#" onClick="return false;">Trainee BIO Data</a>
+            </li>
+            <li class="breadcrumb-item active">{{destination}}</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="row clearfix">
+      <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+        <div class="card">
+          <!--<div class="header">
+            <h2>{{destination}} BIODataGeneralInfo</h2>
+
+          </div>-->
+          <div class="body">
+            <form class="m-4" [formGroup]="BIODataGeneralInfoForm" (ngSubmit)="onSubmit()">
+              <div class="row">
+                
+                
+                <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
+                  <mat-form-field class="example-full-width mb-3" appearance="outline">
+                    <mat-label>P No</mat-label>
+                    <input matInput formControlName="pno" required>
+                    <mat-error *ngIf="BIODataGeneralInfoForm.get('pno').hasError('required')">
+                      P No is required
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
+                  <mat-form-field class="example-full-width mb-3" appearance="outline">
+                    <mat-label>BNA No</mat-label>
+                    <input matInput formControlName="bnaNo" required>
+                    <mat-error *ngIf="BIODataGeneralInfoForm.get('bnaNo').hasError('required')">
+                      BNA No is required
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
+                  <mat-form-field class="example-full-width mb-3" appearance="outline">
+                    <mat-label>Name in Full (English)</mat-label>
+                    <input matInput formControlName="name" required>
+                    <mat-error *ngIf="BIODataGeneralInfoForm.get('name').hasError('required')">
+                      Name in Full (English) is required
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
+                  <mat-form-field class="example-full-width mb-3" appearance="outline">
+                    <mat-label>Name in Full (Bangla)</mat-label>
+                    <input matInput formControlName="nameBangla" >
+                    
+                  </mat-form-field>
+                </div>
+                <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
+                  <mat-form-field class="example-full-width mb-3" appearance="outline">
+                    <mat-label>Date Of Birth</mat-label>
+                      <input matInput [matDatepicker]="birthpicker" formControlName="dateOfBirth" required>
+                      <mat-datepicker-toggle matSuffix [for]="birthpicker"></mat-datepicker-toggle>
+                     <mat-datepicker #birthpicker></mat-datepicker>   
+                     <mat-error *ngIf="BIODataGeneralInfoForm.get('dateOfBirth').hasError('required')">
+                      Date Of Birth is required
+                    </mat-error>                                         
+                  </mat-form-field>
+                </div>
+                <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
+                  <mat-form-field class="example-full-width mb-3" appearance="outline">
+                    <mat-label>Height</mat-label>
+                    <mat-select formControlName="heightId" required>
+                      <mat-option  value="0">--Select--</mat-option >
+                      <mat-option *ngFor="let code of heightValues" [value]="code.value">
+                          {{code.text}}
+                      </mat-option>                          
+                    </mat-select>
+                    <mat-error *ngIf="BIODataGeneralInfoForm.get('heightId').hasError('required')">
+                      Height is required
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
+                  <mat-form-field class="example-full-width mb-3" appearance="outline">
+                    <mat-label>Weight</mat-label>
+                    <mat-select formControlName="weightId" required>
+                      <mat-option  value="0">--Select--</mat-option >
+                      <mat-option *ngFor="let code of weightValues" [value]="code.value">
+                          {{code.text}}
+                      </mat-option>                          
+                    </mat-select>
+                    <mat-error *ngIf="BIODataGeneralInfoForm.get('weightId').hasError('required')">
+                      Weight is required
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
+                  <mat-form-field class="example-full-width mb-3" appearance="outline">
+                    <mat-label>Color Of Eye</mat-label>
+                    <mat-select formControlName="colorOfEyeId" required>
+                      <mat-option  value="0">--Select--</mat-option >
+                      <mat-option *ngFor="let code of colorOfEyeValues" [value]="code.value">
+                          {{code.text}}
+                      </mat-option>                          
+                    </mat-select>
+                    <mat-error *ngIf="BIODataGeneralInfoForm.get('colorOfEyeId').hasError('required')">
+                      Color Of Eye is required
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
+                  <mat-form-field class="example-full-width mb-3" appearance="outline">
+                    <mat-label>Hair Color</mat-label>
+                    <mat-select formControlName="hairColorId" required>
+                      <mat-option  value="0">--Select--</mat-option >
+                      <mat-option *ngFor="let code of hairColorValues" [value]="code.value">
+                          {{code.text}}
+                      </mat-option>                          
+                    </mat-select>
+                    <mat-error *ngIf="BIODataGeneralInfoForm.get('hairColorId').hasError('required')">
+                      Hair Color is required
+                    </mat-error>                      
+                  </mat-form-field>
+                </div>
+                <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
+                  <mat-form-field class="example-full-width mb-3" appearance="outline">
+                    <mat-label>Blood Group</mat-label>
+                    <mat-select formControlName="bloodGroupId" required>
+                      <mat-option  value="0">--Select--</mat-option >
+                      <mat-option *ngFor="let code of bloodValues" [value]="code.value">
+                          {{code.text}}
+                      </mat-option>                          
+                    </mat-select>
+                    <mat-error *ngIf="BIODataGeneralInfoForm.get('bloodGroupId').hasError('required')">
+                      Blood Group is required
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
+                  <mat-form-field class="example-full-width mb-3" appearance="outline">
+                    <mat-label>Identification Mark</mat-label>
+                    <input matInput formControlName="identificationMark" >
+                    
+                  </mat-form-field>
+                </div>
+                <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
+                  <mat-form-field class="example-full-width mb-3" appearance="outline">
+                    <mat-label>Religion</mat-label>
+                    <mat-select formControlName="religionId" required (selectionChange)="onReligionSelectionChangeGetCastes($event.value)">
+                      <mat-option  value="0">--Select--</mat-option >
+                      <mat-option *ngFor="let code of religionValues" [value]="code.value">
+                          {{code.text}}
+                      </mat-option>                          
+                    </mat-select>
+                    <mat-error *ngIf="BIODataGeneralInfoForm.get('religionId').hasError('required')">
+                      Religion is required
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
+                  <mat-form-field class="example-full-width mb-3" appearance="outline">
+                    <mat-label>Caste</mat-label>
+                    <mat-select formControlName="casteId" required>
+                      <mat-option  value="0">--Select--</mat-option >
+                      <mat-option *ngFor="let code of selectedCastes" [value]="code.value">
+                          {{code.text}}
+                      </mat-option>                          
+                    </mat-select>
+                    <mat-error *ngIf="BIODataGeneralInfoForm.get('casteId').hasError('required')">
+                      Caste is required
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
+                  <mat-form-field class="example-full-width mb-3" appearance="outline">
+                    <mat-label>Joining Date</mat-label>
+                      <input matInput [matDatepicker]="joiningpicker" formControlName="joiningDate" required>
+                      <mat-datepicker-toggle matSuffix [for]="joiningpicker"></mat-datepicker-toggle>
+                     <mat-datepicker #joiningpicker></mat-datepicker>   
+                     <mat-error *ngIf="BIODataGeneralInfoForm.get('joiningDate').hasError('required')">
+                      Joining Date is required
+                    </mat-error>                                          
+                  </mat-form-field>
+                </div>
+                
+                <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
+                  <mat-form-field class="example-full-width mb-3" appearance="outline">
+                    <mat-label>Rank</mat-label>
+                    <mat-select formControlName="rankId" required>
+                      <mat-option  value="0">--Select--</mat-option >
+                      <mat-option *ngFor="let code of rankValues" [value]="code.value">
+                          {{code.text}}
+                      </mat-option>                          
+                    </mat-select>
+                    <mat-error *ngIf="BIODataGeneralInfoForm.get('rankId').hasError('required')">
+                      Rank is required
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
+                  <mat-form-field class="example-full-width mb-3" appearance="outline">
+                    <mat-label>Branch</mat-label>
+                    <mat-select formControlName="branchId" required>
+                      <mat-option  value="0">--Select--</mat-option >
+                      <mat-option *ngFor="let code of branchValues" [value]="code.value">
+                          {{code.text}}
+                      </mat-option>                          
+                    </mat-select>
+                    <mat-error *ngIf="BIODataGeneralInfoForm.get('branchId').hasError('required')">
+                      Branch is required
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
+                  <mat-form-field class="example-full-width mb-3" appearance="outline">
+                    <mat-label>BNA Batch</mat-label>
+                    <mat-select formControlName="bnaBatchId" required>
+                      <mat-option  value="0">--Select--</mat-option >
+                      <mat-option *ngFor="let code of batchValues" [value]="code.value">
+                          {{code.text}}
+                      </mat-option>                          
+                    </mat-select>
+                    <mat-error *ngIf="BIODataGeneralInfoForm.get('bnaBatchId').hasError('required')">
+                      BNA Batch is required
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                
+                <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
+                  <mat-form-field class="example-full-width mb-3" appearance="outline">
+                    <mat-label>Gender</mat-label>
+                    <mat-select formControlName="genderId" required>
+                      <mat-option  value="0">--Select--</mat-option >
+                      <mat-option *ngFor="let code of genderValues" [value]="code.value">
+                          {{code.text}}
+                      </mat-option>                          
+                    </mat-select>
+                    <mat-error *ngIf="BIODataGeneralInfoForm.get('genderId').hasError('required')">
+                      Gender is required
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+
+                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mb-2">
+                  <mat-form-field class="example-full-width mb-3" appearance="outline">
+                    <mat-label>Division</mat-label>                
+                    <mat-select formControlName="divisionId" required (selectionChange)="onDivisionSelectionChangeGetDistrict($event.value)">
+                      <mat-option  value="0">--Select--</mat-option >
+                      <mat-option *ngFor="let division of divisionValues" [value]="division.value">
+                        {{division.text}}  
+                      </mat-option>                          
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+                
+
+                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mb-2">
+                  <mat-form-field class="example-full-width mb-3" appearance="outline">
+                    <mat-label>District</mat-label>                
+                    <mat-select formControlName="districtId" required (selectionChange)="onDistrictSelectionChangeGetThana($event.value)">
+                      <mat-option  value="0">--Select--</mat-option >
+                      <mat-option *ngFor="let district of selectedDistrict" [value]="district.value">
+                        {{district.text}}  
+                      </mat-option>                          
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+                
+
+                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mb-2">
+                  <mat-form-field class="example-full-width mb-3" appearance="outline">
+                    <mat-label>Thana</mat-label>                        
+                    <mat-select formControlName="thanaId" required>
+                      <mat-option  value="0">--Select--</mat-option >
+                      <mat-option *ngFor="let thana of selectedThana" [value]="thana.value">
+                        {{thana.text}}  
+                      </mat-option>                          
+                    </mat-select>
+                    <mat-error *ngIf="BIODataGeneralInfoForm.get('thanaId').hasError('required')">
+                      thana is Required!
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                <!-- <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
+                  <mat-form-field class="example-full-width mb-3" appearance="outline">
+                    <mat-label>Thana</mat-label>
+                    <mat-select formControlName="thanaId" required>
+                      <mat-option *ngFor="let code of thanaValues" [value]="code.value">
+                          {{code.text}}
+                      </mat-option>                          
+                    </mat-select>
+                    <mat-error *ngIf="BIODataGeneralInfoForm.get('thanaId').hasError('required')">
+                      Thana is required
+                    </mat-error>
+                  </mat-form-field>
+                </div> -->
+                <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
+                  <mat-form-field class="example-full-width mb-3" appearance="outline">
+                    <mat-label>Nationality</mat-label>
+                    <mat-select formControlName="nationalityId" required>
+                      <mat-option  value="0">--Select--</mat-option >
+                      <mat-option *ngFor="let code of nationalityValues" [value]="code.value">
+                          {{code.text}}
+                      </mat-option>                          
+                    </mat-select>
+                    <mat-error *ngIf="BIODataGeneralInfoForm.get('nationalityId').hasError('required')">
+                      Nationality is required
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
+                  <mat-form-field class="example-full-width mb-3" appearance="outline">
+                    <mat-label>NID</mat-label>
+                    <input matInput formControlName="nid" required>
+                    <mat-error *ngIf="BIODataGeneralInfoForm.get('nid').hasError('required')">
+                      NID is required
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+
+                <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
+                  <mat-form-field class="example-full-width mb-3" appearance="outline">
+                    <mat-label>Mobile</mat-label>
+                    <input matInput formControlName="mobile" >
+                    
+                  </mat-form-field>
+                </div>
+
+                <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
+                  <mat-form-field class="example-full-width mb-3" appearance="outline">
+                    <mat-label>Email</mat-label>
+                    <input matInput formControlName="email" >
+                    
+                  </mat-form-field>
+                </div>
+
+                <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
+                  <mat-form-field class="example-full-width mb-3" appearance="outline">
+                    <mat-label>Remark</mat-label>
+                    <input matInput formControlName="remarks" >
+                    
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                  <mat-form-field class="example-full-width mb-3" appearance="outline">
+                    <mat-label>Present Address</mat-label>
+                    <textarea matInput formControlName="presentAddress" ></textarea>
+                    
+                  </mat-form-field>
+                </div>
+
+                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                  <mat-form-field class="example-full-width mb-3" appearance="outline">
+                    <mat-label>Permanent Address</mat-label>
+                    <textarea matInput formControlName="permanentAddress" ></textarea>
+                    
+                  </mat-form-field>
+                </div>
+
+                
+               
+                
+              </div>
+          
+          
+             
+              <div class="row">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+                  <!-- <button class="btn-space" [class.auth-spinner]="loading" [disabled]="loading" [disabled]="!BIODataGeneralInfoForm.valid " mat-raised-button
+                    color="primary">{{buttonText}}</button> -->
+                  <!-- <button type="button" mat-button routerLink="/trainee-biodata/trainee-biodata-tab/biodata-general-Info-list">Cancel</button> -->
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    

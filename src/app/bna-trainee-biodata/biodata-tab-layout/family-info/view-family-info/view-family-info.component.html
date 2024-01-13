@@ -1,0 +1,198 @@
+
+              <div class="responsive_table">
+                <div class="materialTableHeader">
+                  <div class="row">
+                    <div class="col-8">
+                      <ul class="header-buttons-left ml-0">
+                        <li class="dropdown">
+                          <h4>Family Information </h4>
+                        </li>
+                        <!-- <li class="dropdown">
+                          <input placeholder="Search" type="text" [(ngModel)]="searchText"  #filter class="browser-default search-field"
+                          aria-label="Search box">
+                        </li>
+                        <li> 
+                          <div class="icon-button-demo m-l-10">
+                            <button mat-mini-fab color="accent" (click)="applyFilter(searchText)">
+                              <mat-icon class="col-white">search</mat-icon>
+                            </button>
+                          </div>
+                        </li> -->
+                      </ul> 
+                    </div>
+                    <div class="col-4">
+                      <ul class="header-buttons">
+                        <li>
+                          <div class="icon-button-demo">
+                            <button class="btn-space"  mat-raised-button
+                            color="warn" [routerLink]="['/trainee-biodata/trainee-biodata-tab/main-tab-layout/main-tab/family-info-details', this.traineeId]"> 
+                            <mat-icon class="col-white">keyboard_backspace</mat-icon> Back
+                            </button>
+                            <button class="btn-space"  mat-raised-button
+                            color="primary" [routerLink]="['/trainee-biodata/trainee-biodata-tab/main-tab-layout/main-tab/update-family-info-details', this.traineeId, this.parentRelativeId]"> Update
+                            
+                              <mat-icon class="col-white">update</mat-icon>
+                            </button>
+                          </div>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+
+                <table class="table table-bordered">
+                  <thead>
+                    
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <!-- <th scope="row">Trainee Id</th>
+                      <td>{{traineeId}}</td> -->
+                      <th scope="row">Relation Type</th>
+                      <td>{{relationType}}</td>
+                      <th scope="row">Full Name</th>
+                      <td>{{nameInFull}}</td>
+                    </tr>
+                    <tr>
+                      
+                      <th scope="row">Date Of Birth</th>
+                      <td>{{dateOfBirth | date:'mediumDate'}}</td>
+                      <th scope="row">Marital Status</th>
+                      <td>{{maritalStatus}}</td>
+                    </tr>
+                    <tr>
+                      
+                      <th scope="row">Date Of Marriage</th>
+                      <td>{{dateOfMarriage | date:'mediumDate'}}</td>
+                      <th scope="row">age</th>
+                      <td>{{age}}</td>
+                    </tr>
+                    <tr>
+                      
+                      <th scope="row">Dead Status</th>
+                      <td>{{deadStatusValue}}</td>
+                      <th *ngIf=" deadStatus != 15 " scope="row"><del>Date Of Expiry</del></th>
+                      <td *ngIf=" deadStatus != 15 "></td>
+                      <th *ngIf=" deadStatus === 15 " scope="row">Date Of Expiry</th>
+                      <td *ngIf=" deadStatus === 15 ">{{dateOfExpiry | date:'mediumDate'}}</td>
+                    </tr>
+                    <tr>
+                      
+                      <th scope="row">Nationality</th>
+                      <td>{{nationality}}</td>
+                      <th scope="row">Religion</th>
+                      <td>{{religion}}</td>
+                    </tr>
+                    <tr>
+                      
+                      <th scope="row">Caste</th>
+                      <td>{{caste}}</td>
+                      <th scope="row">Occupation</th>
+                      <td>{{occupation}}</td>
+                    </tr>
+
+                    <tr>
+                      
+                      <th scope="row">Educational Qualification</th>
+                      <td>{{educationQualification}}</td>
+                      <th scope="row">Previous Occupation</th>
+                      <td>{{previousOccupation}}</td>
+                    </tr>
+
+                    <tr>
+                      
+                      <th scope="row">Monthly Income</th>
+                      <td>{{monthlyIncome}}</td>
+                      <th scope="row">Division</th>
+                      <td>{{division}}</td>
+                    </tr>
+
+                    <tr>
+                      
+                      <th scope="row">District</th>
+                      <td>{{district}}</td>
+                      <th scope="row">Thana</th>
+                      <td>{{thana}}</td>
+                    </tr>
+
+                    <tr>
+                      
+                      <th scope="row">Post Code</th>
+                      <td>{{postCode}}</td>
+                      <th scope="row">Present Address</th>
+                      <td>{{presentAddress}}</td>
+                    </tr>
+                    <tr>
+                      
+                      <th scope="row">parmanent Address</th>
+                      <td>{{parmanentAddress}}</td>
+                      <th scope="row">Mobile</th>
+                      <td>{{mobile}}</td>
+                    </tr>
+                    <tr>
+                      
+                      <th scope="row">Email</th>
+                      <td>{{email}}</td>
+                      <th scope="row">Remarks</th>
+                      <td>{{remarks}}</td>
+                    </tr> 
+                    <tr>
+                      
+                      <th scope="row">is Defence Job Experience</th>
+                      <td>{{isDefenceJobExperience}}</td>
+                      <th *ngIf=" isDefenceJobExperience === 'yes' " scope="row">Defense Type</th>
+                      <td *ngIf=" isDefenceJobExperience === 'yes' ">{{defenseType}}</td>
+                      <th *ngIf=" isDefenceJobExperience != 'yes' " scope="row"><del>Defense Type</del></th>
+                      <td *ngIf=" isDefenceJobExperience != 'yes' "></td>
+                    </tr>
+                    <tr>
+                      
+                      <th *ngIf=" isDefenceJobExperience === 'yes' " scope="row">Rank</th>
+                      <td *ngIf=" isDefenceJobExperience === 'yes' ">{{rank}}</td>
+                      <th *ngIf=" isDefenceJobExperience != 'yes' " scope="row"><del>Rank</del></th>
+                      <td *ngIf=" isDefenceJobExperience != 'yes' "></td>
+                      <th *ngIf=" isDefenceJobExperience === 'yes' " scope="row">retired Date</th>
+                      <td *ngIf=" isDefenceJobExperience === 'yes' ">{{retiredDate | date:'mediumDate'}}</td>
+                      <th *ngIf=" isDefenceJobExperience != 'yes' " scope="row"><del>retired Date</del></th>
+                      <td *ngIf=" isDefenceJobExperience != 'yes' "></td>
+                    </tr>
+                    <tr>
+                      
+                      <th scope="row">Place Of Birth</th>
+                      <td>{{placeOfBirth}}</td>
+                      <th scope="row">Dual Nationality</th>
+                      <td>{{dualNationality}}</td>
+                    </tr> 
+                    <tr>
+                      
+                      <th *ngIf=" dualNationality === 'yes' " scope="row">Second Nationality</th>
+                      <td *ngIf=" dualNationality === 'yes' ">{{secondNationality}}</td>
+                      <th *ngIf=" dualNationality != 'yes' " scope="row"><del>Second Nationality</del></th>
+                      <td *ngIf=" dualNationality != 'yes' "></td>
+                      <th scope="row">reason Of Migration</th>
+                      <td>{{reasonOfMigration}}</td>
+                    </tr> 
+                    <tr>
+                      
+                      <th scope="row">migration Date</th>
+                      <td>{{migrationDate | date:'mediumDate'}}</td>
+                      <th scope="row">additional Information</th>
+                      <td>{{additionalInformation}}</td>
+                    </tr>  
+                    <!-- <tr>
+                      
+                      <th scope="row">status</th>
+                      <td>{{status}}</td>
+                    </tr>                     -->
+                  </tbody>
+                </table>
+
+                
+              </div>
+  
+  
+  
+  
+   
+
+

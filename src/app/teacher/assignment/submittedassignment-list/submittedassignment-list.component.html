@@ -1,0 +1,166 @@
+<section class="content">
+    <div class="container-fluid">
+      <div class="block-header">
+        <div class="row">
+          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <ul class="breadcrumb breadcrumb-style ">
+              <li class="breadcrumb-item">
+                <h4 class="page-title">Assignment Submission List</h4>
+              </li>
+              <li class="breadcrumb-item bcrumb-1">
+                <a routerLink="/admin/dashboard/main"><i class="fas fa-home"></i></a>
+              </li>
+              <li class="breadcrumb-item bcrumb-2">
+                <a href="#" onClick="return false;">Assignment Submission List</a>
+              </li>
+              <li class="breadcrumb-item active">All</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+          <div class="card">
+            <div class="body">
+              <div class="responsive_table">
+                <div class="materialTableHeader"> 
+                  <div class="row">
+                    <div class="col-8">
+                      <ul class="header-buttons-left ml-0">
+                        <li class="dropdown">
+                        </li>
+                      </ul>
+                    </div>
+                    <div class="col-4">
+                      <ul class="header-buttons">
+                        <li>
+                          <div class="icon-button-demo">
+                            <button class="btn-space"  mat-raised-button
+                            color="warn" [routerLink]="['/admin/dashboard/add-instructorassignment',traineeId,baseSchoolNameId,courseNameId,courseDurationId,bnaSubjectNameId]"> 
+                            <mat-icon class="col-white">keyboard_backspace</mat-icon> Back
+                            </button>
+                          </div>
+                        </li>
+                       
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+                <!-- <mat-table  #table [dataSource]="submittedStudents" matSort class="table table-hover absent-list mat-cell db-tbl submitted-assignment-lst">               
+                  <ng-container matColumnDef="ser">
+                    <mat-header-cell class="ser-col" *matHeaderCellDef mat-sort-header> Ser: </mat-header-cell>
+                    <mat-cell class="ser-col" *matCellDef="let element; let i = index;"> {{ ((paging.pageIndex-1) *  paging.pageSize) + i+1}} </mat-cell>
+                  </ng-container>          
+                  <ng-container matColumnDef="trainee">
+                    <mat-header-cell class="trainee-col" *matHeaderCellDef mat-sort-header>Trainee </mat-header-cell>
+                    <mat-cell class="trainee-col" *matCellDef="let element"> {{element.position}}  {{element.name}} (P No {{element.pno}})</mat-cell>
+                  </ng-container>
+                  <ng-container matColumnDef="status">
+                    <mat-header-cell class="status-col" *matHeaderCellDef mat-sort-header>Status </mat-header-cell>
+                    <mat-cell class="status-col" *matCellDef="let element">
+                       <span class="complete-status" *ngIf="element.submittedTrainee"> Submitted </span>
+                      <span class="incomplete-status" *ngIf="!element.submittedTrainee">  Not Submitted </span>
+                      </mat-cell>
+                  </ng-container>          
+                  <ng-container matColumnDef="file">
+                    <mat-header-cell class="file-col" *matHeaderCellDef mat-sort-header>File </mat-header-cell>
+                    <mat-cell class="file-col" *matCellDef="let element"> 
+                      <a *ngIf="element.submittedTrainee" target="_blank" [href]="fileUrl + element.imageUpload"><i class="far fa-file-pdf tbl-pdf"></i></a>   
+                    </mat-cell>
+                  </ng-container>          
+                  <ng-container matColumnDef="remarks">
+                    <mat-header-cell class="remarks-col" *matHeaderCellDef mat-sort-header>Remarks </mat-header-cell>
+                    <mat-cell class="remarks-col" *matCellDef="let element" >
+                      {{element.remarks}}
+                    </mat-cell>
+                  </ng-container>   
+                  <ng-container matColumnDef="marks">
+                    <mat-header-cell class="marks-col" *matHeaderCellDef mat-sort-header>marks </mat-header-cell>
+                    <mat-cell class="marks-col" *matCellDef="let element" >
+                     
+                    </mat-cell>
+                  </ng-container>                                
+                  <mat-header-row *matHeaderRowDef="displayedSubmittedStudentsColumns"></mat-header-row>
+                  <mat-row *matRowDef="let row; columns: displayedSubmittedStudentsColumns;"></mat-row>
+                </mat-table>   -->
+                <form class="assignment-mark-form" [formGroup]="AssignmentListForm">
+                  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 p-0 ex-mrk-entry-li">
+                    <div class="card">
+                      
+                      <div class="body table-responsive">
+                        <table class="table ex-mrk-entry assignment-mark-entry">
+                          <thead>
+                            <tr>
+                              <th class="cl-srl"><h5>Ser</h5></th>
+                              <th class="cl-nm-rnk"><h5>Name & Rank</h5></th>
+                              <th class="cl-status"><h5>Status</h5></th>
+                              <th class="cl-doc"><h5>Doc</h5></th>
+                              <th class="cl-remark"><h5>Remarks</h5></th>
+                              <th class="cl-mrk"><h5>Obtaint Mark</h5></th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr *ngFor="let unit of AssignmentListForm.get('SubmittedAssignmentListForm')['controls']; let i = index" [formGroup]="unit">
+                              <th class="cl-srl" scope="row">{{i+1}}</th>
+
+                              <td  class="cl-nm-rnk"> 
+                                {{getControlLabel(i,'position')}} - {{getControlLabel(i,'name')}} -  <span class="t-n-pno-d">(P No {{getControlLabel(i,'pno')}})</span>
+                              </td>
+                              
+
+                              <td  class="cl-status"> 
+                                <span class="complete-status" *ngIf="getControlLabel(i,'submittedTrainee')"> Submitted </span>
+                                <span class="incomplete-status" *ngIf="!getControlLabel(i,'submittedTrainee')">  Not Submitted </span>
+                              </td>
+
+                              <td  class="cl-doc"> 
+                                <a *ngIf="getControlLabel(i,'submittedTrainee')" target="_blank" [href]="fileUrl + getControlLabel(i,'imageUpload')"><i class="far fa-file-pdf tbl-pdf"></i></a>   
+                              </td>
+
+                              <td  class="cl-remark"> 
+                                {{getControlLabel(i,'remarks')}} 
+                              </td>
+                              
+                              
+                              <td class="cl-mrk">
+                                <div *ngIf="getControlLabel(i,'submittedTrainee')">
+                                  <mat-form-field class="example-full-width mb-3" style="width: 55%;" appearance="outline">
+                                    <input matInput  type="text" formControlName="assignmentMark"  /> 
+                                                                
+                                  </mat-form-field>
+                                  <button *ngIf="!getControlLabel(i,'assignmentMarkEntryId')" (click)="submit(i)" style="width: 40%;margin: 0 3px;">submit</button> 
+                                  <button *ngIf="getControlLabel(i,'assignmentMarkEntryId')" (click)="submit(i)" style="width: 40%;margin: 0 3px;">Update</button> 
+                                </div>
+                              </td>
+
+                              <!-- <td class="cl-mrk-rmrk">
+                                <mat-form-field class="example-full-width mb-3" appearance="outline">
+                                  <mat-select formControlName="examMarkRemarksId">
+                                    <mat-option  value="">--Select--</mat-option >
+                                    <mat-option *ngFor="let dropdown of selectedmarkremarks" [value]="dropdown.value">
+                                      {{dropdown.text}} 
+                                    </mat-option>                          
+                                  </mat-select>
+                                </mat-form-field>    
+                              </td> -->
+                            </tr>
+                            
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  
+  
+  
+   
+
