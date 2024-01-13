@@ -33,6 +33,7 @@ import {
   HttpClient,
 } from '@angular/common/http';
 import { ConfirmDialogComponent } from './modals/confirm-dialog/confirm-dialog.component';
+import { TestComponent } from './test/test.component';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
@@ -54,6 +55,7 @@ export function createTranslateLoader(http: HttpClient): any {
     AuthLayoutComponent,
     MainLayoutComponent,
     ConfirmDialogComponent,
+    TestComponent,
   ],
   imports: [
     BrowserModule,
