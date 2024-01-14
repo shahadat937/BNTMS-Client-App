@@ -283,7 +283,7 @@ stopNotices(element){
      }
     else {
       this.loading = true;
-      
+      console.log('NoticeForm value', this.NoticeForm.value.baseSchoolNameId);
       this.NoticeForm.value.baseSchoolNameId.forEach(element => {
        if(element!=0){
         this.NoticeForm.value.baseSchoolNameId=element;
@@ -317,21 +317,21 @@ stopNotices(element){
        }
        
 
-        else{
-          this.noticeService.submit(this.NoticeForm.value).subscribe(response => {
-            this.reloadCurrentRoute();
-            // this.getBulletins(baseSchoolNameId);
-            this.snackBar.open('Information Inserted Successfully ', '', {
-              duration: 2000,
-              verticalPosition: 'bottom',
-              horizontalPosition: 'right',
-              panelClass: 'snackbar-success'
-            });
-          }, error => {
-            this.validationErrors = error;
-          })
+        // else{
+        //   this.noticeService.submit(this.NoticeForm.value).subscribe(response => {
+        //     this.reloadCurrentRoute();
+        //     // this.getBulletins(baseSchoolNameId);
+        //     this.snackBar.open('Information Inserted Successfully ', '', {
+        //       duration: 2000,
+        //       verticalPosition: 'bottom',
+        //       horizontalPosition: 'right',
+        //       panelClass: 'snackbar-success'
+        //     });
+        //   }, error => {
+        //     this.validationErrors = error;
+        //   })
     
-        }          
+        // }          
       });
 
     }

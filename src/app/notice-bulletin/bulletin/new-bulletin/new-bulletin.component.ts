@@ -214,6 +214,7 @@ export class NewBulletinComponent implements OnInit {
       
      }
     else {
+      //debugger
       this.loading = true;
       this.BulletinForm.value.baseSchoolNameId.forEach(element => {  
         if(element!=0){
@@ -221,58 +222,56 @@ export class NewBulletinComponent implements OnInit {
           if(this.BulletinForm.value.courseName!=""){
             this.BulletinForm.value.courseName.forEach((courseElement,index) => {
        
-            if (index!=0){
-              var courseNameArr = courseElement.split('_');
-           
+            if (courseElement!=0){
+              var courseNameArr = courseElement.split('_');    
               var courseDurationId = courseNameArr[0];
               var courseNameId=courseNameArr[1];
                this.BulletinForm.get('courseNameId').patchValue(courseNameId);
                 this.BulletinForm.get('courseDurationId').patchValue(courseDurationId);
               this.BulletinForm.value.courseName="" 
-             // this.BulletinForm.value.baseSchoolNameId=element;
-              
-          
-         
-    
+              this.BulletinForm.value.baseSchoolNameId=element
             }
+            
             this.bulletinService.submit(this.BulletinForm.value).subscribe(response => {
-              this.reloadCurrentRoute();
-               // this.getBulletins(baseSchoolNameId);
-               this.snackBar.open('Information Inserted Successfully ', '', {
-                 duration: 2000,
-                 verticalPosition: 'bottom',
-                 horizontalPosition: 'right',
-                 panelClass: 'snackbar-success'
-               });
+             
              }, error => {
                this.validationErrors = error;
              })
-          
+       //      debugger
               });
+          
+          }
+          else{
             
+            this.bulletinService.submit(this.BulletinForm.value).subscribe(response => {
+              // this.reloadCurrentRoute();
+              // // this.getBulletins(baseSchoolNameId);
+              // this.snackBar.open('Information Inserted Successfully ', '', {
+              //   duration: 2000,
+              //   verticalPosition: 'bottom',
+              //   horizontalPosition: 'right',
+              //   panelClass: 'snackbar-success'
+              // });
+            }, error => {
+              this.validationErrors = error;
+              console.log(error)
+            })
+      
           }
         }
        
-        else{
-          this.bulletinService.submit(this.BulletinForm.value).subscribe(response => {
-            this.reloadCurrentRoute();
-            // this.getBulletins(baseSchoolNameId);
-            this.snackBar.open('Information Inserted Successfully ', '', {
-              duration: 2000,
-              verticalPosition: 'bottom',
-              horizontalPosition: 'right',
-              panelClass: 'snackbar-success'
-            });
-          }, error => {
-            this.validationErrors = error;
-            console.log(error)
-          })
-    
-        }
+        
        
       });
 
- 
+      this.reloadCurrentRoute();
+      // this.getBulletins(baseSchoolNameId);
+      this.snackBar.open('Information Inserted Successfully ', '', {
+        duration: 2000,
+        verticalPosition: 'bottom',
+        horizontalPosition: 'right',
+        panelClass: 'snackbar-success'
+      }); 
      
     }
  
