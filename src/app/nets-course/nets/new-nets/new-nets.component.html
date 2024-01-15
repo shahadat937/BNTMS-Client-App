@@ -1,0 +1,141 @@
+<section class="content">
+    <div class="container-fluid">
+      <div class="block-header">
+        <div class="row">
+          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <ul class="breadcrumb breadcrumb-style ">
+              <li class="breadcrumb-item">
+                <h4 class="page-title">{{pageTitle}}</h4>
+              </li>
+              <li class="breadcrumb-item bcrumb-1">
+                <a routerLink="/admin/dashboard/main"><i class="fas fa-home"></i></a>
+              </li>
+              <li class="breadcrumb-item bcrumb-2">
+                <a href="#" onClick="return false;">NETS Course</a>
+              </li>
+              <li class="breadcrumb-item active">{{destination}}</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="row clearfix">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+          <div class="card">
+            <div class="header">
+            </div>
+            <div class="body">
+              <form class="m-4" [formGroup]="CourseDurationForm" (ngSubmit)="onSubmit()">
+                <div class="row">
+                  
+                 <!-- <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                        <mat-label>School Name</mat-label>                        
+                        <mat-select formControlName="baseSchoolNameId" required>
+                            <mat-option *ngFor="let dropdown of selectedschoolname" [value]="dropdown.value">
+                                {{dropdown.text}} 
+                              </mat-option>                          
+                        </mat-select>
+                        <mat-error *ngIf="CourseDurationForm.get('baseSchoolNameId').hasError('required')">
+                          School Name is Required!
+                        </mat-error>
+                    </mat-form-field>
+                  </div>-->
+                  <!-- <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                        <mat-label>Course Type</mat-label>                
+                        <mat-select formControlName="courseTypeId" >
+                          <mat-option  value="0">--Select--</mat-option >   
+                            <mat-option *ngFor="let dropdown of selectedcoursetype" [value]="dropdown.value">
+                                {{dropdown.text}} 
+                              </mat-option>                          
+                        </mat-select>
+                    </mat-form-field>
+                  </div>  -->
+                  <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                        <mat-label>Course Name</mat-label>                        
+                        <mat-select formControlName="courseNameId" required>
+                          <mat-option  value="0">--Select--</mat-option >   
+                            <mat-option *ngFor="let dropdown of selectedcoursename" [value]="dropdown.value">
+                                {{dropdown.text}} 
+                              </mat-option>                          
+                        </mat-select>
+                        <mat-error *ngIf="CourseDurationForm.get('courseNameId').hasError('required')">
+                          Course Name is Required!
+                        </mat-error>
+                    </mat-form-field>
+                  </div>
+
+                  <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                        <mat-label>Semester Title</mat-label>                        
+                        <input matInput formControlName="courseTitle" required>
+                        <mat-error *ngIf="CourseDurationForm.get('courseTitle').hasError('required')">
+                          Semester Title is Required
+                        </mat-error>
+                    </mat-form-field>
+                  </div> 
+                  
+                  <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                        <mat-label>No of Candidates</mat-label>                        
+                        <input matInput formControlName="noOfCandidates" required>
+                        <mat-error *ngIf="CourseDurationForm.get('noOfCandidates').hasError('required')">
+                          Remark is Required
+                        </mat-error>
+                    </mat-form-field>
+                  </div> 
+                  <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                        <mat-label>No Of Weeks</mat-label>                        
+                        <input matInput formControlName="professional" required>
+                        <mat-error *ngIf="CourseDurationForm.get('professional').hasError('required')">
+                          Professional is Required
+                        </mat-error>
+                    </mat-form-field>
+                  </div>
+                  <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                      <mat-label>Duration From</mat-label>
+                        <input matInput [matDatepicker]="frompicker" formControlName="durationFrom" >
+                        <mat-datepicker-toggle matSuffix [for]="frompicker"></mat-datepicker-toggle>
+                       <mat-datepicker #frompicker></mat-datepicker>                                            
+                    </mat-form-field>
+                  </div>
+
+                  <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                      <mat-label>Duration To</mat-label>
+                        <input matInput [matDatepicker]="topicker" formControlName="durationTo" >
+                        <mat-datepicker-toggle matSuffix [for]="topicker"></mat-datepicker-toggle>
+                       <mat-datepicker #topicker></mat-datepicker>                                            
+                    </mat-form-field>
+                  </div>
+
+                  <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                        <mat-label>Remark</mat-label>                        
+                        <input matInput formControlName="remark">
+                        <!-- <mat-error *ngIf="CourseDurationForm.get('remark').hasError('required')">
+                          Remark is Required
+                        </mat-error> -->
+                    </mat-form-field>
+                  </div> 
+                </div>
+               
+                <div class="row">
+                  <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+                    <button class="btn-space" [class.auth-spinner]="loading" [disabled]="loading" [disabled]="!CourseDurationForm.valid " mat-raised-button
+                        color="primary">{{buttonText}}</button>
+                    <button type="button" mat-button routerLink="/nets-course/nets-list">Cancel</button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+

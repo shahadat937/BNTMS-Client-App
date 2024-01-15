@@ -20,13 +20,15 @@ export const MasterData = {
         ForeignCourse:18,
         InterService :19,
         MIST :1022,
-        CentralExam:1021,        
+        CentralExam:1021,
+        NETS:1034,           
       },
       schoolName:{
         BNA:2,
         NdSchool:20,
         NBCDSchool:26,
         JSTISchool:156,
+        NETS:43,
       },
 
       dbType:{

@@ -212,6 +212,17 @@ const routes: Routes = [
         loadChildren: () =>
           import('./mist-course/mist-course.module').then((m) => m.MISTCourseModule),
       },
+
+      {
+        path: 'nets-course',
+        canActivate: [AuthGuard],
+        data: {
+          role: [Role.MasterAdmin,Role.DDNT,Role.BNASchool],
+        },
+        loadChildren: () => 
+        import('./nets-course/nets-course.module').then((m) => m.NETSCourseModule),
+    },
+
       {
         path: 'staff-collage',
         canActivate: [AuthGuard],

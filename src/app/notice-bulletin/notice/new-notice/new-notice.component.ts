@@ -281,125 +281,65 @@ stopNotices(element){
 
       
      }
-    // else {
-    //   this.loading = true;
-    //   console.log('NoticeForm value', this.NoticeForm.value.baseSchoolNameId);
-    //   this.NoticeForm.value.baseSchoolNameId.forEach(element => {
-    //    if(element!=0){
-    //     this.NoticeForm.value.baseSchoolNameId=element;
-    //     if(this.NoticeForm.value.courseName!=""){
-    //       this.NoticeForm.value.courseName.forEach((courseElement,index) => {
-    //         if (index!=0){
-    //           var courseNameArr = courseElement.split('_');
-    //           var courseDurationId = courseNameArr[0];
-    //           var courseNameId=courseNameArr[1];
-    //            this.NoticeForm.get('courseNameId').patchValue(courseNameId);
-    //             this.NoticeForm.get('courseDurationId').patchValue(courseDurationId);
-    //           this.NoticeForm.value.courseName="" 
-    //        //   this.NoticeForm.value.baseSchoolNameId=element;
-    //         }
-    //         this.noticeService.submit(this.NoticeForm.value).subscribe(response => {
-    //           //    this.router.navigateByUrl('/notice-bulletin/notice-list');
-    //               this.reloadCurrentRoute();
-    //               this.snackBar.open('Information Inserted Successfully ', '', {
-    //                 duration: 2000,
-    //                 verticalPosition: 'bottom',
-    //                 horizontalPosition: 'right',
-    //                 panelClass: 'snackbar-success'
-    //               });
-    //             }, error => {
-    //               this.validationErrors = error;
-    //             })
-    //       });
-
-    //     }
-
-    //    }
-       
-
-    //     // else{
-    //     //   this.noticeService.submit(this.NoticeForm.value).subscribe(response => {
-    //     //     this.reloadCurrentRoute();
-    //     //     // this.getBulletins(baseSchoolNameId);
-    //     //     this.snackBar.open('Information Inserted Successfully ', '', {
-    //     //       duration: 2000,
-    //     //       verticalPosition: 'bottom',
-    //     //       horizontalPosition: 'right',
-    //     //       panelClass: 'snackbar-success'
-    //     //     });
-    //     //   }, error => {
-    //     //     this.validationErrors = error;
-    //     //   })
-    
-    //     // }          
-    //   });
-
-    // }
     else {
-      //debugger
       this.loading = true;
-      this.NoticeForm.value.baseSchoolNameId.forEach(element => {  
-        if(element!=0){
-          this.NoticeForm.value.baseSchoolNameId=element;
-          if(this.NoticeForm.value.courseName!=""){
-            this.NoticeForm.value.courseName.forEach((courseElement,index) => {
-       
-            if (courseElement!=0){
-              var courseNameArr = courseElement.split('_');    
+      
+      this.NoticeForm.value.baseSchoolNameId.forEach(element => {
+       if(element!=0){
+        this.NoticeForm.value.baseSchoolNameId=element;
+        if(this.NoticeForm.value.courseName!=""){
+          this.NoticeForm.value.courseName.forEach((courseElement,index) => {
+            if (index!=0){
+              var courseNameArr = courseElement.split('_');
               var courseDurationId = courseNameArr[0];
               var courseNameId=courseNameArr[1];
                this.NoticeForm.get('courseNameId').patchValue(courseNameId);
                 this.NoticeForm.get('courseDurationId').patchValue(courseDurationId);
               this.NoticeForm.value.courseName="" 
-              this.NoticeForm.value.baseSchoolNameId=element
+           //   this.NoticeForm.value.baseSchoolNameId=element;
             }
-            
             this.noticeService.submit(this.NoticeForm.value).subscribe(response => {
-             
-             }, error => {
-               this.validationErrors = error;
-             })
-       //      debugger
-              });
-          
-          }
-          else{
-            
-            this.noticeService.submit(this.NoticeForm.value).subscribe(response => {
-              // this.reloadCurrentRoute();
-              // // this.getBulletins(baseSchoolNameId);
-              // this.snackBar.open('Information Inserted Successfully ', '', {
-              //   duration: 2000,
-              //   verticalPosition: 'bottom',
-              //   horizontalPosition: 'right',
-              //   panelClass: 'snackbar-success'
-              // });
-            }, error => {
-              this.validationErrors = error;
-              console.log(error)
-            })
-      
-          }
+              //    this.router.navigateByUrl('/notice-bulletin/notice-list');
+                  this.reloadCurrentRoute();
+                  this.snackBar.open('Information Inserted Successfully ', '', {
+                    duration: 2000,
+                    verticalPosition: 'bottom',
+                    horizontalPosition: 'right',
+                    panelClass: 'snackbar-success'
+                  });
+                }, error => {
+                  this.validationErrors = error;
+                })
+          });
+
         }
+
+       }
        
-        
-       
+
+        else{
+          this.noticeService.submit(this.NoticeForm.value).subscribe(response => {
+            this.reloadCurrentRoute();
+            // this.getBulletins(baseSchoolNameId);
+            this.snackBar.open('Information Inserted Successfully ', '', {
+              duration: 2000,
+              verticalPosition: 'bottom',
+              horizontalPosition: 'right',
+              panelClass: 'snackbar-success'
+            });
+          }, error => {
+            this.validationErrors = error;
+          })
+    
+        }          
       });
 
-      this.reloadCurrentRoute();
-      // this.getBulletins(baseSchoolNameId);
-      this.snackBar.open('Information Inserted Successfully ', '', {
-        duration: 2000,
-        verticalPosition: 'bottom',
-        horizontalPosition: 'right',
-        panelClass: 'snackbar-success'
-      }); 
-     
     }
+ 
   }
   toggleAllSelection() {
     if (this.allSelected.selected) {
-      //console.log('Test Form ',this.NoticeForm.controls.baseSchoolNameId)
+      //console.log('Test Form ',this.BulletinForm.controls.baseSchoolNameId)
       this.NoticeForm.controls.baseSchoolNameId
         .patchValue([...this.selectedbaseschools.map(item => item.value), 0]);
     } else {
@@ -408,7 +348,7 @@ stopNotices(element){
   }
   toggleAllSelectionCourse() {
     if (this.allSelectedCourse.selected) {
-      //console.log('Test Form ',this.NoticeForm.controls.courseName)
+      //console.log('Test Form ',this.BulletinForm.controls.courseName)
       //console.log('Test selectedcoursedurationbyschoolname ',this.selectedcoursedurationbyschoolname)
       this.NoticeForm.controls.courseName
         .patchValue([...this.selectedCourse.map(item => item.value), 0]);
