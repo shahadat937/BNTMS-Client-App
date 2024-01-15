@@ -281,59 +281,67 @@ stopNotices(element){
 
       
      }
-    else {
+     
+     else {
+      //debugger
       this.loading = true;
-      
-      this.NoticeForm.value.baseSchoolNameId.forEach(element => {
-       if(element!=0){
-        this.NoticeForm.value.baseSchoolNameId=element;
-        if(this.NoticeForm.value.courseName!=""){
-          this.NoticeForm.value.courseName.forEach((courseElement,index) => {
-            if (index!=0){
-              var courseNameArr = courseElement.split('_');
+      this.NoticeForm.value.baseSchoolNameId.forEach(element => {  
+        if(element!=0){
+          this.NoticeForm.value.baseSchoolNameId=element;
+          if(this.NoticeForm.value.courseName!=""){
+            this.NoticeForm.value.courseName.forEach((courseElement,index) => {
+       
+            if (courseElement!=0){
+              var courseNameArr = courseElement.split('_');    
               var courseDurationId = courseNameArr[0];
               var courseNameId=courseNameArr[1];
                this.NoticeForm.get('courseNameId').patchValue(courseNameId);
                 this.NoticeForm.get('courseDurationId').patchValue(courseDurationId);
               this.NoticeForm.value.courseName="" 
-           //   this.NoticeForm.value.baseSchoolNameId=element;
+              this.NoticeForm.value.baseSchoolNameId=element
             }
+            
             this.noticeService.submit(this.NoticeForm.value).subscribe(response => {
-              //    this.router.navigateByUrl('/notice-bulletin/notice-list');
-                  this.reloadCurrentRoute();
-                  this.snackBar.open('Information Inserted Successfully ', '', {
-                    duration: 2000,
-                    verticalPosition: 'bottom',
-                    horizontalPosition: 'right',
-                    panelClass: 'snackbar-success'
-                  });
-                }, error => {
-                  this.validationErrors = error;
-                })
-          });
-
+             
+             }, error => {
+               this.validationErrors = error;
+             })
+       //      debugger
+              });
+          
+          }
+          else{
+            
+            this.noticeService.submit(this.NoticeForm.value).subscribe(response => {
+              // this.reloadCurrentRoute();
+              // // this.getBulletins(baseSchoolNameId);
+              // this.snackBar.open('Information Inserted Successfully ', '', {
+              //   duration: 2000,
+              //   verticalPosition: 'bottom',
+              //   horizontalPosition: 'right',
+              //   panelClass: 'snackbar-success'
+              // });
+            }, error => {
+              this.validationErrors = error;
+              console.log(error)
+            })
+      
+          }
         }
-
-       }
        
-
-        else{
-          this.noticeService.submit(this.NoticeForm.value).subscribe(response => {
-            this.reloadCurrentRoute();
-            // this.getBulletins(baseSchoolNameId);
-            this.snackBar.open('Information Inserted Successfully ', '', {
-              duration: 2000,
-              verticalPosition: 'bottom',
-              horizontalPosition: 'right',
-              panelClass: 'snackbar-success'
-            });
-          }, error => {
-            this.validationErrors = error;
-          })
-    
-        }          
+        
+       
       });
 
+      this.reloadCurrentRoute();
+      // this.getBulletins(baseSchoolNameId);
+      this.snackBar.open('Information Inserted Successfully ', '', {
+        duration: 2000,
+        verticalPosition: 'bottom',
+        horizontalPosition: 'right',
+        panelClass: 'snackbar-success'
+      }); 
+     
     }
  
   }
