@@ -37,7 +37,7 @@ export class SigninComponent
   }
 
   ngOnInit() {
-    this.lastPublishDate = '11/01/2023';
+    this.lastPublishDate = '01/15/2023';
     this.authForm = this.formBuilder.group({
       email: ['', Validators.required],
       password: ['', Validators.required],
