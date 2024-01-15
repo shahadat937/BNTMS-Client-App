@@ -74,8 +74,7 @@ export class LocalcourseListComponent implements OnInit {
           courses: groups[schoolName]
         };
       });
-      console.log("group");
-      console.log(this.groupArrays);
+      console.log("group"); 
 
       this.paging.length = response.totalItemsCount    
       this.isLoading = false;
@@ -143,6 +142,8 @@ export class LocalcourseListComponent implements OnInit {
         };
       });
       console.log("group");
+      
+      console.log('all school ' , this.groupArrays);
       console.log(this.groupArrays);
 
       // this.paging.length = response.totalItemsCount    

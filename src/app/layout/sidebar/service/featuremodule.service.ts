@@ -18,7 +18,7 @@ export class FeatureModuleService {
   //CourseDurationPagination = new CourseDurationPagination(); 
   constructor(private http: HttpClient) { }
 
-getModuleFeatures(){
+getModuleFeatures(){ 
   return this.http.get<Module[]>(this.baseUrl + '/Module/get-module-features');
 }
   

@@ -67,7 +67,6 @@ export class ReadingMaterialService {
     return this.http.get<ReadingMaterial>(this.baseUrl + '/reading-material/get-readingMaterialDetail/' + id);
   }
   update(id: number,model: any) {
-    
     return this.http.put(this.baseUrl + '/reading-material/update-readingMaterial/'+id, model);
   }
   // submit(model: any) {

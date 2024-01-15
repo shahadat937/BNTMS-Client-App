@@ -1717,6 +1717,64 @@ export const ROUTES: RouteInfo[] = [
       
     ],
   },
+
+
+  {
+    path: '',
+    title: 'NETS School',
+    moduleName: 'nets-course',
+    iconType: 'material-icons-two-tone',
+    icon: 'description',
+    class: 'menu-toggle',
+    groupTitle: false,
+    badge: '',
+    badgeClass: '',
+    role: ['Admin'],
+    submenu: [
+      {
+        path: '/nets-course/nets-list',
+        title: 'NETS',
+        moduleName: 'nets-course',
+        iconType: '',
+        icon: '',
+        class: 'ml-menu',
+        groupTitle: false,
+        badge: '',
+        badgeClass: '',
+        role: [''],
+        submenu: [],
+      },
+      // {
+      //   path: '/inter-service/document-list',
+      //   title: 'Document',
+      //   moduleName: 'inter-service',
+      //   iconType: '',
+      //   icon: '',
+      //   class: 'ml-menu',
+      //   groupTitle: false,
+      //   badge: '',
+      //   badgeClass: '',
+      //   role: [''],
+      //   submenu: [],
+      // },
+      // {
+      //   path: '/inter-service/bnasubjectname-list',
+      //   title: 'Subject Name',
+      //   moduleName: 'inter-service',
+      //   iconType: '',
+      //   icon: '',
+      //   class: 'ml-menu',
+      //   groupTitle: false,
+      //   badge: '',
+      //   badgeClass: '',
+      //   role: [''],
+      //   submenu: [],
+      // },
+      
+    ],
+  },
+
+
   {
     path: '',
     title: 'Teachers Evaluation',
