@@ -21,6 +21,7 @@ import { MatOption } from '@angular/material/core';
 export class NewBulletinComponent implements OnInit {
   @ViewChild('allSelected') private allSelected: MatOption;
   @ViewChild('allSelectedCourse') private allSelectedCourse: MatOption;
+  isShowCourseName:boolean=false;
   masterData = MasterData;
   loading = false;
   runningload = false;
@@ -125,6 +126,7 @@ export class NewBulletinComponent implements OnInit {
         }); 
  }
  else { 
+  this.isShowCourseName=true;
   this.selectedcoursedurationbyschoolname=[];
 
   }
@@ -243,12 +245,14 @@ export class NewBulletinComponent implements OnInit {
               this.BulletinForm.value.courseName="" 
               this.BulletinForm.value.baseSchoolNameId=element
             }
-            
-            this.bulletinService.submit(this.BulletinForm.value).subscribe(response => {
+            if (courseElement!=0){
+              this.bulletinService.submit(this.BulletinForm.value).subscribe(response => {
              
-             }, error => {
-               this.validationErrors = error;
-             })
+              }, error => {
+                this.validationErrors = error;
+              })
+            }
+          
        //      debugger
               });
           
@@ -297,7 +301,7 @@ export class NewBulletinComponent implements OnInit {
       this.dataSource.data = response.items; 
       this.paging.length = response.totalItemsCount    
       this.isLoading = false;
-      
+
     })
   }
 
@@ -384,6 +388,7 @@ export class NewBulletinComponent implements OnInit {
   
   toggleAllSelection() {
     if (this.allSelected.selected) {
+      this.isShowCourseName=true;
       //console.log('Test Form ',this.BulletinForm.controls.baseSchoolNameId)
       this.BulletinForm.controls.baseSchoolNameId
         .patchValue([...this.selectedbaseschools.map(item => item.value), 0]);
@@ -393,6 +398,7 @@ export class NewBulletinComponent implements OnInit {
   }
   toggleAllSelectionCourse() {
     if (this.allSelectedCourse.selected) {
+      
       //console.log('Test Form ',this.BulletinForm.controls.courseName)
       //console.log('Test selectedcoursedurationbyschoolname ',this.selectedcoursedurationbyschoolname)
       this.BulletinForm.controls.courseName
