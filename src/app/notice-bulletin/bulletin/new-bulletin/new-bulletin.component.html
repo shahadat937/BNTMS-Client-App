@@ -53,7 +53,7 @@
                   <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12 mb-2">
                     <mat-form-field class="example-full-width mb-3" appearance="outline">
                         <mat-label>Course Title</mat-label>                        
-                        <mat-select multiple formControlName="courseName">
+                        <mat-select multiple formControlName="courseName" [disabled]="isShowCourseName">
                           <!-- <mat-option  value="0">--Select--</mat-option > -->
                             <mat-option #allSelectedCourse (click)="toggleAllSelectionCourse()" [value]="0">All</mat-option>
                             <!-- (onSelectionChange)="getselectedbnasubjectname(dropdown)" -->

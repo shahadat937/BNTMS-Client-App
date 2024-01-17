@@ -30,6 +30,7 @@
                   <mat-form-field class="example-full-width mb-3" appearance="outline">
                     <mat-label>School Name</mat-label>                        
                     <mat-select required multiple formControlName="baseSchoolNameId"  (selectionChange)="getselectedcoursedurationbyschoolname()">
+                      <!-- <input matInput (input)="filterOptions($event.target.value)" placeholder="Search options"> -->
                       <mat-option #allSelected (click)="toggleAllSelection()" [value]="0">All</mat-option>
                       <mat-option *ngFor="let school of selectedbaseschools" [value]="school.value">
                         {{school.text}} 
@@ -64,10 +65,10 @@
                 </div> -->
 
 
-                <div class="col-xl-6 col-lg-6 col-md-4 col-sm-12 mb-2">
+                <div class="col-xl-6 col-lg-6 col-md-4 col-sm-12 mb-2" >
                   <mat-form-field class="example-full-width mb-3" appearance="outline">
                     <mat-label>Course Name</mat-label>  
-                    <mat-select multiple formControlName="courseName">
+                    <mat-select multiple formControlName="courseName" [disabled]="isShowCourseName">
                       <!-- <mat-option  value="0">--Select--</mat-option > -->
                         <mat-option #allSelectedCourse (click)="toggleAllSelectionCourse()" [value]="0">All</mat-option>
                         <!-- (onSelectionChange)="getselectedbnasubjectname(dropdown)" -->

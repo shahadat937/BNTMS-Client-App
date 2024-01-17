@@ -20,6 +20,7 @@ import { MatOption } from '@angular/material/core';
 export class NewNoticeComponent implements OnInit {
   @ViewChild('allSelected') private allSelected: MatOption;
   @ViewChild('allSelectedCourse') private allSelectedCourse: MatOption;
+  isShowCourseName:boolean=false;
   masterData = MasterData;
   loading = false;
   buttonText:string;
@@ -161,8 +162,11 @@ export class NewNoticeComponent implements OnInit {
     if (baseSchoolNameId.length ==1){ 
       this.classRoutineService.getselectedcoursedurationbyschoolname(baseSchoolNameId).subscribe(res=>{
         this.selectedCourse=res;   
+      },err=>{
+        
       });
     }else{
+      this.isShowCourseName=true;
       this.selectedCourse=[];
     }
    
@@ -286,6 +290,7 @@ stopNotices(element){
       //debugger
       this.loading = true;
       this.NoticeForm.value.baseSchoolNameId.forEach(element => {  
+        debugger
         if(element!=0){
           this.NoticeForm.value.baseSchoolNameId=element;
           if(this.NoticeForm.value.courseName!=""){
@@ -300,13 +305,15 @@ stopNotices(element){
               this.NoticeForm.value.courseName="" 
               this.NoticeForm.value.baseSchoolNameId=element
             }
-            
-            this.noticeService.submit(this.NoticeForm.value).subscribe(response => {
+            if (courseElement!=0){
+              this.noticeService.submit(this.NoticeForm.value).subscribe(response => {
              
-             }, error => {
-               this.validationErrors = error;
-             })
-       //      debugger
+              }, error => {
+                this.validationErrors = error;
+              })
+            }
+           
+            debugger
               });
           
           }
@@ -325,7 +332,7 @@ stopNotices(element){
               this.validationErrors = error;
               console.log(error)
             })
-      
+      debugger
           }
         }
        
@@ -346,13 +353,18 @@ stopNotices(element){
  
   }
   toggleAllSelection() {
+    debugger
     if (this.allSelected.selected) {
+  this.isShowCourseName=true;
+
       //console.log('Test Form ',this.BulletinForm.controls.baseSchoolNameId)
       this.NoticeForm.controls.baseSchoolNameId
         .patchValue([...this.selectedbaseschools.map(item => item.value), 0]);
     } else {
+      //this.isShowCourseName=true;
       this.NoticeForm.controls.baseSchoolNameId.patchValue([]);
     }
+    debugger
   }
   toggleAllSelectionCourse() {
     if (this.allSelectedCourse.selected) {
