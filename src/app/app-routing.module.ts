@@ -36,7 +36,7 @@ const routes: Routes = [
         path: 'security',
         canActivate: [AuthGuard],
         data: {
-          role: [Role.MasterAdmin,Role.DDNT],
+          role: [Role.MasterAdmin,Role.DDNT,Role.SuperAdmin],
         },
         loadChildren: () =>
           import('./security/security.module').then((m) => m.SecurityModule),

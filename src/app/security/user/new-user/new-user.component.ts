@@ -16,7 +16,7 @@ import { MasterData } from 'src/assets/data/master-data';
 })
 export class NewUserComponent implements OnInit {
 
-   masterData = MasterData;
+  masterData = MasterData;
   loading = false;
   pageTitle: string;
   destination:string;

@@ -4,13 +4,14 @@ import {RoleService} from '../../service/role.service';
 import { ConfirmService } from '../../../core/service/confirm.service';
 import { UserService } from '../../service/User.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, ValidatorFn, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MasterData } from 'src/assets/data/master-data';
 import { BIODataGeneralInfo } from 'src/app/trainee-biodata/models/BIODataGeneralInfo';
-import { PageEvent } from '@angular/material/paginator';
+import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { Role } from '../../../core/models/role';
+import { MatSort } from '@angular/material/sort';
 
 
 @Component({
@@ -19,7 +20,8 @@ import { Role } from '../../../core/models/role';
   styleUrls: ['./new-userlist.component.sass']
 })
 export class NewUserListComponent implements OnInit {
-
+  @ViewChild(MatSort, {static: true}) sort: MatSort;
+  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   // pageTitle: string;
   // destination:string;
   UserForm: FormGroup;
@@ -54,8 +56,11 @@ export class NewUserListComponent implements OnInit {
   getTraineeList(searchPno) {
     this.isLoading = true;
     this.UserService.getTraineeList(searchPno).subscribe(response => {
-      this.dataSource.data = response; 
+      //this.dataSource.data = response; 
      // console.log(response)
+     this.dataSource=new MatTableDataSource(response);
+     this.dataSource.sort = this.sort;
+     this.dataSource.paginator = this.paginator;
     })
   }
   /** Whether the number of selected elements matches the total number of rows. */
@@ -118,13 +123,13 @@ export class NewUserListComponent implements OnInit {
     this.userList = this.selection.selected;
     //console.log(this.userList);
     //console.log(this.userList.length);
-
+console.log("User",this.userList)
     this.userList.forEach(element => {
       this.UserForm.get('userName').setValue(element.pno);
       this.UserForm.get('traineeId').setValue(element.traineeId);
       this.UserForm.get('email').setValue(element.email);
       this.UserForm.get('phoneNumber').setValue(element.mobile);
-      //console.log(this.UserForm.value)
+      console.log("User Value",this.UserForm.value)
 
       this.UserService.submit(this.UserForm.value).subscribe(response => {
         
