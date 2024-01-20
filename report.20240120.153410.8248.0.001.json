@@ -1,0 +1,478 @@
+
+{
+  "header": {
+    "reportVersion": 1,
+    "event": "Allocation failed - JavaScript heap out of memory",
+    "trigger": "FatalError",
+    "filename": "report.20240120.153410.8248.0.001.json",
+    "dumpEventTime": "2024-01-20T15:34:10Z",
+    "dumpEventTimeStamp": "1705743250895",
+    "processId": 8248,
+    "cwd": "G:\\office_dotnet\\BNATMSGIT\\BNTMS-Client-App",
+    "commandLine": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "C:\\Users\\Infinity_hasan\\AppData\\Roaming\\npm/node_modules/@angular/cli/bin/ng",
+      "serve"
+    ],
+    "nodejsVersion": "v12.14.0",
+    "wordSize": 64,
+    "arch": "x64",
+    "platform": "win32",
+    "componentVersions": {
+      "node": "12.14.0",
+      "v8": "7.7.299.13-node.16",
+      "uv": "1.33.1",
+      "zlib": "1.2.11",
+      "brotli": "1.0.7",
+      "ares": "1.15.0",
+      "modules": "72",
+      "nghttp2": "1.39.2",
+      "napi": "5",
+      "llhttp": "1.1.4",
+      "http_parser": "2.8.0",
+      "openssl": "1.1.1d",
+      "cldr": "35.1",
+      "icu": "64.2",
+      "tz": "2019c",
+      "unicode": "12.1"
+    },
+    "release": {
+      "name": "node",
+      "lts": "Erbium",
+      "headersUrl": "https://nodejs.org/download/release/v12.14.0/node-v12.14.0-headers.tar.gz",
+      "sourceUrl": "https://nodejs.org/download/release/v12.14.0/node-v12.14.0.tar.gz",
+      "libUrl": "https://nodejs.org/download/release/v12.14.0/win-x64/node.lib"
+    },
+    "osName": "Windows_NT",
+    "osRelease": "10.0.19045",
+    "osVersion": "Windows 10 Pro",
+    "osMachine": "x86_64",
+    "cpus": [
+      {
+        "model": "Intel(R) Core(TM) i7-4600U CPU @ 2.10GHz",
+        "speed": 2694,
+        "user": 9229781,
+        "nice": 0,
+        "sys": 5647875,
+        "idle": 30521437,
+        "irq": 458203
+      },
+      {
+        "model": "Intel(R) Core(TM) i7-4600U CPU @ 2.10GHz",
+        "speed": 2694,
+        "user": 9299140,
+        "nice": 0,
+        "sys": 4797484,
+        "idle": 31302187,
+        "irq": 117750
+      },
+      {
+        "model": "Intel(R) Core(TM) i7-4600U CPU @ 2.10GHz",
+        "speed": 2694,
+        "user": 11117203,
+        "nice": 0,
+        "sys": 5428718,
+        "idle": 28852890,
+        "irq": 109984
+      },
+      {
+        "model": "Intel(R) Core(TM) i7-4600U CPU @ 2.10GHz",
+        "speed": 2694,
+        "user": 12046671,
+        "nice": 0,
+        "sys": 5445531,
+        "idle": 27906593,
+        "irq": 80734
+      }
+    ],
+    "networkInterfaces": [
+      {
+        "name": "vEthernet (WSL)",
+        "internal": false,
+        "mac": "00:15:5d:b8:aa:78",
+        "address": "fe80::fbf3:4524:f3e:307a",
+        "netmask": "ffff:ffff:ffff:ffff::",
+        "family": "IPv6",
+        "scopeid": 39
+      },
+      {
+        "name": "vEthernet (WSL)",
+        "internal": false,
+        "mac": "00:15:5d:b8:aa:78",
+        "address": "172.22.224.1",
+        "netmask": "255.255.240.0",
+        "family": "IPv4"
+      },
+      {
+        "name": "Ethernet",
+        "internal": false,
+        "mac": "d0:bf:9c:25:6a:64",
+        "address": "fe80::be5c:54a8:4f8c:193d",
+        "netmask": "ffff:ffff:ffff:ffff::",
+        "family": "IPv6",
+        "scopeid": 11
+      },
+      {
+        "name": "Ethernet",
+        "internal": false,
+        "mac": "d0:bf:9c:25:6a:64",
+        "address": "192.168.1.80",
+        "netmask": "255.255.255.0",
+        "family": "IPv4"
+      },
+      {
+        "name": "VMware Network Adapter VMnet1",
+        "internal": false,
+        "mac": "00:50:56:c0:00:01",
+        "address": "fe80::1aba:29f4:8e9b:7531",
+        "netmask": "ffff:ffff:ffff:ffff::",
+        "family": "IPv6",
+        "scopeid": 8
+      },
+      {
+        "name": "VMware Network Adapter VMnet1",
+        "internal": false,
+        "mac": "00:50:56:c0:00:01",
+        "address": "192.168.112.1",
+        "netmask": "255.255.255.0",
+        "family": "IPv4"
+      },
+      {
+        "name": "VMware Network Adapter VMnet8",
+        "internal": false,
+        "mac": "00:50:56:c0:00:08",
+        "address": "fe80::854:471a:ec67:4c14",
+        "netmask": "ffff:ffff:ffff:ffff::",
+        "family": "IPv6",
+        "scopeid": 17
+      },
+      {
+        "name": "VMware Network Adapter VMnet8",
+        "internal": false,
+        "mac": "00:50:56:c0:00:08",
+        "address": "192.168.75.1",
+        "netmask": "255.255.255.0",
+        "family": "IPv4"
+      },
+      {
+        "name": "Loopback Pseudo-Interface 1",
+        "internal": true,
+        "mac": "00:00:00:00:00:00",
+        "address": "::1",
+        "netmask": "ffff:ffff:ffff:ffff:ffff:ffff:ffff:ffff",
+        "family": "IPv6",
+        "scopeid": 0
+      },
+      {
+        "name": "Loopback Pseudo-Interface 1",
+        "internal": true,
+        "mac": "00:00:00:00:00:00",
+        "address": "127.0.0.1",
+        "netmask": "255.0.0.0",
+        "family": "IPv4"
+      }
+    ],
+    "host": "DESKTOP-3PTJC37"
+  },
+  "javascriptStack": {
+    "message": "No stack.",
+    "stack": [
+      "Unavailable."
+    ]
+  },
+  "nativeStack": [
+    {
+      "pc": "0x00007ff7cf871729",
+      "symbol": "std::basic_ostream<char,std::char_traits<char> >::operator<<+10873"
+    },
+    {
+      "pc": "0x00007ff7cf875b4c",
+      "symbol": "std::basic_ostream<char,std::char_traits<char> >::operator<<+28316"
+    },
+    {
+      "pc": "0x00007ff7cf874b08",
+      "symbol": "std::basic_ostream<char,std::char_traits<char> >::operator<<+24152"
+    },
+    {
+      "pc": "0x00007ff7cf96369b",
+      "symbol": "v8::base::CPU::has_sse+37723"
+    },
+    {
+      "pc": "0x00007ff7d01682de",
+      "symbol": "v8::Isolate::ReportExternalAllocationLimitReached+94"
+    },
+    {
+      "pc": "0x00007ff7d0150321",
+      "symbol": "v8::SharedArrayBuffer::Externalize+833"
+    },
+    {
+      "pc": "0x00007ff7d001dbec",
+      "symbol": "v8::internal::Heap::EphemeronKeyWriteBarrierFromCode+1436"
+    },
+    {
+      "pc": "0x00007ff7d0028f90",
+      "symbol": "v8::internal::Heap::ProtectUnprotectedMemoryChunks+1312"
+    },
+    {
+      "pc": "0x00007ff7d0025ac4",
+      "symbol": "v8::internal::Heap::PageFlagsAreConsistent+3204"
+    },
+    {
+      "pc": "0x00007ff7d001b353",
+      "symbol": "v8::internal::Heap::CollectGarbage+1283"
+    },
+    {
+      "pc": "0x00007ff7d0019b24",
+      "symbol": "v8::internal::Heap::AddRetainedMap+2356"
+    },
+    {
+      "pc": "0x00007ff7d003adf5",
+      "symbol": "v8::internal::Factory::NewFillerObject+53"
+    },
+    {
+      "pc": "0x00007ff7cfda6e19",
+      "symbol": "v8::internal::interpreter::JumpTableTargetOffsets::iterator::operator=+4057"
+    },
+    {
+      "pc": "0x00007ff7d059404d",
+      "symbol": "v8::internal::SetupIsolateDelegate::SetupHeap+567949"
+    },
+    {
+      "pc": "0x00007ff7d060fee4",
+      "symbol": "v8::internal::SetupIsolateDelegate::SetupHeap+1075492"
+    },
+    {
+      "pc": "0x00007ff7d0513bdc",
+      "symbol": "v8::internal::SetupIsolateDelegate::SetupHeap+42524"
+    },
+    {
+      "pc": "0x00007ff7d0513bdc",
+      "symbol": "v8::internal::SetupIsolateDelegate::SetupHeap+42524"
+    },
+    {
+      "pc": "0x00007ff7d0513bdc",
+      "symbol": "v8::internal::SetupIsolateDelegate::SetupHeap+42524"
+    },
+    {
+      "pc": "0x000002167b571d3d",
+      "symbol": ""
+    }
+  ],
+  "javascriptHeap": {
+    "totalMemory": 2175229952,
+    "totalCommittedMemory": 2175229952,
+    "usedMemory": 2047626120,
+    "availableMemory": 56071696,
+    "memoryLimit": 2197815296,
+    "heapSpaces": {
+      "read_only_space": {
+        "memorySize": 262144,
+        "committedMemory": 262144,
+        "capacity": 261872,
+        "used": 32296,
+        "available": 229576
+      },
+      "new_space": {
+        "memorySize": 33554432,
+        "committedMemory": 33554432,
+        "capacity": 16759808,
+        "used": 1070520,
+        "available": 15689288
+      },
+      "old_space": {
+        "memorySize": 1911926784,
+        "committedMemory": 1911926784,
+        "capacity": 1854383816,
+        "used": 1853576136,
+        "available": 807680
+      },
+      "code_space": {
+        "memorySize": 11173888,
+        "committedMemory": 11173888,
+        "capacity": 9296224,
+        "used": 9296224,
+        "available": 0
+      },
+      "map_space": {
+        "memorySize": 39063552,
+        "committedMemory": 39063552,
+        "capacity": 5027440,
+        "used": 5027440,
+        "available": 0
+      },
+      "large_object_space": {
+        "memorySize": 178626560,
+        "committedMemory": 178626560,
+        "capacity": 178073104,
+        "used": 178073104,
+        "available": 0
+      },
+      "code_large_object_space": {
+        "memorySize": 622592,
+        "committedMemory": 622592,
+        "capacity": 550400,
+        "used": 550400,
+        "available": 0
+      },
+      "new_large_object_space": {
+        "memorySize": 0,
+        "committedMemory": 0,
+        "capacity": 16759808,
+        "used": 0,
+        "available": 16759808
+      }
+    }
+  },
+  "resourceUsage": {
+    "userCpuSeconds": 539.515,
+    "kernelCpuSeconds": 52.39,
+    "cpuConsumptionPercent": 130.376,
+    "maxRss": 2339352576,
+    "pageFaults": {
+      "IORequired": 1532244,
+      "IONotRequired": 0
+    },
+    "fsActivity": {
+      "reads": 17950,
+      "writes": 154
+    }
+  },
+  "libuv": [
+  ],
+  "environmentVariables": {
+    "=::": "::\\",
+    "=C:": "C:\\Users\\Infinity_hasan\\AppData\\Local\\Programs\\Microsoft VS Code",
+    "ACLOCAL_PATH": "C:\\Program Files\\Git\\mingw64\\share\\aclocal;C:\\Program Files\\Git\\usr\\share\\aclocal",
+    "ALLUSERSPROFILE": "C:\\ProgramData",
+    "APPDATA": "C:\\Users\\Infinity_hasan\\AppData\\Roaming",
+    "CHROME_CRASHPAD_PIPE_NAME": "\\\\.\\pipe\\crashpad_15812_MKPPEYNGQDTJPSCQ",
+    "COMMONPROGRAMFILES": "C:\\Program Files\\Common Files",
+    "COMPUTERNAME": "DESKTOP-3PTJC37",
+    "COMSPEC": "C:\\Windows\\system32\\cmd.exe",
+    "CONFIG_SITE": "C:/Program Files/Git/etc/config.site",
+    "ChocolateyInstall": "C:\\ProgramData\\chocolatey",
+    "ChocolateyLastPathUpdate": "133103919112615965",
+    "CommonProgramFiles(x86)": "C:\\Program Files (x86)\\Common Files",
+    "CommonProgramW6432": "C:\\Program Files\\Common Files",
+    "DISPLAY": "needs-to-be-defined",
+    "DriverData": "C:\\Windows\\System32\\Drivers\\DriverData",
+    "EXEPATH": "C:\\Program Files\\Git",
+    "FPS_BROWSER_APP_PROFILE_STRING": "Internet Explorer",
+    "FPS_BROWSER_USER_PROFILE_STRING": "Default",
+    "HOME": "C:\\Users\\Infinity_hasan",
+    "HOMEDRIVE": "C:",
+    "HOMEPATH": "\\Users\\Infinity_hasan",
+    "HOSTNAME": "DESKTOP-3PTJC37",
+    "INFOPATH": "C:\\Program Files\\Git\\mingw64\\local\\info;C:\\Program Files\\Git\\mingw64\\share\\info;C:\\Program Files\\Git\\usr\\local\\info;C:\\Program Files\\Git\\usr\\share\\info;C:\\Program Files\\Git\\usr\\info;C:\\Program Files\\Git\\share\\info",
+    "JAVA_HOME": "C:\\Program Files\\Java\\jdk1.8.0_202",
+    "LC_CTYPE": "en_US.UTF-8",
+    "LD_LIBRARY_PATH": "D:\\Oracle\\Middleware\\Oracle_FRHome2\\lib",
+    "LOCALAPPDATA": "C:\\Users\\Infinity_hasan\\AppData\\Local",
+    "LOGONSERVER": "\\\\DESKTOP-3PTJC37",
+    "MANPATH": "C:\\Program Files\\Git\\mingw64\\local\\man;C:\\Program Files\\Git\\mingw64\\share\\man;C:\\Program Files\\Git\\usr\\local\\man;C:\\Program Files\\Git\\usr\\share\\man;C:\\Program Files\\Git\\usr\\man;C:\\Program Files\\Git\\share\\man",
+    "MINGW_CHOST": "x86_64-w64-mingw32",
+    "MINGW_PACKAGE_PREFIX": "mingw-w64-x86_64",
+    "MINGW_PREFIX": "C:/Program Files/Git/mingw64",
+    "MSYS": "disable_pcon",
+    "MSYSTEM": "MINGW64",
+    "MSYSTEM_CARCH": "x86_64",
+    "MSYSTEM_CHOST": "x86_64-w64-mingw32",
+    "MSYSTEM_PREFIX": "C:/Program Files/Git/mingw64",
+    "NLS_LANG": ".UTF8",
+    "NODE_OPTIONS": "",
+    "NUMBER_OF_PROCESSORS": "4",
+    "ORIGINAL_PATH": "C:\\Program Files\\Git\\mingw64\\bin;C:\\Program Files\\Git\\usr\\bin;C:\\Users\\Infinity_hasan\\bin;D:\\Oracle\\app\\Infinity_hasan\\product\\11.2.0\\dbhome_1\\bin;C:\\Program Files (x86)\\VMware\\VMware Workstation\\bin;C:\\Program Files\\Java\\jdk1.8.0_202\\bin;C:\\Program Files\\Java\\jre1.8.0_202\\bin;C:\\Tomcat\\bin;C:\\Tomcat\\lib\\servlet-api.jar;C:\\Tomcat\\lib\\jsp-api.jar;C:\\Program Files (x86)\\Common Files\\Oracle\\Java\\javapath;D:\\Oracle\\Middleware\\Oracle_FRHome1\\bin;C:\\Windows\\system32;C:\\Windows;C:\\Windows\\System32\\Wbem;C:\\Windows\\System32\\WindowsPowerShell\\v1.0;C:\\Windows\\System32\\OpenSSH;D:\\Oracle\\Middleware\\Oracle_FRHome1\\opmn\\bin;D:\\Oracle\\Middleware\\Oracle_FRHome1\\opmn\\lib;D:\\Oracle\\Middleware\\Oracle_FRHome1\\perl\\bin;D:\\Oracle\\Middleware\\Oracle_FRHome2\\opmn\\bin;D:\\Oracle\\Middleware\\Oracle_FRHome2\\opmn\\lib;D:\\Oracle\\Middleware\\Oracle_FRHome2\\perl\\bin;C:\\Program Files\\Microsoft SQL Server\\150\\Tools\\Binn;C:\\Program Files\\Microsoft SQL Server\\Client SDK\\ODBC\\170\\Tools\\Binn;C:\\Program Files\\dotnet;C:\\ProgramData\\chocolatey\\bin;C:\\Program Files\\Microsoft SQL Server\\130\\Tools\\Binn;C:\\Program Files (x86)\\Microsoft SQL Server\\160\\DTS\\Binn;C:\\Program Files\\Azure Data Studio\\bin;C:\\Program Files\\Docker\\Docker\\resources\\bin;C:\\Program Files (x86)\\Microsoft SQL Server\\160\\Tools\\Binn;C:\\Program Files\\Microsoft SQL Server\\160\\Tools\\Binn;C:\\Program Files\\Microsoft SQL Server\\160\\DTS\\Binn;D:\\Oracle\\Middleware\\Oracle_FRHome2\\bin;C:\\Program Files\\nodejs;C:\\Program Files\\Git\\cmd;C:\\Users\\Infinity_hasan\\AppData\\Local\\Microsoft\\WindowsApps;C:\\Users\\Infinity_hasan\\.dotnet\\tools;C:\\Users\\Infinity_hasan\\AppData\\Local\\GitHubDesktop\\bin;C:\\Users\\Infinity_hasan\\AppData\\Local\\Programs\\Microsoft VS Code\\bin;C:\\Program Files\\Azure Data Studio\\bin;C:\\Users\\Infinity_hasan\\AppData\\Roaming\\npm",
+    "ORIGINAL_TEMP": "C:/Users/INFINI~1/AppData/Local/Temp",
+    "ORIGINAL_TMP": "C:/Users/INFINI~1/AppData/Local/Temp",
+    "ORIGINAL_XDG_CURRENT_DESKTOP": "undefined",
+    "OS": "Windows_NT",
+    "OneDrive": "C:\\Users\\Infinity_hasan\\OneDrive",
+    "PATH": "C:\\Users\\Infinity_hasan\\bin;C:\\Program Files\\Git\\mingw64\\bin;C:\\Program Files\\Git\\usr\\local\\bin;C:\\Program Files\\Git\\usr\\bin;C:\\Program Files\\Git\\usr\\bin;C:\\Program Files\\Git\\mingw64\\bin;C:\\Program Files\\Git\\usr\\bin;C:\\Users\\Infinity_hasan\\bin;D:\\Oracle\\app\\Infinity_hasan\\product\\11.2.0\\dbhome_1\\bin;C:\\Program Files (x86)\\VMware\\VMware Workstation\\bin;C:\\Program Files\\Java\\jdk1.8.0_202\\bin;C:\\Program Files\\Java\\jre1.8.0_202\\bin;C:\\Tomcat\\bin;C:\\Tomcat\\lib\\servlet-api.jar;C:\\Tomcat\\lib\\jsp-api.jar;C:\\Program Files (x86)\\Common Files\\Oracle\\Java\\javapath;D:\\Oracle\\Middleware\\Oracle_FRHome1\\bin;C:\\Windows\\system32;C:\\Windows;C:\\Windows\\System32\\Wbem;C:\\Windows\\System32\\WindowsPowerShell\\v1.0;C:\\Windows\\System32\\OpenSSH;D:\\Oracle\\Middleware\\Oracle_FRHome1\\opmn\\bin;D:\\Oracle\\Middleware\\Oracle_FRHome1\\opmn\\lib;D:\\Oracle\\Middleware\\Oracle_FRHome1\\perl\\bin;D:\\Oracle\\Middleware\\Oracle_FRHome2\\opmn\\bin;D:\\Oracle\\Middleware\\Oracle_FRHome2\\opmn\\lib;D:\\Oracle\\Middleware\\Oracle_FRHome2\\perl\\bin;C:\\Program Files\\Microsoft SQL Server\\150\\Tools\\Binn;C:\\Program Files\\Microsoft SQL Server\\Client SDK\\ODBC\\170\\Tools\\Binn;C:\\Program Files\\dotnet;C:\\ProgramData\\chocolatey\\bin;C:\\Program Files\\Microsoft SQL Server\\130\\Tools\\Binn;C:\\Program Files (x86)\\Microsoft SQL Server\\160\\DTS\\Binn;C:\\Program Files\\Azure Data Studio\\bin;C:\\Program Files\\Docker\\Docker\\resources\\bin;C:\\Program Files (x86)\\Microsoft SQL Server\\160\\Tools\\Binn;C:\\Program Files\\Microsoft SQL Server\\160\\Tools\\Binn;C:\\Program Files\\Microsoft SQL Server\\160\\DTS\\Binn;D:\\Oracle\\Middleware\\Oracle_FRHome2\\bin;C:\\Program Files\\nodejs;C:\\Program Files\\Git\\cmd;C:\\Users\\Infinity_hasan\\AppData\\Local\\Microsoft\\WindowsApps;C:\\Users\\Infinity_hasan\\.dotnet\\tools;C:\\Users\\Infinity_hasan\\AppData\\Local\\GitHubDesktop\\bin;C:\\Users\\Infinity_hasan\\AppData\\Local\\Programs\\Microsoft VS Code\\bin;C:\\Program Files\\Azure Data Studio\\bin;C:\\Users\\Infinity_hasan\\AppData\\Roaming\\npm;C:\\Program Files\\Git\\usr\\bin\\vendor_perl;C:\\Program Files\\Git\\usr\\bin\\core_perl",
+    "PATHEXT": ".COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC",
+    "PKG_CONFIG_PATH": "C:\\Program Files\\Git\\mingw64\\lib\\pkgconfig;C:\\Program Files\\Git\\mingw64\\share\\pkgconfig",
+    "PKG_CONFIG_SYSTEM_INCLUDE_PATH": "C:/Program Files/Git/mingw64/include",
+    "PKG_CONFIG_SYSTEM_LIBRARY_PATH": "C:/Program Files/Git/mingw64/lib",
+    "PLINK_PROTOCOL": "ssh",
+    "PROCESSOR_ARCHITECTURE": "AMD64",
+    "PROCESSOR_IDENTIFIER": "Intel64 Family 6 Model 69 Stepping 1, GenuineIntel",
+    "PROCESSOR_LEVEL": "6",
+    "PROCESSOR_REVISION": "4501",
+    "PROGRAMFILES": "C:\\Program Files",
+    "PSModulePath": "C:\\Program Files\\WindowsPowerShell\\Modules;C:\\Windows\\system32\\WindowsPowerShell\\v1.0\\Modules;C:\\Program Files (x86)\\Microsoft SQL Server\\160\\Tools\\PowerShell\\Modules\\",
+    "PUBLIC": "C:\\Users\\Public",
+    "PWD": "G:/office_dotnet/BNATMSGIT/BNTMS-Client-App",
+    "ProgramData": "C:\\ProgramData",
+    "ProgramFiles(x86)": "C:\\Program Files (x86)",
+    "ProgramW6432": "C:\\Program Files",
+    "SESSIONNAME": "Console",
+    "SHELL": "C:\\Program Files\\Git\\usr\\bin\\bash.exe",
+    "SHLVL": "2",
+    "SSH_ASKPASS": "C:/Program Files/Git/mingw64/bin/git-askpass.exe",
+    "SYSTEMDRIVE": "C:",
+    "SYSTEMROOT": "C:\\Windows",
+    "TEMP": "C:\\Users\\INFINI~1\\AppData\\Local\\Temp",
+    "TERM": "xterm",
+    "TERM_PROGRAM": "mintty",
+    "TERM_PROGRAM_VERSION": "3.6.4",
+    "TMP": "C:\\Users\\INFINI~1\\AppData\\Local\\Temp",
+    "TMPDIR": "C:\\Users\\INFINI~1\\AppData\\Local\\Temp",
+    "USERDOMAIN": "DESKTOP-3PTJC37",
+    "USERDOMAIN_ROAMINGPROFILE": "DESKTOP-3PTJC37",
+    "USERNAME": "Infinity_hasan",
+    "USERPROFILE": "C:\\Users\\Infinity_hasan",
+    "VSCODE_CODE_CACHE_PATH": "C:\\Users\\Infinity_hasan\\AppData\\Roaming\\Code\\CachedData\\0ee08df0cf4527e40edc9aa28f4b5bd38bbff2b2",
+    "VSCODE_CWD": "C:\\Users\\Infinity_hasan\\AppData\\Local\\Programs\\Microsoft VS Code",
+    "VSCODE_IPC_HOOK": "\\\\.\\pipe\\842d73f3e7cfd996274a0a6dc45a12d7-1.85.1-main-sock",
+    "VSCODE_NLS_CONFIG": "{\"locale\":\"en-us\",\"osLocale\":\"en-us\",\"availableLanguages\":{},\"_languagePackSupport\":true}",
+    "VSCODE_PID": "15812",
+    "WEBPACK_DEV_SERVER": "true",
+    "WINDIR": "C:\\Windows",
+    "_": "C:/Program Files/nodejs/node",
+    "__PSLockDownPolicy": "0"
+  },
+  "sharedObjects": [
+    "C:\\Program Files\\nodejs\\node.exe",
+    "C:\\Windows\\SYSTEM32\\ntdll.dll",
+    "C:\\Windows\\System32\\KERNEL32.DLL",
+    "C:\\Windows\\System32\\KERNELBASE.dll",
+    "C:\\Windows\\System32\\WS2_32.dll",
+    "C:\\Windows\\System32\\RPCRT4.dll",
+    "C:\\Windows\\System32\\ADVAPI32.dll",
+    "C:\\Windows\\System32\\msvcrt.dll",
+    "C:\\Windows\\System32\\sechost.dll",
+    "C:\\Windows\\System32\\bcrypt.dll",
+    "C:\\Windows\\SYSTEM32\\dbghelp.dll",
+    "C:\\Windows\\System32\\USER32.dll",
+    "C:\\Windows\\System32\\win32u.dll",
+    "C:\\Windows\\System32\\GDI32.dll",
+    "C:\\Windows\\System32\\ucrtbase.dll",
+    "C:\\Windows\\System32\\gdi32full.dll",
+    "C:\\Windows\\System32\\msvcp_win.dll",
+    "C:\\Windows\\System32\\PSAPI.DLL",
+    "C:\\Windows\\System32\\CRYPT32.dll",
+    "C:\\Windows\\SYSTEM32\\IPHLPAPI.DLL",
+    "C:\\Windows\\SYSTEM32\\WINMM.dll",
+    "C:\\Windows\\SYSTEM32\\USERENV.dll",
+    "C:\\Windows\\System32\\IMM32.DLL",
+    "C:\\Windows\\SYSTEM32\\powrprof.dll",
+    "C:\\Windows\\SYSTEM32\\UMPDC.dll",
+    "C:\\Windows\\SYSTEM32\\CRYPTBASE.DLL",
+    "C:\\Windows\\system32\\uxtheme.dll",
+    "C:\\Windows\\System32\\combase.dll",
+    "C:\\Windows\\system32\\mswsock.dll",
+    "C:\\Windows\\SYSTEM32\\kernel.appcore.dll",
+    "C:\\Windows\\System32\\bcryptprimitives.dll",
+    "C:\\Windows\\System32\\NSI.dll",
+    "C:\\Windows\\SYSTEM32\\dhcpcsvc6.DLL",
+    "C:\\Windows\\SYSTEM32\\dhcpcsvc.DLL",
+    "C:\\Windows\\SYSTEM32\\DNSAPI.dll",
+    "C:\\Windows\\system32\\napinsp.dll",
+    "C:\\Windows\\system32\\pnrpnsp.dll",
+    "C:\\Windows\\system32\\wshbth.dll",
+    "C:\\Windows\\system32\\NLAapi.dll",
+    "C:\\Windows\\System32\\winrnr.dll",
+    "C:\\Program Files\\Bonjour\\mdnsNSP.dll",
+    "C:\\Windows\\System32\\rasadhlp.dll",
+    "C:\\Windows\\System32\\fwpuclnt.dll"
+  ]
+}
