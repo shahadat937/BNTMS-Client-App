@@ -10,6 +10,7 @@ ssl
 
 # dependencies
 /node_modules
+/wwwroot
 
 # profiling files
 chrome-profiler-events*.json
